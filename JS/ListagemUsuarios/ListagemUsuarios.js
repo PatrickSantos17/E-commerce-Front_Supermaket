@@ -30,3 +30,7 @@ function populateTable() {
 
 // Chama a função para preencher a tabela ao carregar a página
 window.onload = populateTable;
+
+function directToListagem() {
+    window.location.href = "TelaFormularioCliente.html"
+}
