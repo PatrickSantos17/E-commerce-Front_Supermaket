@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Css/Reset/Reset.css">
+  <link rel="stylesheet" href="CSS/BootStrap/bootstrap.css">
+  <link rel="stylesheet" href="CSS/BootStrap/open-iconic-bootstrap.css">
+  <link rel="stylesheet" href="CSS/FormularioCliente/alterarUsuario.css">
+  <title>Alterar Usuário</title>
+</head>
+
+<body class="bg-light">
+<div class="main">
+  <div class="container">
+    <div class="py-5 text-center">
+      <h1>ALTERAR USUÁRIO</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="col-md-8 order-md-1">
+        <form class="form" novalidate>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="nomeCompleto">Nome completo</label>
+              <input type="text" class="form-control" id="nomeCompleto"
+                     placeholder="Digite seu nome..." required>
+              <div class="invalid-feedback">
+                Digite o seu nome completo.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="cpf">CPF</label>
+              <input type="text" class="form-control" id="cpf" placeholder="Digite seu CPF..."
+                     inputmode="numeric" pattern="[0-9]*" minlength="11" required>
+              <div class="invalid-feedback">
+                Digite um CPF válido.
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="senha">Nova Senha</label>
+            <input type="password" class="form-control" placeholder="Digite sua nova senha..." id="senha"
+                   minlength="5" required>
+            <div class="invalid-feedback">
+              A senha deve conter no mínimo 5 caracteres.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="confirmSenha">Confirme sua nova senha</label>
+            <input type="password" class="form-control" placeholder="Confirme a sua nova senha..."
+                   id="confirmSenha" minlength="5" required>
+            <div class="invalid-feedback">
+              As senhas precisam ser iguais.
+            </div>
+          </div>
+          <hr class="mb-4">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <button class="btn btn-secondary btn-lg btn-block">
+                <a href="TelaLogin.html" style="color: inherit; text-decoration: none;">Cancelar</a>
+              </button>
+            </div>
+            <div class="col-md-6 mb-2">
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Confirmar Alteração</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>
