@@ -13,9 +13,15 @@
 <body>
     <div class="container">
         <div class="header">
-            <span>Cadastro de Funcionários</span>
-            <button onclick="directToListagem()" id="new">+</i></button>
+            <span>Listagem de Funcionários</span>
+            <button onclick="directToCadastro()" id="new">+</i></button>
         </div>
+
+        <div class="container-filtro">
+            <div class="filtro-usuarios">
+              <input id="filtro" onkeyup="filtrarUsuarios()" type="text" placeholder="Pesquisar usuarios">
+            </div>
+          </div>
 
         <div class="divTable">
             <table>
@@ -24,6 +30,7 @@
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Status</th>
+                        <th>Grupo</th>
                         <th class="acao">Alterar</th>
                         <th class="acao">Hab/Des</th>
                     </tr>
@@ -33,7 +40,8 @@
             </table>
         </div>
     </div>
-    <script src="JS/ListagemUsuarios/ListagemUsuarios.js"></script>
+    <script src="JS/ListagemUsuarios/ListagemUsuarios.js" defer></script>
+    <script src="JS/ListagemUsuarios/Filtro.js" defer></script>
 </body>
 
 </html>
