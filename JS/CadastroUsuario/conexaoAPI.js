@@ -11,7 +11,8 @@ document.querySelector("form").addEventListener("submit", function (event) {
             cpf: form.querySelector("#cpf").value,
             email: form.querySelector("#email").value,
             senha: form.querySelector('#senha').value,
-            grupo: form.querySelector('#grupo').value
+            grupo: form.querySelector('#grupo').value,
+            teste: form.querySelector('#grupo').value
         };
 
         cadastrar(usuario);
