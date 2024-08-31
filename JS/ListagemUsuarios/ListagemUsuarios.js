@@ -1,36 +1,70 @@
-// Dados para adicionar à tabela
-const data = [
-    { name: 'João', age: 25, city: 'São Paulo' },
-    { name: 'Maria', age: 30, city: 'Rio de Janeiro' },
-    { name: 'Pedro', age: 22, city: 'Belo Horizonte' },
-];
+document.addEventListener("DOMContentLoaded", () => {
+    fetchUsuarios();
+});
 
-// Função para adicionar dados à tabela
-function populateTable() {
-    const tableBody = document.querySelector('#myTable tbody');
+async function fetchUsuarios() {
+    try {
+        // Substitua o URL abaixo pela URL da sua API
+        const response = await fetch("http://localhost:8080/usuario");
+        const usuarios = await response.json();
 
-    data.forEach(item => {
-        const row = document.createElement('tr');
+        // Chama a função que preenche a tabela
+        preencherTabela(usuarios);
+    } catch (error) {
+        console.error("Erro ao buscar usuários:", error);
+    }
+}
 
-        const cellName = document.createElement('td');
-        cellName.textContent = item.name;
-        row.appendChild(cellName);
+function preencherTabela(usuarios) {
+    const tbody = document.querySelector("tbody");
+    tbody.innerHTML = ""; // Limpa o conteúdo da tabela antes de adicionar novos dados
 
-        const cellAge = document.createElement('td');
-        cellAge.textContent = item.age;
-        row.appendChild(cellAge);
+    usuarios.forEach(usuario => {
+        const tr = document.createElement("tr");
 
-        const cellCity = document.createElement('td');
-        cellCity.textContent = item.city;
-        row.appendChild(cellCity);
+        const ativo = usuario.ativo ? "Ativo" : "Inativo";
+        // Preenche as células com os dados do usuário
+        tr.innerHTML = `
+            <td>${usuario.nome}</td>
+            <td>${usuario.credencialId.email}</td>
+            <td>${ativo}</td>
+            <td>${usuario.grupo}</td>
+            <td class="acao">
+                <button onclick="alterarUsuario(${usuario.id})">Alterar</button>
+            </td>
+            <td class="acao">
+                <button onclick="habilitarDesabilitarUsuario(${usuario.id}, '${ativo}')">${ativo === 'Ativo' ? 'Desabilitar' : 'Habilitar'}</button>
+            </td>
+        `;
 
-        tableBody.appendChild(row);
+        tbody.appendChild(tr);
     });
 }
 
-// Chama a função para preencher a tabela ao carregar a página
-window.onload = populateTable;
+function alterarUsuario(id) {
+    // Função para redirecionar para a página de alteração do usuário
+    window.location.href = `TelaAlterarUsuario.html?id=${id}`;
+}
 
-function directToListagem() {
+async function habilitarDesabilitarUsuario(id, ativo) {
+    const endpoint = ativo === 'Ativo' ? `http://localhost:8080/usuario/desativar/${id}` : `http://localhost:8080/usuario/ativar/${id}`;
+    try {
+        const response = await fetch(endpoint, {
+            method: 'PATCH'
+        });
+
+        if (response.status === 200) {
+            alert(`Usuário ${ativo === 'Ativo' ? 'desabilitado' : 'ativado'} com sucesso!`);
+            fetchUsuarios();
+        } else {
+            alert("Erro ao tentar atualizar o status do usuário. Por favor, tente novamente.");
+        }
+    } catch (error) {
+        console.error("Erro ao atualizar status do usuário:", error);
+        alert("Ocorreu um erro inesperado. Por favor, tente novamente.");
+    }
+}
+
+function directToCadastro() {
     window.location.href = "TelaFormularioCliente.html"
 }
