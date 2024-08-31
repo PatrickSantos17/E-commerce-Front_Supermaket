@@ -1,3 +1,6 @@
+var API = "4.201.153.129"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+// var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+
 document.addEventListener("DOMContentLoaded", () => {
     fetchUsuarios();
 });
@@ -5,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function fetchUsuarios() {
     try {
         // Substitua o URL abaixo pela URL da sua API
-        const response = await fetch("http://localhost:8080/usuario");
+        const response = await fetch("http://"+API+":8080/usuario");
         const usuarios = await response.json();
 
         // Chama a função que preenche a tabela
@@ -47,7 +50,7 @@ function alterarUsuario(id) {
 }
 
 async function habilitarDesabilitarUsuario(id, ativo) {
-    const endpoint = ativo === 'Ativo' ? `http://localhost:8080/usuario/desativar/${id}` : `http://localhost:8080/usuario/ativar/${id}`;
+    const endpoint = ativo === 'Ativo' ? `http://`+API+`:8080/usuario/desativar/${id}` : `http://`+API+`:8080/usuario/ativar/${id}`;
     try {
         const response = await fetch(endpoint, {
             method: 'PATCH'

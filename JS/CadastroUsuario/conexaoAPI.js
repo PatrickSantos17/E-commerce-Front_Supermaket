@@ -1,3 +1,6 @@
+var API = "4.201.153.129"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+// var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+
 document.querySelector("form").addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -21,7 +24,7 @@ document.querySelector("form").addEventListener("submit", function (event) {
 
 function cadastrar(usuario) {
     mostrarLoading();
-    fetch('http://localhost:8080/usuario/cadastro', {
+    fetch('http://'+API+':8080/usuario/cadastro', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
