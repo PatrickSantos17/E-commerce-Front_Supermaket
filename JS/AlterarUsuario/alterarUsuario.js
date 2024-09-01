@@ -1,3 +1,6 @@
+var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+// var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+
 document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const usuarioId = urlParams.get('id');
@@ -7,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function acessarUsuário(usuarioId) {
-        fetch('http://localhost:8080/usuario/consultar/' + usuarioId)
+        fetch('http://'+API+':8080/usuario/consultar/' + usuarioId)
             .then(response => response.json())
             .then(usuario => {
                 document.getElementById('nomeCompleto').value = usuario.nome;
@@ -49,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function alterarUsuario(usuarioId, usuario) {
-        fetch('http://localhost:8080/usuario/alterar/' + usuarioId, {
+        fetch('http://'+API+':8080/usuario/alterar/' + usuarioId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
