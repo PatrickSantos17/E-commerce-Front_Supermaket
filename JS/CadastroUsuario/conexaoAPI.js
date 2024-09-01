@@ -1,4 +1,4 @@
-var API = "4.201.153.129"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
 // var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
 document.querySelector("form").addEventListener("submit", function (event) {
