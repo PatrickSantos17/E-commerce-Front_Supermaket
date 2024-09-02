@@ -13,84 +13,109 @@
 </head>
 
 <body class="bg-light">
-    <div class="main">
-        <div class="container">
-            <div class="py-5 text-center">
-                <h1>ALTERAR USUÁRIO</h1>
-            </div>
-            <div class="d-flex justify-content-center">
-                <div class="col-md-8 order-md-1">
-                    <form class="form" novalidate>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="nomeCompleto">Nome completo</label>
-                                <input type="text" class="form-control" id="nomeCompleto"
-                                    placeholder="Digite seu nome..." required>
-                                <div class="invalid-feedback">
-                                    Digite o seu nome completo.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="cpf">CPF</label>
-                                <input type="text" class="form-control" id="cpf" placeholder="Digite seu CPF..."
-                                    inputmode="numeric" pattern="[0-9]*" minlength="11" required>
-                                <div class="invalid-feedback">
-                                    Digite um CPF válido.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="grupo">Grupo</label>
-                                <select name="grupo_options" class="form-control" id="grupo">
-                                    <option value="Estoquista" selected>Estoquista</option>
-                                    <option value="Admin">Admin</option>
-                                </select>
-                            </div>
-                        </div>
-                        <hr class="mb-4">
-                        <div class="mb-3">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail..."
-                                required>
+<div class="main">
+    <div class="container">
+        <div class="py-5 text-center">
+            <h1>ALTERAR USUÁRIO</h1>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="col-md-8 order-md-1">
+                <form class="form" novalidate>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="nomeCompleto">Nome completo</label>
+                            <input type="text" class="form-control" id="nomeCompleto"
+                                   placeholder="Digite seu nome..." required>
                             <div class="invalid-feedback">
-                                Digite um e-mail válido.
+                                Digite o seu nome completo.
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="senha">Senha</label>
-                            <input type="password" class="form-control" placeholder="Digite sua senha..." id="senha"
-                                minlength="5">
+                        <div class="col-md-6 mb-3">
+                            <label for="cpf">CPF</label>
+                            <input type="text" class="form-control" id="cpf" placeholder="Digite seu CPF..."
+                                   inputmode="numeric" pattern="[0-9]*" minlength="11" required>
                             <div class="invalid-feedback">
-                                A senha deve conter no mínimo 5 caracteres.
+                                Digite um CPF válido.
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="confirmSenha">Confirme sua senha</label>
-                            <input type="password" class="form-control" placeholder="Confirme a sua senha..."
-                                id="confirmSenha" minlength="5">
-                            <div class="invalid-feedback">
-                                As senhas precisam ser iguais.
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="grupo">Grupo</label>
+                            <select name="grupo_options" class="form-control" id="grupo">
+                                <option value="Estoquista" selected>Estoquista</option>
+                                <option value="Admin">Admin</option>
+                            </select>
                         </div>
-                        <hr class="mb-4">
-                        <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <button class="btn btn-secondary btn-lg btn-block">
-                                    <a href="TelaListagemUsuarios.html"
-                                        style="color: inherit; text-decoration: none;">Cancelar</a>
-                                </button>
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Confirmar
-                                    alteração</button>
-                            </div>
+                    </div>
+                    <hr class="mb-4">
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail..."
+                               required>
+                        <div class="invalid-feedback">
+                            Digite um e-mail válido.
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="senha">Senha</label>
+                        <input type="password" class="form-control" placeholder="Digite sua senha..." id="senha"
+                               minlength="5">
+                        <div class="invalid-feedback">
+                            A senha deve conter no mínimo 5 caracteres.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmSenha">Confirme sua senha</label>
+                        <input type="password" class="form-control" placeholder="Confirme a sua senha..."
+                               id="confirmSenha" minlength="5">
+                        <div class="invalid-feedback">
+                            As senhas precisam ser iguais.
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <button class="btn btn-secondary btn-lg btn-block">
+                                <a href="TelaListagemUsuarios.html"
+                                   style="color: inherit; text-decoration: none;">Cancelar</a>
+                            </button>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Confirmar
+                                alteração</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="alterarUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="alterarUsuarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alterarUsuarioModalLabel">Alterar Usuário</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja alterar o usuário?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="confirmAlterarUsuario">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
