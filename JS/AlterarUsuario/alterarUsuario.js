@@ -40,7 +40,18 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             if (typeof usuarioId !== 'undefined') {
-                alterarUsuario(usuarioId, usuario);
+                // Abre o modal de confirmação
+                $('#alterarUsuarioModal').modal('show');
+
+                // Adiciona evento ao botão de confirmação do modal
+                document.getElementById('confirmAlterarUsuario').addEventListener('click', function() {
+                    alterarUsuario(usuarioId, usuario);
+                });
+
+                // Adiciona evento ao botão de cancelamento do modal
+                document.querySelector('#alterarUsuarioModal .btn-secondary').addEventListener('click', function() {
+                    $('#alterarUsuarioModal').modal('hide');
+                });
             } else {
                 console.error("ID do usuário não está definido.");
             }
