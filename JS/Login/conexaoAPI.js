@@ -1,5 +1,5 @@
-var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
-// var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+// var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
 const formulario = document.querySelector("form")
 const email = document.querySelector(".email")
@@ -7,12 +7,6 @@ const senha = document.querySelector(".senha")
 const btnLogin = document.querySelector(".btn-login");
 const show = document.querySelector(".modal-confirm");
 
-btnLogin.addEventListener('click', function (event) {
-    event.preventDefault();
-    if (validarCampos()) {
-        validarLogin();
-    }
-});
 
 function validarLogin() {
     const login = {
@@ -20,7 +14,7 @@ function validarLogin() {
         "senha": senha.value
     };
 
-    fetch('http://' + API + ':8080/usuario/cadastro', {
+    fetch('http://' + API + ':8080/login/entrar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -123,3 +117,10 @@ function loginInvalido() {
 function limparCampos() {
     document.querySelector(".card-login").reset();
 }
+
+btnLogin.addEventListener('click', function (event) {
+    event.preventDefault();
+    if (validarCampos()) {
+        validarLogin();
+    }
+});
