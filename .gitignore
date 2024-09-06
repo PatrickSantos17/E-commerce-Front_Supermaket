@@ -1,0 +1,9 @@
+/shelf/
+/workspace.xml
+node_modules/
+cypress/results/
+cypress/screenshots/
+cypress/videos/
+.env
+.vscode
+.idea
