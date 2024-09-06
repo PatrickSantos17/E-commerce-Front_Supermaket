@@ -1,6 +1,3 @@
-// var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
-var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
-
 document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const usuarioId = urlParams.get('id');
@@ -138,5 +135,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (this.value.length > 11) {
             this.value = this.value.slice(0, 11);
         }
+    });
+
+    // Adiciona evento ao botão de cancelamento para redirecionar para a página de listagem de usuários
+    document.querySelector('.btn-secondary').addEventListener('click', function() {
+        window.location.href = 'TelaListagemUsuarios.html';
     });
 });
