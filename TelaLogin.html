@@ -9,14 +9,17 @@
     <link rel="stylesheet" href="CSS/Login/login.css">
     <link rel="stylesheet" href="CSS/BootStrap/bootstrap.css">
     <link rel="stylesheet" href="CSS/BootStrap/open-iconic-bootstrap.css">
-    <title>Tela de Login</title>
+
+    <script src="JS/Login/conexaoAPI.js" defer></script>
+
+    <title>Login</title>
 </head>
 
 <body>
     <main class="principal">
         <div class="login">
             <form class="card-login">
-                <a id="link_btn" href="/TelaInicial.html"><img id="logo" src="/img/logo.png" alt="logo"></a>
+                <a id="link_btn" href="#"><img id="logo" src="src/img/logo-removebg-preview.png" alt="logo-img"></a>
 
                 <div class="text-field">
                     <label class="label-text-field" for="user">Usuário</label>
@@ -28,11 +31,15 @@
                     <input class="senha" type="password" for="password" placeholder="Digite sua senha">
                 </div>
 
-                <a id="link_btn_login" href="/TelaInicial.html">
+                <a id="link_btn_login">
                     <button class="btn-login" type="submit">Login</button>
                 </a>
-                <p><a id="senha" href="">Esqueceu sua senha?</a></p>
-                <p><a id="cadastro" href="/TelaFormularioCliente.html" target="_blank">Ainda não tem cadastro?</a></p>
+                <a class="recuperar-senha" href="">
+                    <p>Esqueceu sua senha?</p>
+                </a>
+                <a class="cadastro" href="TelaFormularioCliente.html" target="_blank">
+                    <p>Ainda não tem cadastro?</p>
+                </a>
             </form>
         </div>
 
@@ -66,8 +73,6 @@
 
     </main>
 
-    <script src="JS/Login/conexaoAPI.js" type="module"></script>
-    <script src="/JavaScript/Login/ForgottenEmail.js"></script>
 </body>
 
 </html>
