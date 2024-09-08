@@ -15,7 +15,7 @@ body {
     width: 100vw;
     height: 100vh;
     /*tamanho da viewport (pega o tamanho da tela)*/
-    background: radial-gradient(circle, #F5F5F5, #CCCCCC, #999999);
+    background: radial-gradient(circle, #4340ff, #000770, #000000);
     display: flex;
     justify-content: center;
     /* eixo x */
@@ -33,16 +33,16 @@ body {
 }
 
 .card-login {
-    width: 50%;
+    width: 50vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 30px 35px;
     /* eixo y e eixo x (respectivamente) */
-    background-color: #f2f2f267;
+    background-color: #ffffff;
     border-radius: 20px;
-    box-shadow: 0px 10px 20px 0px rgb(69, 65, 65);
+    /* box-shadow: 0px 10px 20px 0px rgba(255, 255, 255, 0.781); */
     /*1-sombra direita/esquerda 2-direita/baixo 3-blur 4-cor*/
 }
 
@@ -57,13 +57,25 @@ body {
     height: 30%;
 }
 
-#senha {
+.recuperar-senha {
     text-decoration: none;
     color: black;
 }
 
-#cadastro {
+.recuperar-senha:hover {
     text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.cadastro {
+    text-decoration: none;
+    color: black;
+}
+
+.cadastro:hover{
+    text-decoration: none;
+    font-weight: bold;
     color: black;
 }
 

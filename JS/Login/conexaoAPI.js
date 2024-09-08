@@ -26,16 +26,26 @@ function validarLogin() {
 
                 // Login realizado com sucesso
                 loginSucedido();
+                return response.json();
             } else if (response.status === 403) {
                 // alert("Usuário/senha inválido!");
                 loginInvalido()
+                console.log('Usuário ou senha inválido');
             }
         })
-        .catch(error => {
-            // Exibe mensagem de erro em caso de falha na requisição
-            console.log('Erro ao acessar usuário:', error);
-            alert("Erro ao acessar usuário. Por favor, tente novamente.");
-        });
+        .then(data => {
+            console.log("Usuario autenticado: "+data.autenticado)
+            localStorage.setItem("autenticado", data.autenticado);
+            localStorage.setItem("id", data.id);
+            localStorage.setItem("nome", data.nome);
+            localStorage.setItem("grupo", data.grupo);
+            localStorage.setItem("ativo", data.ativo);
+        })
+        .catch (error => {
+        // Exibe mensagem de erro em caso de falha na requisição
+        console.log('Erro ao acessar usuário:', error);
+        // alert("Erro ao acessar usuário. Por favor, tente novamente.");
+    });
 }
 
 function validarCampos() {
