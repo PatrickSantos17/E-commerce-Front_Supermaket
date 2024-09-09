@@ -1,30 +1,38 @@
-// var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
-var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+// var API = "4.228.231.177"; // Setar essa variavel quando subir para a nuvem e comentar a localhost
+var API = "localhost"; // Setar essa variavel quando testar local e comentar a do IP
 
-document.querySelector("form").addEventListener("submit", function (event) {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
 
-    const form = event.target;
-    if (form.checkValidity() && validarSenha() === true) {
-        const usuario = {
-            nome: form.querySelector("#nomeCompleto").value,
-            cpf: form.querySelector("#cpf").value,
-            email: form.querySelector("#email").value,
-            senha: form.querySelector('#senha').value,
-            grupo: form.querySelector('#grupo').value
-        };
+    // Aplicar máscara ao campo de CPF usando VanillaMasker
+    VMasker(document.querySelector("#cpf")).maskPattern("999.999.999-99");
 
-        cadastrar(usuario);
-        document.getElementById("form").addEventListener("click", function () {
-            removerInvalidFeedbackClass();
-        });
-        limparCampos();
-    }
+    document.querySelector(".btn-cancelar").addEventListener("click", function () {
+        redirecionarParaListagem();
+    });
+
+    document.querySelector("form").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const form = document.querySelector("form");
+        if (form.checkValidity() && validarSenha() === true) {
+            const usuario = {
+                nome: form.querySelector("#nomeCompleto").value,
+                cpf: form.querySelector("#cpf").value.replace(/\D/g, ''),  // Remover máscara antes de enviar
+                email: form.querySelector("#email").value,
+                senha: form.querySelector('#senha').value,
+                grupo: form.querySelector('#grupo').value
+            };
+
+            cadastrar(usuario);
+        } else {
+            form.classList.add('was-validated');
+        }
+    });
 });
 
 function cadastrar(usuario) {
     mostrarLoading();
-    fetch('http://'+API+':8080/usuario/cadastro', {
+    fetch('http://' + API + ':8080/usuario/cadastro', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -38,10 +46,14 @@ function cadastrar(usuario) {
                     document.querySelector(".card").style.display = "flex";
                 }, 3000);
             } else if (response.status === 409) {
-                alert("CPF/E-mail já cadastrado.");
+                alert("Este e-mail já foi cadastrado por outro usuário.");
                 document.querySelector(".main").classList.remove('blur');
-                document.querySelector("footer").classList.remove('blur');
                 esconderLoading();
+                const emailField = document.getElementById("email");
+                emailField.setCustomValidity("Este e-mail já está em uso. Por favor, escolha outro.");
+                emailField.classList.add("is-invalid"); // Marcar o campo como inválido visualmente
+                emailField.nextElementSibling.textContent = "Este e-mail já está em uso. Por favor, escolha outro.";
+
             }
         })
         .catch(error => {
@@ -52,3 +64,9 @@ function cadastrar(usuario) {
             document.querySelector("footer").classList.remove('blur');
         });
 }
+
+document.getElementById("email").addEventListener("input", function () {
+    // Limpar a mensagem de erro personalizada quando o usuário digitar no campo
+    this.setCustomValidity("");
+    this.classList.remove("is-invalid");
+});

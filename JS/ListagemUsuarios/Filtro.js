@@ -4,8 +4,7 @@ function filtrarUsuarios() {
   
   // Obtém todas as linhas da tabela dentro do <tbody>
   var linhas = document.querySelectorAll("tbody tr");
-
-  console.log(linhas);
+  
   // Itera sobre cada linha da tabela
   linhas.forEach(linha => {
       // Obtém o texto da célula que contém o nome do usuário (supondo que esteja na primeira célula <td>)
