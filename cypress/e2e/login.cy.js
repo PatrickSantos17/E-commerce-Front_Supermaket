@@ -1,18 +1,77 @@
-describe('Login Test', () => {
-    it('should log in successfully with valid credentials', () => {
-        // Visita a página de login
-        cy.visit('TelaLogin.html'); // Altere a URL conforme necessário
+class RegisterForm {
+  elements = {
+    emailInput: () => cy.get('.email'),
+    senhaInput: () => cy.get('.senha'),
+    btnLogin: () => cy.get('.btn-login'),
+    modalCredencialInvalida: () => cy.get('.invalido .modal-dados-pessoais .message'),
+    modalCredencialValida: () => cy.get('.cartao .modal-dados-pessoais .message'),
+    btnOkModal: () => cy.get('#clicked'),
+  }
 
-        // Insere o nome de usuário
-        cy.get('input[placeholder="Digite seu E-mail"]').type('lucas@teste.com'); // Altere o valor conforme necessário
+  typeEmail(text) {
+    if (!text) return;
+    this.elements.emailInput().type(text)
+  }
 
-        // Insere a senha
-        cy.get('input[type="password"]').type('12345'); // Altere o seletor e o valor conforme necessário
+  typeSenha(senha) {
+    if (!senha) return;
+    this.elements.senhaInput().type(senha)
+  }
+}
 
-        // Clica no botão de login
-        cy.get('button[type="submit"]').click(); // Altere o seletor conforme necessário
+const registerForm = new RegisterForm()
+describe('Teste login com a senha errada inicialmente e correção depois', () => {
+  describe('Preenchendo o login com senha incorreta', () => {
+    const input = {
+      email: 'lucas@teste.com',
+      senha: '123456',
+    }
 
-        // Verifica se o modal de sucesso aparece e está visível
-        cy.get('.cartao .modal-dados-pessoais .message').should('be.visible').and('contain.text', 'Login Realizado com sucesso!');
-    });
+    it('Dado que eu acesso a tela de login', () => {
+      cy.visit('TelaLogin.html');
+    })
+
+    it(`Quando eu digito "${input.email}" no email`, () => {
+      registerForm.typeEmail(input.email)
+    })
+
+    it(`Então eu digito a senha no campo da senha`, () => {
+      registerForm.typeSenha(input.senha)
+    })
+
+    it('Então eu clico no botão de login', () => {
+      registerForm.elements.btnLogin().click();
+    })
+
+    it('Então eu deveria ver "Usuário/senha inválido!" em um modal', () => {
+      registerForm.elements.modalCredencialInvalida().should('contain.text', 'Usuário/senha inválido!')
+    })
+  })
+
+  describe('Preenchendo o login com senha correta após preencher com a senha errada', () => {
+
+    const input = {
+      email: 'lucas@teste.com',
+      senha: '12345',
+    }
+    it('Dado que eu clico em ok para fechar o modal', () => {
+      registerForm.elements.btnOkModal().click();
+    })
+
+    it('Quando eu apago a senha errada', () => {
+      registerForm.elements.senhaInput().clear();
+    })
+
+    it(`Então eu digito a senha correta no campo da senha`, () => {
+      registerForm.typeSenha(input.senha)
+    })
+
+    it('Então eu clico no botão de login', () => {
+      registerForm.elements.btnLogin().click();
+    })
+
+    it('Então eu deveria ver "Login Realizado com sucesso!" em um modal', () => {
+      registerForm.elements.modalCredencialValida().should('be.visible').and('contain.text', 'Login Realizado com sucesso!');
+    })
+  });
 });
