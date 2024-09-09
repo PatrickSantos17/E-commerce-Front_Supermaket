@@ -16,7 +16,7 @@
 })()
 
 document.getElementById("cpf").addEventListener("blur", function () {
-    var cpf = this.value;
+    var cpf = this.value.replace(/\D/g, '');;
 
     if (!cpf.match(/^\d{11}$/)) {
         this.classList.add("is-invalid");

@@ -3,13 +3,13 @@ function mostrarLoading() {
     document.querySelector(".main").classList.add('blur');
 }
 
-function redirecionarParaPagina() {
+function redirecionarParaListagem() {
     window.location.href = "TelaListagemUsuarios.html";
 
     window.history.replaceState(null, null, "TelaListagemUsuarios.html");
 }
 
-document.querySelector(".accept-cookie-button").addEventListener("click", redirecionarParaPagina);
+document.querySelector(".accept-cookie-button").addEventListener("click", redirecionarParaListagem);
 
 function esconderLoading() {
     document.getElementById("loadingModal").style.display = "none";

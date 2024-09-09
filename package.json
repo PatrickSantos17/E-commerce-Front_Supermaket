@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^13.14.2"
+  },
+  "dependencies": {
+    "inputmask": "^5.0.9"
   }
 }
