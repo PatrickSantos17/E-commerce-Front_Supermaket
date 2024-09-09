@@ -5,7 +5,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const usuarioId = urlParams.get('id');
     if (usuarioId) {
+        
+        const usuarioLogadoId = localStorage.getItem("id"); // Recupere o ID do usuário logado do localStorage
+
+    // Verifique se o usuário logado está tentando alterar seu próprio perfil
+    if (usuarioId === usuarioLogadoId) {
+        alert("Você não pode alterar seu próprio perfil.");
+        window.location.href = "TelaListagemUsuarios.html";
+        return;
+    }
+    else{
+        
         acessarUsuário(usuarioId);
+    }
+        
         console.log(usuarioId);
     }
  
@@ -28,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault(); // Evita o envio padrão do formulário
  
         const form = event.target;
+        
  
         // Verifica se o formulário é válido e se a senha é válida (se a senha for fornecida)
         if (form.checkValidity() && validarSenha()) {
