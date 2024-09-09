@@ -53,6 +53,14 @@ function cadastrar(usuario) {
                 emailField.setCustomValidity("Este e-mail já está em uso. Por favor, escolha outro.");
                 emailField.classList.add("is-invalid"); // Marcar o campo como inválido visualmente
                 emailField.nextElementSibling.textContent = "Este e-mail já está em uso. Por favor, escolha outro.";
+            } else if (response.status === 400){
+                alert("Número do registro de contribuinte individual brasileiro (CPF) inválido!")
+                document.querySelector(".main").classList.remove('blur');
+                esconderLoading();
+                const cpfField = document.getElementById("cpf");
+                cpfField.setCustomValidity("Este CPF é inválido. Por favor, digite um CPF válido.");
+                cpfField.classList.add("is-invalid"); // Marcar o campo como inválido visualmente
+                cpfField.nextElementSibling.textContent = "Este CPF é inválido. Por favor, digite um CPF válido.";
 
             }
         })
@@ -66,6 +74,11 @@ function cadastrar(usuario) {
 }
 
 document.getElementById("email").addEventListener("input", function () {
+    // Limpar a mensagem de erro personalizada quando o usuário digitar no campo
+    this.setCustomValidity("");
+    this.classList.remove("is-invalid");
+});
+document.getElementById("cpf").addEventListener("input", function () {
     // Limpar a mensagem de erro personalizada quando o usuário digitar no campo
     this.setCustomValidity("");
     this.classList.remove("is-invalid");
