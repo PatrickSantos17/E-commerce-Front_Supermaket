@@ -12,12 +12,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Verifique se o usuário logado está tentando alterar seu próprio perfil
         if (usuarioId === usuarioLogadoId) {
-            alert("Você não pode alterar seu próprio perfil.");
-            window.location.href = "TelaListagemUsuarios.html";
+            document.querySelector("#grupo").disabled = true;
+            acessarUsuário(usuarioId);
+            alert("Você não pode alterar seu próprio grupo.");
+            
             return;
         }
         else {
-
+           
             acessarUsuário(usuarioId);
         }
     }
