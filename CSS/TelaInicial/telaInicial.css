@@ -1,0 +1,91 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background: radial-gradient(circle, #130ff3, #000770, #000000);
+    width: 100vw;
+    height: 100vh;
+}
+
+header {
+    background-color: #FFFFFF;
+    height: 170px;
+    display: flex;
+}
+
+.lado-a {
+    width: 50%;
+    display: flex;
+}
+
+.lado-b {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 80px;
+}
+
+header .lado-a img {
+    height: 170px;
+    padding: 0 60px;
+}
+
+header .lado-b img {
+    height: 45px;
+}
+
+.lado-a #buscar {
+    width: 220px;
+    height: 35px;
+    border: 2px solid #8d8d8d;
+    border-radius: 13px;
+    text-align: left;
+    padding-left: 12px;
+    margin: auto 0;
+}
+
+.lado-b .info-usuario {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 100%;
+}
+
+.lado-b .info-usuario .nome-usuario {
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.lado-b .info-usuario .grupo-usuario {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+main {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+main h1 {
+    font-size: 80px;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin: 70px 0;
+}
+
+main a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 12px 0;
+    transition: font-size 0.3s ease;
+    width: 240px;
+}
+
+main a:hover {
+    font-size: 23px;
+}

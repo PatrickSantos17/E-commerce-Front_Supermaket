@@ -24,28 +24,43 @@ function validarLogin() {
         .then(response => {
             if (response.status === 200) {
 
-                // Login realizado com sucesso
-                loginSucedido();
+                // Login está ok,  converte a resposta em JSON
                 return response.json();
             } else if (response.status === 403) {
-                // alert("Usuário/senha inválido!");
+
                 loginInvalido()
                 console.log('Usuário ou senha inválido');
+                return Promise.reject('Usuário ou senha inválido');
             }
         })
         .then(data => {
-            console.log("Usuario autenticado: "+data.autenticado)
-            localStorage.setItem("autenticado", data.autenticado);
-            localStorage.setItem("id", data.id);
-            localStorage.setItem("nome", data.nome);
-            localStorage.setItem("grupo", data.grupo);
-            localStorage.setItem("ativo", data.ativo);
+
+            if (data.ativo) {
+                if (data.grupo != "cliente") {
+
+                    console.log("Usuario autenticado: " + data.autenticado)
+
+                    // Armazena os dados do usuário no localStorage
+                    localStorage.setItem("autenticado", data.autenticado);
+                    localStorage.setItem("id", data.id);
+                    localStorage.setItem("nome", data.nome);
+                    localStorage.setItem("grupo", data.grupo);
+                    localStorage.setItem("ativo", data.ativo);
+
+                    loginSucedido();
+                } else {
+                    alert('Usuário sem permissão para acessar o Backoffice!')
+                }
+            } else {
+                // Usuário não está ativo
+                alert('Usuário inativo. Por favor, entre em contato com o administrador.');
+            }
         })
-        .catch (error => {
-        // Exibe mensagem de erro em caso de falha na requisição
-        console.log('Erro ao acessar usuário:', error);
-        // alert("Erro ao acessar usuário. Por favor, tente novamente.");
-    });
+        .catch(error => {
+            // Exibe mensagem de erro em caso de falha na requisição
+            console.log('Erro ao acessar usuário:', error);
+            // alert("Erro ao acessar usuário. Por favor, tente novamente.");
+        });
 }
 
 function validarCampos() {
