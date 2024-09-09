@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="/CSS/Reset/Reset.css">
     <link rel="stylesheet" href="/CSS/BootStrap/bootstrap.css">
     <link rel="stylesheet" href="/CSS/BootStrap/open-iconic-bootstrap.css">
-    <link rel="stylesheet" href="/CSS/FormularioCliente/formulario.css">
+    <link rel="stylesheet" href="/CSS/FormularioCliente/formulario.css"> 
+    <script src="https://unpkg.com/vanilla-masker/build/vanilla-masker.min.js"></script>
     <script src="/JS/AlterarUsuario/alterarUsuario.js "></script>
     <title>Alterar Usuário</title>
 </head>
@@ -33,7 +34,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="cpf">CPF</label>
                             <input type="text" class="form-control" id="cpf" placeholder="Digite seu CPF..."
-                                   inputmode="numeric" pattern="[0-9]*" minlength="11" required>
+                                    pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required>
                             <div class="invalid-feedback">
                                 Digite um CPF válido.
                             </div>
