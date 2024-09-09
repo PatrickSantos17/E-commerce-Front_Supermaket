@@ -54,6 +54,11 @@ describe('Teste login com a senha errada inicialmente e correção depois', () =
       email: 'lucas@teste.com',
       senha: '12345',
     }
+
+    after(() => {
+      cy.clearLocalStorage()
+    })
+
     it('Dado que eu clico em ok para fechar o modal', () => {
       registerForm.elements.btnOkModal().click();
     })
