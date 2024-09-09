@@ -1,7 +1,10 @@
 var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
 // var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
+var grupoUsuarioLogado = localStorage.getItem("grupo");
+
 document.addEventListener('DOMContentLoaded', function () {
+    if (grupoUsuarioLogado === "Admin") {
     // Aplicar máscara ao campo de CPF usando VanillaMasker
     VMasker(document.querySelector("#cpf")).maskPattern("999.999.999-99");
     const urlParams = new URLSearchParams(window.location.search);
@@ -23,7 +26,10 @@ document.addEventListener('DOMContentLoaded', function () {
             acessarUsuário(usuarioId);
         }
     }
-
+} else {
+    alert("Você não tem permissão para acessar esta página!");
+    window.location.href = 'TelaLogin.html'
+}
     function acessarUsuário(usuarioId) {
         fetch('http://' + API + ':8080/usuario/consultar/' + usuarioId)
             .then(response => response.json())

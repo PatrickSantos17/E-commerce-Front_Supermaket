@@ -1,33 +1,40 @@
 var API = "4.228.231.177"; // Setar essa variavel quando subir para a nuvem e comentar a localhost
 // var API = "localhost"; // Setar essa variavel quando testar local e comentar a do IP
 
+var grupoUsuarioLogado = localStorage.getItem("grupo");
+
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Aplicar máscara ao campo de CPF usando VanillaMasker
-    VMasker(document.querySelector("#cpf")).maskPattern("999.999.999-99");
+    if (grupoUsuarioLogado === "Admin") {
+        // Aplicar máscara ao campo de CPF usando VanillaMasker
+        VMasker(document.querySelector("#cpf")).maskPattern("999.999.999-99");
 
-    document.querySelector(".btn-cancelar").addEventListener("click", function () {
-        redirecionarParaListagem();
-    });
+        document.querySelector(".btn-cancelar").addEventListener("click", function () {
+            redirecionarParaListagem();
+        });
 
-    document.querySelector("form").addEventListener("submit", function (event) {
-        event.preventDefault();
+        document.querySelector("form").addEventListener("submit", function (event) {
+            event.preventDefault();
 
-        const form = document.querySelector("form");
-        if (form.checkValidity() && validarSenha() === true) {
-            const usuario = {
-                nome: form.querySelector("#nomeCompleto").value,
-                cpf: form.querySelector("#cpf").value.replace(/\D/g, ''),  // Remover máscara antes de enviar
-                email: form.querySelector("#email").value,
-                senha: form.querySelector('#senha').value,
-                grupo: form.querySelector('#grupo').value
-            };
+            const form = document.querySelector("form");
+            if (form.checkValidity() && validarSenha() === true) {
+                const usuario = {
+                    nome: form.querySelector("#nomeCompleto").value,
+                    cpf: form.querySelector("#cpf").value.replace(/\D/g, ''),  // Remover máscara antes de enviar
+                    email: form.querySelector("#email").value,
+                    senha: form.querySelector('#senha').value,
+                    grupo: form.querySelector('#grupo').value
+                };
 
-            cadastrar(usuario);
-        } else {
-            form.classList.add('was-validated');
-        }
-    });
+                cadastrar(usuario);
+            } else {
+                form.classList.add('was-validated');
+            }
+        });
+    } else {
+        alert("Você não tem permissão para acessar esta página! Contate um administrador para ser cadastrado!");
+        window.location.href = 'TelaLogin.html'
+    }
 });
 
 function cadastrar(usuario) {
@@ -53,7 +60,7 @@ function cadastrar(usuario) {
                 emailField.setCustomValidity("Este e-mail já está em uso. Por favor, escolha outro.");
                 emailField.classList.add("is-invalid"); // Marcar o campo como inválido visualmente
                 emailField.nextElementSibling.textContent = "Este e-mail já está em uso. Por favor, escolha outro.";
-            } else if (response.status === 400){
+            } else if (response.status === 400) {
                 alert("Número do registro de contribuinte individual brasileiro (CPF) inválido!")
                 document.querySelector(".main").classList.remove('blur');
                 esconderLoading();
