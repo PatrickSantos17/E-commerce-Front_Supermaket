@@ -1,3 +1,6 @@
+// var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+
 document.getElementById('produtoForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
@@ -15,8 +18,16 @@ document.getElementById('produtoForm').addEventListener('submit', async function
     const produtoBlob = new Blob([JSON.stringify(produto)], { type: 'application/json' });
     formData.append('produto', produtoBlob);
 
+    const imgPrincipalInput = document.querySelector("#imagemPrincipal");
+    const imgPrincipal = imgPrincipalInput.files;
+
+    // Verifica se o arquivo de imagem principal foi selecionado
+    if (imgPrincipal.length === 0) {
+        document.getElementById('response').innerText = 'Erro: Nenhuma imagem principal selecionada.';
+        return;
+    }
     // Adiciona a imagem principal
-    formData.append('imagemPrincipal', document.getElementById('imagemPrincipal').files[0]);
+    formData.append('imagemPrincipal', imgPrincipal[0]);
 
     // Adiciona as imagens adicionais
     const imagens = document.getElementById('imagens').files;
@@ -25,7 +36,7 @@ document.getElementById('produtoForm').addEventListener('submit', async function
     }
 
     try {
-        const response = await fetch('http://localhost:8080/produto/cadastro', {
+        const response = await fetch('http://' + API + ':8080/produto/cadastro', {
             method: 'POST',
             body: formData
         });
