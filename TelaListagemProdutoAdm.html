@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/Reset/Reset.css">
     <link rel="stylesheet" href="CSS/ListagemProdutoAdm/listagemProduto.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
-    <script src="JS/TelaInicial/inicioSessao.js" defer></script>
+    <script src="JS/Header/header.js" defer></script>
 
     <title>Lista Produtos</title>
 </head>
@@ -21,7 +22,7 @@
 <body>
     <header>
         <div class="lado-a">
-            <img src="src/img/logo-removebg-preview.png" alt="logo-img">
+            <a href="/TelaInicial.html"><img src="src/img/logo-removebg-preview.png" alt="logo-img"></a>
             <input type="search" id="buscar" name="q" placeholder="Buscar">
         </div>
         <div class="lado-b">
@@ -35,11 +36,41 @@
         </div>
     </header>
 
-    <button>Detalhe produto</button>
+    <!-- <button>Detalhe produto</button> -->
 
-    <div class="modal-detalhe-produto-adm">
-        
+    <div class="container">
+        <div class="header">
+            <span>Listagem de produtos</span>
+            <button onclick="directToCadastroProdutos()" id="new">+</i></button>
+        </div>
+
+        <div class="container-filtro">
+            <div class="filtro-usuarios">
+                <input id="filtro" onkeyup="filtrarUsuarios()" type="text" placeholder="Digite o nome do produto">
+            </div>
+        </div>
+
+        <div class="divTable">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Imagem</th>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th class="acao">Visualizar</th>
+                        <th class="acao">Alterar</th>
+                        <th class="acao">Hab/Des</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
     </div>
+    <script src="JS/ListagemUsuarios/Filtro.js" defer></script>
 </body>
 
 </html>
