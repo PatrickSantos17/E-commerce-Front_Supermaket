@@ -47,3 +47,7 @@ document.getElementById('produtoForm').addEventListener('submit', async function
         document.getElementById('response').innerText = 'Erro ao cadastrar produto: ' + error.message;
     }
 });
+
+function directToListagemProdutos() {
+    window.location.href = "TelaListagemProdutoAdm.html";
+}

@@ -46,7 +46,7 @@
 
         <div class="container-filtro">
             <div class="filtro-usuarios">
-                <input id="filtro" onkeyup="filtrarUsuarios()" type="text" placeholder="Digite o nome do produto">
+                <input id="filtro" onkeyup="filtrarProdutos()" type="text" placeholder="Digite o nome do produto">
             </div>
         </div>
 
@@ -65,12 +65,16 @@
                         <th class="acao">Hab/Des</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="table-body">
                 </tbody>
             </table>
         </div>
+        <div id="pagination" class="pagination">
+            <!-- Botões de paginação serão gerados dinamicamente -->
+        </div>
     </div>
-    <script src="JS/ListagemUsuarios/Filtro.js" defer></script>
+    <script src="JS/ListagemProdutos/Filtro.js" defer></script>
+    <script src="JS/ListagemProdutos/ListagemProdutos.js" defer></script>
 </body>
 
 </html>

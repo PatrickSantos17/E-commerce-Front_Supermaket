@@ -49,10 +49,13 @@ button {
 
 .divTable {
     padding: 10px;
-    width: 100%; /* Certifique-se de que a div contêiner ocupa 100% da largura disponível */
-    height: 410px; /* Defina uma altura fixa ou máxima para a div contêiner */
+    width: 100%;
+    /* Certifique-se de que a div contêiner ocupa 100% da largura disponível */
+    height: 410px;
+    /* Defina uma altura fixa ou máxima para a div contêiner */
     overflow: auto;
-    box-sizing: border-box; /* Inclui padding e border no tamanho total da div */
+    box-sizing: border-box;
+    /* Inclui padding e border no tamanho total da div */
 }
 
 .divTable::-webkit-scrollbar {
@@ -66,18 +69,24 @@ button {
 }
 
 table {
-    width: 100%; /* Certifique-se de que a tabela ocupa 100% da largura da div contêiner */
-    table-layout: fixed; /* Garante que a tabela respeite o tamanho do contêiner */
-    border-collapse: collapse; /* Garante que as bordas da tabela colapsem corretamente */
+    width: 100%;
+    /* Certifique-se de que a tabela ocupa 100% da largura da div contêiner */
+    table-layout: fixed;
+    /* Garante que a tabela respeite o tamanho do contêiner */
+    border-collapse: collapse;
+    /* Garante que as bordas da tabela colapsem corretamente */
 }
 
 thead {
     background-color: whitesmoke;
 }
 
-th, td {
-    word-wrap: break-word; /* Garante que o conteúdo das células quebre corretamente */
-    max-width: 200px; /* Defina uma largura máxima para as células, se necessário */
+th,
+td {
+    word-wrap: break-word;
+    /* Garante que o conteúdo das células quebre corretamente */
+    max-width: 200px;
+    /* Defina uma largura máxima para as células, se necessário */
 }
 
 tr {
@@ -229,4 +238,27 @@ header .lado-b img {
 .lado-b .info-usuario .grupo-usuario {
     font-size: 28px;
     font-weight: 700;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination button:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
 }
