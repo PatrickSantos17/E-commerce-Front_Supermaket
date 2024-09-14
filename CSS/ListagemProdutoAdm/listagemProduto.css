@@ -1,13 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700&family=Roboto:wght@100;300;400;500;700;900&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+
 body {
     font-family: "Poppins", sans-serif;
     background: radial-gradient(circle, #130ff3, #000770, #000000);
     width: 100vw;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+button {
+    cursor: pointer;
+}
+
+.container {
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    background: white;
+    margin: 15px;
+}
+
+.header {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto 12px;
+}
+
+.header span {
+    font-weight: 900;
+    font-size: 20px;
+    word-break: break-all;
+}
+
+#new {
+    font-size: 25px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: rgb(57, 57, 226);
+}
+
+.divTable {
+    padding: 10px;
+    width: 100%; /* Certifique-se de que a div contêiner ocupa 100% da largura disponível */
+    height: 410px; /* Defina uma altura fixa ou máxima para a div contêiner */
+    overflow: auto;
+    box-sizing: border-box; /* Inclui padding e border no tamanho total da div */
+}
+
+.divTable::-webkit-scrollbar {
+    width: 12px;
+    background-color: whitesmoke;
+}
+
+.divTable::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: darkgray;
+}
+
+table {
+    width: 100%; /* Certifique-se de que a tabela ocupa 100% da largura da div contêiner */
+    table-layout: fixed; /* Garante que a tabela respeite o tamanho do contêiner */
+    border-collapse: collapse; /* Garante que as bordas da tabela colapsem corretamente */
+}
+
+thead {
+    background-color: whitesmoke;
+}
+
+th, td {
+    word-wrap: break-word; /* Garante que o conteúdo das células quebre corretamente */
+    max-width: 200px; /* Defina uma largura máxima para as células, se necessário */
+}
+
+tr {
+    border-bottom: 1px solid rgb(238, 235, 235) !important;
+}
+
+tbody tr td {
+    vertical-align: text-top;
+    padding: 6px;
+    max-width: 50px;
+}
+
+thead tr th {
+    padding: 5px;
+    text-align: start;
+    margin-bottom: 50px;
+}
+
+tbody tr {
+    margin-bottom: 50px;
+}
+
+thead tr th.acao {
+    width: 100px !important;
+    text-align: center;
+}
+
+tbody tr td.acao {
+    text-align: center;
+}
+
+.container-filtro {
+    width: 100%;
+    margin-left: 1%;
+}
+
+.filtro-usuarios {
+    width: 70%;
+    height: 25%;
+}
+
+.filtro-usuarios #filtro {
+    width: 220px;
+    height: 35px;
+    border: 2px solid #8d8d8d;
+    border-radius: 13px;
+    text-align: left;
+    padding-left: 12px;
+}
+
+@media (max-width: 700px) {
+    body {
+        font-size: 10px;
+    }
+
+    .header span {
+        font-size: 15px;
+    }
+
+    #new {
+        padding: 5px;
+        font-size: 10px;
+    }
+
+    thead tr th.acao {
+        width: auto !important;
+    }
+
+    td button i {
+        font-size: 20px !important;
+    }
+
+    td button i:first-child {
+        margin-right: 0;
+    }
+}
+
+.active {
+    display: flex;
+}
+
+td button {
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+td button i {
+    font-size: 25px;
+}
+
+td button i:first-child {
+    margin-right: 10px;
 }
 
 header {
+    width: 100%;
     background-color: #FFFFFF;
-    height: 170px;
+    height: 120px;
     display: flex;
 }
 
@@ -24,12 +193,12 @@ header {
 }
 
 header .lado-a img {
-    height: 170px;
+    height: 120px;
     padding: 0 60px;
 }
 
 header .lado-b img {
-    height: 45px;
+    height: 35px;
 }
 
 .lado-a #buscar {
