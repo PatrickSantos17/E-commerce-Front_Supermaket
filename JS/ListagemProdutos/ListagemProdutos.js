@@ -56,8 +56,8 @@ function displayTableData() {
             <td>${item.quantidade}</td>
             <td>${item.preco}</td>
             <td>${item.ativo ? 'Ativo' : 'Inativo'}</td>
-            <td class="acao"><button>Visualizar</button></td>
             <td class="acao"><button>Alterar</button></td>
+            <td class="acao"><button>Visualizar</button></td>
             <td class="acao"><button>Hab/Des</button></td>
         `;
             tableBody.appendChild(row);
