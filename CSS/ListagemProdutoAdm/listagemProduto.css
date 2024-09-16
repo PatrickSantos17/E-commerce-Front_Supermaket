@@ -229,26 +229,27 @@ header {
     background-color: #FFFFFF;
     height: 120px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    box-sizing: border-box;
 }
 
 .lado-a {
+    width: 50%;
     display: flex;
-    align-items: center;
-    gap: 20px;
 }
 
 .lado-b {
+    width: 50%;
     display: flex;
-    align-items: center;
-    gap: 20px;
+    justify-content: flex-end;
+    padding-right: 80px;
 }
 
 header .lado-a img {
-    height: 80px;
+    height: 120px;
+    padding: 0 60px;
+}
+
+header .lado-b img {
+    height: 35px;
 }
 
 .lado-a #buscar {
@@ -256,11 +257,9 @@ header .lado-a img {
     height: 35px;
     border: 2px solid #8d8d8d;
     border-radius: 13px;
+    text-align: left;
     padding-left: 12px;
-}
-
-header .lado-b img {
-    height: 40px;
+    margin: auto 0;
 }
 
 .lado-b .info-usuario {
@@ -268,10 +267,12 @@ header .lado-b img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 180px;
+    height: 100%;
 }
 
 .lado-b .info-usuario .nome-usuario {
-    margin-top: 5px;
+    margin-top: 15px;
     font-size: 17px;
     font-weight: 600;
 }
