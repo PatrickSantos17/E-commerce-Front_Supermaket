@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700&family=Roboto:wght@100;300;400;500;700;900&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
-
 body {
     font-family: "Poppins", sans-serif;
     background: radial-gradient(circle, #130ff3, #000770, #000000);
@@ -10,18 +8,89 @@ body {
     justify-content: center;
     flex-direction: column;
     background-color: rgba(0, 0, 0, 0.1);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 button {
     cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: white;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+    background-color: #003f7f;
+}
+
+button:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+}
+
+#new {
+    padding: 12px 25px;
+    font-size: 18px;
+    background-color: #28a745;
+}
+
+#new:hover {
+    background-color: black;
+}
+
+#new:active {
+    background-color: #1e7e34;
+}
+
+.pagination button {
+    margin: 5px;
+    padding: 8px 16px;
+    background-color: #f9f9f9;
+    color: #007bff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination button:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
 }
 
 .container {
     width: 90%;
+    max-width: 1200px;
     height: 80%;
     border-radius: 10px;
     background: white;
     margin: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
@@ -29,7 +98,8 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: auto 12px;
+    margin: 0 12px;
+    flex-wrap: wrap;
 }
 
 .header span {
@@ -50,31 +120,15 @@ button {
 .divTable {
     padding: 10px;
     width: 100%;
-    /* Certifique-se de que a div contêiner ocupa 100% da largura disponível */
-    height: 410px;
-    /* Defina uma altura fixa ou máxima para a div contêiner */
-    overflow: auto;
+    height: auto;
+    overflow-x: auto;
     box-sizing: border-box;
-    /* Inclui padding e border no tamanho total da div */
-}
-
-.divTable::-webkit-scrollbar {
-    width: 12px;
-    background-color: whitesmoke;
-}
-
-.divTable::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: darkgray;
 }
 
 table {
     width: 100%;
-    /* Certifique-se de que a tabela ocupa 100% da largura da div contêiner */
     table-layout: fixed;
-    /* Garante que a tabela respeite o tamanho do contêiner */
     border-collapse: collapse;
-    /* Garante que as bordas da tabela colapsem corretamente */
 }
 
 thead {
@@ -84,169 +138,76 @@ thead {
 th,
 td {
     word-wrap: break-word;
-    /* Garante que o conteúdo das células quebre corretamente */
-    max-width: 200px;
-    /* Defina uma largura máxima para as células, se necessário */
-}
-
-tr {
-    border-bottom: 1px solid rgb(238, 235, 235) !important;
+    padding: 10px;
+    text-align: center; /* Alinha o conteúdo nas células */
+    vertical-align: middle; /* Alinha o conteúdo verticalmente ao centro */
 }
 
 tbody tr td {
-    vertical-align: text-top;
-    padding: 6px;
-    max-width: 50px;
+    vertical-align: middle; /* Alinha o conteúdo das células ao centro */
+    padding: 10px;
 }
 
-thead tr th {
-    padding: 5px;
-    text-align: start;
-    margin-bottom: 50px;
-}
-
-tbody tr {
-    margin-bottom: 50px;
-}
-
-thead tr th.acao {
+thead tr th.acao, tbody tr td.acao {
     width: 100px !important;
-    text-align: center;
 }
 
-tbody tr td.acao {
-    text-align: center;
-}
-
-.container-filtro {
-    width: 100%;
-    margin-left: 1%;
-}
-
-.filtro-usuarios {
-    width: 70%;
-    height: 25%;
-}
-
-.filtro-usuarios #filtro {
-    width: 220px;
-    height: 35px;
-    border: 2px solid #8d8d8d;
-    border-radius: 13px;
-    text-align: left;
-    padding-left: 12px;
-}
-
-@media (max-width: 700px) {
-    body {
-        font-size: 10px;
-    }
-
-    .header span {
-        font-size: 15px;
-    }
-
-    #new {
-        padding: 5px;
-        font-size: 10px;
-    }
-
-    thead tr th.acao {
-        width: auto !important;
-    }
-
-    td button i {
-        font-size: 20px !important;
-    }
-
-    td button i:first-child {
-        margin-right: 0;
-    }
-}
-
-.active {
-    display: flex;
+td img {
+    max-width: 50px;
+    max-height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    vertical-align: middle; /* Alinha a imagem ao centro verticalmente */
 }
 
 td button {
     border: none;
     outline: none;
     background: transparent;
+    font-size: 16px;
+    color: #007bff;
+    padding: 5px;
+    transition: color 0.3s ease;
 }
 
 td button i {
-    font-size: 25px;
+    font-size: 20px;
+}
+
+td button:hover {
+    color: #0056b3;
 }
 
 td button i:first-child {
     margin-right: 10px;
 }
 
-header {
+tbody tr {
+    border-bottom: 1px solid rgb(238, 235, 235);
+}
+
+.container-filtro {
     width: 100%;
-    background-color: #FFFFFF;
-    height: 120px;
-    display: flex;
+    margin: 10px 0;
 }
 
-.lado-a {
-    width: 50%;
-    display: flex;
-}
-
-.lado-b {
-    width: 50%;
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 80px;
-}
-
-header .lado-a img {
-    height: 120px;
-    padding: 0 60px;
-}
-
-header .lado-b img {
-    height: 35px;
-}
-
-.lado-a #buscar {
-    width: 220px;
+.filtro-usuarios #filtro {
+    width: 100%;
+    max-width: 400px;
     height: 35px;
     border: 2px solid #8d8d8d;
     border-radius: 13px;
-    text-align: left;
     padding-left: 12px;
-    margin: auto 0;
-}
-
-.lado-b .info-usuario {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 180px;
-    height: 100%;
-}
-
-.lado-b .info-usuario .nome-usuario {
-    margin-top: 15px;
-    font-size: 17px;
-    font-weight: 600;
-}
-
-.lado-b .info-usuario .grupo-usuario {
-    font-size: 28px;
-    font-weight: 700;
 }
 
 .pagination {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .pagination button {
-    margin: 0 5px;
     padding: 5px 10px;
     border: 1px solid #ccc;
     background-color: #f9f9f9;
@@ -261,4 +222,163 @@ header .lado-b img {
 .pagination button:disabled {
     background-color: #e9ecef;
     cursor: not-allowed;
+}
+
+header {
+    width: 100%;
+    background-color: #FFFFFF;
+    height: 120px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.lado-a {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.lado-b {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+header .lado-a img {
+    height: 80px;
+}
+
+.lado-a #buscar {
+    width: 220px;
+    height: 35px;
+    border: 2px solid #8d8d8d;
+    border-radius: 13px;
+    padding-left: 12px;
+}
+
+header .lado-b img {
+    height: 40px;
+}
+
+.lado-b .info-usuario {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.lado-b .info-usuario .nome-usuario {
+    margin-top: 5px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.lado-b .info-usuario .grupo-usuario {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .lado-a, .lado-b {
+        width: 100%;
+        justify-content: center;
+        margin: 10px 0;
+    }
+
+    header .lado-a img {
+        height: 60px;
+    }
+
+    .lado-a #buscar {
+        width: 100%;
+        max-width: 300px;
+        margin-top: 10px;
+    }
+
+    header .lado-b img {
+        height: 35px;
+    }
+
+    .lado-b .info-usuario .nome-usuario {
+        font-size: 14px;
+    }
+
+    .lado-b .info-usuario .grupo-usuario {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lado-a #buscar {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .lado-b .info-usuario .nome-usuario {
+        font-size: 12px;
+    }
+
+    .lado-b .info-usuario .grupo-usuario {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .header span {
+        font-size: 18px;
+    }
+
+    #new {
+        padding: 5px 15px;
+        font-size: 18px;
+    }
+
+    .lado-a, .lado-b {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .divTable {
+        height: auto;
+    }
+
+    th, td {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header span {
+        font-size: 16px;
+    }
+
+    #new {
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    th, td {
+        font-size: 10px;
+        padding: 6px;
+    }
+
+    .pagination button {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
 }
