@@ -3,8 +3,8 @@ body {
     font-family: Arial, sans-serif;
     background: radial-gradient(circle, #130ff3, #000770, #000000);
     color: #333; /* Cor do texto padrão */
-    margin: 0;
-    padding: 0;
+    margin: 150px;
+    padding: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,10 +13,10 @@ body {
 
 .container {
     background-color: #fff; /* Cor de fundo do container */
-    padding: 20px;
-    border-radius: 8px;
+    padding: 70px;
+    border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    width: 70%;
     max-width: 600px;
     color: #333; /* Cor do texto dentro do container */
 }
@@ -47,7 +47,7 @@ input[type="file"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 10px;
     box-sizing: border-box;
     color: #333; /* Cor do texto dos inputs */
 }
@@ -57,7 +57,7 @@ button {
     color: #fff;
     border: none;
     padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
     margin-bottom: 10px; /* Adiciona espaço entre os botões */
     width: 100%; /* Ocupa toda a largura do formulário */
@@ -100,7 +100,7 @@ button[type="button"]:hover {
     max-width: 100px;
     max-height: 100px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 10px;
 }
 
 /* Estilos do modal */
