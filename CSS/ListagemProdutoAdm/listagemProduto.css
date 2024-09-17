@@ -139,16 +139,20 @@ th,
 td {
     word-wrap: break-word;
     padding: 10px;
-    text-align: center; /* Alinha o conteúdo nas células */
-    vertical-align: middle; /* Alinha o conteúdo verticalmente ao centro */
+    text-align: center;
+    /* Alinha o conteúdo nas células */
+    vertical-align: middle;
+    /* Alinha o conteúdo verticalmente ao centro */
 }
 
 tbody tr td {
-    vertical-align: middle; /* Alinha o conteúdo das células ao centro */
+    vertical-align: middle;
+    /* Alinha o conteúdo das células ao centro */
     padding: 10px;
 }
 
-thead tr th.acao, tbody tr td.acao {
+thead tr th.acao,
+tbody tr td.acao {
     width: 100px !important;
 }
 
@@ -157,7 +161,8 @@ td img {
     max-height: 50px;
     object-fit: cover;
     border-radius: 5px;
-    vertical-align: middle; /* Alinha a imagem ao centro verticalmente */
+    vertical-align: middle;
+    /* Alinha a imagem ao centro verticalmente */
 }
 
 td button {
@@ -290,7 +295,8 @@ header .lado-b img {
         text-align: center;
     }
 
-    .lado-a, .lado-b {
+    .lado-a,
+    .lado-b {
         width: 100%;
         justify-content: center;
         margin: 10px 0;
@@ -348,7 +354,8 @@ header .lado-b img {
         font-size: 18px;
     }
 
-    .lado-a, .lado-b {
+    .lado-a,
+    .lado-b {
         flex: 1 1 100%;
         text-align: center;
     }
@@ -357,7 +364,8 @@ header .lado-b img {
         height: auto;
     }
 
-    th, td {
+    th,
+    td {
         font-size: 12px;
         padding: 8px;
     }
@@ -373,7 +381,8 @@ header .lado-b img {
         font-size: 14px;
     }
 
-    th, td {
+    th,
+    td {
         font-size: 10px;
         padding: 6px;
     }
@@ -383,3 +392,150 @@ header .lado-b img {
         font-size: 12px;
     }
 }
+
+/* modal para visualizar produto */
+.card-produto {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    /* Centraliza verticalmente */
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    background-color: rgba(0, 0, 0, 0.76);
+    /* Fundo escuro para sobreposição */
+}
+
+.modal-detalhe-prod-adm {
+    width: 60%;
+    height: 75%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid rgb(206, 206, 206);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 20px;
+    gap: 15px;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.066);
+}
+
+.modal-heading {
+    display: flex;
+    height: 10%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-preview {
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+}
+
+/* botão fechar modal */
+.btn-fechar {
+    position: absolute;
+    width: 3em;
+    height: 3em;
+    border: none;
+    background: rgb(0, 0, 0);
+    border-radius: 5px;
+    transition: background 0.5s;
+    right: 4%;
+}
+
+.X {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2em;
+    height: 1.5px;
+    background-color: rgb(255, 255, 255);
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.Y {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2em;
+    height: 1.5px;
+    background-color: #fff;
+    transform: translateX(-50%) rotate(-45deg);
+}
+
+.close {
+    position: absolute;
+    display: flex;
+    padding: 0.8rem 1.5rem;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-50%);
+    top: -70%;
+    left: 50%;
+    width: 2em;
+    height: 1em;
+    font-size: 12px;
+    background-color: rgb(19, 22, 24);
+    color: rgb(187, 229, 236);
+    border: none;
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.btn-fechar:hover {
+    background-color: rgb(211, 21, 21);
+}
+
+.btn-fechar:active {
+    background-color: rgb(130, 0, 0);
+}
+
+.btn-fechar:hover>.close {
+    animation: close 0.2s forwards 0.25s;
+}
+
+@keyframes close {
+    100% {
+        opacity: 1;
+    }
+}
+/* fim btn fechar modal */
+
+/* detalhes do produto */
+.produto {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.produto .imagens-prod {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+    background-color: #007bff;
+}
+
+.produto .info-prod {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+    background-color: #62aeff;
+}
+
+/*Fim estilo modal visualizar produto  */
