@@ -1,0 +1,190 @@
+/* Estilos gerais */
+#imagens, #imagemPrincipal {
+    display: none;
+}
+
+/* Estilo para pré-visualização de imagens adicionais */
+.additionalImagesDisplay {
+    display: flex;
+    flex-wrap: wrap; /* Permite que as imagens quebrem para a próxima linha */
+    gap: 10px; /* Espaço entre as imagens */
+}
+
+.additional-img {
+    width: 100px; /* Define o tamanho da imagem adicional */
+    height: 100px; /* Define o tamanho da imagem adicional */
+    object-fit: cover; /* Garante que a imagem fique bem ajustada sem distorções */
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.imagem1, 
+.imgsAdicionais {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: color 300ms ease-in-out, background 300ms ease-in-out;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.300);
+    overflow: hidden;
+}
+
+.imagem1:hover, 
+.imgsAdicionais:hover {
+    color: #302222;
+    background: #ccc;
+}
+
+.additionalImagesDisplay img {
+    width: 150px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle, #130ff3, #000770, #000000);
+    color: #333; /* Cor do texto padrão */
+    margin: 150px;
+    padding: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff; /* Cor de fundo do container */
+    padding: 70px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    max-width: 600px;
+    color: #333; /* Cor do texto dentro do container */
+}
+
+h1 {
+    text-align: center;
+    color: #007bff; /* Cor primária */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    color: #333; /* Cor do texto dos inputs */
+}
+
+button {
+    background-color: #007bff; /* Cor primária */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 10px; /* Adiciona espaço entre os botões */
+    width: 100%; /* Ocupa toda a largura do formulário */
+}
+
+button:hover {
+    background-color: #0056b3; /* Cor primária escura */
+}
+
+button[type="submit"] {
+    background-color: #130ff3; /* Cor secundária */
+}
+
+button[type="submit"]:hover {
+    background-color: #000770; /* Cor secundária escura */
+}
+
+button[type="button"] {
+    background-color: #7e7e7e; /* Cor de cancelamento */
+}
+
+button[type="button"]:hover {
+    background-color: #636262; /* Cor de cancelamento escura */
+}
+
+#response {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #dc3545; /* Cor de erro */
+}
+
+.image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.image-preview img {
+    max-width: 100px;
+    max-height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+/* Estilos do modal */
+.modal {
+    display: none; /* Esconde o modal por padrão */
+    position: fixed; /* Fixa o modal na tela */
+    z-index: 1; /* Garante que o modal fique acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Habilita rolagem se necessário */
+    background-color: rgb(0, 0, 0); /* Cor de fundo preta */
+    background-color: rgba(0, 0, 0, 0.4); /* Cor de fundo com opacidade */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Centraliza o modal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Largura do modal */
+    max-width: 500px; /* Largura máxima do modal */
+    border-radius: 8px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
