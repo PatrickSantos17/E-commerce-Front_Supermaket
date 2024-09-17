@@ -57,7 +57,9 @@ function displayTableData() {
             <td>${item.preco}</td>
             <td>${item.ativo ? 'Ativo' : 'Inativo'}</td>
             <td class="acao"><button>Alterar</button></td>
-            <td class="acao"><button>Visualizar</button></td>
+            <td class="acao">
+                <button onclick="visualizarProduto()">Visualizar</button>
+            </td>
             <td class="acao"><button>Hab/Des</button></td>
         `;
             tableBody.appendChild(row);
@@ -126,4 +128,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function directToCadastroProdutos() {
     window.location.href = "TelaCadastroProduto.html";
+}
+
+function visualizarProduto() {
+    abrirModalProduto();
+}
+
+function abrirModalProduto() {
+    document.querySelector(".card-produto").style.display = "flex";
+}
+
+function fecharModalProduto() {
+    document.querySelector(".card-produto").style.display = "none";
 }
