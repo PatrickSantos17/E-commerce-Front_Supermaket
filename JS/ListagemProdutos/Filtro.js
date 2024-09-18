@@ -1,20 +1,20 @@
+// var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+
 function filtrarProdutos() {
     // Obtém o valor digitado no campo de entrada
     var filtro = document.getElementById('filtro').value.toUpperCase();
     
-    // Obtém todas as linhas da tabela dentro do <tbody>
-    var linhas = document.querySelectorAll("tbody tr");
-    
-    // Itera sobre cada linha da tabela
-    linhas.forEach(linha => {
-        // Obtém o texto da célula que contém o nome do produto (supondo que esteja na terceira célula <td>)
-        var nomeProduto = linha.querySelector("td:nth-child(3)").innerText.toUpperCase();
-
-        // Verifica se o nome do produto contém o filtro digitado
-        if (nomeProduto.includes(filtro)) {
-            linha.style.display = ""; // Mostra a linha
-        } else {
-            linha.style.display = "none"; // Esconde a linha
+    async function fetchData(page = 0, nome) {
+        try {
+            const response = await fetch(`http://${API}:8080/produto/buscaNome?nome=${nome}&page=${page}`); // Substitua pela URL do seu backend
+            const result = await response.json();
+            data = result.produtos; // Armazena os produtos recebidos
+            totalPages = result.totalPages; // Armazena o número total de páginas
+            displayTableData();
+            setupPagination();
+        } catch (error) {
+            console.error('Erro ao buscar dados:', error);
         }
-    });
+    }
 }
