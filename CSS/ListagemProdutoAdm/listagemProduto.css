@@ -47,11 +47,17 @@ button:disabled {
     background-color: #28a745;
 }
 
-#new:hover {
+#buscar-filtro {
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: #28a745;
+}
+
+#new:hover, #buscar-filtro:hover {
     background-color: black;
 }
 
-#new:active {
+#new:active, #buscar-filtro:active {
     background-color: #1e7e34;
 }
 
@@ -112,6 +118,15 @@ button:disabled {
     font-size: 25px;
     padding: 10px 20px;
     border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: rgb(57, 57, 226);
+}
+
+#buscar-filtro {
+    font-size: 15px;
+    padding: 3px 12px;
+    border-radius: 3px;
     border: none;
     color: white;
     background-color: rgb(57, 57, 226);
@@ -194,6 +209,8 @@ tbody tr {
 .container-filtro {
     width: 100%;
     margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
 }
 
 .filtro-usuarios #filtro {
@@ -349,7 +366,7 @@ header .lado-b img {
         font-size: 18px;
     }
 
-    #new {
+    #new, #buscar-filtro{
         padding: 5px 15px;
         font-size: 18px;
     }
@@ -376,7 +393,7 @@ header .lado-b img {
         font-size: 16px;
     }
 
-    #new {
+    #new, #buscar-filtro{
         padding: 5px;
         font-size: 14px;
     }
