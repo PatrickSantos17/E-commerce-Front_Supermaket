@@ -122,6 +122,59 @@ function setupPagination() {
     }
 }
 
+function filtrarProdutos() {
+    // Obtém o valor digitado no campo de entrada e remove espaços extras
+    var filtro = document.getElementById('filtro').value.trim().toUpperCase();
+
+    // Se o filtro estiver vazio, busca os produtos normalmente
+    if (!filtro) {
+        fetchData(); // Carrega a lista completa se o filtro estiver vazio
+        return;
+    }
+
+    async function fetchFilteredData(page = 0) {
+        try {
+            const response = await fetch(`http://${API}:8080/produto/buscaNome?nome=${filtro}&page=${page}`);
+            
+            // Se a API retornar 404, exibe a mensagem de produto não encontrado
+            if (response.status === 404) {
+                exibirMensagemProdutoNaoEncontrado();
+                return;
+            }
+
+            const result = await response.json();
+            if (result.produtos.length === 0) {
+                // Caso a lista de produtos retornada seja vazia, exibe mensagem de produto não encontrado
+                exibirMensagemProdutoNaoEncontrado();
+            } else {
+                data = result.produtos; // Armazena os produtos filtrados
+                totalPages = result.totalPages; // Armazena o número total de páginas para os produtos filtrados
+                displayTableData(); // Exibe os dados filtrados
+                setupPagination(); // Configura a paginação para os dados filtrados
+            }
+        } catch (error) {
+            console.error('Erro ao buscar dados filtrados:', error);
+            exibirMensagemProdutoNaoEncontrado(); // Exibe mensagem em caso de erro
+        }
+    }
+
+    fetchFilteredData(); // Chama a função para buscar os produtos filtrados
+}
+
+function exibirMensagemProdutoNaoEncontrado() {
+    const tabela = document.querySelector('.divTable');
+    tabela.innerHTML = `
+        <div class="produto-nao-encontrado">
+            <p>PRODUTO NÃO ENCONTRADO!</p>
+            <img src="src/img/1178479.png" alt="Produto não encontrado" width="200">
+        </div>
+    `;
+
+    const pagination = document.getElementById('pagination');
+    pagination.innerHTML = ''; // Limpa a paginação quando não houver resultados
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchData(); // Carrega os dados do backend quando a página é carregada
 });
