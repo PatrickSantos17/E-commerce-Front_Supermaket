@@ -42,19 +42,18 @@
 
             <div class="EscolhaImg">
                 <label class="imagem1" for="imagemPrincipal" tabindex="0">
-                    <span class="mainPicture__image">Escolha uma imagem:</span>
+                    <span class="mainPicture__image">Clique para escolher a imagem Principal:</span>
                 </label>
                 <input type="file" id="imagemPrincipal" name="imagemPrincipal" required>
             </div>
-
+            
             <div class="EscolhaImgMultiple">
-                <label class="imgsAdicionais" for="imagens" tabindex="0">
-                    <span class="imgsAdicionais__image">Escolha as imagens adicionais:</span>
-                    <div class="additionalImagesDisplay"></div> 
-                </label>    
-                
-                <input type="file" id="imagens" name="imagens" multiple>
-                
+                <div class="EscolhaImgMultiple">
+                    <div class="additionalImagesDisplay"></div>
+                    <input type="file" id="imagens" name="imagens" multiple style="display: none;">
+                    <button type="button" id="addImagesButton">Escolha as imagens adicionais</button>
+                </div> 
+            </div>
 
             <div class="form-group">
                 <button type="submit">Cadastrar Produto</button>
