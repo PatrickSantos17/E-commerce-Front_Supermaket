@@ -1,6 +1,10 @@
 // URL da API
 var API = "localhost"; // Altere para o IP da API quando subir para a nuvem
 
+document.getElementById('addImagesButton').addEventListener('click', function() {
+    document.getElementById('imagens').click();
+});
+
 // Função para pré-visualizar a imagem principal
 document.getElementById("imagemPrincipal").addEventListener("change", function (e) {
     const inputTarget = e.target;
@@ -19,7 +23,7 @@ document.getElementById("imagemPrincipal").addEventListener("change", function (
         };
         reader.readAsDataURL(file);
     } else {
-        mainPictureImage.innerHTML = "Escolha uma imagem"; // Texto padrão quando não há imagem
+        mainPictureImage.innerHTML = "Clique para adicionar a imagem principal"; // Texto padrão quando não há imagem
     }
 });
 
@@ -27,7 +31,6 @@ document.getElementById("imagemPrincipal").addEventListener("change", function (
 document.getElementById("imagens").addEventListener("change", function (e) {
     const files = e.target.files;
     const additionalImagesDisplay = document.querySelector(".additionalImagesDisplay");
-    additionalImagesDisplay.innerHTML = ""; // Limpa as imagens anteriores
 
     if (files.length > 0) {
         Array.from(files).forEach(file => {
@@ -35,14 +38,11 @@ document.getElementById("imagens").addEventListener("change", function (e) {
             reader.onload = function (e) {
                 const img = document.createElement("img");
                 img.src = e.target.result;
-                img.classList.add("additionalImagesDisplay");
+                img.classList.add("additional-img");
                 additionalImagesDisplay.appendChild(img); // Adiciona a imagem na lista
-
             };
             reader.readAsDataURL(file);
         });
-    } else {
-        additionalImagesDisplay.innerHTML = "Escolha uma ou mais imagens"; // Mensagem padrão
     }
 });
 
@@ -78,7 +78,6 @@ document.getElementById('produtoForm').addEventListener('submit', async function
     const imagens = document.getElementById('imagens').files;
     for (let i = 0; i < imagens.length; i++) {
         formData.append('imagens', imagens[i]);
-        document.querySelector('.imgsAdicionais__image').innerHTML = 'Escolha as imagens adicionais:';
     }
 
     try {
@@ -96,7 +95,7 @@ document.getElementById('produtoForm').addEventListener('submit', async function
         document.getElementById('produtoForm').reset();
         document.querySelector(".mainPicture__image").innerHTML = "Escolha uma imagem";
         document.querySelector(".additionalImagesDisplay").innerHTML = "";
-        document.querySelector('.imgsAdicionais__image').innerHTML = 'Escolha as imagens adicionais:';
+        document.querySelector('.imgsAdicionais__image').innerHTML = 'Escolha as imagens adicionais:'; // Restaura a mensagem
 
         // Exibe o modal de confirmação
         showModal('Produto cadastrado com sucesso!');

@@ -5,14 +5,15 @@
 
 /* Estilo para pré-visualização de imagens adicionais */
 .additionalImagesDisplay {
+    margin: 10px 0 50px 0;
     display: flex;
     flex-wrap: wrap; /* Permite que as imagens quebrem para a próxima linha */
-    gap: 10px; /* Espaço entre as imagens */
+    /* gap: 10px; Espaço entre as imagens */
 }
 
 .additional-img {
-    width: 100px; /* Define o tamanho da imagem adicional */
-    height: 100px; /* Define o tamanho da imagem adicional */
+    width: 120px; /* Define o tamanho da imagem adicional */
+    height: 120px; /* Define o tamanho da imagem adicional */
     object-fit: cover; /* Garante que a imagem fique bem ajustada sem distorções */
     border-radius: 10px;
     border: 1px solid #ccc;
@@ -34,15 +35,18 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.300);
     overflow: hidden;
 }
-.imagem1:hover, 
-.imgsAdicionais:hover {
+.imagem1:hover
+/* .imgsAdicionais:hover  */
+{
     color: #302222;
     background: #ccc;
 }
 
 .additionalImagesDisplay img {
+    padding: auto;
+    margin: 10px;
     width: 150px;
-    margin-right: 10px;
+    margin-right: 5px;
     margin-bottom: 10px;
     border-radius: 5px;
 }
