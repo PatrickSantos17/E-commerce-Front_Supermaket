@@ -93,6 +93,17 @@ label {
     font-weight: bold;
 }
 
+.linha{
+    display: flex;
+    flex-direction: space-between;
+    gap: 20px;
+}
+
+.campo{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
 input[type="text"],
 input[type="number"],
 input[type="file"] {
