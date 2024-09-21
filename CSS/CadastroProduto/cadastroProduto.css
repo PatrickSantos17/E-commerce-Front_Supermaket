@@ -104,6 +104,51 @@ label {
     flex-direction: column;
     flex-grow: 1;
 }
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.form-group select option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
+.form-group select:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
 input[type="text"],
 input[type="number"],
 input[type="file"] {
@@ -158,55 +203,55 @@ button[type="button"]:hover {
     border: 1px solid #cc0000;
     background-color: #e50000;
     overflow: hidden;
-  }
-  
-  .btn-remove,
-  .btn-remove__icon,
-  .btn-remove__text {
-    transition: all 0.3s;
-  }
-  
-  .btn-remove .btn-remove__text {
-    transform: translateX(35px);
+}
+
+.btn-remove,
+.btn-remove__icon,
+.btn-remove__text {
+    transition: all 0.6s;
+}
+
+.btn-remove .btn-remove__text {
+    transform: translateX(40px);
     color: #fff;
     font-weight: 600;
-  }
-  
-  .btn-remove .btn-remove__icon {
+}
+
+.btn-remove .btn-remove__icon {
     position: absolute;
-    transform: translateX(109px);
+    transform: translateX(150px); /* Move o ícone para fora do botão inicialmente */
     height: 100%;
     width: 39px;
     background-color: #cc0000;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .btn-remove .svg {
+}
+
+.btn-remove .svg {
     width: 20px;
-  }
-  
-  .btn-remove:hover {
+}
+
+.btn-remove:hover {
     background: #cc0000;
-  }
-  
-  .btn-remove:hover .btn-remove__text {
+}
+
+.btn-remove:hover .btn-remove__text {
     color: transparent;
-  }
-  
-  .btn-remove:hover .btn-remove__icon {
-    width: 148px;
-    transform: translateX(0);
-  }
-  
-  .btn-remove:active .btn-remove__icon {
+}
+
+.btn-remove:hover .btn-remove__icon {
+    width: 50px;
+    transform: translateX(50%); /* Para o ícone no centro do botão */
+}
+
+.btn-remove:active .btn-remove__icon {
     background-color: #b20000;
-  }
-  
-  .btn-remove:active {
+}
+
+.btn-remove:active {
     border: 1px solid #b20000;
-  }
+}
   
   /* Estilo do contêiner das imagens */
   .img-wrapper {
