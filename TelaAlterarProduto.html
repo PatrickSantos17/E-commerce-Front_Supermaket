@@ -1,56 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="PT-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela Alteração Produto</title>
     <link rel="stylesheet" href="CSS/AlterarProduto/alterarProduto.css">
+    <title>Alteração de Produto</title>
 </head>
 <body>
     <div class="container">
         <h1>Alteração de Produto</h1>
-        <form id="alteracaoProdutoForm">
-            <label for="productName">Nome do Produto:</label>
-            <input type="text" id="productName" name="productName" required>
+        <form id="produtoForm">
+            <div class="form-group">
+                <label for="nomeProduto">Nome do Produto:</label>
+                <input type="text" id="nomeProduto" name="nomeProduto" required>
+            </div>
+            <div class="form-group">
+                <label for="categoria">Categoria:</label>
+                <input type="text" id="categoria" name="categoria" required>
+            </div>
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca" required>
+            </div>          
+            
+            <div class="form-group">
+                <div class="linha">
+                    <div class="campo">
+                        <label for="quantidade">Quantidade:</label>
+                        <input type="number" id="quantidade" name="quantidade" required>
+                    </div>
+                    <div class="campo">
+                        <label for="quantidade">Avaliação:</label>
+                        <input type="number" id="avaliacao" name="avaliacao" min="0" max="5" step="0.5" required>
+                    </div>
+                    <div class="campo">
+                        <label for="preco">Preço:</label>
+                        <input type="number" id="preco" name="preco" step="0.01" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao" name="descricao" required>
+            </div>
 
-            <label for="productDescription">Descrição do Produto:</label>
-            <textarea id="productDescription" name="productDescription" required></textarea>
+            <div class="exibir-img-principal">
+            </div>
 
-            <label for="productPrice">Preço do Produto:</label>
-            <input type="number" id="productPrice" name="productPrice" required>
-
-            <label for="productQuantity">Quantidade do Produto:</label>
-            <input type="number" id="productQuantity" name="productQuantity" required>
-
-            <label for="productBrand">Marca do Produto:</label>
-            <input type="text" id="productBrand" name="productBrand" required>
-
-            <label for="productCategory">Categoria do Produto:</label>
-            <select id="productCategory" name="productCategory" required>
-                <option value="categoria1">Categoria 1</option>
-                <option value="categoria2">Categoria 2</option>
-                <option value="categoria3">Categoria 3</option>
-            </select>
+            <div class="exibir-img-adicionais"></div>
+            </div>
 
             <div class="EscolhaImg">
                 <label class="imagem1" for="imagemPrincipal" tabindex="0">
-                    <span class="mainPicture__image">Escolha uma imagem:</span>
-                    <div class="mainImageDisplay"></div> 
+                    <span class="mainPicture__image">Clique para escolher a imagem Principal:</span>
                 </label>
                 <input type="file" id="imagemPrincipal" name="imagemPrincipal" required>
             </div>
-
+            
             <div class="EscolhaImgMultiple">
-                <label class="imgsAdicionais" for="imagens" tabindex="0">
-                    <span class="imgsAdicionais__image">Escolha as imagens adicionais:</span>
-                    <div class="additionalImagesDisplay"></div> 
-                </label>    
-                
-                <input type="file" id="imagens" name="imagens" multiple>
+                <div class="EscolhaImgMultiple">
+                    <div class="additionalImagesDisplay"></div>
+                    <input type="file" id="imagens" name="imagens" multiple style="display: none;">
+                    <button type="button" id="addImagesButton">Escolha novas imagens adicionais</button>
+                    
+                </div> 
             </div>
 
             <div class="form-group">
-                <button type="submit">Alterar Produto</button>
+                <button type="submit">Cadastrar Produto</button>
                 <button type="button" onclick="directToListagemProdutos()">Cancelar</button>
             </div>
         </form>
@@ -58,13 +75,13 @@
     </div>
 
     <!-- Modal -->
-    <div id="alterationModal" class="modal">
+    <div id="confirmationModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <p id="modalMessage"></p>
         </div>
     </div>
 
-    <script src="JS/AlteracaoProduto/AlteracaoProdutos.js"></script>
+    <script src="JS/AlterarProduto/alterarProduto.js"></script>
 </body>
 </html>
