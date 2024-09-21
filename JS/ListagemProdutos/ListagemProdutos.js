@@ -56,13 +56,21 @@ function displayTableData() {
             <td>${item.quantidade}</td>
             <td>${item.preco}</td>
             <td>${item.ativo ? 'Ativo' : 'Inativo'}</td>
-            <td class="acao"><button>Alterar</button></td>
+            <td class="acao"><button class="alterar" data-codigo="${item.id}">Alterar</button></td>
             <td class="acao">
                 <button onclick="visualizarProduto()">Visualizar</button>
             </td>
             <td class="acao"><button>Hab/Des</button></td>
         `;
             tableBody.appendChild(row);
+        });
+
+        // Adiciona evento de clique para os botões "Alterar"
+        document.querySelectorAll('.alterar').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const codigoProduto = event.target.getAttribute('data-codigo');
+                window.location.href = `TelaAlterarProduto.html?codigo=${codigoProduto}`;
+            });
         });
     } else if (grupoUsuarioLogado === "Estoquista") {
         tabela.innerHTML = `
@@ -93,9 +101,17 @@ function displayTableData() {
             <td>${item.quantidade}</td>
             <td>${item.preco}</td>
             <td>${item.ativo ? 'Ativo' : 'Inativo'}</td>
-            <td class="acao"><button>Alterar</button></td>
+            <td class="acao"><button class="alterar" data-codigo="${item.id}">Alterar</button></td>
         `;
             tableBody.appendChild(row);
+        });
+
+        // Adiciona evento de clique para os botões "Alterar"
+        document.querySelectorAll('.alterar').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const codigoProduto = event.target.getAttribute('data-codigo');
+                window.location.href = `TelaAlterarProduto.html?codigo=${codigoProduto}`;
+            });
         });
     } else {
         alert("Você não tem permissão para acessar esta página!");
@@ -173,7 +189,6 @@ function exibirMensagemProdutoNaoEncontrado() {
     const pagination = document.getElementById('pagination');
     pagination.innerHTML = ''; // Limpa a paginação quando não houver resultados
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchData(); // Carrega os dados do backend quando a página é carregada
