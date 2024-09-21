@@ -54,7 +54,7 @@ function displayTableData() {
             <td>${item.id}</td>
             <td>${item.nomeProduto}</td>
             <td>${item.quantidade}</td>
-            <td>${item.preco}</td>
+            <td>R$${item.preco}</td>
             <td>${item.ativo ? 'Ativo' : 'Inativo'}</td>
             <td class="acao"><button>Alterar</button></td>
             <td class="acao">
