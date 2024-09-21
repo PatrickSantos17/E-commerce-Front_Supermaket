@@ -1,81 +1,35 @@
-/* Estilos gerais */
-#imagens, #imagemPrincipal{
-    display: none;
-}
-
-/* Estilo para pré-visualização de imagens adicionais */
-.additionalImagesDisplay {
-    margin: 10px 0 50px 0;
-    display: flex;
-    flex-wrap: wrap; /* Permite que as imagens quebrem para a próxima linha */
-    /* gap: 10px; Espaço entre as imagens */
-}
-
-.additional-img {
-    width: 120px; /* Define o tamanho da imagem adicional */
-    height: 120px; /* Define o tamanho da imagem adicional */
-    object-fit: cover; /* Garante que a imagem fique bem ajustada sem distorções */
-    border-radius: 10px;
-    border: 1px solid #ccc;
-}
-
-
-.imagem1, 
-.imgsAdicionais{
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #aaa;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: color 300ms ease-in-out, background 300ms ease-in-out;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.300);
-    overflow: hidden;
-}
-.imagem1:hover
-/* .imgsAdicionais:hover  */
-{
-    color: #302222;
-    background: #ccc;
-}
-
-.additionalImagesDisplay img {
-    padding: auto;
-    margin: 10px;
-    width: 150px;
-    margin-right: 5px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
-
+/* Container e layout */
 body {
     font-family: Arial, sans-serif;
     background: radial-gradient(circle, #130ff3, #000770, #000000);
-    color: #333; /* Cor do texto padrão */
-    margin: 150px;
-    padding: 70px;
+    color: #333;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start;
+    /* Ajuste para alinhar no topo da página */
+    min-height: 100vh;
+    /* Garante que o container ocupe a altura total da tela */
 }
 
 .container {
-    background-color: #fff; /* Cor de fundo do container */
-    padding: 70px;
+    background-color: #fff;
+    padding: 40px;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 70%;
+    width: 100%;
     max-width: 600px;
-    color: #333; /* Cor do texto dentro do container */
+    color: #333;
+    box-sizing: border-box;
+    overflow-y: auto;
+    margin-top: 20px;
+    /* Garante espaçamento do topo */
 }
 
 h1 {
     text-align: center;
-    color: #007bff; /* Cor primária */
+    color: #007bff;
 }
 
 form {
@@ -93,17 +47,18 @@ label {
     font-weight: bold;
 }
 
-.linha{
+/* Linha e campos */
+.linha {
     display: flex;
-    flex-direction: space-between;
     gap: 20px;
 }
 
-.campo{
+.campo {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
+
 input[type="text"],
 input[type="number"],
 input[type="file"] {
@@ -112,152 +67,91 @@ input[type="file"] {
     border: 1px solid #ccc;
     border-radius: 10px;
     box-sizing: border-box;
-    color: #333; /* Cor do texto dos inputs */
+}
+
+/* Imagens */
+.exibir-img-principal,
+.exibir-img-adicionais {
+    margin-bottom: 20px;
+}
+
+.exibir-img-principal img,
+.exibir-img-adicionais img {
+    max-width: 100px;
+    margin-right: 10px;
+}
+
+.img-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    /* Espaçamento inferior entre imagens */
+}
+
+.additionalImagesDisplay {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.additionalImagesDisplay img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Botões */
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+    /* Aumentando o espaço entre o conteúdo acima e os botões */
 }
 
 button {
-    background-color: #007bff; /* Cor primária */
+    background-color: #007bff;
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
-    margin-bottom: 10px; /* Adiciona espaço entre os botões */
-    width: 100%; /* Ocupa toda a largura do formulário */
+    width: 100%;
 }
 
 button:hover {
-    background-color: #0056b3; /* Cor primária escura */
+    background-color: #0056b3;
 }
 
 button[type="submit"] {
-    background-color: #130ff3; /* Cor secundária */
-}
-
-button[type="submit"]:hover {
-    background-color: #000770; /* Cor secundária escura */
+    background-color: #130ff3;
 }
 
 button[type="button"] {
-    background-color: #7e7e7e; /* Cor de cancelamento */
+    background-color: #7e7e7e;
 }
 
-button[type="button"]:hover {
-    background-color: #636262; /* Cor de cancelamento escura */
-}
-
-/* Estilo do botão com a nova nomenclatura */
-.btn-remove {
-    position: relative;
-    border-radius: 6px;
-    width: 150px;
-    height: 40px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    border: 1px solid #cc0000;
-    background-color: #e50000;
-    overflow: hidden;
-  }
-  
-  .btn-remove,
-  .btn-remove__icon,
-  .btn-remove__text {
-    transition: all 0.3s;
-  }
-  
-  .btn-remove .btn-remove__text {
-    transform: translateX(35px);
-    color: #fff;
-    font-weight: 600;
-  }
-  
-  .btn-remove .btn-remove__icon {
-    position: absolute;
-    transform: translateX(109px);
-    height: 100%;
-    width: 39px;
-    background-color: #cc0000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .btn-remove .svg {
-    width: 20px;
-  }
-  
-  .btn-remove:hover {
-    background: #cc0000;
-  }
-  
-  .btn-remove:hover .btn-remove__text {
-    color: transparent;
-  }
-  
-  .btn-remove:hover .btn-remove__icon {
-    width: 148px;
-    transform: translateX(0);
-  }
-  
-  .btn-remove:active .btn-remove__icon {
-    background-color: #b20000;
-  }
-  
-  .btn-remove:active {
-    border: 1px solid #b20000;
-  }
-  
-  /* Estilo do contêiner das imagens */
-  .img-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px; /* Espaçamento inferior entre imagens */
-  }
-  
-
-#response {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #dc3545; /* Cor de erro */
-}
-
-.image-preview {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.image-preview img {
-    max-width: 100px;
-    max-height: 100px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-}
-
-/* Estilos do modal */
+/* Modal */
 .modal {
-    display: none; /* Esconde o modal por padrão */
-    position: fixed; /* Fixa o modal na tela */
-    z-index: 1; /* Garante que o modal fique acima de outros elementos */
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Habilita rolagem se necessário */
-    background-color: rgb(0, 0, 0); /* Cor de fundo preta */
-    background-color: rgba(0, 0, 0, 0.4); /* Cor de fundo com opacidade */
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* Centraliza o modal */
+    margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Largura do modal */
-    max-width: 500px; /* Largura máxima do modal */
+    width: 80%;
+    max-width: 500px;
     border-radius: 8px;
 }
 
@@ -268,9 +162,68 @@ button[type="button"]:hover {
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+/* Media Queries */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        max-width: 100%;
+        margin-top: 10px;
+        /* Ajusta espaçamento do topo para telas menores */
+    }
+
+    .linha {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .campo {
+        width: 100%;
+    }
+
+    .additionalImagesDisplay img {
+        width: 100px;
+        height: 100px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+        gap: 15px;
+        /* Aumentando o espaço entre os botões */
+        margin-top: 15px;
+        /* Espaçamento maior para separar os botões do conteúdo */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        font-size: 1rem;
+    }
+
+    .additionalImagesDisplay img {
+        width: 80px;
+        height: 80px;
+    }
+
+    button {
+        padding: 10px;
+    }
+
+    .form-buttons {
+        gap: 20px;
+        /* Espaçamento maior entre os botões */
+    }
 }
