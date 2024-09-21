@@ -132,7 +132,7 @@ function renderImageList(previewContainer, input, files) {
             removeBtn.classList.add("btn-remove");
             removeBtn.type = "button-remove";
             removeBtn.innerHTML = `
-                <span class="btn-remove__text">Delete</span>
+                <span class="btn-remove__text">Excluir</span>
                 <span class="btn-remove__icon">
                     <svg class="svg" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
                         <path d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path>
