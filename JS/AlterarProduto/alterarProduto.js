@@ -2,6 +2,7 @@
 var API = "localhost"; // Setar essa variavel quando testar local e comentar a do IP
 
 var grupoUsuarioLogado = localStorage.getItem("grupo");
+var removedAdditionalImages = [];  // Para armazenar as URLs das imagens adicionais removidas
 
 document.addEventListener('DOMContentLoaded', (event) => {
     if (grupoUsuarioLogado === "Admin") {
@@ -43,24 +44,15 @@ function acessarProduto(produtoId) {
             document.getElementById('quantidade').value = produto.quantidade;
             document.getElementById('marca').value = produto.marca;
             document.getElementById('categoria').value = produto.categoria;
-            const imgPrincipal = document.querySelector('.exibir-img-principal');
-            const imgAdicionais = document.querySelector('.exibir-img-adicionais');
 
+            // Exibir imagem principal
             if (produto.imagemPrincipal) {
-                imgPrincipal.innerHTML = `
-                    <label>Imagem principal:</label>
-                    <img src="${produto.imagemPrincipal}" alt="Imagem principal do produto" style="max-width: 100%;">
-                        `;
-                // tableBody.appendChild(row);
+                showExistingMainImage(produto.imagemPrincipal);
             }
-            // Exibir imagens adicionais se disponíveis
+
+            // Exibir imagens adicionais, se disponíveis
             if (produto.imagens && produto.imagens.length > 0) {
-                produto.imagens.forEach(item => {
-                    imgAdicionais.innerHTML = `
-                    <label>Imagens adicionais:</label>
-                    <img src="${item}" alt="Imagem principal do produto" style="max-width: 50%;">
-                        `;
-                });
+                showExistingAdditionalImages(produto.imagens);
             }
         })
         .catch(error => {
@@ -69,37 +61,160 @@ function acessarProduto(produtoId) {
         });
 }
 
-// Função para exibir o modal com uma mensagem
-function showModal(message) {
-    const modal = document.getElementById("alterationModal");
-    const modalMessage = document.getElementById("modalMessage");
-    modalMessage.textContent = message;
-    modal.style.display = "block";
+// Função para exibir imagem principal existente
+function showExistingMainImage(url) {
+    const mainImageContainer = document.querySelector('.exibir-img-principal');
+    mainImageContainer.innerHTML = '';  // Limpa a pré-visualização
+
+    const imgWrapper = document.createElement("div");
+    imgWrapper.classList.add("img-wrapper");
+
+    const img = document.createElement("img");
+    img.src = url;
+    img.classList.add("img-principal");
+
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add("btn-remove");
+    removeBtn.type = "button-remove";
+    removeBtn.innerHTML = 'Remover';
+
+    removeBtn.addEventListener('click', function() {
+        mainImageContainer.innerHTML = '';  // Remove a imagem da visualização
+    });
+
+    imgWrapper.appendChild(img);
+    imgWrapper.appendChild(removeBtn);
+    mainImageContainer.appendChild(imgWrapper);
 }
 
+// Função para exibir imagens adicionais existentes
+function showExistingAdditionalImages(urls) {
+    const additionalImagesContainer = document.querySelector('.exibir-img-adicionais');
+    additionalImagesContainer.innerHTML = '';  // Limpa a pré-visualização
 
-// Função para exibir uma imagem
-function displayImage(file, displayElement, maxWidth) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.alt = "Imagem do produto";
-        img.style.maxWidth = maxWidth;
-        displayElement.appendChild(img);
-    };
-    reader.onerror = function (error) {
-        console.error("Erro ao ler o arquivo:", error);
-    };
-    reader.readAsDataURL(file);
+    urls.forEach((url, index) => {
+        const imgWrapper = document.createElement("div");
+        imgWrapper.classList.add("img-wrapper");
+
+        const img = document.createElement("img");
+        img.src = url;
+        img.classList.add("img-adicional");
+
+        const removeBtn = document.createElement("button");
+        removeBtn.classList.add("btn-remove");
+        removeBtn.type = "button-remove";
+        removeBtn.innerHTML = 'Remover';
+
+        removeBtn.addEventListener('click', function() {
+            removedAdditionalImages.push(url);  // Armazena a URL da imagem removida na lista
+            renderExistingAndNewImages();  // Re-renderiza imagens
+        });
+
+        imgWrapper.appendChild(img);
+        imgWrapper.appendChild(removeBtn);
+        additionalImagesContainer.appendChild(imgWrapper);
+
+        existingImagesList.push(url);  // Adiciona à lista de imagens existentes
+    });
 }
 
-// Supondo que você tenha uma função para obter o ID do produto da URL
+// Exibe novas imagens adicionadas pelo usuário
+document.getElementById('imagens').addEventListener('change', function() {
+    previewImages(this, 'additionalImagesDisplay');
+});
+
+function previewImages(input, previewContainerClass) {
+    const previewContainer = document.querySelector(`.${previewContainerClass}`);
+    let files = Array.from(input.files);
+
+    if (!previewContainer.existingFiles) {
+        previewContainer.existingFiles = [];
+    }
+
+    previewContainer.existingFiles = previewContainer.existingFiles.concat(files);
+    additionalImagesList = previewContainer.existingFiles;
+    files = additionalImagesList;
+
+    renderExistingAndNewImages();
+}
+
+// Atualiza a visualização das imagens (novas e existentes)
+function renderExistingAndNewImages() {
+    const additionalImagesContainer = document.querySelector('.additionalImagesDisplay');
+    additionalImagesContainer.innerHTML = '';
+    showExistingAdditionalImages(existingImagesList);
+    renderImageList(additionalImagesContainer, document.getElementById('imagens'), additionalImagesList);
+}
+
+// Função para renderizar novas imagens
+function renderImageList(previewContainer, input, files) {
+    previewContainer.innerHTML = "";
+
+    files.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const imgWrapper = document.createElement("div");
+            imgWrapper.classList.add("img-wrapper");
+
+            const img = document.createElement("img");
+            img.src = e.target.result;
+            img.classList.add("additional-img");
+
+            const removeBtn = document.createElement("button");
+            removeBtn.classList.add("btn-remove");
+            removeBtn.type = "button-remove";
+            removeBtn.innerHTML = 'Remover';
+
+            removeBtn.addEventListener('click', function() {
+                files.splice(index, 1);
+                updateFileInput(input, files);
+                additionalImagesList = files;
+                renderImageList(previewContainer, input, files);
+            });
+
+            imgWrapper.appendChild(img);
+            imgWrapper.appendChild(removeBtn);
+            previewContainer.appendChild(imgWrapper);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+// Atualiza o campo de input de arquivos
+function updateFileInput(input, files) {
+    const dataTransfer = new DataTransfer();
+    files.forEach(file => dataTransfer.items.add(file));
+    input.files = dataTransfer.files;
+}
+
+// Exibe nova imagem principal selecionada
+document.getElementById('imagemPrincipal').addEventListener('change', function() {
+    previewMainImage(this, 'exibir-img-principal');
+});
+
+function previewMainImage(input, previewContainerClass) {
+    const previewContainer = document.querySelector(`.${previewContainerClass}`);
+    previewContainer.innerHTML = "";
+    const file = input.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.createElement("img");
+            img.src = e.target.result;
+            img.classList.add("main-img");
+            previewContainer.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// Função para direcionar à listagem de produtos
+function directToListagemProdutos() {
+    window.location.href = "TelaListagemProdutoAdm.html";
+}
+
+// Função para obter o ID do produto da URL
 function getProdutoIdFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('id');
-}
-
-function directToListagemProdutos() {
-    window.location.href = "TelaListagemProdutoAdm.html";
 }
