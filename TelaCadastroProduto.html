@@ -16,7 +16,18 @@
             </div>
             <div class="form-group">
                 <label for="categoria">Categoria:</label>
-                <input type="text" id="categoria" name="categoria" required>
+                <select id="categoria" name="categoria" required>
+                    <option value="" disabled selected>Selecione uma categoria</option>
+                    <option value="Açougue">Açougue</option>
+                    <option value="Frios e laticínios">Frios e laticínios</option>
+                    <option value="Adega e bebidas">Adega e bebidas</option>
+                    <option value="Higiene e limpeza">Higiene e limpeza</option>
+                    <option value="Hortifruti e mercearia">Hortifruti e mercearia</option>
+                    <option value="Padaria">Padaria</option>
+                    <option value="Enlatados">Enlatados</option>
+                    <option value="Cereais">Cereais</option>
+                    <option value="">Achocolatados</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="marca">Marca:</label>
@@ -73,6 +84,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <p id="modalMessage"></p>
+            <button type="button" onclick="directToListagemProdutos()">OK</button>
         </div>
     </div>
 
