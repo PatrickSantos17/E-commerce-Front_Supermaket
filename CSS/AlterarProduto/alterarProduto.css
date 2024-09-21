@@ -81,6 +81,10 @@ input[type="file"] {
     margin-right: 10px;
 }
 
+.img-principal {
+    margin: 10px 20px;
+}
+
 .img-wrapper {
     display: flex;
     flex-direction: column;
@@ -103,36 +107,140 @@ input[type="file"] {
     border: 1px solid #ccc;
 }
 
-/* Botões */
-.form-buttons {
-    display: flex;
-    justify-content: space-between;
+/* Grade de imagens adicionais */
+.img-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    margin-top: 20px;
-    /* Aumentando o espaço entre o conteúdo acima e os botões */
+}
+
+.img-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.img-wrapper img {
+    width: 120px; /* Tamanho fixo */
+    height: 120px; /* Tamanho fixo */
+    object-fit: cover; /* Mantém a proporção */
+}
+
+.img-wrapper {
+    margin-top: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Estilo do botão com a nova nomenclatura */
+.btn-remove {
+    position: relative;
+    border-radius: 6px;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #cc0000;
+    background-color: #e50000;
+    overflow: hidden;
+  }
+  
+  .btn-remove,
+  .btn-remove__icon,
+  .btn-remove__text {
+    transition: all 0.3s;
+  }
+  
+  .btn-remove .btn-remove__text {
+    transform: translateX(35px);
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .btn-remove .btn-remove__icon {
+    position: absolute;
+    transform: translateX(109px);
+    height: 100%;
+    width: 39px;
+    background-color: #cc0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .btn-remove .svg {
+    width: 20px;
+  }
+  
+  .btn-remove:hover {
+    background: #cc0000;
+  }
+  
+  .btn-remove:hover .btn-remove__text {
+    color: transparent;
+  }
+  
+  .btn-remove:hover .btn-remove__icon {
+    width: 148px;
+    transform: translateX(0);
+  }
+  
+  .btn-remove:active .btn-remove__icon {
+    background-color: #b20000;
+  }
+  
+  .btn-remove:active {
+    border: 1px solid #b20000;
+  }
+
+/* Botões */
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    color: #333; /* Cor do texto dos inputs */
 }
 
 button {
-    background-color: #007bff;
+    background-color: #007bff; /* Cor primária */
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
-    width: 100%;
+    margin-bottom: 10px; /* Adiciona espaço entre os botões */
+    width: 100%; /* Ocupa toda a largura do formulário */
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Cor primária escura */
 }
 
 button[type="submit"] {
-    background-color: #130ff3;
+    background-color: #130ff3; /* Cor secundária */
+}
+
+button[type="submit"]:hover {
+    background-color: #000770; /* Cor secundária escura */
 }
 
 button[type="button"] {
-    background-color: #7e7e7e;
+    background-color: #7e7e7e; /* Cor de cancelamento */
 }
+
+button[type="button"]:hover {
+    background-color: #636262; /* Cor de cancelamento escura */
+}
+
 
 /* Modal */
 .modal {

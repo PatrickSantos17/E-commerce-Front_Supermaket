@@ -82,27 +82,34 @@ function acessarProduto(produtoId) {
 // Função para exibir imagem principal existente
 function showExistingMainImage(url) {
     const mainImageContainer = document.querySelector('.exibir-img-principal');
-    mainImageContainer.innerHTML = '';  // Limpa a pré-visualização
+    mainImageContainer.innerHTML = `
+        <label>Imagem Principal:</label>
+        <div class="img-wrapper">
+            <img src="${url}" class="img-principal">
+            <button class="btn-alterar-principal">Alterar imagem principal</button>
+            <input type="file" class="input-alterar-principal" style="display: none;">
+        </div>
+    `;
 
-    const imgWrapper = document.createElement("div");
-    imgWrapper.classList.add("img-wrapper");
+    const alterarBtn = document.querySelector('.btn-alterar-principal');
+    const inputFile = document.querySelector('.input-alterar-principal');
 
-    const img = document.createElement("img");
-    img.src = url;
-    img.classList.add("img-principal");
-
-    const removeBtn = document.createElement("button");
-    removeBtn.classList.add("btn-remove");
-    removeBtn.type = "button-remove";
-    removeBtn.innerHTML = 'Remover';
-
-    removeBtn.addEventListener('click', function() {
-        mainImageContainer.innerHTML = '';  // Remove a imagem da visualização
+    alterarBtn.addEventListener('click', function(event) {
+        event.preventDefault();  // Previne a ação padrão do botão
+        inputFile.click();  // Abre o gerenciador de arquivos
     });
 
-    imgWrapper.appendChild(img);
-    imgWrapper.appendChild(removeBtn);
-    mainImageContainer.appendChild(imgWrapper);
+    inputFile.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const newImageUrl = e.target.result;
+                mainImageContainer.querySelector('.img-principal').src = newImageUrl;  // Atualiza a imagem principal
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 }
 
 // Função para exibir imagens adicionais existentes
@@ -110,35 +117,48 @@ function showExistingAdditionalImages(urls) {
     const additionalImagesContainer = document.querySelector('.exibir-img-adicionais');
     additionalImagesContainer.innerHTML = '';  // Limpa a pré-visualização
 
+    additionalImagesContainer.innerHTML = `
+        <label>Imagens adicionais:</label>
+        <div class="img-grid"></div>
+    `;
+
+    const imgGrid = additionalImagesContainer.querySelector('.img-grid');
+
     urls.forEach((url, index) => {
-        const imgWrapper = document.createElement("div");
-        imgWrapper.classList.add("img-wrapper");
+        const imgWrapper = document.createElement('div');
+        imgWrapper.classList.add('img-wrapper');
 
-        const img = document.createElement("img");
-        img.src = url;
-        img.classList.add("img-adicional");
+        imgWrapper.innerHTML = `
+            <img src="${url}" class="img-principal">
+            <button class="btn-remove" type="button-remove">
+                <span class="btn-remove__text">Excluir</span>
+                <span class="btn-remove__icon">
+                    <svg class="svg" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path>
+                        <line style="stroke:#fff;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" x1="80" x2="432" y1="112" y2="112"></line>
+                        <path d="M192,112V72h0a23.93,23.93,0,0,1,24-24h80a23.93,23.93,0,0,1,24,24h0v40" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path>
+                        <line style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" x1="256" x2="256" y1="176" y2="400"></line>
+                        <line style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" x1="184" x2="192" y1="176" y2="400"></line>
+                        <line style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" x1="328" x2="320" y1="176" y2="400"></line>
+                    </svg>
+                </span>
+            </button>
+        `;
 
-        const removeBtn = document.createElement("button");
-        removeBtn.classList.add("btn-remove");
-        removeBtn.type = "button-remove";
-        removeBtn.innerHTML = 'Remover';
-
+        const removeBtn = imgWrapper.querySelector('.btn-remove');
         removeBtn.addEventListener('click', function() {
             removedAdditionalImages.push(url);  // Armazena a URL da imagem removida na lista
             renderExistingAndNewImages();  // Re-renderiza imagens
         });
 
-        imgWrapper.appendChild(img);
-        imgWrapper.appendChild(removeBtn);
-        additionalImagesContainer.appendChild(imgWrapper);
-
-        existingImagesList.push(url);  // Adiciona à lista de imagens existentes
+        imgGrid.appendChild(imgWrapper);
     });
 }
 
+
 // Exibe novas imagens adicionadas pelo usuário
 document.getElementById('imagens').addEventListener('change', function() {
-    previewImages(this, 'additionalImagesDisplay');
+    previewImages(this, 'img-grid');
 });
 
 function previewImages(input, previewContainerClass) {
@@ -153,77 +173,47 @@ function previewImages(input, previewContainerClass) {
     additionalImagesList = previewContainer.existingFiles;
     files = additionalImagesList;
 
-    renderExistingAndNewImages();
-}
-
-// Atualiza a visualização das imagens (novas e existentes)
-function renderExistingAndNewImages() {
-    const additionalImagesContainer = document.querySelector('.additionalImagesDisplay');
-    additionalImagesContainer.innerHTML = '';
-    showExistingAdditionalImages(existingImagesList);
-    renderImageList(additionalImagesContainer, document.getElementById('imagens'), additionalImagesList);
-}
-
-// Função para renderizar novas imagens
-function renderImageList(previewContainer, input, files) {
-    previewContainer.innerHTML = "";
-
     files.forEach((file, index) => {
         const reader = new FileReader();
         reader.onload = function(e) {
-            const imgWrapper = document.createElement("div");
-            imgWrapper.classList.add("img-wrapper");
+            const imgWrapper = document.createElement('div');
+            imgWrapper.classList.add('img-wrapper');
 
-            const img = document.createElement("img");
-            img.src = e.target.result;
-            img.classList.add("additional-img");
+            imgWrapper.innerHTML = `
+                <img src="${e.target.result}" class="img-principal">
+                <button class="btn-remove" type="button-remove">
+                    <span class="btn-remove__text">Remover</span>
+                    <span class="btn-remove__icon">
+                        <svg class="svg" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path>
+                            <line style="stroke:#fff;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" x1="80" x2="432" y1="112" y2="112"></line>
+                            <path d="M192,112V72h0a23.93,23.93,0,0,1,24-24h80a23.93,23.93,0,0,1,24,24h0v40" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path>
+                            <line style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" x1="256" x2="256" y1="176" y2="400"></line>
+                            <line style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" x1="184" x2="192" y1="176" y2="400"></line>
+                            <line style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" x1="328" x2="320" y1="176" y2="400"></line>
+                        </svg>
+                    </span>
+                </button>
+            `;
 
-            const removeBtn = document.createElement("button");
-            removeBtn.classList.add("btn-remove");
-            removeBtn.type = "button-remove";
-            removeBtn.innerHTML = 'Remover';
-
+            const removeBtn = imgWrapper.querySelector('.btn-remove');
             removeBtn.addEventListener('click', function() {
-                files.splice(index, 1);
-                updateFileInput(input, files);
-                additionalImagesList = files;
-                renderImageList(previewContainer, input, files);
+                files.splice(index, 1);  // Remove o arquivo da lista
+                updateFileInput(input, files);  // Atualiza o campo de entrada de arquivos
+                additionalImagesList = files;  // Atualiza a lista de imagens globais
+                renderImageList(previewContainer, input, files);  // Atualiza a pré-visualização
             });
 
-            imgWrapper.appendChild(img);
-            imgWrapper.appendChild(removeBtn);
             previewContainer.appendChild(imgWrapper);
         };
         reader.readAsDataURL(file);
     });
 }
 
-// Atualiza o campo de input de arquivos
 function updateFileInput(input, files) {
     const dataTransfer = new DataTransfer();
     files.forEach(file => dataTransfer.items.add(file));
     input.files = dataTransfer.files;
-}
-
-// Exibe nova imagem principal selecionada
-document.getElementById('imagemPrincipal').addEventListener('change', function() {
-    previewMainImage(this, 'exibir-img-principal');
-});
-
-function previewMainImage(input, previewContainerClass) {
-    const previewContainer = document.querySelector(`.${previewContainerClass}`);
-    previewContainer.innerHTML = "";
-    const file = input.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const img = document.createElement("img");
-            img.src = e.target.result;
-            img.classList.add("main-img");
-            previewContainer.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-    }
 }
 
 // Função para direcionar à listagem de produtos
