@@ -195,7 +195,7 @@ button[type="button"]:hover {
 .btn-remove {
     position: relative;
     border-radius: 6px;
-    width: 150px;
+    width: 160px;
     height: 40px;
     cursor: pointer;
     display: flex;
@@ -223,6 +223,7 @@ button[type="button"]:hover {
     height: 100%;
     width: 39px;
     background-color: #cc0000;
+    margin-left: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
