@@ -62,6 +62,24 @@ function acessarProduto(produtoId) {
                         `;
                 });
             }
+       
+             // Desabilitar campos se o usuário for Estoquista
+             if (grupoUsuarioLogado === "Estoquista") {
+                document.getElementById('nomeProduto').disabled = true;
+                document.getElementById('descricao').disabled = true;
+                document.getElementById('preco').disabled = true;
+                document.getElementById('avaliacao').disabled = true;
+                document.getElementById('marca').disabled = true;
+                document.getElementById('categoria').disabled = true;
+                document.getElementById('imagemPrincipal').disabled = true;
+                document.getElementById('imagensAdicionais').disabled = true;
+
+                // Habilitar botões de salvar e cancelar e o campo de quantidade
+                document.getElementById('botaoSalvar').disabled = false;
+                document.getElementById('botaoCancelar').disabled = false;
+                document.getElementById('quantidade').disabled = false;
+            }
+       
         })
         .catch(error => {
             console.error('Erro ao acessar produto:', error);
