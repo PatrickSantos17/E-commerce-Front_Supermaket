@@ -570,15 +570,13 @@ header .lado-b img {
     flex-direction: row;
 }
 
+/* CARROSSEL DE IMAGENS */
 .produto .imagens-prod {
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 50%;
     /* background-color: #007bff; */
-
-    /* max-width: 1000px; */
-    /* display: flex; */
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
@@ -590,7 +588,7 @@ img {
 }
 
 .swiper {
-    height: 80%;
+    height: 60%;
     width: 100%;
 }
 
@@ -615,12 +613,82 @@ img {
     width: 50%;
 }
 
+/* INFO PROD */
 .produto .info-prod {
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 50%;
-    background-color: #62aeff;
+    /* background-color: #62aeff; */
+    padding: 0 60px;
+
 }
+
+.titulo-prod {
+    margin-top: 80px;
+    font-size: 45px;
+    font-weight: 700;
+}
+
+.valor-prod {
+    margin-top: 30px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.avaliacao-prod {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.descricao-prod {
+    margin-top: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+/* botão comprar */
+.btn-comprar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 15px;
+    background-color: #181717;
+    outline: 3px #181717 solid;
+    outline-offset: -3px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 400ms;
+    width: 150px;
+    margin-top: 50px;
+}
+
+.btn-comprar .text {
+    color: white;
+    font-weight: 700;
+    font-size: 1em;
+    transition: 400ms;
+}
+
+.btn-comprar svg path {
+    transition: 400ms;
+}
+
+.btn-comprar:hover {
+    background-color: transparent;
+}
+
+.btn-comprar:hover .text {
+    color: #181717;
+}
+
+.btn-comprar:hover svg path {
+    fill: #181717;
+}
+
 
 /*Fim estilo modal visualizar produto  */
