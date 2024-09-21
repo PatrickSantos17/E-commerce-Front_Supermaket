@@ -101,13 +101,23 @@ function previewImage(input, previewContainerClass) {
 
 function previewImages(input, previewContainerClass) {
     const previewContainer = document.querySelector(`.${previewContainerClass}`);
-    previewContainer.innerHTML = "";
     let files = Array.from(input.files);
+
+    if (!previewContainer.existingFiles) {
+        previewContainer.existingFiles = [];
+    }
+    
+    previewContainer.existingFiles = previewContainer.existingFiles.concat(files);
+    files = previewContainer.existingFiles;
+
+    previewContainer.innerHTML = "";
+
     files.forEach((file, index) => {
         const reader = new FileReader();
         reader.onload = function(e) {
             const imgWrapper = document.createElement("div");
             imgWrapper.classList.add("img-wrapper");
+            imgWrapper.file = file;
 
             const img = document.createElement("img");
             img.src = e.target.result;
@@ -136,23 +146,25 @@ function previewImages(input, previewContainerClass) {
 
             // Evento para remover a imagem ao clicar no botão
             removeBtn.addEventListener('click', function() {
-                imgWrapper.remove();  // Remove a imagem do DOM
                 files.splice(index, 1);  // Remove o arquivo da lista
-                const dataTransfer = new DataTransfer();
-                files.forEach(file => {
-                    dataTransfer.items.add(file);
-                });
-                input.files = dataTransfer.files; 
+                updateFileInput(input, files);  // Atualiza o campo de entrada de arquivos
+                previewContainer.existingFiles = files;
                 previewImages(input, previewContainerClass);  // Atualiza a pré-visualização
             });
 
+
             // Adiciona a imagem e o botão ao contêiner
-            imgWrapper.appendChild(img);
-            imgWrapper.appendChild(removeBtn);
-            previewContainer.appendChild(imgWrapper);
+                imgWrapper.appendChild(img);
+                imgWrapper.appendChild(removeBtn);
+                previewContainer.appendChild(imgWrapper);
         };
         reader.readAsDataURL(file);
     });
+}
+function updateFileInput(input, files) {
+    const dataTransfer = new DataTransfer();
+    files.forEach(file => dataTransfer.items.add(file));
+    input.files = dataTransfer.files;
 }
 
 
