@@ -1,6 +1,8 @@
 // var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
 var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
+let additionalImagesList = [];
+
 document.getElementById('produtoForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
@@ -30,13 +32,9 @@ document.getElementById('produtoForm').addEventListener('submit', async function
     // Adiciona a imagem principal
     formData.append('imagemPrincipal', imgPrincipal[0]);
 
-    // Adiciona as imagens adicionais, se houver
-    const imagens = document.getElementById('imagens').files;
-    if (imagens.length > 0) {
-        for (let i = 0; i < imagens.length; i++) {
-            formData.append('imagens', imagens[i]);
-        }
-    }
+    additionalImagesList.forEach(image => {
+        formData.append('imagens', image);
+    });
 
     try {
         console.log('Enviando requisição para a API...');
@@ -103,13 +101,21 @@ function previewImages(input, previewContainerClass) {
     const previewContainer = document.querySelector(`.${previewContainerClass}`);
     let files = Array.from(input.files);
 
+    // Se não houver uma lista existente, inicializamos
     if (!previewContainer.existingFiles) {
         previewContainer.existingFiles = [];
     }
-    
-    previewContainer.existingFiles = previewContainer.existingFiles.concat(files);
-    files = previewContainer.existingFiles;
 
+    // Mescla as novas imagens com as existentes
+    previewContainer.existingFiles = previewContainer.existingFiles.concat(files);
+    additionalImagesList = previewContainer.existingFiles;  // Atualiza a lista global de imagens
+    files = additionalImagesList;
+
+    // Atualiza a exibição de imagens
+    renderImageList(previewContainer, input, files);
+}
+
+function renderImageList(previewContainer, input, files) {
     previewContainer.innerHTML = "";
 
     files.forEach((file, index) => {
@@ -117,23 +123,18 @@ function previewImages(input, previewContainerClass) {
         reader.onload = function(e) {
             const imgWrapper = document.createElement("div");
             imgWrapper.classList.add("img-wrapper");
-            imgWrapper.file = file;
 
             const img = document.createElement("img");
             img.src = e.target.result;
             img.classList.add("additional-img");
 
-            // Cria o novo botão com a nova nomenclatura
             const removeBtn = document.createElement("button");
-            removeBtn.classList.add("btn-remove"); // Classe principal do botão estilizado
+            removeBtn.classList.add("btn-remove");
             removeBtn.type = "button-remove";
-
-            // Adiciona o conteúdo do botão (ícone + texto)
             removeBtn.innerHTML = `
                 <span class="btn-remove__text">Delete</span>
                 <span class="btn-remove__icon">
                     <svg class="svg" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
-                        <title></title>
                         <path d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path>
                         <line style="stroke:#fff;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" x1="80" x2="432" y1="112" y2="112"></line>
                         <path d="M192,112V72h0a23.93,23.93,0,0,1,24-24h80a23.93,23.93,0,0,1,24,24h0v40" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path>
@@ -144,29 +145,26 @@ function previewImages(input, previewContainerClass) {
                 </span>
             `;
 
-            // Evento para remover a imagem ao clicar no botão
             removeBtn.addEventListener('click', function() {
                 files.splice(index, 1);  // Remove o arquivo da lista
                 updateFileInput(input, files);  // Atualiza o campo de entrada de arquivos
-                previewContainer.existingFiles = files;
-                previewImages(input, previewContainerClass);  // Atualiza a pré-visualização
+                additionalImagesList = files;  // Atualiza a lista de imagens globais
+                renderImageList(previewContainer, input, files);  // Atualiza a pré-visualização
             });
 
-
-            // Adiciona a imagem e o botão ao contêiner
-                imgWrapper.appendChild(img);
-                imgWrapper.appendChild(removeBtn);
-                previewContainer.appendChild(imgWrapper);
+            imgWrapper.appendChild(img);
+            imgWrapper.appendChild(removeBtn);
+            previewContainer.appendChild(imgWrapper);
         };
         reader.readAsDataURL(file);
     });
 }
+
 function updateFileInput(input, files) {
     const dataTransfer = new DataTransfer();
     files.forEach(file => dataTransfer.items.add(file));
     input.files = dataTransfer.files;
 }
-
 
 function directToListagemProdutos() {
     window.location.href = "TelaListagemProdutoAdm.html";

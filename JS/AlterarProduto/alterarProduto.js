@@ -57,7 +57,7 @@ function acessarProduto(produtoId) {
             if (produto.imagens && produto.imagens.length > 0) {
                 produto.imagens.forEach(item => {
                     imgAdicionais.innerHTML = `
-                    <label>Imagem adicionais:</label>
+                    <label>Imagens adicionais:</label>
                     <img src="${item}" alt="Imagem principal do produto" style="max-width: 50%;">
                         `;
                 });
