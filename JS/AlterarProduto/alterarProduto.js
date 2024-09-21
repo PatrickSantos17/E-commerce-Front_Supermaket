@@ -3,6 +3,8 @@ var API = "localhost"; // Setar essa variavel quando testar local e comentar a d
 
 var grupoUsuarioLogado = localStorage.getItem("grupo");
 var removedAdditionalImages = [];  // Para armazenar as URLs das imagens adicionais removidas
+var existingImages = [];  // Lista para armazenar URLs das imagens existentes
+var newImages = [];  // Lista para armazenar os novos arquivos de imagem
 
 document.addEventListener('DOMContentLoaded', (event) => {
     if (grupoUsuarioLogado === "Admin") {
@@ -114,6 +116,7 @@ function showExistingMainImage(url) {
 
 // Função para exibir imagens adicionais existentes
 function showExistingAdditionalImages(urls) {
+    existingImages = urls;  // Armazena as URLs das imagens existentes
     const additionalImagesContainer = document.querySelector('.exibir-img-adicionais');
     additionalImagesContainer.innerHTML = '';  // Limpa a pré-visualização
 
@@ -147,33 +150,59 @@ function showExistingAdditionalImages(urls) {
 
         const removeBtn = imgWrapper.querySelector('.btn-remove');
         removeBtn.addEventListener('click', function() {
-            removedAdditionalImages.push(url);  // Armazena a URL da imagem removida na lista
-            renderExistingAndNewImages();  // Re-renderiza imagens
+            existingImages.splice(index, 1);  // Remove a URL da lista
+            showExistingAdditionalImages(existingImages);  // Re-renderiza imagens
         });
 
         imgGrid.appendChild(imgWrapper);
     });
+
+    document.getElementById('imagens').addEventListener('change', function() {
+        previewImages(this, 'img-grid');
+    });
 }
-
-
-// Exibe novas imagens adicionadas pelo usuário
-document.getElementById('imagens').addEventListener('change', function() {
-    previewImages(this, 'img-grid');
-});
 
 function previewImages(input, previewContainerClass) {
     const previewContainer = document.querySelector(`.${previewContainerClass}`);
     let files = Array.from(input.files);
 
-    if (!previewContainer.existingFiles) {
-        previewContainer.existingFiles = [];
-    }
+    newImages = newImages.concat(files);  // Adiciona novos arquivos à lista de novas imagens
 
-    previewContainer.existingFiles = previewContainer.existingFiles.concat(files);
-    additionalImagesList = previewContainer.existingFiles;
-    files = additionalImagesList;
+    previewContainer.innerHTML = '';  // Limpa a pré-visualização
 
-    files.forEach((file, index) => {
+    // Exibe imagens existentes
+    existingImages.forEach((url, index) => {
+        const imgWrapper = document.createElement('div');
+        imgWrapper.classList.add('img-wrapper');
+
+        imgWrapper.innerHTML = `
+            <img src="${url}" class="img-principal">
+            <button class="btn-remove" type="button-remove">
+                <span class="btn-remove__text">Excluir</span>
+                <span class="btn-remove__icon">
+                    <svg class="svg" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path>
+                        <line style="stroke:#fff;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" x1="80" x2="432" y1="112" y2="112"></line>
+                        <path d="M192,112V72h0a23.93,23.93,0,0,1,24-24h80a23.93,23.93,0,0,1,24,24h0v40" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path>
+                        <line style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" x1="256" x2="256" y1="176" y2="400"></line>
+                        <line style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" x1="184" x2="192" y1="176" y2="400"></line>
+                        <line style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" x1="328" x2="320" y1="176" y2="400"></line>
+                    </svg>
+                </span>
+            </button>
+        `;
+
+        const removeBtn = imgWrapper.querySelector('.btn-remove');
+        removeBtn.addEventListener('click', function() {
+            existingImages.splice(index, 1);  // Remove a URL da lista
+            previewImages(input, previewContainerClass);  // Re-renderiza imagens
+        });
+
+        previewContainer.appendChild(imgWrapper);
+    });
+
+    // Exibe novas imagens
+    newImages.forEach((file, index) => {
         const reader = new FileReader();
         reader.onload = function(e) {
             const imgWrapper = document.createElement('div');
@@ -182,7 +211,7 @@ function previewImages(input, previewContainerClass) {
             imgWrapper.innerHTML = `
                 <img src="${e.target.result}" class="img-principal">
                 <button class="btn-remove" type="button-remove">
-                    <span class="btn-remove__text">Remover</span>
+                    <span class="btn-remove__text">Excluir</span>
                     <span class="btn-remove__icon">
                         <svg class="svg" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
                             <path d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path>
@@ -198,10 +227,10 @@ function previewImages(input, previewContainerClass) {
 
             const removeBtn = imgWrapper.querySelector('.btn-remove');
             removeBtn.addEventListener('click', function() {
-                files.splice(index, 1);  // Remove o arquivo da lista
-                updateFileInput(input, files);  // Atualiza o campo de entrada de arquivos
-                additionalImagesList = files;  // Atualiza a lista de imagens globais
-                renderImageList(previewContainer, input, files);  // Atualiza a pré-visualização
+                newImages.splice(index, 1);  // Remove o arquivo da lista
+                updateFileInput(input, newImages);  // Atualiza o campo de entrada de arquivos
+                previewContainer.existingFiles = newImages;  // Atualiza a lista de imagens globais
+                previewImages(input, previewContainerClass);  // Re-renderiza imagens
             });
 
             previewContainer.appendChild(imgWrapper);
@@ -215,6 +244,11 @@ function updateFileInput(input, files) {
     files.forEach(file => dataTransfer.items.add(file));
     input.files = dataTransfer.files;
 }
+
+// Adiciona evento ao botão "Escolha novas imagens adicionais"
+document.getElementById('addImagesButton').addEventListener('click', function() {
+    document.getElementById('imagens').click();
+});
 
 // Função para direcionar à listagem de produtos
 function directToListagemProdutos() {
