@@ -58,7 +58,7 @@ function displayTableData() {
             <td>${item.ativo ? 'Ativo' : 'Inativo'}</td>
             <td class="acao"><button onclick="alterarProduto(${item.id})">Alterar</button></td>
             <td class="acao">
-                <button onclick="visualizarProduto()">Visualizar</button>
+                <button onclick="visualizarProduto(${item.id})">Visualizar</button>
             </td>
             <td class="acao"><button>Hab/Des</button></td>
         `;
@@ -135,7 +135,7 @@ function filtrarProdutos() {
     async function fetchFilteredData(page = 0) {
         try {
             const response = await fetch(`http://${API}:8080/produto/buscaNome?nome=${filtro}&page=${page}`);
-            
+
             // Se a API retornar 404, exibe a mensagem de produto não encontrado
             if (response.status === 404) {
                 exibirMensagemProdutoNaoEncontrado();
@@ -182,8 +182,58 @@ function directToCadastroProdutos() {
     window.location.href = "TelaCadastroProduto.html";
 }
 
-function visualizarProduto() {
+function visualizarProduto(produtoId) {
+    const carrosselImagens = document.querySelector(".swiper-wrapper");
+    const nomeProd = document.querySelector(".titulo-prod");
+    const valorProd = document.querySelector(".valor-prod");
+    const avaliacaoProd = document.querySelector(".avaliacao-prod");
+    const descricaoProd = document.querySelector(".descricao-prod");
     abrirModalProduto();
+
+    fetch('http://' + API + ':8080/produto/buscaID?id=' + produtoId)
+        .then(response => {
+            if (response.status === 200) {
+                return response.json();
+            }
+        })
+        .then(produto => {
+
+            // Adiciona a imagem principal
+            let indexImage = 0;
+            carrosselImagens.innerHTML = `
+                <div class="swiper-slide">
+                    <div class="project-img">
+                        <img src="${produto.imagemPrincipal}" alt="Imagem produto ${indexImage++}">
+                    </div>
+                </div>
+            `;
+            atualizarInstanciaSwiper();
+
+            // Adiciona imagens adicionais, se houver
+            if (produto.imagens && produto.imagens.length > 0) {
+                atualizarLoopSwiper(true);
+                produto.imagens.forEach(imagenProduto => {
+                    carrosselImagens.innerHTML += `
+                        <div class="swiper-slide">
+                            <div class="project-img">
+                                <img src="${imagenProduto}" alt="Imagem produto ${indexImage++}">
+                            </div>
+                        </div>
+                    `;
+                });
+                atualizarInstanciaSwiper();
+            }
+
+            nomeProd.innerText  = produto.nomeProduto;
+            valorProd.innerText  = "R$ "+produto.preco;
+            avaliacaoProd.innerText  = "Avaliação: "+produto.avaliacao;
+            descricaoProd.innerText  = produto.descricao;
+
+        })
+        .catch(error => {
+            console.error('Erro ao acessar produto:', error);
+            alert("Erro ao acessar produto. Por favor, tente novamente.");
+        });
 }
 
 function abrirModalProduto() {
@@ -192,6 +242,10 @@ function abrirModalProduto() {
 
 function fecharModalProduto() {
     document.querySelector(".card-produto").style.display = "none";
+    const carrosselImagens = document.querySelector(".swiper-wrapper");
+    carrosselImagens.innerHTML = '';  // Limpar conteudo do produto antigo
+    atualizarLoopSwiper(false);
+    atualizarInstanciaSwiper();
 }
 
 function alterarProduto(id) {
