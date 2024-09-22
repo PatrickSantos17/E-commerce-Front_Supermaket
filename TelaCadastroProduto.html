@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/CadastroProduto/cadastroProduto.css">
+    <title>Cadastro de Produto</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Produto</h1>
+        <form id="produtoForm">
+            <div class="form-group">
+                <label for="nomeProduto">Nome do Produto:</label>
+                <input type="text" id="nomeProduto" name="nomeProduto" required>
+            </div>
+            <div class="form-group">
+                <label for="categoria">Categoria:</label>
+                <select id="categoria" name="categoria" required>
+                    <option value="" disabled selected>Selecione uma categoria</option>
+                    <option value="Açougue">Açougue</option>
+                    <option value="Frios e laticínios">Frios e laticínios</option>
+                    <option value="Adega e bebidas">Adega e bebidas</option>
+                    <option value="Higiene e limpeza">Higiene e limpeza</option>
+                    <option value="Hortifruti e mercearia">Hortifruti e mercearia</option>
+                    <option value="Padaria">Padaria</option>
+                    <option value="Enlatados">Enlatados</option>
+                    <option value="Cereais">Cereais</option>
+                    <option value="Achocolatados">Achocolatados</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca" required>
+            </div>          
+            
+            <div class="form-group">
+                <div class="linha">
+                    <div class="campo">
+                        <label for="quantidade">Quantidade:</label>
+                        <input type="number" id="quantidade" name="quantidade" required>
+                    </div>
+                    <div class="campo">
+                        <label for="quantidade">Avaliação:</label>
+                        <input type="number" id="avaliacao" name="avaliacao" min="0" max="5" step="0.5" required>
+                    </div>
+                    <div class="campo">
+                        <label for="preco">Preço:</label>
+                        <input type="number" id="preco" name="preco" step="0.01" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao" name="descricao" required>
+            </div>
+
+            <div class="EscolhaImg">
+                <label class="imagem1" for="imagemPrincipal" tabindex="0">
+                    <span class="mainPicture__image">Clique para escolher a imagem Principal:</span>
+                </label>
+                <input type="file" id="imagemPrincipal" name="imagemPrincipal" required>
+            </div>
+            
+            <div class="EscolhaImgMultiple">
+                <div class="EscolhaImgMultiple">
+                    <div class="additionalImagesDisplay"></div>
+                    <input type="file" id="imagens" name="imagens" multiple style="display: none;">
+                    <button type="button" id="addImagesButton">Escolha as imagens adicionais</button>
+                    
+                </div> 
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Cadastrar Produto</button>
+                <button type="button" onclick="directToListagemProdutos()">Cancelar</button>
+            </div>
+        </form>
+        <div id="response"></div>
+    </div>
+
+    <!-- Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalMessage"></p>
+            <button type="button" onclick="directToListagemProdutos()">OK</button>
+        </div>
+    </div>
+
+    <script src="JS/CadastroProduto/CadastroProdutos.js"></script>
+</body>
+</html>
