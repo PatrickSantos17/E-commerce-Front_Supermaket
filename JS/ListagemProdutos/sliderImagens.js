@@ -10,11 +10,12 @@
 //     },
 //     keyboard: true,
 //   });
+let swiperInstance = null; 
 
 document.addEventListener('DOMContentLoaded', function() {
-    const swiper = new Swiper('.swiper', {
+    swiperInstance = new Swiper('.swiper', {
         // Configurações do carrossel
-        loop: true,
+        loop: false,
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
@@ -24,8 +25,20 @@ document.addEventListener('DOMContentLoaded', function() {
             clickable: true,
         },
         autoplay: {
-            delay: 2500,
+            delay: 2000,
             disableOnInteraction: false,
         },
     });
 });
+
+function atualizarLoopSwiper(loopAtivo) {
+    if(loopAtivo ==! swiperInstance.params.loop) {
+        swiperInstance.params.loop = loopAtivo;
+        console.log("LOOP ATUALIZADO - "+ swiperInstance.params.loop);
+    }
+}
+
+function atualizarInstanciaSwiper() {
+    swiperInstance.update();
+    console.log("INSTANCIA ATUALIZADA")
+}
