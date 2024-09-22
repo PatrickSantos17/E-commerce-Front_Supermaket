@@ -16,7 +16,18 @@
             </div>
             <div class="form-group">
                 <label for="categoria">Categoria:</label>
-                <input type="text" id="categoria" name="categoria" required>
+                <select id="categoria" name="categoria" required>
+                    <option value="" disabled selected>Selecione uma categoria</option>
+                    <option value="Açougue">Açougue</option>
+                    <option value="Frios e laticínios">Frios e laticínios</option>
+                    <option value="Adega e bebidas">Adega e bebidas</option>
+                    <option value="Higiene e limpeza">Higiene e limpeza</option>
+                    <option value="Hortifruti e mercearia">Hortifruti e mercearia</option>
+                    <option value="Padaria">Padaria</option>
+                    <option value="Enlatados">Enlatados</option>
+                    <option value="Cereais">Cereais</option>
+                    <option value="Achocolatados">Achocolatados</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="marca">Marca:</label>
@@ -54,19 +65,30 @@
 
             <div class="form-group form-buttons">
                 <button type="submit" id="btn-alterar">Alterar Produto</button>
-                <button type="button" onclick="directToListagemProdutos()">Cancelar</button>
+                <button type="button" id="btn-cancelar" onclick="directToListagemProdutos()">Cancelar</button>
             </div>
         </form>
     </div>
 
     <!-- Modal -->
-    <div id="confirmationModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p id="modalMessage"></p>
+    <div id="loadingModal" class="loading-modal">
+        <svg viewBox="25 25 50 50">
+            <circle r="20" cy="50" cx="50"></circle>
+        </svg>
+    </div>
+    <div class="card">
+        <div class="modal-confirm">
+            <p class="modal-heading">Alteração Realizada!</p>
+            <p class="modal-info">
+                Sua alteração foi realizada com sucesso!!
+            </p>
+            <div class="button-wrapper">
+                <button class="accept-cookie-button">OK</button>
+            </div>
         </div>
     </div>
 
     <script src="JS/AlterarProduto/alterarProduto.js"></script>
+    <script src="JS/AlterarProduto/utils.js"></script>
 </body>
 </html>

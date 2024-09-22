@@ -13,19 +13,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (produtoId) {
             acessarProduto(produtoId);
         }
-
-        const modal = document.getElementById("alterationModal");
-        const span = document.getElementsByClassName("close")[0];
-
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
     } else if (grupoUsuarioLogado === "Estoquista") {
         const produtoId = getProdutoIdFromURL();
         if (produtoId) {
@@ -64,12 +51,13 @@ function acessarProduto(produtoId) {
                 document.getElementById('avaliacao').disabled = true;
                 document.getElementById('marca').disabled = true;
                 document.getElementById('categoria').disabled = true;
-                document.getElementById('imagemPrincipal').disabled = true;
-                document.getElementById('imagensAdicionais').disabled = true;
+                document.querySelector('.input-alterar-principal').disabled = true;
+                document.getElementById('imagens').disabled = true;
+                document.getElementById('addImagesButton').disabled = true;
 
                 // Habilitar botões de salvar e cancelar e o campo de quantidade
-                document.getElementById('botaoSalvar').disabled = false;
-                document.getElementById('botaoCancelar').disabled = false;
+                document.getElementById('btn-alterar').disabled = false;
+                document.getElementById('btn-cancelar').disabled = false;
                 document.getElementById('quantidade').disabled = false;
             }
 
@@ -272,23 +260,32 @@ document.getElementById('btn-alterar').addEventListener('click', function (event
 })
 
 function alterarProduto(formData) {
+    mostrarLoading();
     fetch('http://' + API + ':8080/produto/alterar', {
         method: 'PUT',
         body: formData
     })
         .then(response => {
             if (response.status === 200) {
-                alert("Produto alterado com sucesso.");
-                window.location.href = "TelaListagemProdutoAdm.html";
+                setTimeout(() => {
+                    esconderLoading();
+                    document.querySelector(".card").style.display = "flex";
+                }, 3000);
             } else if (response.status === 400) {
-                alert("Avaliação deve estar entre 1 e 5 e variar de 0,5 em 0,5!")
+                alert("Avaliação deve estar entre 1 e 5 e variar de 0,5 em 0,5!");
+                document.querySelector(".container").classList.remove('blur');
+                esconderLoading();
             } else {
                 alert("Erro ao alterar produto. Por favor, tente novamente.");
+                document.querySelector(".container").classList.remove('blur');
+                esconderLoading();
             }
         })
         .catch(error => {
             console.error('Erro ao alterar produto:', error);
             alert("Erro ao alterar produto. Por favor, tente novamente.");
+            esconderLoading();
+            document.querySelector(".container").classList.remove('blur');
         });
 }
 
