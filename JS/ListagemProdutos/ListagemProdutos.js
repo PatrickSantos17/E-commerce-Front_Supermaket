@@ -49,6 +49,9 @@ function displayTableData() {
 
         data.forEach(item => {
             const row = document.createElement('tr');
+
+            const isProdAtivo = item.ativo ? "Ativo" : "Inativo";
+
             row.innerHTML = `
             <td><img src="${item.urlImagemPrincipal}" alt="${item.nomeProduto}" width="50"></td>
             <td>${item.id}</td>
@@ -60,7 +63,9 @@ function displayTableData() {
             <td class="acao">
                 <button onclick="visualizarProduto(${item.id})">Visualizar</button>
             </td>
-            <td class="acao"><button>Hab/Des</button></td>
+            <td class="acao">
+                <button onclick="abrirModalConfirmacao(${item.id}, '${isProdAtivo}')">${isProdAtivo === 'Ativo' ? 'Desabilitar' : 'Habilitar'}</button>
+            </td>
         `;
             tableBody.appendChild(row);
         });
@@ -224,10 +229,10 @@ function visualizarProduto(produtoId) {
                 atualizarInstanciaSwiper();
             }
 
-            nomeProd.innerText  = produto.nomeProduto;
-            valorProd.innerText  = "R$ "+produto.preco;
-            avaliacaoProd.innerText  = "Avaliação: "+produto.avaliacao;
-            descricaoProd.innerText  = produto.descricao;
+            nomeProd.innerText = produto.nomeProduto;
+            valorProd.innerText = "R$ " + produto.preco;
+            avaliacaoProd.innerText = "Avaliação: " + produto.avaliacao;
+            descricaoProd.innerText = produto.descricao;
 
         })
         .catch(error => {
@@ -251,4 +256,50 @@ function fecharModalProduto() {
 function alterarProduto(id) {
     // Função para redirecionar para a página de alteração do usuário
     window.location.href = `TelaAlterarProduto.html?id=${id}`;
+}
+
+async function habilitarDesabilitarProduto(id, ativo) {
+    const endpoint = ativo === 'Ativo' ? `http://` + API + `:8080/produto/desativar/${id}` : `http://` + API + `:8080/produto/ativar/${id}`;
+    try {
+        const response = await fetch(endpoint, {
+            method: 'PATCH'
+        });
+
+        if (response.status === 200) {
+            alert(`Produto ${ativo === 'Ativo' ? 'desabilitado' : 'ativado'} com sucesso!`);
+            fetchData();
+        } else {
+            alert("Erro ao tentar atualizar o status do produto. Por favor, tente novamente.");
+        }
+    } catch (error) {
+        console.error("Erro ao atualizar status do produto:", error);
+        alert("Ocorreu um erro inesperado. Por favor, tente novamente.");
+    }
+}
+
+function abrirModalConfirmacao(id, ativo) {
+    const modal = document.querySelector(".card-confirmar");
+    const heading = document.querySelector(".card-heading");
+    const btnConfirmar = modal.querySelector('.card-button.primary');
+
+    if (ativo === "Inativo") {
+        heading.innerText = "Habilitar produto?";
+        btnConfirmar.innerText = "Habilitar";
+        btnConfirmar.style.backgroundColor = "rgb(58, 151, 63)";
+    } else {
+        heading.innerText = "Desabilitar produto?";
+        btnConfirmar.innerText = "Desabilitar";
+        btnConfirmar.style.backgroundColor = "rgb(214, 63, 58)";
+    }
+
+    modal.style.display = "flex";
+
+    btnConfirmar.onclick = () => {
+        habilitarDesabilitarProduto(id, ativo);
+        fecharModalConfirmacao();
+    }
+}
+
+function fecharModalConfirmacao() {
+    document.querySelector(".card-confirmar").style.display = "none";
 }
