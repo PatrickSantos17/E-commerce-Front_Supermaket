@@ -1,8 +1,8 @@
 body {
     font-family: "Poppins", sans-serif;
     background: radial-gradient(circle, #130ff3, #000770, #000000);
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,6 +11,71 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* estilização do header */
+header {
+    width: 100%;
+    background-color: #FFFFFF;
+    min-height: 120px;
+    display: flex;
+}
+
+.lado-a {
+    width: 50%;
+    display: flex;
+}
+
+.lado-b {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 80px;
+}
+
+header .lado-a img {
+    width: 150px;
+    height: 120px;
+    margin: 0 80px;
+}
+
+header .lado-b img {
+    height: 35px;
+}
+
+.lado-a #buscar {
+    width: 220px;
+    height: 35px;
+    border: 2px solid #8d8d8d;
+    border-radius: 13px;
+    text-align: left;
+    padding-left: 12px;
+    margin: auto 0;
+}
+
+.lado-b .info-usuario {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 100%;
+}
+
+.lado-b .info-usuario .nome-usuario {
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.lado-b .info-usuario .grupo-usuario {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+#main-content {
+    height: auto;
+    padding-top: 50px;
 }
 
 button {
@@ -274,64 +339,7 @@ tbody tr {
     cursor: not-allowed;
 }
 
-header {
-    width: 100%;
-    background-color: #FFFFFF;
-    height: 160px;
-    display: flex;
-}
-
-.lado-a {
-    width: 50%;
-    display: flex;
-}
-
-.lado-b {
-    width: 50%;
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 80px;
-}
-
-header .lado-a img {
-    height: 120px;
-    padding: 0 60px;
-}
-
-header .lado-b img {
-    height: 35px;
-}
-
-.lado-a #buscar {
-    width: 220px;
-    height: 35px;
-    border: 2px solid #8d8d8d;
-    border-radius: 13px;
-    text-align: left;
-    padding-left: 12px;
-    margin: auto 0;
-}
-
-.lado-b .info-usuario {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 180px;
-    height: 100%;
-}
-
-.lado-b .info-usuario .nome-usuario {
-    margin-top: 15px;
-    font-size: 17px;
-    font-weight: 600;
-}
-
-.lado-b .info-usuario .grupo-usuario {
-    font-size: 28px;
-    font-weight: 700;
-}
-
+/* resposividade header */
 @media (max-width: 768px) {
     header {
         flex-direction: column;
@@ -438,6 +446,18 @@ header .lado-b img {
         padding: 4px 8px;
         font-size: 12px;
     }
+}
+
+/* Overlay para bloquear interações com o fundo */
+.overlay {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro */
+    z-index: 999; /* Um pouco abaixo do modal */
 }
 
 /* modal para visualizar produto */
@@ -694,6 +714,7 @@ img {
 
 /* modal confirmar alteração no status do produto */
 .card-confirmar {
+    z-index: 1000;
     width: 300px;
     height: fit-content;
     background: rgb(255, 255, 255);
@@ -760,9 +781,9 @@ img {
     background-color: #919191;
 }
 
-/* .secondary:hover {
-    background-color: rgb(126, 126, 126);
-} */
+.secondary:hover {
+    background-color: #919191;
+}
 
 .exit-button {
     display: flex;

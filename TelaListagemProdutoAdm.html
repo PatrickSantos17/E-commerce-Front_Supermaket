@@ -38,29 +38,28 @@
         </div>
     </header>
 
-    <!-- <button>Detalhe produto</button> -->
-
-    <div class="container">
-        <div class="header">
-            <span>Listagem de produtos</span>
-            <button onclick="directToCadastroProdutos()" id="new">+</i></button>
-        </div>
-
-        <div class="container-filtro">
-            <div class="filtro-usuarios">
-                <input id="filtro" type="text" placeholder="Digite o nome do produto">
+    <div id="main-content">
+        <div class="container">
+            <div class="header">
+                <span>Listagem de produtos</span>
+                <button onclick="directToCadastroProdutos()" id="new">+</i></button>
             </div>
-            <button onclick="filtrarProdutos()" id="buscar-filtro">Buscar</i></button>
-        </div>
-
-
-        <div class="divTable">
-
-        </div>
-        <div id="pagination" class="pagination">
-            <!-- Botões de paginação serão gerados dinamicamente -->
+            <div class="container-filtro">
+                <div class="filtro-usuarios">
+                    <input id="filtro" type="text" placeholder="Digite o nome do produto">
+                </div>
+                <button onclick="filtrarProdutos()" id="buscar-filtro">Buscar</i></button>
+            </div>
+            <div class="divTable">
+            </div>
+            <div id="pagination" class="pagination">
+                <!-- Botões de paginação serão gerados dinamicamente -->
+            </div>
         </div>
     </div>
+
+    <!-- desativa o clique no fundo da tela ao abrir o modal -->
+    <div id="overlay" class="overlay"></div>
 
     <!-- modal visualização do produto -->
     <div class="card-produto">
