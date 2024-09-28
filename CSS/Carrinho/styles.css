@@ -1,0 +1,370 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f6f6f6;
+    font-family: 'Lato', sans-serif;
+}
+
+body>header {
+    background: #33333344;
+    color: black;
+    font-size: 24px;
+    padding: 20px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+body>main {
+    background: #fff;
+    padding: 0 30px 30px;
+}
+
+body>main .page-title {
+    font-size: 40px;
+    padding: 50px 0;
+    text-align: center;
+}
+
+body>main .content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+body>main .content section {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+body>main .content aside {
+    min-width: 250px;
+}
+
+button {
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table thead tr {
+    border-bottom: 3px solid #eee;
+}
+
+table thead tr th {
+    text-align: left;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    color: #666;
+}
+
+table tbody tr {
+    border-bottom: 3px solid #eee;
+}
+
+table tbody tr:last-child {
+    border: 0;
+}
+
+table tbody tr td {
+    padding: 30px 0;
+}
+
+.product {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.product img {
+    border-radius: 6px;
+}
+
+.product .info {
+    margin-left: 20px;
+}
+
+.product .info .name {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.product .info .category {
+    color: #666;
+}
+
+.qty {
+    background: #eee;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    padding: 0 0;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-width: 60px;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 30px;
+}
+
+.qty span {
+    margin: 0 10px;
+}
+
+.qty button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: transparent;
+    border: 0;
+    padding: 0 10px;
+    font-size: 20px;
+    height: 100%;
+}
+
+.qty button:hover {
+    background: #ddd;
+}
+
+.remove {
+    background: #eee;
+    border: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.remove:hover {
+    background: #ddd;
+}
+
+aside {
+    margin-left: 30px;
+}
+
+aside .box {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    background: #eee;
+    color: #222;
+}
+
+aside .box header {
+    padding: 15px 20px;
+    font-size: 18px;
+    border-bottom: 1px solid #ccc;
+}
+
+aside .box .info {
+    padding: 20px;
+    font-size: 16px;
+}
+
+aside .box .info>div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+aside .box .info>div:last-child {
+    margin: 0;
+}
+
+aside .box .info button {
+    color: #28a745;
+    background: transparent;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+aside .box footer {
+    padding: 15px 20px;
+    background: #ddd;
+    font-size: 18px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+aside>button {
+    border: 0;
+    padding: 15px 0;
+    color: white;
+    background: #28a745;
+    display: block;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 16px;
+}
+
+aside>button:hover {
+    background: #3bc55b;
+}
+
+.lado-a {
+    width: 50%;
+    display: flex;
+}
+
+.lado-b {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 80px;
+}
+
+header .lado-a img {
+    height: 80px;
+    padding: 0 60px;
+}
+
+header .lado-b img {
+    height: 35px;
+}
+
+.lado-a #buscar {
+    width: 220px;
+    height: 35px;
+    border: 2px solid #8d8d8d;
+    border-radius: 13px;
+    text-align: left;
+    padding-left: 12px;
+    margin: auto 0;
+}
+
+.lado-b .info-usuario {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 100%;
+}
+
+.lado-b .info-usuario .nome-usuario {
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.lado-b .info-usuario .grupo-usuario {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.entre-cadastre {
+    color: #222;
+    font-size: 18px;
+
+}
+
+.entre-cadastre a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.entre-cadastre a:hover {
+    text-decoration: underline; /* Adiciona o sublinhado no hover */
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .lado-a,
+    .lado-b {
+        width: 100%;
+        justify-content: center;
+        margin: 10px 0;
+    }
+
+    header .lado-a img {
+        height: 60px;
+    }
+
+    .lado-a #buscar {
+        width: 100%;
+        max-width: 300px;
+        margin-top: 10px;
+    }
+
+    header .lado-b img {
+        height: 35px;
+    }
+
+    .lado-b .info-usuario .nome-usuario {
+        font-size: 14px;
+    }
+
+    .lado-b .info-usuario .grupo-usuario {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lado-a #buscar {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .lado-b .info-usuario .nome-usuario {
+        font-size: 12px;
+    }
+
+    .lado-b .info-usuario .grupo-usuario {
+        font-size: 18px;
+    }
+}
+
+/*# sourceMappingURL=styles.css.map */
