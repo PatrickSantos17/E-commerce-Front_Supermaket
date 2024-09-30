@@ -13,7 +13,7 @@ body {
 body>header {
     background: #33333344;
     color: black;
-    font-size: 24px;
+    font-size: 18px;
     padding: 20px 0;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -297,6 +297,25 @@ header .lado-b img {
 .lado-b .info-usuario .grupo-usuario {
     font-size: 28px;
     font-weight: 700;
+}
+
+.user-carrinho {
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.user-carrinho img {
+    display: inline-block;
+}
+
+.header-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .entre-cadastre {
