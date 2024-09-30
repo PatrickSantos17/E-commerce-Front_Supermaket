@@ -14,12 +14,18 @@
     <header>
         <div class="lado-a">
             <a href="/TelaInicial.html"><img src="src/img/logo-removebg-preview.png" alt="logo-img"></a>
-            <input type="search" id="buscar" name="q" placeholder="Buscar">
+            <input type="search" id="buscar" placeholder="Buscar">
         </div>
         <div class="lado-b">
-            <div class="info-usuario">
-                <img id="iconUsuario" src="src/img/icon-cliente.png" alt="user-icon">
-                <p class="nome-usuario"></p>
+            <div class="user-carrinho">
+                <div class="header-user">
+                    <img id="iconUsuario" src="src/img/icon-cliente.png" alt="user-icon">
+                    <p class="nome-usuario"></p>
+                </div>
+                <a href="TelaCarrinho.html">
+                    <img id="iconCarrinho" src="src/img/vista-lateral-vazia-do-carrinho-de-compras.png" alt="user-icon">
+                </a>
+                <p class="qtd-carrinho"></p>
             </div>
             <div class="info-usuario entre-cadastre">
                 <a href="TelaLogin.html">Entre</a>
@@ -137,6 +143,7 @@
             </aside>
         </div>
     </main>
+    <script src="JS/GeralHeaderCliente/geralHeaderCliente.js" defer></script>
 </body>
 
 </html>
