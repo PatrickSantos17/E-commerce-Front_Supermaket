@@ -1,9 +1,13 @@
-var API = "localhost"; // Setar essa variavel quando testar local e comentar a do IP
+// var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
 data = [];
 
+var produtosIDCarrinho = JSON.parse(localStorage.getItem("produtos")) || [];
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchProduto();
+    console.log(produtosIDCarrinho);
 })
 
 async function fetchProduto() {
@@ -67,6 +71,7 @@ function montarLayoutExibicao(produtos) {
                             <p class="card-text"><strong>R$ ${formatarCasasDecimais(produto.preco)}</strong></p>
                             <p>Avaliação: ${estrelasHTML}</p> <!-- Aqui estão as estrelas -->
                             <a href="TelaDetalheProduto.html?produtoId=${produto.id}" class="btn btn-primary">Detalhes do produto</a>
+                            <button onclick="adicionarCarrinho(${produto.id})" class="btn btn-primary">Comprar</button>
                         </div>
                     </div>
                 </div>
@@ -82,4 +87,10 @@ function formatarCasasDecimais(numero) {
 
 function redirecionarTelaLogin() {
     window.location.href = "Login.html"
+}
+
+function adicionarCarrinho(produtoId) {
+    produtosIDCarrinho.push(produtoId);
+    localStorage.setItem("produtos", JSON.stringify(produtosIDCarrinho));
+    window.location.href = "TelaCarrinho.html";
 }
