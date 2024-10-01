@@ -33,12 +33,31 @@ function montarLayoutExibicao(produtos) {
 
     produtos.forEach(produto => {
         if (produto.ativo) {  // Apenas exibe produtos ativos
-            document.querySelectorAll('.card').forEach(card => {
-                card.classList.add('card-sm');
-            });            
+            // Gerar estrelas com base na avaliação
+            const avaliacao = produto.avaliacao;
+            let estrelasHTML = '';
+            const estrelasCheias = Math.floor(avaliacao); // Número de estrelas cheias
+            const temEstrelaMeia = (avaliacao % 1) >= 0.5; // Verifica se tem estrela meia
+
+            // Adiciona estrelas cheias
+            for (let i = 0; i < estrelasCheias; i++) {
+                estrelasHTML += '<span class="star filled">★</span>'; // Estrela cheia
+            }
+
+            // Adiciona estrela meia se necessário
+            if (temEstrelaMeia) {
+                estrelasHTML += '<span class="star half">★</span>'; // Estrela meia
+            }
+
+            // Adiciona estrelas vazias
+            const estrelasVazias = 5 - estrelasCheias - (temEstrelaMeia ? 1 : 0);
+            for (let i = 0; i < estrelasVazias; i++) {
+                estrelasHTML += '<span class="star">☆</span>'; // Estrela vazia
+            }
+
             produtosHTML += `
                 <div class="col product-col">
-                    <div class="card h-100">
+                    <div class="card h-100 card-sm">
                         <img src="${produto.urlImagemPrincipal}" class="card-img-top img-sm" alt="${produto.nomeProduto}">
                         <div class="card-body">
                             <div class="produtos-nome">
@@ -46,7 +65,7 @@ function montarLayoutExibicao(produtos) {
                                 <hr>
                             </div>
                             <p class="card-text"><strong>R$ ${formatarCasasDecimais(produto.preco)}</strong></p>
-                            <p>Avaliação: ${produto.avaliacao}</p>
+                            <p>Avaliação: ${estrelasHTML}</p> <!-- Aqui estão as estrelas -->
                             <a href="TelaDetalheProduto.html?produtoId=${produto.id}" class="btn btn-primary">Detalhes do produto</a>
                         </div>
                     </div>
@@ -57,7 +76,6 @@ function montarLayoutExibicao(produtos) {
 
     listaProdutos.innerHTML = produtosHTML;
 }
-
 function formatarCasasDecimais(numero) {
     return Number(numero).toFixed(2);
 }
