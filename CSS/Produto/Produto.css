@@ -24,6 +24,11 @@ body {
     padding: 20px;
     border-radius: 8px; /* Deixa o container com bordas arredondadas */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve ao redor do container */
+    display: flex;
+    flex-wrap: wrap; /* Para permitir que os cards se movam para a próxima linha */
+    gap: 20px; /* Espaço entre os cards */
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .lado-a {
@@ -258,12 +263,13 @@ header .lado-b img {
     display: flex;
     flex-direction: column;
     gap: 5%;
+    margin-top: 100px;
     margin-bottom: 0;
     object-fit: 50px;
 }
 
 .img-sm {
-    margin-top: 0;
+    margin-top: 30px;
     align-items: center;
     align-content: center; 
     max-height: 240px;
@@ -285,6 +291,11 @@ header .lado-b img {
     text-align: center;
 }
 
+.product-col {
+    margin-top: 4%; /* Mantém o espaço acima */
+    margin-bottom: 20px; /* Aumenta o espaço abaixo do card */
+}
+
 .conteudo {
     display: flex;
     justify-content: center;
@@ -292,8 +303,12 @@ header .lado-b img {
     flex-direction: column;
     font-size: 20px;
 }
+.card{
+    margin-bottom: 20px;
+}
 
 .card-title {
+    margin-top: auto;
     margin-bottom: 5px; /* Reduz o espaço abaixo do título */
     font-size: 100%; /* Se quiser diminuir o tamanho do título */
 }
@@ -303,7 +318,8 @@ header .lado-b img {
 }
 
 .card-text {
-    margin-bottom: 5px; /* Reduz o espaço abaixo do preço */
+
+    margin-bottom: 50px; /* Reduz o espaço abaixo do preço */
     margin-bottom: 0;
 }
 
@@ -313,7 +329,7 @@ header .lado-b img {
 
 .btn-primary {
     margin-top: 5px; /* Reduz o espaço acima do botão */
-    padding: 6px 12px; /* Reduz o tamanho do botão */
+    padding: 20px 12px; /* Reduz o tamanho do botão */
     font-size: 14px; /* Ajusta o tamanho da fonte do botão */
     margin-bottom: 5px;
 }
@@ -327,4 +343,28 @@ header .lado-b img {
 
 /* avaliação produto */
 
+.star {
+    font-size: 30px; /* Tamanho da estrela */
+    color: #666; /* Cor padrão da estrela vazia */
+    margin: 0 2px; /* Espaçamento entre as estrelas */
+    vertical-align: middle; /* Alinhamento vertical */
+}
 
+/* Estrela cheia */
+.star.filled {
+    color: #ffa723; /* Cor das estrelas cheias */
+}
+
+/* Estrela meia - a classe 'half' pode ser usada para aplicar estilo específico */
+.star.half {
+    color: #ffa723; /* Cor da estrela meia */
+    position: relative;
+}
+
+/* Para mostrar a meia estrela, pode-se adicionar um estilo adicional */
+.star.half:after {
+    content: '☆'; /* Adiciona uma estrela vazia ao lado da estrela meia */
+    position: absolute;
+    left: 0; /* Alinha a estrela vazia à esquerda da estrela meia */
+    color: #666; /* Cor da estrela vazia */
+}
