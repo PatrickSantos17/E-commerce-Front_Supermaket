@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/Reset/Reset.css">
+    <link rel="stylesheet" href="CSS/Produto/Produto.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
+
+    <title>Tela de Produtos</title>
+    
+</head>
+<body>
+    <header>
+        <div class="lado-a">
+            <a href="/TelaInicial.html"><img src="src/img/logo-removebg-preview.png" alt="logo-img"></a>
+            <input type="search" id="buscar" name="q" placeholder="Buscar">
+        </div>
+        <div class="lado-b">
+            <div class="carrinho">
+                <img src="download.png" alt="carrinho-img">
+                <p class="contador">0</p>
+            </div>
+            <div class="info-usuario">
+                <img src="Pessoa.png" alt="carrinho-img">
+                <p class="nome-usuario"></p>
+            </div>
+            <div class="info-usuario">
+                <p class="grupo-usuario"></p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Adicionando a div para os produtos -->
+    <div class="produtos-container">
+        <div class="container my-5 custom-container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4" id="product-list"></div>
+        </div>
+    </div>
+
+    <script src="JS/Produto/Produto.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+</body>
+</html>

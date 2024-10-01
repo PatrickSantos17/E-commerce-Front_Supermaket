@@ -1,0 +1,330 @@
+header {
+    width: 100%;
+    background-color: #FFFFFF;
+    height: 160px;
+    display: flex;
+}
+body {
+    background-color: #140048; /* Cor de fundo da página */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+.container {
+    background-color: #140048; /* Se você quiser que o container fique branco, por exemplo */
+    padding: 20px;
+    border-radius: 8px; /* Para dar um efeito arredondado nas bordas */
+}
+.produtos-container{
+    background-color: #140048;
+}
+
+.custom-container {
+    background-color: #140048; /* Cor de fundo branco para o container dos produtos */
+    padding: 20px;
+    border-radius: 8px; /* Deixa o container com bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve ao redor do container */
+}
+
+.lado-a {
+    width: 50%;
+    display: flex;
+}
+
+.lado-b {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 80px;
+}
+.contador {
+    margin-top: 5px; /* Ajuste a distância conforme necessário */
+    font-size: 16px; /* Tamanho da fonte do número */
+    text-align: center;
+}
+
+header .lado-a img {
+    height: 120px;
+    padding: 0 60px;
+}
+
+header .lado-b img {
+    height: 35px;
+}
+
+.lado-a #buscar {
+    width: 220px;
+    height: 35px;
+    border: 2px solid #8d8d8d;
+    border-radius: 13px;
+    text-align: left;
+    padding-left: 12px;
+    margin: auto 0;
+}
+
+.lado-b .info-usuario {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 100%;
+}
+
+.lado-b .info-usuario .nome-usuario {
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.lado-b .info-usuario .grupo-usuario {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .lado-a,
+    .lado-b {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px 0;
+    }
+
+    header .lado-a img {
+        height: 60px;
+    }
+
+    .lado-a #buscar {
+        width: 100%;
+        max-width: 300px;
+        margin-top: 10px;
+    }
+
+    header .lado-b img {
+        height: 35px;
+    }
+
+    .lado-b .info-usuario .nome-usuario {
+        font-size: 14px;
+    }
+
+    .lado-b .info-usuario .grupo-usuario {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lado-a #buscar {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .lado-b .info-usuario .nome-usuario {
+        font-size: 12px;
+    }
+
+    .lado-b .info-usuario .grupo-usuario {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .header span {
+        font-size: 18px;
+    }
+
+    #new,
+    #buscar-filtro {
+        padding: 5px 15px;
+        font-size: 18px;
+    }
+
+    .lado-a,
+    .lado-b {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .divTable {
+        height: auto;
+    }
+
+    th,
+    td {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header span {
+        font-size: 16px;
+    }
+
+    #new,
+    #buscar-filtro {
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    th,
+    td {
+        font-size: 10px;
+        padding: 6px;
+    }
+
+    .pagination button {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+.product-col {
+    margin-top: 4%;
+}
+
+.custom-container {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.card-body{
+    height: auto;
+    
+}
+
+.card-title {
+    font-size: 100%;
+    font-weight: bold;
+}
+.card-img-top {
+    width: 20%; /* Ajusta a largura da imagem */
+    height: 30%; /* Mantém a proporção natural da imagem */
+    object-fit: contain; /* Faz a imagem se ajustar ao espaço sem cortar */
+    margin: 0 ; /* Centraliza a imagem dentro do card */
+    display: block;
+}
+.card:hover {
+    transform: scale(1.05); 
+    transition: transform 0.2s; 
+}
+
+.card-title, .card-text {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+}
+
+
+.produtos-nome {
+    /* font-size: 1.5rem; */
+    font-weight: bold;
+    margin-bottom: 0;
+    height: 10px;
+    width:150px;
+}
+.produtos-nome h5{
+    margin-bottom: 0;
+}
+
+.produtos-nome hr{
+    margin: 0 0;
+}
+
+.card-body {
+    max-width: 100%;
+    padding: 10px;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    margin-bottom: 0;
+    object-fit: 50px;
+}
+
+.img-sm {
+    margin-top: 0;
+    align-items: center;
+    align-content: center; 
+    max-height: 240px;
+   
+      /* Garante que a imagem seja ajustada corretamente */
+}
+
+
+#subtitulo {
+    color: white;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    font-size: 80px;
+}
+
+#texto {
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+.conteudo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+.card-title {
+    margin-bottom: 5px; /* Reduz o espaço abaixo do título */
+    font-size: 100%; /* Se quiser diminuir o tamanho do título */
+}
+
+.card-body hr {
+    margin: 5px 0; /* Reduz o espaçamento do <hr> (linha) */
+}
+
+.card-text {
+    margin-bottom: 5px; /* Reduz o espaço abaixo do preço */
+    margin-bottom: 0;
+}
+
+.card-body p {
+    margin-bottom: 5px; /* Reduz o espaço entre os parágrafos */
+}
+
+.btn-primary {
+    margin-top: 5px; /* Reduz o espaço acima do botão */
+    padding: 6px 12px; /* Reduz o tamanho do botão */
+    font-size: 14px; /* Ajusta o tamanho da fonte do botão */
+    margin-bottom: 5px;
+}
+
+.card-body .btn {
+    margin-top: 5px; /* Reduz o espaço acima do botão */
+    padding: 6px 12px; /* Reduz o tamanho do botão */
+    font-size: 14px; /* Ajusta o tamanho da fonte do botão */
+    margin-bottom: 0;
+}
+
+/* avaliação produto */
+
+
