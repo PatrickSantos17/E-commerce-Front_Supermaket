@@ -37,6 +37,15 @@ body>main .content aside {
     min-width: 250px;
 }
 
+.produtosCarrinho {
+    width: 100%;
+}
+
+.produtosCarrinho {
+    max-height: 400px; /* Ajuste a altura máxima conforme necessário */
+    overflow-y: auto; /* Adiciona a barra de rolagem vertical */
+}
+
 button {
     cursor: pointer;
     font-family: 'Lato', sans-serif;
@@ -81,6 +90,8 @@ table tbody tr td {
 
 .product img {
     border-radius: 6px;
+    width: 50px;
+    height: 50px;
 }
 
 .product .info {

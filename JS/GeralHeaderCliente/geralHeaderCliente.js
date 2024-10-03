@@ -3,7 +3,8 @@ let nome = localStorage.getItem("nome");
 
 let iconUsuario = document.getElementById('iconUsuario');
 let nomeUsuario = document.querySelector('.nome-usuario');
-let logoutButton = document.getElementById('logout'); // Botão de logout (escondido inicialmente)
+let logoutButton = document.getElementById('logout');
+let qtdCarrinho = document.querySelector('.qtd-carrinho');
 
 // Verifica se o nome do usuário está definido no localStorage
 if (nome) {
@@ -23,6 +24,11 @@ if (nome) {
     logoutButton.style.display = "block";
 } else {
     logoutButton.style.display = "none";
+}
+
+if (localStorage.getItem("produtos")) {
+    let listaProdutos = JSON.parse(localStorage.getItem("produtos"));
+    qtdCarrinho.innerHTML = listaProdutos.length;
 }
 
 // Função de logout
