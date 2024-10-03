@@ -88,7 +88,7 @@ header .lado-b img {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 50px;
 }
 
 .user-carrinho img {
@@ -96,6 +96,13 @@ header .lado-b img {
 }
 
 .header-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-carrinho {
     display: flex;
     flex-direction: column;
     justify-content: center;
