@@ -1,7 +1,7 @@
 body>header {
     background: #33333344;
     color: black;
-    font-size: 18px;
+    font-size: 15px;
     padding: 20px 0;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -9,6 +9,7 @@ body>header {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+    height: 50px;
 }
 
 .logout-menu {
@@ -35,6 +36,7 @@ body>header {
 .lado-a {
     width: 50%;
     display: flex;
+    align-items: center;
 }
 
 .lado-b {
@@ -50,7 +52,7 @@ header .lado-a img {
 }
 
 header .lado-b img {
-    height: 35px;
+    height: 25px;
 }
 
 .lado-a #buscar {
@@ -111,7 +113,7 @@ header .lado-b img {
 
 .entre-cadastre {
     color: #222;
-    font-size: 18px;
+    font-size: 16px;
 
 }
 
