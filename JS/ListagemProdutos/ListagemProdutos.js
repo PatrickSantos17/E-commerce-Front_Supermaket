@@ -278,6 +278,9 @@ async function habilitarDesabilitarProduto(id, ativo) {
 }
 
 function abrirModalConfirmacao(id, ativo) {
+    document.getElementById("overlay").style.display = "flex";
+    document.getElementById("main-content").classList.add("blur");
+
     const modal = document.querySelector(".card-confirmar");
     const heading = document.querySelector(".card-heading");
     const btnConfirmar = modal.querySelector('.card-button.primary');
@@ -302,4 +305,6 @@ function abrirModalConfirmacao(id, ativo) {
 
 function fecharModalConfirmacao() {
     document.querySelector(".card-confirmar").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("main-content").classList.remove("blur");
 }
