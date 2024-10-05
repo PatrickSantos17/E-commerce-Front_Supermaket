@@ -46,7 +46,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                             <th>Total</th>
                             <th>Excluir</th>
                         </tr>
-                    </thead>`;    
+                    </thead>`;
     result.produtos.forEach(produtoCarrinho => {
         const row = document.createElement('tbody');
         row.innerHTML = `
@@ -66,7 +66,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                             <td>
                                 <div class="qty">
                                     <button><i class="bx bx-minus"></i></button>
-                                    <span>${produtoCarrinho.quantidade}</span>
+                                    <span class="quantidade">${produtoCarrinho.quantidade}</span>
                                     <button><i class="bx bx-plus"></i></button>
                                 </div>
                             </td>
@@ -122,19 +122,19 @@ async function buscarCarrinhoNL(listaIdProdutos) {
     // Agora que o botão foi adicionado ao DOM, podemos adicionar o event listener e a máscara
     const cepInput = document.querySelector('#cep');
     cepInput.addEventListener('input', aplicarMascaraCEP);
-    
+
     document.querySelector('.btn-cep').addEventListener('click', async function (event) {
         event.preventDefault();
         const cep = cepInput.value.trim();
-    
+
         // Expressão regular para validar o formato do CEP
         const cepRegex = /^\d{5}-\d{3}$/;
-    
+
         if (!cepRegex.test(cep)) {
             mostrarMensagemErro('Digite um CEP válido.');
             return;
         }
-    
+
         try {
             const endereco = await buscarEnderecoViaCEP(cep);
             if (endereco.erro) {
@@ -147,6 +147,28 @@ async function buscarCarrinhoNL(listaIdProdutos) {
             mostrarMensagemErro('Erro ao buscar o CEP.');
             console.error('Erro:', error);
         }
+        // Adiciona event listeners para os botões de aumentar e diminuir quantidade
+        row.querySelector('.bx-minus').addEventListener('click', () => {
+            let quantityElement = row.querySelector('.quantidade');
+            let quantity = parseInt(quantityElement.textContent);
+            if (quantity > 1) {
+                quantity--;
+                quantityElement.textContent = quantity;
+                // Remove o ID do produto da lista salva
+                listaSalva.splice(listaSalva.indexOf(produtoCarrinho.produto.id), 1);
+                localStorage.setItem("produtos", JSON.stringify(listaSalva));
+            }
+        });
+
+        row.querySelector('.bx-plus').addEventListener('click', () => {
+            let quantityElement = row.querySelector('.quantidade');
+            let quantity = parseInt(quantityElement.textContent);
+            quantity++;
+            quantityElement.textContent = quantity;
+            // Adiciona o ID do produto à lista salva
+            listaSalva.push(produtoCarrinho.produto.id);
+            localStorage.setItem("produtos", JSON.stringify(listaSalva));
+        });
     });
 }
 
