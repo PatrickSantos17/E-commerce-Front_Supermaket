@@ -4,13 +4,7 @@ var API = "localhost"; //Setar essa variavel quando testar local e comentar a do
 var totalProdutos;
 var totalFrete;
 let listaSalva = JSON.parse(localStorage.getItem("produtos"));
-var frete = localStorage.getItem("frete") || "";
-
-if (listaSalva) {
-    console.log(listaSalva);
-} else {
-    console.log("Nenhum produto salvo");
-}
+var frete = 0.00;
 
 document.addEventListener('DOMContentLoaded', () => {
     const carrinhoBuscarNLRequestDTO = {
@@ -20,98 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function buscarCarrinhoNL(listaIdProdutos) {
-    const response = await fetch('http://' + API + ':8080/api/carrinho/buscarCarrinhoNL', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(listaIdProdutos)
-    });
-
-    if (!response.ok) {
-        throw new Error('Erro ao cadastrar produto: ' + response.statusText);
-    }
-
-    totalProdutos = 0;
-    const result = await response.json();
-    const conteudo = document.querySelector(".content");
-    const prodCarrinho = document.querySelector(".produtoCarrinho");
-    prodCarrinho.innerHTML = '';
-    prodCarrinho.innerHTML = `<thead>
-                        <tr>
-                            <th>Imagem</th>
-                            <th>Produto</th>
-                            <th>Preço</th>
-                            <th>Quantidade</th>
-                            <th>Total</th>
-                            <th>Excluir</th>
-                        </tr>
-                    </thead>`;
-    result.produtos.forEach(produtoCarrinho => {
-        const row = document.createElement('tbody');
-        row.innerHTML = `
-                        <tr>
-                            <td>
-                                <img src="${produtoCarrinho.produto.urlImagemPrincipal}" alt="Imagem produto" />
-                            </td>
-                            <td>
-                                <div class="product">
-                                    <div class="info">
-                                        <div class="name">${produtoCarrinho.produto.nomeProduto}</div>
-                                        <div class="category">${produtoCarrinho.produto.categoria}</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>R$ ${produtoCarrinho.produto.preco}</td>
-                            <td>
-                                <div class="qty">
-                                    <button class="btn-diminuir"><i class="bx bx-minus"></i></button>
-                                    <span class="quantidade">${produtoCarrinho.quantidade}</span>
-                                    <button class="btn-aumentar"><i class="bx bx-plus"></i></button>
-                                </div>
-                            </td>
-                            <td>R$ ${produtoCarrinho.produto.preco * produtoCarrinho.quantidade}</td>
-                            <td>
-                                <button class="remove"><i class="bx bx-x"></i></button>
-                            </td>
-                        </tr>
-            `;
-        totalProdutos += produtoCarrinho.produto.preco * produtoCarrinho.quantidade;
-        prodCarrinho.appendChild(row);
-
-        // Event listener para o botão diminuir quantidade
-        row.querySelector('.btn-diminuir').addEventListener('click', () => {
-            console.log(produtoCarrinho.produto.id);
-            let quantityElement = row.querySelector('.quantidade');
-            let quantity = parseInt(quantityElement.textContent);
-            if (quantity > 1) {
-                quantity--;
-                quantityElement.textContent = quantity;
-                // Remove um ID do produto da listaSalva
-                listaSalva.splice(listaSalva.indexOf(produtoCarrinho.produto.id), 1);
-                localStorage.setItem("produtos", JSON.stringify(listaSalva));
-            } else {
-                // Caso a quantidade seja 1, remove o item do carrinho visualmente
-                row.remove();
-                listaSalva.splice(listaSalva.indexOf(produtoCarrinho.produto.id), 1);
-                localStorage.setItem("produtos", JSON.stringify(listaSalva));
-            }
-            atualizarTotal();
-        });
-
-        // Event listener para o botão aumentar quantidade
-        row.querySelector('.btn-aumentar').addEventListener('click', () => {
-            let quantityElement = row.querySelector('.quantidade');
-            let quantity = parseInt(quantityElement.textContent);
-            quantity++;
-            quantityElement.textContent = quantity;
-            // Adiciona o ID do produto à listaSalva
-            listaSalva.push(produtoCarrinho.produto.id);
-            localStorage.setItem("produtos", JSON.stringify(listaSalva));
-            atualizarTotal();
-        });
-    });
+    await carregaCarrinho(listaIdProdutos);
     totalFrete = totalProdutos += parseFloat(frete);
+    const conteudo = document.querySelector(".content");
     conteudo.innerHTML += `<aside>
                 <div class="box">
                     <header>
@@ -150,7 +55,6 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                     <button class="btn-continuar" onclick="directToTelaProdutos()">CONTINUAR COMPRANDO</button>
                 </div>
             </aside>`;
-
     // Agora que o botão foi adicionado ao DOM, podemos adicionar o event listener e a máscara
     const cepInput = document.querySelector('#cep');
     cepInput.addEventListener('input', aplicarMascaraCEP);
@@ -179,6 +83,67 @@ async function buscarCarrinhoNL(listaIdProdutos) {
             mostrarMensagemErro('Erro ao buscar o CEP.');
             console.error('Erro:', error);
         }
+    });
+}
+
+async function carregaCarrinho(listaIdProdutos) {
+    const response = await fetch('http://' + API + ':8080/api/carrinho/buscarCarrinhoNL', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(listaIdProdutos)
+    });
+
+    if (!response.ok) {
+        throw new Error('Erro ao cadastrar produto: ' + response.statusText);
+    }
+
+    totalProdutos = 0;
+    const result = await response.json();
+    const prodCarrinho = document.querySelector(".produtoCarrinho");
+    prodCarrinho.innerHTML = '';
+    prodCarrinho.innerHTML = `<thead>
+                        <tr>
+                            <th>Imagem</th>
+                            <th>Produto</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                            <th>Total</th>
+                            <th>Excluir</th>
+                        </tr>
+                    </thead>`;
+    result.produtos.forEach(produtoCarrinho => {
+        const row = document.createElement('tbody');
+        row.innerHTML = `
+                        <tr>
+                            <td>
+                                <img src="${produtoCarrinho.produto.urlImagemPrincipal}" alt="Imagem produto" />
+                            </td>
+                            <td>
+                                <div class="product">
+                                    <div class="info">
+                                        <div class="name">${produtoCarrinho.produto.nomeProduto}</div>
+                                        <div class="category">${produtoCarrinho.produto.categoria}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>R$ ${produtoCarrinho.produto.preco}</td>
+                            <td>
+                                <div class="qty">
+                                    <button class="btn-diminuir" onclick="diminuirQtd(${produtoCarrinho.produto.id})"><i class="bx bx-minus"></i></button>
+                                    <span class="quantidade">${produtoCarrinho.quantidade}</span>
+                                    <button class="btn-aumentar" onclick="aumentarQtd(${produtoCarrinho.produto.id})"><i class="bx bx-plus"></i></button>
+                                </div>
+                            </td>
+                            <td>R$ ${(produtoCarrinho.produto.preco * produtoCarrinho.quantidade).toFixed(2)}</td>
+                            <td>
+                                <button class="remove"><i class="bx bx-x"></i></button>
+                            </td>
+                        </tr>
+            `;
+        totalProdutos += produtoCarrinho.produto.preco * produtoCarrinho.quantidade;
+        prodCarrinho.appendChild(row);
     });
 }
 
@@ -254,33 +219,44 @@ function mostrarEndereco(endereco) {
 
 // Função para atualizar o frete e o total da compra
 function atualizarFrete() {
-    const freteSelecionado = document.querySelector('input[name="frete"]:checked').value;
-    localStorage.setItem('frete', freteSelecionado);  // Salva o valor do frete no localStorage
+    let freteSelecionado;
+    if (document.querySelector('input[name="frete"]:checked')) {
+        freteSelecionado = document.querySelector('input[name="frete"]:checked').value;
+        const totalFrete = totalProdutos + parseFloat(freteSelecionado);
 
-    const totalFrete = totalProdutos + parseFloat(freteSelecionado);
+        const resumoFrete = document.querySelector('.info div:nth-child(2) span:last-child');
+        const resumoTotal = document.querySelector('footer span:last-child');
 
-    const resumoFrete = document.querySelector('.info div:nth-child(2) span:last-child');
-    const resumoTotal = document.querySelector('footer span:last-child');
-
-    resumoFrete.textContent = `R$ ${freteSelecionado}`;
-    resumoTotal.textContent = `R$ ${totalFrete.toFixed(2)}`;
+        resumoFrete.textContent = `R$ ${freteSelecionado}`;
+        resumoTotal.textContent = `R$ ${totalFrete.toFixed(2)}`;
+    } else {
+        const resumoTotal = document.querySelector('footer span:last-child');
+        resumoTotal.textContent = `R$ ${totalProdutos.toFixed(2)}`;
+    }
 }
 
-function atualizarTotal() {
-    totalProdutos = 0;
-    document.querySelectorAll('.produtoCarrinho tbody').forEach(row => {
-        const preco = parseFloat(row.querySelector('td:nth-child(3)').textContent.replace('R$ ', ''));
-        const quantidade = parseInt(row.querySelector('.quantidade').textContent);
-        totalProdutos += preco * quantidade;
-    });
+function aumentarQtd(produtoId) {
+    listaSalva.push(produtoId);
+    localStorage.setItem("produtos", JSON.stringify(listaSalva));
+    atualizarCarrinho();
+}
 
-    // Atualiza o total de produtos e o total com frete (se já selecionado)
-    const freteSelecionado = localStorage.getItem('frete') || 0;
-    const totalFrete = totalProdutos + parseFloat(freteSelecionado);
+function diminuirQtd(produtoId) {
+    // Remove um ID do produto da listaSalva
+    listaSalva.splice(listaSalva.indexOf(produtoId), 1);
+    localStorage.setItem("produtos", JSON.stringify(listaSalva));
+    atualizarCarrinho();
+}
 
-    // Atualiza os campos de resumo do carrinho
-    document.querySelector('.info div:nth-child(2) span:last-child').textContent = `R$ ${freteSelecionado}`;
-    document.querySelector('footer span:last-child').textContent = `R$ ${totalFrete.toFixed(2)}`;
+async function atualizarCarrinho() {
+    const carrinhoBuscarNLRequestDTO = {
+        "listaIds": listaSalva
+    }
+    await carregaCarrinho(carrinhoBuscarNLRequestDTO);
+    const resumoProdutos = document.querySelector('.info div:nth-child(1) span:last-child');
+    resumoProdutos.textContent = `R$ ${totalProdutos.toFixed(2)}`;
+
+    atualizarFrete();
 }
 
 function directToTelaProdutos() {
