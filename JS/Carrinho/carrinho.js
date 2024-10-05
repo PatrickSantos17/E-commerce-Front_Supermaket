@@ -249,14 +249,15 @@ function diminuirQtd(produtoId) {
 }
 
 async function atualizarCarrinho() {
+    let qtdCarrinho = document.querySelector('.qtd-carrinho');
     const carrinhoBuscarNLRequestDTO = {
         "listaIds": listaSalva
     }
     await carregaCarrinho(carrinhoBuscarNLRequestDTO);
     const resumoProdutos = document.querySelector('.info div:nth-child(1) span:last-child');
     resumoProdutos.textContent = `R$ ${totalProdutos.toFixed(2)}`;
-
     atualizarFrete();
+    qtdCarrinho.innerHTML = listaSalva.length;
 }
 
 function directToTelaProdutos() {
