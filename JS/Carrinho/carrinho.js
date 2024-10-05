@@ -65,9 +65,9 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                             <td>R$ ${produtoCarrinho.produto.preco}</td>
                             <td>
                                 <div class="qty">
-                                    <button><i class="bx bx-minus"></i></button>
+                                    <button class="btn-diminuir"><i class="bx bx-minus"></i></button>
                                     <span class="quantidade">${produtoCarrinho.quantidade}</span>
-                                    <button><i class="bx bx-plus"></i></button>
+                                    <button class="btn-aumentar"><i class="bx bx-plus"></i></button>
                                 </div>
                             </td>
                             <td>R$ ${produtoCarrinho.produto.preco * produtoCarrinho.quantidade}</td>
@@ -78,6 +78,38 @@ async function buscarCarrinhoNL(listaIdProdutos) {
             `;
         totalProdutos += produtoCarrinho.produto.preco * produtoCarrinho.quantidade;
         prodCarrinho.appendChild(row);
+
+        // Event listener para o botão diminuir quantidade
+        row.querySelector('.btn-diminuir').addEventListener('click', () => {
+            console.log(produtoCarrinho.produto.id);
+            let quantityElement = row.querySelector('.quantidade');
+            let quantity = parseInt(quantityElement.textContent);
+            if (quantity > 1) {
+                quantity--;
+                quantityElement.textContent = quantity;
+                // Remove um ID do produto da listaSalva
+                listaSalva.splice(listaSalva.indexOf(produtoCarrinho.produto.id), 1);
+                localStorage.setItem("produtos", JSON.stringify(listaSalva));
+            } else {
+                // Caso a quantidade seja 1, remove o item do carrinho visualmente
+                row.remove();
+                listaSalva.splice(listaSalva.indexOf(produtoCarrinho.produto.id), 1);
+                localStorage.setItem("produtos", JSON.stringify(listaSalva));
+            }
+            atualizarTotal();
+        });
+
+        // Event listener para o botão aumentar quantidade
+        row.querySelector('.btn-aumentar').addEventListener('click', () => {
+            let quantityElement = row.querySelector('.quantidade');
+            let quantity = parseInt(quantityElement.textContent);
+            quantity++;
+            quantityElement.textContent = quantity;
+            // Adiciona o ID do produto à listaSalva
+            listaSalva.push(produtoCarrinho.produto.id);
+            localStorage.setItem("produtos", JSON.stringify(listaSalva));
+            atualizarTotal();
+        });
     });
     totalFrete = totalProdutos += parseFloat(frete);
     conteudo.innerHTML += `<aside>
@@ -147,28 +179,6 @@ async function buscarCarrinhoNL(listaIdProdutos) {
             mostrarMensagemErro('Erro ao buscar o CEP.');
             console.error('Erro:', error);
         }
-        // Adiciona event listeners para os botões de aumentar e diminuir quantidade
-        row.querySelector('.bx-minus').addEventListener('click', () => {
-            let quantityElement = row.querySelector('.quantidade');
-            let quantity = parseInt(quantityElement.textContent);
-            if (quantity > 1) {
-                quantity--;
-                quantityElement.textContent = quantity;
-                // Remove o ID do produto da lista salva
-                listaSalva.splice(listaSalva.indexOf(produtoCarrinho.produto.id), 1);
-                localStorage.setItem("produtos", JSON.stringify(listaSalva));
-            }
-        });
-
-        row.querySelector('.bx-plus').addEventListener('click', () => {
-            let quantityElement = row.querySelector('.quantidade');
-            let quantity = parseInt(quantityElement.textContent);
-            quantity++;
-            quantityElement.textContent = quantity;
-            // Adiciona o ID do produto à lista salva
-            listaSalva.push(produtoCarrinho.produto.id);
-            localStorage.setItem("produtos", JSON.stringify(listaSalva));
-        });
     });
 }
 
@@ -254,6 +264,23 @@ function atualizarFrete() {
 
     resumoFrete.textContent = `R$ ${freteSelecionado}`;
     resumoTotal.textContent = `R$ ${totalFrete.toFixed(2)}`;
+}
+
+function atualizarTotal() {
+    totalProdutos = 0;
+    document.querySelectorAll('.produtoCarrinho tbody').forEach(row => {
+        const preco = parseFloat(row.querySelector('td:nth-child(3)').textContent.replace('R$ ', ''));
+        const quantidade = parseInt(row.querySelector('.quantidade').textContent);
+        totalProdutos += preco * quantidade;
+    });
+
+    // Atualiza o total de produtos e o total com frete (se já selecionado)
+    const freteSelecionado = localStorage.getItem('frete') || 0;
+    const totalFrete = totalProdutos + parseFloat(freteSelecionado);
+
+    // Atualiza os campos de resumo do carrinho
+    document.querySelector('.info div:nth-child(2) span:last-child').textContent = `R$ ${freteSelecionado}`;
+    document.querySelector('footer span:last-child').textContent = `R$ ${totalFrete.toFixed(2)}`;
 }
 
 function directToTelaProdutos() {
