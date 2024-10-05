@@ -182,7 +182,7 @@ button:disabled {
 .container {
     width: 90%;
     max-width: 1200px;
-    height: 80%;
+    height: 73vh;
     border-radius: 10px;
     background: white;
     margin: 15px;

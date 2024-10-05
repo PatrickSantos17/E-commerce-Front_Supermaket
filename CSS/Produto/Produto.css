@@ -1,26 +1,26 @@
 header {
     width: 100%;
     background-color: #FFFFFF;
-    height: 160px;
+    /* height: 160px; */
     display: flex;
 }
 body {
-    background-color: #140048; /* Cor de fundo da página */
+    background: radial-gradient(circle, #211efd, #000770, #000000); /* Cor de fundo da página */
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
 }
 .container {
-    background-color: #140048; /* Se você quiser que o container fique branco, por exemplo */
+    /* background-color: #140048; Se você quiser que o container fique branco, por exemplo */
     padding: 20px;
     border-radius: 8px; /* Para dar um efeito arredondado nas bordas */
 }
 .produtos-container{
-    background-color: #140048;
+    /* background-color: #140048; */
 }
 
 .custom-container {
-    background-color: #140048; /* Cor de fundo branco para o container dos produtos */
+    /* background-color: #140048; Cor de fundo branco para o container dos produtos */
     padding: 20px;
     border-radius: 8px; /* Deixa o container com bordas arredondadas */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve ao redor do container */
@@ -263,7 +263,7 @@ header .lado-b img {
     display: flex;
     flex-direction: column;
     gap: 5%;
-    margin-top: 100px;
+    margin-top: 20px;
     margin-bottom: 0;
     object-fit: 50px;
 }
@@ -293,7 +293,7 @@ header .lado-b img {
 
 .product-col {
     margin-top: 4%; /* Mantém o espaço acima */
-    margin-bottom: 20px; /* Aumenta o espaço abaixo do card */
+    margin-bottom: 25px; /* Aumenta o espaço abaixo do card */
 }
 
 .conteudo {
@@ -304,7 +304,7 @@ header .lado-b img {
     font-size: 20px;
 }
 .card{
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .card-title {
@@ -339,6 +339,7 @@ header .lado-b img {
     padding: 6px 12px; /* Reduz o tamanho do botão */
     font-size: 14px; /* Ajusta o tamanho da fonte do botão */
     margin-bottom: 0;
+    border: none;
 }
 
 /* avaliação produto */
