@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrinho de Compras</title>
+    <link rel="stylesheet" href="CSS/HeaderCliente/headerCliente.css">
+    <link rel="stylesheet" href="CSS/Carrinho/styles.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <div class="lado-a">
+            <a href="/TelaProduto.html"><img src="src/img/logo-removebg-preview.png" alt="logo-img"></a>
+            <input type="search" id="buscar" placeholder="Buscar">
+        </div>
+        <div class="lado-b">
+            <div class="user-carrinho">
+                <div class="header-user">
+                    <img id="iconUsuario" src="src/img/icon-cliente.png" alt="user-icon">
+                    <p class="nome-usuario"></p>
+                    <div id="logout-menu" class="logout-menu hidden">
+                        <button id="logout">Sair</button>
+                    </div>
+                </div>
+
+                <div class="header-carrinho">
+                    <a href="TelaCarrinho.html">
+                        <img id="iconCarrinho" src="src/img/vista-lateral-vazia-do-carrinho-de-compras.png"
+                            alt="user-icon">
+                    </a>
+                    <p class="qtd-carrinho"></p>
+                </div>
+            </div>
+            <div class="info-usuario entre-cadastre">
+                <a href="TelaLogin.html">Entre</a>
+                <p>ou</p>
+                <a href="TelaFormularioCliente.html">Cadastre-se</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="page-title">Seu Carrinho</div>
+        <div class="content">
+            <div class="produtosCarrinho">
+                <section>
+                    <table class="produtoCarrinho">
+
+                    </table>
+                </section>
+            </div>
+        </div>
+    </main>
+    <script src="JS/GeralHeaderCliente/geralHeaderCliente.js" defer></script>
+    <script src="JS/Carrinho/carrinho.js" defer></script>
+</body>
+
+</html>
