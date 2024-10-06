@@ -138,7 +138,7 @@ async function carregaCarrinho(listaIdProdutos) {
                             </td>
                             <td>R$ ${(produtoCarrinho.produto.preco * produtoCarrinho.quantidade).toFixed(2)}</td>
                             <td>
-                                <button class="remove"><i class="bx bx-x"></i></button>
+                                <button class="remove" onclick="removerProdutoCarrinho(${produtoCarrinho.produto.id})"><i class="bx bx-x"></i></button>
                             </td>
                         </tr>
             `;
@@ -242,9 +242,26 @@ function aumentarQtd(produtoId) {
 }
 
 function diminuirQtd(produtoId) {
-    // Remove um ID do produto da listaSalva
     listaSalva.splice(listaSalva.indexOf(produtoId), 1);
+
+    // Verifica se o produto ainda existe na lista após a remoção
+    const quantidadeProduto = listaSalva.filter(id => id === produtoId).length;
+    if (quantidadeProduto === 0) {
+        listaSalva = listaSalva.filter(id => id !== produtoId);
+    }
+
     localStorage.setItem("produtos", JSON.stringify(listaSalva));
+    atualizarCarrinho();
+}
+
+function removerProdutoCarrinho(produtoId) {
+    // Remove todos os IDs do produto da listaSalva
+    listaSalva = listaSalva.filter(id => id !== produtoId);
+
+    // Atualiza o localStorage
+    localStorage.setItem("produtos", JSON.stringify(listaSalva));
+
+    // Atualiza a exibição do carrinho
     atualizarCarrinho();
 }
 
