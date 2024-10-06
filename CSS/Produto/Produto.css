@@ -344,28 +344,23 @@ header .lado-b img {
 
 /* avaliação produto */
 
+/* Estilos comuns para todas as estrelas */
 .star {
-    font-size: 30px; /* Tamanho da estrela */
-    color: #666; /* Cor padrão da estrela vazia */
-    margin: 0 2px; /* Espaçamento entre as estrelas */
-    vertical-align: middle; /* Alinhamento vertical */
-}
-
-/* Estrela cheia */
-.star.filled {
-    color: #ffa723; /* Cor das estrelas cheias */
-}
-
-/* Estrela meia - a classe 'half' pode ser usada para aplicar estilo específico */
-.star.half {
-    color: #ffa723; /* Cor da estrela meia */
-    position: relative;
-}
-
-/* Para mostrar a meia estrela, pode-se adicionar um estilo adicional */
-.star.half:after {
-    content: '☆'; /* Adiciona uma estrela vazia ao lado da estrela meia */
-    position: absolute;
-    left: 0; /* Alinha a estrela vazia à esquerda da estrela meia */
-    color: #666; /* Cor da estrela vazia */
-}
+    width: 24px;
+    height: 24px;
+    fill: #666; /* Cor para estrelas vazias */
+  }
+  
+  .star.filled {
+    fill: #ffeb49; /* Cor para estrelas preenchidas */
+  }
+  
+  /* Estrela meia preenchida */
+  .star.half {
+    fill: url(#half-fill); /* Aplica o gradiente da metade amarela e metade preta */
+  }
+  
+  .star.empty {
+    fill: #666; /* Cor para estrelas vazias */
+  }
+  
