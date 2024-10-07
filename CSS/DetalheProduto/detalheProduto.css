@@ -1,23 +1,26 @@
 body {
     height: 100vh;
     width: 100%;
+    font-family: "Poppins", sans-serif;
 }
 
 main {
     width: 80%;
-    height: 100%;
+    height: 91%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+    /* background-color: aquamarine; */
 }
 
 /* detalhes do produto */
 .produto {
     width: 100%;
-    height: 100%;
+    height: 75%;
     display: flex;
     flex-direction: row;
+    /* background-color: cadetblue; */
 }
 
 /* CARROSSEL DE IMAGENS */
@@ -32,9 +35,9 @@ main {
     justify-content: center;
 }
 
-img {
-    box-shadow: 0 1px 2px #0003;
+.swiper-slide img {
     height: 200px;
+    margin-top: 50px;
 }
 
 .swiper {
@@ -55,12 +58,18 @@ img {
     }
 }
 
-.swiper-button-next {
-    width: 50%;
+.produto .swiper-button-next {
+    width: 30%;
+    color: #000000;
 }
 
-.swiper-button-prev {
-    width: 50%;
+.produto .swiper-button-prev {
+    width: 30%;
+    color: #000000;
+}
+
+.produto .swiper-pagination-bullet {
+    background-color: #000000;
 }
 
 /* INFO PROD */
@@ -71,7 +80,8 @@ img {
     width: 50%;
     /* background-color: #62aeff; */
     padding: 0 60px;
-
+    align-content: center;
+    justify-content: center;
 }
 
 .titulo-prod {
@@ -138,4 +148,30 @@ img {
 
 .btn-comprar:hover svg path {
     fill: #181717;
+}
+
+/* avaliação produto */
+
+/* Estilos comuns para todas as estrelas */
+.star {
+    width: 24px;
+    height: 24px;
+    fill: #666;
+    /* Cor para estrelas vazias */
+}
+
+.star.filled {
+    fill: #ffeb49;
+    /* Cor para estrelas preenchidas */
+}
+
+/* Estrela meia preenchida */
+.star.half {
+    fill: url(#half-fill);
+    /* Aplica o gradiente da metade amarela e metade preta */
+}
+
+.star.empty {
+    fill: #666;
+    /* Cor para estrelas vazias */
 }
