@@ -1,0 +1,190 @@
+body>header {
+    background: #f3f3f373;
+    color: black;
+    font-size: 15px;
+    padding: 20px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100px;
+}
+
+.logout-menu {
+    display: none;
+}
+
+.logout-menu button {
+    background-color: #33333344;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.logout-menu button:hover {
+    background-color: #8d8d8d;
+}
+
+.header-user:hover .logout-menu {
+    display: block;
+}
+
+.lado-a {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.lado-b {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 80px;
+}
+
+header .lado-a img {
+    height: 80px;
+    padding: 0 60px;
+}
+
+header .lado-b img {
+    height: 25px;
+}
+
+.lado-a #buscar {
+    width: 220px;
+    height: 35px;
+    border: 2px solid #8d8d8d;
+    border-radius: 13px;
+    text-align: left;
+    padding-left: 12px;
+    margin: auto 0;
+}
+
+.lado-b .info-usuario {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 100%;
+}
+
+.lado-b .info-usuario .nome-usuario {
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.lado-b .info-usuario .grupo-usuario {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.user-carrinho {
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.user-carrinho img {
+    display: inline-block;
+}
+
+.header-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-carrinho {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.entre-cadastre {
+    color: #222;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.entre-cadastre a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.entre-cadastre a:hover {
+    text-decoration: underline; /* Adiciona o sublinhado no hover */
+}
+
+.entre-cadastre p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .lado-a,
+    .lado-b {
+        width: 100%;
+        justify-content: center;
+        margin: 10px 0;
+    }
+
+    header .lado-a img {
+        height: 60px;
+    }
+
+    .lado-a #buscar {
+        width: 100%;
+        max-width: 300px;
+        margin-top: 10px;
+    }
+
+    header .lado-b img {
+        height: 35px;
+    }
+
+    .lado-b .info-usuario .nome-usuario {
+        font-size: 14px;
+    }
+
+    .lado-b .info-usuario .grupo-usuario {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lado-a #buscar {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .lado-b .info-usuario .nome-usuario {
+        font-size: 12px;
+    }
+
+    .lado-b .info-usuario .grupo-usuario {
+        font-size: 18px;
+    }
+}

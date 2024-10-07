@@ -1,0 +1,379 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f6f6f6;
+    font-family: 'Lato', sans-serif;
+}
+
+body>main {
+    background: #fff;
+    padding: 25px 25px 25px;
+}
+
+body>main .page-title {
+    font-size: 20px;
+    padding: 20px 0;
+    text-align: center;
+}
+
+body>main .content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+body>main .content section {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+body>main .content aside {
+    min-width: 250px;
+}
+
+.content {
+    display: flex;
+    width: 100%; /* Faz com que a .content acompanhe a largura da .box */
+    max-width: 1300px; /* Ajuste conforme necessário */
+    margin: 0 auto; /* Centraliza a .content horizontalmente */
+    padding: 20px; /* Espaçamento interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
+    border-radius: 8px; /* Bordas arredondadas */
+    background-color: #f8f9fa; /* Cor de fundo */
+}
+
+.produtosCarrinho {
+    width: 100%;
+    height: 100%;
+}
+
+.produtosCarrinho {
+    max-height: 620px; /* Ajuste a altura máxima conforme necessário */
+    overflow-y: auto; /* Adiciona a barra de rolagem vertical */
+}
+
+button {
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table thead tr {
+    border-bottom: 3px solid #eee;
+}
+
+table thead tr th {
+    text-align: center; /* Centraliza o cabeçalho */
+    padding: 10px;
+    text-transform: uppercase;
+    color: #666;
+    background-color: #f2f2f2;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #222; /* Borda inferior leve entre os produtos */
+}
+
+table tbody tr:last-child {
+    border-bottom: 0; /* Remove a borda inferior do último item */
+}
+
+table tbody tr td {
+    padding: 10px;
+    vertical-align: middle; /* Alinha verticalmente os itens */
+    text-align: center; /* Centraliza o conteúdo da tabela */
+}
+
+.product {
+    display: flex;
+    align-items: center;
+}
+
+tbody img {
+    border-radius: 6px;
+    width: auto;
+    height: 60px;
+    display: block;
+    margin: 0 auto; /* Centraliza a imagem na célula */
+}
+
+.product .info {
+    margin: 0 auto;
+}
+
+.product .info .name {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.product .info .category {
+    color: #666;
+}
+
+.qty {
+    background: #eee;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    padding: 0 0;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-width: 60px;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 30px;
+}
+
+.qty span {
+    margin: 0 10px;
+}
+
+.qty button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: transparent;
+    border: 0;
+    padding: 0 10px;
+    font-size: 20px;
+    height: 100%;
+}
+
+.qty button:hover {
+    background: #ddd;
+}
+
+.remove {
+    background: #eee;
+    border: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-size: 20px;
+    margin: 0 auto; /* Centraliza o botão de remoção */
+}
+
+.remove:hover {
+    background: #ddd;
+}
+
+aside {
+    margin-left: 30px;
+}
+
+aside .box {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    background: #eee;
+    color: #222;
+}
+
+aside .box header {
+    padding: 15px 20px;
+    font-size: 18px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+}
+
+aside .box header img{
+    width: 25px;
+    height: 25px;
+    margin-right: 3%;
+}
+
+aside .box .info {
+    padding: 20px;
+    font-size: 16px;
+}
+
+aside .box .info>div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+aside .box .info>div:last-child {
+    margin: 0;
+}
+
+aside .box .info button {
+    color: #28a745;
+    background: transparent;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+aside .box footer {
+    padding: 15px 20px;
+    background: #ddd;
+    font-size: 18px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.btn-finali-conti button {
+    border: 0;
+    padding: 15px 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.btn-finalizar {
+    background: #28a745;
+}
+
+.btn-continuar {
+    background: #777;
+}
+
+.btn-finalizar:hover {
+    background: #218838; /* Cor de fundo ao passar o mouse */
+    color: #fff; /* Cor do texto ao passar o mouse */
+}
+
+.btn-continuar:hover {
+    background: #555; /* Cor de fundo ao passar o mouse */
+    color: #fff; /* Cor do texto ao passar o mouse */
+}
+
+.invalid-feedback {
+    display: none;
+}
+
+/* CSS/Carrinho/styles.css */
+.box-cep {
+    background-color: #f8f9fa; /* Cor de fundo clara */
+    padding: 20px; /* Espaçamento interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaçamento entre os elementos */
+}
+
+.info-cep {
+    background-color: #f8f9fa; /* Cor de fundo clara */
+    padding: 10px; /* Espaçamento interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 450px;
+    gap: 10px; /* Espaçamento entre os elementos */
+}
+
+/* CSS/Carrinho/styles.css */
+.frete-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Três colunas de largura igual */
+    gap: 20px; /* Espaçamento entre os itens */
+    margin-bottom: 20px; /* Espaçamento inferior */
+}
+
+.fretes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ced4da; /* Borda */
+    border-radius: 4px; /* Bordas arredondadas */
+    background-color: #f8f9fa; /* Cor de fundo */
+}
+
+.fretes input[type="radio"] {
+    margin-bottom: 10px; /* Espaçamento inferior */
+}
+
+.fretes p {
+    margin: 5px 0; /* Espaçamento superior e inferior */
+}
+
+.fretes label {
+    font-weight: bold;
+}
+
+.box-cep input[type="text"] {
+    width: 80%; /* Largura total */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ced4da; /* Borda */
+    border-radius: 4px; /* Bordas arredondadas */
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); /* Sombra interna */
+    font-size: 16px; /* Tamanho da fonte */
+}
+
+.box-cep .btn-cep {
+    background-color: #555; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    padding: 10px 20px; /* Espaçamento interno */
+    border: none; /* Sem borda */
+    border-radius: 4px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de ponteiro */
+    font-size: 14px; /* Tamanho da fonte */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+.box-cep .btn-cep:hover {
+    background-color: #218838; /* Cor de fundo ao passar o mouse */
+}
+
+.box-cep .invalid-feedback {
+    color: red; /* Cor do texto */
+    font-size: 12px; /* Tamanho da fonte */
+    margin-top: 5px; /* Espaçamento superior */
+}
+
+.input-cep {
+    display: flex;
+    flex-direction: column;
+}
+
+/*# sourceMappingURL=styles.css.map */
