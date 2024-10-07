@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchProduto() {
     try {
-        const response = await fetch(`http://localhost:8080/produto/listagemAtivos`, {
+        const response = await fetch('http://' + API + ':8080/produto/listagemAtivos`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
