@@ -1,13 +1,8 @@
-header {
-    width: 100%;
-    background-color: #FFFFFF;
-    /* height: 160px; */
-    display: flex;
-}
+
 body {
-    background: radial-gradient(circle, #211efd, #000770, #000000); /* Cor de fundo da página */
-    margin: 0;
-    padding: 0;
+    background: #FFFFFF ; /* Cor de fundo da página */
+    /* margin: 0;
+    padding: 0; */
     font-family: Arial, sans-serif;
 }
 .container {
@@ -16,6 +11,11 @@ body {
     border-radius: 8px; /* Para dar um efeito arredondado nas bordas */
 }
 .produtos-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     /* background-color: #140048; */
 }
 
@@ -23,7 +23,7 @@ body {
     /* background-color: #140048; Cor de fundo branco para o container dos produtos */
     padding: 20px;
     border-radius: 8px; /* Deixa o container com bordas arredondadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve ao redor do container */
+    box-shadow: 0 4px 8px rgba(91, 129, 196, 0.1); /* Sombra leve ao redor do container */
     display: flex;
     flex-wrap: wrap; /* Para permitir que os cards se movam para a próxima linha */
     gap: 20px; /* Espaço entre os cards */
@@ -31,179 +31,11 @@ body {
     padding-right: 10%;
 }
 
-.lado-a {
-    width: 50%;
-    display: flex;
-}
-
-.lado-b {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 80px;
-}
-.contador {
-    margin-top: 5px; /* Ajuste a distância conforme necessário */
-    font-size: 16px; /* Tamanho da fonte do número */
-    text-align: center;
-}
-
-header .lado-a img {
-    height: 120px;
-    padding: 0 60px;
-}
-
-header .lado-b img {
-    height: 35px;
-}
-
-.lado-a #buscar {
-    width: 220px;
-    height: 35px;
-    border: 2px solid #8d8d8d;
-    border-radius: 13px;
-    text-align: left;
-    padding-left: 12px;
-    margin: auto 0;
-}
-
-.lado-b .info-usuario {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 180px;
-    height: 100%;
-}
-
-.lado-b .info-usuario .nome-usuario {
-    margin-top: 15px;
-    font-size: 17px;
-    font-weight: 600;
-}
-
-.lado-b .info-usuario .grupo-usuario {
-    font-size: 28px;
-    font-weight: 700;
-}
-
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        height: auto;
-        padding: 10px;
-        text-align: center;
-    }
-
-    .lado-a,
-    .lado-b {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 10px 0;
-    }
-
-    header .lado-a img {
-        height: 60px;
-    }
-
-    .lado-a #buscar {
-        width: 100%;
-        max-width: 300px;
-        margin-top: 10px;
-    }
-
-    header .lado-b img {
-        height: 35px;
-    }
-
-    .lado-b .info-usuario .nome-usuario {
-        font-size: 14px;
-    }
-
-    .lado-b .info-usuario .grupo-usuario {
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .lado-a #buscar {
-        width: 100%;
-        max-width: 250px;
-    }
-
-    .lado-b .info-usuario .nome-usuario {
-        font-size: 12px;
-    }
-
-    .lado-b .info-usuario .grupo-usuario {
-        font-size: 18px;
-    }
-}
-
-@media (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
-
-    .header span {
-        font-size: 18px;
-    }
-
-    #new,
-    #buscar-filtro {
-        padding: 5px 15px;
-        font-size: 18px;
-    }
-
-    .lado-a,
-    .lado-b {
-        flex: 1 1 100%;
-        text-align: center;
-    }
-
-    .divTable {
-        height: auto;
-    }
-
-    th,
-    td {
-        font-size: 12px;
-        padding: 8px;
-    }
-}
-
-@media (max-width: 480px) {
-    .header span {
-        font-size: 16px;
-    }
-
-    #new,
-    #buscar-filtro {
-        padding: 5px;
-        font-size: 14px;
-    }
-
-    th,
-    td {
-        font-size: 10px;
-        padding: 6px;
-    }
-
-    .pagination button {
-        padding: 4px 8px;
-        font-size: 12px;
-    }
-}
 
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-* {
+/* * {
     box-sizing: border-box;
-}
+} */
 
 .product-col {
     margin-top: 4%;
@@ -216,7 +48,12 @@ header .lado-b img {
 
 .card-body{
     height: auto;
+    margin-bottom: 10px;
     
+}
+
+.card.h-100.card-sm{
+    border: 2px solid #8cb3f6;
 }
 
 .card-title {
@@ -363,4 +200,22 @@ header .lado-b img {
   .star.empty {
     fill: #666; /* Cor para estrelas vazias */
   }
+
+  
+  .imagem-mercado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 600px;
+    
+  }
+
+  .imagem-mercado img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+  }
+
   
