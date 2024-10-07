@@ -1,5 +1,5 @@
 body>header {
-    background: #bbbbbb44;
+    background: #ffffff;
     color: black;
     font-size: 15px;
     padding: 20px 0;
@@ -9,7 +9,7 @@ body>header {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    height: 50px;
+    height: 20%;
 }
 
 .logout-menu {
@@ -114,6 +114,9 @@ header .lado-b img {
 .entre-cadastre {
     color: #222;
     font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
 }
 
@@ -124,6 +127,13 @@ header .lado-b img {
 
 .entre-cadastre a:hover {
     text-decoration: underline; /* Adiciona o sublinhado no hover */
+}
+
+.entre-cadastre p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
 }
 
 @media (max-width: 768px) {
