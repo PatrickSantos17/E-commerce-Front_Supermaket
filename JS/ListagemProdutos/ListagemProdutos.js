@@ -1,5 +1,5 @@
-// var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
-var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+// var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
 var grupoUsuarioLogado = localStorage.getItem("grupo");
 
@@ -308,3 +308,4 @@ function fecharModalConfirmacao() {
     document.getElementById("overlay").style.display = "none";
     document.getElementById("main-content").classList.remove("blur");
 }
+
