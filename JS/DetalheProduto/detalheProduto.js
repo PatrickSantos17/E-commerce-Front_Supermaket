@@ -3,7 +3,7 @@ var API = "localhost"; //Setar essa variavel quando testar local e comentar a do
 
 var grupoUsuarioLogado = localStorage.getItem("grupo");
 
-let productId = localStorage.getItem("IdProdutoDetalhes");
+let productId = parseInt(localStorage.getItem("IdProdutoDetalhes"));
 
 var produtosIDCarrinho = JSON.parse(localStorage.getItem("produtos")) || [];
 
