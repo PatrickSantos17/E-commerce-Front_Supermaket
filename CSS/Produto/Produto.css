@@ -206,16 +206,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 600px;
-    
   }
 
   .imagem-mercado img{
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    
+    height: 500px;
   }
 
   
