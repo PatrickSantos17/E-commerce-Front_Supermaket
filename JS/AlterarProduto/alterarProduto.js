@@ -189,17 +189,18 @@ function previewImages(input, previewContainerClass) {
         const removeBtn = imgWrapper.querySelector('.btn-remove');
         removeBtn.addEventListener('click', function (event) {
             event.preventDefault();
+            if (!(grupoUsuarioLogado === "Estoquista")) {
+                if (arrayType === 'existing') {
+                    removedAdditionalImages.push(existingImages[originalIndex]);
+                    existingImages.splice(originalIndex, 1);
+                } else {
+                    files.splice(originalIndex, 1);
+                    updateFileInput(input);
+                    newImages = files;
+                }
 
-            if (arrayType === 'existing') {
-                removedAdditionalImages.push(existingImages[originalIndex]);
-                existingImages.splice(originalIndex, 1);
-            } else {
-                files.splice(originalIndex, 1);
-                updateFileInput(input);
-                newImages = files;
+                previewImages(input, previewContainerClass);
             }
-
-            previewImages(input, previewContainerClass);
         });
 
         previewContainer.appendChild(imgWrapper);
