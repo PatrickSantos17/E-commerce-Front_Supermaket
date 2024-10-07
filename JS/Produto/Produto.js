@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchProduto() {
     try {
-        const response = await fetch(`http://localhost:8080/produto/listagem`, {
+        const response = await fetch(`http://localhost:8080/produto/listagemAtivos`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -104,8 +104,10 @@ function montarLayoutExibicao(produtos) {
                                 <hr>
                             </div>
                             <p class="card-text"><strong>R$ ${formatarCasasDecimais(produto.preco)}</strong></p>
+
                             <p>Avaliação: ${estrelasHTML}</p> <!-- Aqui estão as estrelas -->
                             <button onclick="directToDetalheProduto(${produto.id})" class="btn btn-primary">Detalhes do produto</button>
+
                             <button onclick="adicionarCarrinho(${produto.id})" class="btn btn-primary">Comprar</button>
                         </div>
                     </div>

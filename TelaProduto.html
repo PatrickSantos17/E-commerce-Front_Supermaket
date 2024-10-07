@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="CSS/Produto/Produto.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="CSS/HeaderCliente/headerCliente.css">
+    
 
     <title>Tela de Produtos</title>
     
@@ -15,31 +17,43 @@
     <header>
         <div class="lado-a">
             <a href="/TelaProduto.html"><img src="src/img/logo-removebg-preview.png" alt="logo-img"></a>
-            <input type="search" id="buscar" name="q" placeholder="Buscar">
+            <input type="search" id="buscar" placeholder="Buscar">
         </div>
         <div class="lado-b">
-            <div class="carrinho">
-                <a href="TelaCarrinho.html"><img src="download.png" alt="carrinho-img"></a>
-                <p class="contador">0</p>
+            <div class="user-carrinho">
+                <div class="header-user">
+                    <img id="iconUsuario" src="src/img/icon-cliente.png" alt="user-icon">
+                    <p class="nome-usuario"></p>
+                    <div id="logout-menu" class="logout-menu hidden">
+                        <button id="logout">Sair</button>
+                    </div>
+                </div>
+
+                <div class="header-carrinho">
+                    <a href="TelaCarrinho.html">
+                        <img id="iconCarrinho" src="src/img/vista-lateral-vazia-do-carrinho-de-compras.png"
+                            alt="user-icon">
+                    </a>
+                    <p class="qtd-carrinho"></p>
+                </div>
             </div>
-            <div class="info-usuario">
-                <img src="Pessoa.png" alt="carrinho-img">
-                <p class="nome-usuario"></p>
-            </div>
-            <div class="info-usuario">
-                <p class="grupo-usuario"></p>
+            <div class="info-usuario entre-cadastre">
+                <a href="#">Entre</a>
+                <p>ou</p>
+                <a href="#">Cadastre-se</a>
             </div>
         </div>
     </header>
-
-    <!-- Adicionando a div para os produtos -->
-    <div class="produtos-container">
+    <div class="imagem-mercado">
+        <img class="imagem-merc" src="src/img/SM_Principal.jpg" alt="">
+    </div>        
         <div class="container my-5 custom-container">
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4" id="product-list"></div>
         </div>
-    </div>
+    
 
     <script src="JS/Produto/Produto.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="JS/GeralHeaderCliente/geralHeaderCliente.js"></script>
 </body>
 </html>
