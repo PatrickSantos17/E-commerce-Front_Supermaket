@@ -106,6 +106,7 @@ function montarLayoutExibicao(produtos) {
                             <p class="card-text"><strong>R$ ${formatarCasasDecimais(produto.preco)}</strong></p>
                             <p> ${estrelasHTML}</p> <!-- Aqui estão as estrelas -->
                             <a href="TelaDetalheProduto.html?produtoId=${produto.id}" class="btn btn-primary">Detalhes do produto</a>
+
                             <button onclick="adicionarCarrinho(${produto.id})" class="btn btn-primary">Comprar</button>
                         </div>
                     </div>
