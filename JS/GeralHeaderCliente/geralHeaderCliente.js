@@ -33,7 +33,8 @@ if (localStorage.getItem("produtos")) {
 
 // Função de logout
 logoutButton.addEventListener('click', function () {
-    localStorage.removeItem('nome');   // Remove o nome do usuário
-    localStorage.removeItem('grupo');  // Remove o grupo (Admin ou cliente)
+    // localStorage.removeItem('nome');   // Remove o nome do usuário
+    // localStorage.removeItem('grupo');  // Remove o grupo (Admin ou cliente)
+    localStorage.clear();
     window.location.href = "TelaProduto.html";  // Redireciona para a tela de login
 });

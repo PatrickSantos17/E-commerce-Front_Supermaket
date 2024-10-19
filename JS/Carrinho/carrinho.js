@@ -17,7 +17,35 @@ async function buscarCarrinhoNL(listaIdProdutos) {
     await carregaCarrinho(listaIdProdutos);
     totalFrete = totalProdutos += parseFloat(frete);
     const conteudo = document.querySelector(".content");
-    conteudo.innerHTML += `<aside>
+    let usuarioAutenticado = localStorage.getItem("autenticado");
+    if(usuarioAutenticado) {
+        conteudo.innerHTML += `<aside>
+                <div class="box">
+                    <header>
+                        <img src="src/img/carrinho-de-compras.png" alt="imagem carrinho"/>
+                        <p>Resumo da compra</p>
+                    </header>
+                    <div class="info">
+                        <div><span>Produtos:</span><span>R$ ${totalProdutos.toFixed(2)}</span></div>
+                        <div><span>Frete</span><span>R$ 0.00</span></div>
+                    </div>
+                    <footer>
+                        <span>Total</span>
+                        <span>R$ ${totalFrete.toFixed(2)}</span>
+                    </footer>
+                </div>
+                
+                <div>
+                    <p>Lista de endereços</p>
+                </div>
+
+                <div class="btn-finali-conti">
+                    <button class="btn-finalizar">FINALIZAR COMPRA</button>
+                    <button class="btn-continuar" onclick="directToTelaProdutos()">CONTINUAR COMPRANDO</button>
+                </div>
+            </aside>`;
+    } else {
+        conteudo.innerHTML += `<aside>
                 <div class="box">
                     <header>
                         <img src="src/img/carrinho-de-compras.png" alt="imagem carrinho"/>
@@ -55,6 +83,8 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                     <button class="btn-continuar" onclick="directToTelaProdutos()">CONTINUAR COMPRANDO</button>
                 </div>
             </aside>`;
+    }
+    
     // Agora que o botão foi adicionado ao DOM, podemos adicionar o event listener e a máscara
     const cepInput = document.querySelector('#cep');
     cepInput.addEventListener('input', aplicarMascaraCEP);
