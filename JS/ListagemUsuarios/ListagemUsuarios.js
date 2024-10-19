@@ -76,5 +76,5 @@ async function habilitarDesabilitarUsuario(id, ativo) {
 }
 
 function directToCadastro() {
-    window.location.href = "TelaFormularioCliente.html"
+    window.location.href = "TelaFormularioFuncionario.html"
 }
