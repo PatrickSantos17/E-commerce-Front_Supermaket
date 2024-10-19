@@ -7,9 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carrinho de Compras</title>
     <link rel="stylesheet" href="CSS/Reset/Reset.css">
+
+    <!-- <link rel="stylesheet" href="CSS/BootStrap/bootstrap.css">
+    <link rel="stylesheet" href="CSS/BootStrap/open-iconic-bootstrap.css"> -->
+
     <link rel="stylesheet" href="CSS/HeaderCliente/headerCliente.css">
     <link rel="stylesheet" href="CSS/Carrinho/styles.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+
 </head>
 
 <body>
@@ -54,6 +60,59 @@
             </div>
         </div>
     </main>
+
+    <!-- modal visualização do produto -->
+    <div class="card-endereco">
+        <div class="modal-endereco">
+            <div class="modal-heading">
+                <p class="text-preview">Cadastro de endereço</p>
+                <button onclick="fecharModalEndereco()" class="btn-fechar">
+                    <span class="X"></span>
+                    <span class="Y"></span>
+                    <div class="close">Fechar</div>
+                </button>
+            </div>
+
+
+            <div class="dados-endereco">
+                <div class="modal-info">
+                    <label class="labels" for="cep">CEP</label>
+                    <input type="text" class="input-dados" id="cep" onblur=pesquisacep(this); required>
+                </div>
+                <div class="modal-info">
+                    <label class="labels" for="logradouro">Logradouro</label>
+                    <input type="text" class="input-dados" id="logradouro">
+                </div>
+                <div class="modal-info">
+                    <label class="labels" for="numero">Número</label>
+                    <input type="text" class="input-dados" id="numero">
+                </div>
+                <div class="modal-info">
+                    <label class="labels" for="complemento">Complemento</label>
+                    <input type="text" class="input-dados" id="complemento">
+                </div>
+                <div class="modal-info">
+                    <label class="labels" for="bairro">Bairro</label>
+                    <input type="text" class="input-dados" id="bairro">
+                </div>
+                <div class="modal-info">
+                    <label class="labels" for="cidade">Cidade</label>
+                    <input type="text" class="input-dados" id="cidade">
+                </div>
+                <div class="modal-info">
+                    <label class="labels" for="uf">UF</label>
+                    <input type="text" class="input-dados" id="uf">
+                </div>
+                <div class="button-wrapper">
+                    <button class="btn-salvar">CANCELAR</button>
+                    <button id="salvar-endereco" class="btn-cadastrar">CADASTRAR</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
     <script src="JS/GeralHeaderCliente/geralHeaderCliente.js" defer></script>
     <script src="JS/Carrinho/carrinho.js" defer></script>
 </body>
