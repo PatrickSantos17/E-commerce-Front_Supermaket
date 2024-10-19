@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="PT-BR">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CSS/Reset/Reset.css">
-    <link rel="stylesheet" href="/CSS/BootStrap/bootstrap.css">
-    <link rel="stylesheet" href="/CSS/BootStrap/open-iconic-bootstrap.css">
-    <link rel="stylesheet" href="/CSS/FormularioCliente/formulario.css">
-    <script src="https://unpkg.com/vanilla-masker/build/vanilla-masker.min.js"></script>
+    <link rel="stylesheet" href="Css/Reset/Reset.css">
+    <link rel="stylesheet" href="CSS/BootStrap/bootstrap.css">
+    <link rel="stylesheet" href="CSS/BootStrap/open-iconic-bootstrap.css">
+    <link rel="stylesheet" href="Css/FormularioCliente/formulario.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    
+    <!-- <script src="JavaScript/FormularioCliente/utils.js" defer></script>
+    <script src="JavaScript/FormularioCliente/conexaoAPI.js" defer></script>
+    <script src="JavaScript/FormularioCliente/validacaoFormulario.js" defer></script>
+    <script src="JavaScript/FormularioCliente/consultaAPIexterna.js" defer></script> -->
+
     <title>Cadastre-se</title>
 </head>
 
@@ -16,7 +23,11 @@
     <div class="main">
         <div class="container">
             <div class="py-5 text-center">
-                <h1>CRIE A SUA CONTA</h1>
+                <a href="TelaProduto.html"><img class="d-block mx-auto mb-4" src="src/img/logo-removebg-preview.png" alt="logo" width="90" height="90"></a>
+                <h2>CRIE A SUA CONTA</h2>
+                <p class="lead">Cadastre-se em nosso site para realizar compras e ficar por dentro de todas as novidades
+                    e produtos!
+                </p>
             </div>
             <div class="d-flex justify-content-center">
                 <div class="col-md-8 order-md-1">
@@ -33,8 +44,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="cpf">CPF</label>
                                 <input type="text" class="form-control" id="cpf" placeholder="Digite seu CPF..."
-                                    pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required>
-
+                                    inputmode="numeric" pattern="[0-9]*" minlength="11" required>
                                 <div class="invalid-feedback">
                                     Digite um CPF válido.
                                 </div>
@@ -42,13 +52,90 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="grupo">Grupo</label>
-                                <select name="grupo_options" class="form-control" id="grupo">
-                                    <option value="Estoquista" selected>Estoquista</option>
-                                    <option value="Admin">Admin</option>
+                                <label for="sexo">Sexo</label>
+                                <select name="sexo_options" class="form-control" id="sexo">
+                                    <option value="Masculino" selected>Masculino</option>
+                                    <option value="Feminino">Feminino</option>
                                 </select>
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="dtNascimento">Data de nascimento</label>
+                                <input type="date" class="form-control" id="dtNascimento" required min="1900-01-01"
+                                    max="2024-12-31" onchange="validarAno()">
+                                <div class="invalid-feedback">
+                                    Informe sua data de nascimento.
+                                </div>
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cep">CEP</label>
+                                <input type="text" class="form-control" id="cep" inputmode="numeric" required>
+                                <div class="invalid-feedback">
+                                    Digite um CEP válido.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="bairro">Bairro</label>
+                                <input type="text" class="form-control" id="bairro" disabled>
+                                <div class="invalid-feedback">
+                                    Informe o bairro.
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="logradouro">Logradouro</label>
+                                <input type="text" class="form-control" id="logradouro" disabled>
+                                <div class="invalid-feedback">
+                                    Informe um endereço válido.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="numero">Número</label>
+                                <input type="text" class="form-control" id="numero" required>
+                                <div class="invalid-feedback">
+                                    Informe o n°.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="complemento">Complemento</label>
+                                <input type="text" class="form-control" id="complemento">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 mb-3">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" class="form-control" id="cidade" disabled>
+                                <div class="invalid-feedback">
+                                    Informe a cidade.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="col-md-8 mb-3">
+                                    <label for="uf">UF</label>
+                                    <input type="text" class="form-control" id="uf" disabled style="width: 175%;">
+                                    <div class="invalid-feedback">
+                                        Informe a UF.
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="form-check mb-3">
+                            <input type="checkbox" class="form-check-input" id="mesmoEndereco" checked>
+                            <label class="form-check-label" for="mesmoEndereco">Usar endereço de faturamento como endereço de entrega</label>
+                        </div>
+                        <div id="novosEnderecos"></div>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <button type="button" class="btn btn-primary" id="adicionarEndereco">Adicionar Endereço</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Contêiner para novos endereços -->
+                        <div id="novosEnderecos"></div>
+
+                        
                         <hr class="mb-4">
                         <div class="mb-3">
                             <label for="email">Email</label>
@@ -75,18 +162,10 @@
                             </div>
                         </div>
                         <hr class="mb-4">
-                        <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <button class="btn btn-secondary btn-lg btn-block btn-cancelar">
-                                    <a href="TelaListagemUsuarios.html"
-                                        style="color: inherit; text-decoration: none;">Cancelar</a>
-                                </button>
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Confirmar
-                                    Cadastro</button>
-                            </div>
-                        </div>
+                        <button class="btn btn-primary btn-lg btn-block" id="confirmarCadastro" type="button">Confirmar Cadastro</button>
+                        <button class="btn btn-secondary btn-lg btn-block">
+                            <a href="TelaLogin.html" style="color: inherit; text-decoration: none;">Cancelar</a>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -108,10 +187,14 @@
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+       
+    </footer>
+    <!-- Footer -->
     </div>
-    <script src="JS/CadastroUsuario/conexaoAPI.js" defer></script>
-    <script src="JS/CadastroUsuario/utils.js" defer></script>
-    <script src="JS/CadastroUsuario/validacaoFormulario.js" defer></script>
+    <script src="JS/CadastroCliente/cadastroCliente.js" defer></script>
 </body>
 
 </html>
