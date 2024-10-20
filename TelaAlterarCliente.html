@@ -26,7 +26,7 @@
             </div>
             <div class="d-flex justify-content-center">
                 <div class="col-md-8 order-md-1">
-                    <form class="form" novalidate>
+                    <form class="form formulario-alterar-cliente" novalidate>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="nomeCompleto">Nome completo</label>
@@ -88,7 +88,7 @@
                         <div class="mb-3">
                             <label for="senha">Senha</label>
                             <input type="password" class="form-control" placeholder="Digite sua senha..." id="senha"
-                                minlength="5" required>
+                                minlength="5">
                             <div class="invalid-feedback">
                                 A senha deve conter no mínimo 5 caracteres.
                             </div>
@@ -96,15 +96,15 @@
                         <div class="mb-3">
                             <label for="confirmSenha">Confirme sua senha</label>
                             <input type="password" class="form-control" placeholder="Confirme a sua senha..."
-                                id="confirmSenha" minlength="5" required>
+                                id="confirmSenha" minlength="5">
                             <div class="invalid-feedback">
                                 As senhas precisam ser iguais.
                             </div>
                         </div>
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" id="confirmarCadastro" type="button">Confirmar
+                        <button class="btn btn-primary btn-lg btn-block" id="confirmarAlteracao">Confirmar
                             Alteração</button>
-                        <button class="btn btn-secondary btn-lg btn-block">
+                        <button class="btn btn-secondary btn-lg btn-block" type="button">
                             <a href="TelaProduto.html" style="color: inherit; text-decoration: none;">Cancelar</a>
                         </button>
                     </form>
