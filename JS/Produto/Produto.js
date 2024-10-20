@@ -145,3 +145,13 @@ function directToDetalheProduto(produtoId) {
     localStorage.setItem("IdProdutoDetalhes", produtoId);
     window.location.href = "TelaDetalheProduto.html";
 }
+
+function sair() {
+    // Limpar dados do usuário armazenados no localStorage
+    localStorage.removeItem("usuarioLogado");
+
+    // Exibir o modal de logout
+    var logoutModal = new bootstrap.Modal(document.getElementById('logoutModal'));
+    logoutModal.show();
+
+}
