@@ -8,19 +8,21 @@
     <link rel="stylesheet" href="CSS/BootStrap/bootstrap.css">
     <link rel="stylesheet" href="CSS/BootStrap/open-iconic-bootstrap.css">
     <link rel="stylesheet" href="Css/AlterarCliente/AlterarCliente.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
 
-    <title>Meus Dados</title>
+    <title>Perfil</title>
 </head>
 
 <body class="bg-light">
     <div class="main">
         <div class="container">
             <div class="py-5 text-center">
-                <a href="TelaProduto.html"><img class="d-block mx-auto mb-4" src="src/img/logo-removebg-preview.png" alt="logo" width="90" height="90"></a>
+                <a href="TelaProduto.html"><img class="d-block mx-auto mb-4" src="src/img/logo-removebg-preview.png"
+                        alt="logo" width="90" height="90"></a>
                 <h2>MINHAS INFORMAÇÕES</h2>
-                <p class="lead">Acesse seus dados e, se necessário, altere-os!
-                </p>
+                <p class="lead">Acesse seus dados e, se necessário, altere-os!</p>
             </div>
             <div class="d-flex justify-content-center">
                 <div class="col-md-8 order-md-1">
@@ -37,7 +39,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="cpf">CPF</label>
                                 <input type="text" class="form-control" id="cpf" placeholder="Digite seu CPF..."
-                                    inputmode="numeric" pattern="[0-9]*" minlength="11" required>
+                                    inputmode="numeric" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" minlength="11" readonly>
                                 <div class="invalid-feedback">
                                     Digite um CPF válido.
                                 </div>
@@ -54,89 +56,30 @@
                             <div class="col-md-6 mb-3">
                                 <label for="dtNascimento">Data de nascimento</label>
                                 <input type="date" class="form-control" id="dtNascimento" required min="1900-01-01"
-                                    max="2024-12-31">
+                                    max="2024-12-31" onchange="validarAno()">
                                 <div class="invalid-feedback">
                                     Informe sua data de nascimento.
                                 </div>
                             </div>
                         </div>
-                        <div class="endereco">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="cep">CEP</label>
-                                <input type="text" class="form-control" id="cep" inputmode="numeric" required>
-                                <div class="invalid-feedback">
-                                    Digite um CEP válido.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="bairro">Bairro</label>
-                                <input type="text" class="form-control" id="bairro" disabled>
-                                <div class="invalid-feedback">
-                                    Informe o bairro.
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="logradouro">Logradouro</label>
-                                <input type="text" class="form-control" id="logradouro" disabled>
-                                <div class="invalid-feedback">
-                                    Informe um endereço válido.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="numero">Número</label>
-                                <input type="text" class="form-control" id="numero" required>
-                                <div class="invalid-feedback">
-                                    Informe o n°.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="complemento">Complemento</label>
-                                <input type="text" class="form-control" id="complemento">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8 mb-3">
-                                <label for="cidade">Cidade</label>
-                                <input type="text" class="form-control" id="cidade" disabled>
-                                <div class="invalid-feedback">
-                                    Informe a cidade.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="col-md-8 mb-3">
-                                    <label for="uf">UF</label>
-                                    <input type="text" class="form-control" id="uf" disabled style="width: 175%;">
-                                    <div class="invalid-feedback">
-                                        Informe a UF.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <h3>Endereço de faturamento:</h3>
+                        <div class="row linha-faturamento">
                             
-
-
                         </div>
-                        <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="mesmoEndereco" checked>
-                            <label class="form-check-label" for="mesmoEndereco">Usar endereço de faturamento como endereço de entrega</label>
+                        <h3>Escolha um endereço padrão de entrega:</h3>
+                        <div class="enderecos">
                         </div>
-                        <div id="novosEnderecos"></div>
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <button type="button" class="btn btn-primary" id="adicionarEndereco">Adicionar Endereço</button>
+                                <button type="button" class="btn btn-primary" id="adicionarEndereco">Novo Endereço</button>
                             </div>
                         </div>
-                        
-                        <!-- Contêiner para novos endereços -->
-                        <div class="endereco" id="novosEnderecos"></div>
 
-                        
                         <hr class="mb-4">
                         <div class="mb-3">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail..."
-                                required>
+                                readonly>
                             <div class="invalid-feedback">
                                 Digite um e-mail válido.
                             </div>
@@ -158,9 +101,10 @@
                             </div>
                         </div>
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" id="confirmarCadastro" type="button">Confirmar Cadastro</button>
+                        <button class="btn btn-primary btn-lg btn-block" id="confirmarCadastro" type="button">Confirmar
+                            Alteração</button>
                         <button class="btn btn-secondary btn-lg btn-block">
-                            <a href="TelaLogin.html" style="color: inherit; text-decoration: none;">Cancelar</a>
+                            <a href="TelaProduto.html" style="color: inherit; text-decoration: none;">Cancelar</a>
                         </button>
                     </form>
                 </div>
@@ -172,11 +116,11 @@
             <circle r="20" cy="50" cx="50"></circle>
         </svg>
     </div>
-    <div class="card">
+    <div class="card" id="modal-confirm">
         <div class="modal-confirm">
-            <p class="modal-heading">Cadastro Realizado!</p>
+            <p class="modal-heading">Cliente Alterado!</p>
             <p class="modal-info">
-                Seu cadastro foi realizado com sucesso!!
+                Suas informações foram alteradas com sucesso!!
             </p>
             <div class="button-wrapper">
                 <button class="accept-cookie-button">OK</button>
@@ -186,11 +130,13 @@
 
     <!-- Footer -->
     <footer>
-       
+
     </footer>
     <!-- Footer -->
     </div>
     <script src="JS/AlterarCliente/AlterarCliente.js" defer></script>
+    <script src="JS/AlterarCliente/utils.js" defer></script>
+    <script src="JS/AlterarCliente/validacaoFormulario.js" defer></script>
 </body>
 
 </html>

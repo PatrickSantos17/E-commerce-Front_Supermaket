@@ -1,4 +1,4 @@
-input {
+input, select {
     border-radius: 8px;
     border: 1px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.300);
@@ -130,4 +130,49 @@ input {
     background-color: rgb(0, 0, 0);
 }
 
-/*Fim estilo modal confirmação  */
+.enderecos {
+    display: flex;
+    justify-content: baseline;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.endereco {
+    flex: 1 1 calc(33.333% - 20px);
+    max-width: 220px;
+    min-width: 150px;
+    border: 2px solid rgb(206, 206, 206);
+    border-radius: 5%;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.endereco-faturamento {
+    border: 2px solid rgb(206, 206, 206);
+    padding: 10px;
+    text-align: center;
+    border-radius: 5%;
+    margin-bottom: 20px;
+}
+
+input[type="radio"] {
+    appearance: none;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 2px solid rgb(206, 206, 206);
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transform: scale(1.2);
+}
+
+input[type="radio"]:checked {
+    background-color: black;
+    border: 5px solid rgb(129, 129, 129); /* Círculo preenchido ao ser selecionado */
+}
