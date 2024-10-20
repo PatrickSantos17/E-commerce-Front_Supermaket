@@ -17,7 +17,56 @@ async function buscarCarrinhoNL(listaIdProdutos) {
     await carregaCarrinho(listaIdProdutos);
     totalFrete = totalProdutos += parseFloat(frete);
     const conteudo = document.querySelector(".content");
-    conteudo.innerHTML += `<aside>
+    let usuarioAutenticado = localStorage.getItem("autenticado");
+    if (usuarioAutenticado) {
+        conteudo.innerHTML += `<aside>
+                <div class="box">
+                    <header>
+                        <img src="src/img/carrinho-de-compras.png" alt="imagem carrinho"/>
+                        <p>Resumo da compra</p>
+                    </header>
+                    <div class="info">
+                        <div><span>Produtos:</span><span>R$ ${totalProdutos.toFixed(2)}</span></div>
+                        <div><span>Frete</span><span>R$ 0.00</span></div>
+                    </div>
+                    <footer>
+                        <span>Total</span>
+                        <span>R$ ${totalFrete.toFixed(2)}</span>
+                    </footer>
+                </div>
+                
+                <div class="box entrega">
+                    <header>
+                        <img src="src/img/entrega-rapida.png" alt="imagem carrinho"/>
+                        <p>Entrega</p>
+                    </header>
+                    
+                    <div class="checkbox-wrapper-4">
+                        <input class="inp-cbx" id="morning" type="checkbox">
+                        <label class="cbx" for="morning"><span>
+                        <svg width="12px" height="10px">
+                            
+                        </svg></span><span>Entrega padrão</span></label>
+                        <svg class="inline-svg">
+                            <symbol id="check-4" viewBox="0 0 12 10">
+                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                            </symbol>
+                        </svg>
+                    </div>
+
+                    <button onclick="abrirModalEndereco()" type="button" class="btn-add-endereco">
+                        <span class="button__text">Cadastrar novo endereço</span>
+                        <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+                    </button>
+                </div>
+
+                <div class="btn-finali-conti">
+                    <button class="btn-finalizar">FINALIZAR COMPRA</button>
+                    <button class="btn-continuar" onclick="directToTelaProdutos()">CONTINUAR COMPRANDO</button>
+                </div>
+            </aside>`;
+    } else {
+        conteudo.innerHTML += `<aside>
                 <div class="box">
                     <header>
                         <img src="src/img/carrinho-de-compras.png" alt="imagem carrinho"/>
@@ -55,6 +104,8 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                     <button class="btn-continuar" onclick="directToTelaProdutos()">CONTINUAR COMPRANDO</button>
                 </div>
             </aside>`;
+    }
+
     // Agora que o botão foi adicionado ao DOM, podemos adicionar o event listener e a máscara
     const cepInput = document.querySelector('#cep');
     cepInput.addEventListener('input', aplicarMascaraCEP);
@@ -279,4 +330,12 @@ async function atualizarCarrinho() {
 
 function directToTelaProdutos() {
     window.location.href = "TelaProduto.html";
+}
+
+function abrirModalEndereco() {
+    document.querySelector(".card-endereco").style.display = "flex";
+}
+
+function fecharModalEndereco() {
+    document.querySelector(".card-endereco").style.display = "none";
 }

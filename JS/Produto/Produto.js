@@ -1,5 +1,9 @@
-var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
-// var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+var API; 
+if (window.location.hostname == '127.0.0.1') {
+    API = "localhost";
+} else {
+    API = "4.228.231.177";
+}
 
 data = [];
 
@@ -7,12 +11,12 @@ var produtosIDCarrinho = JSON.parse(localStorage.getItem("produtos")) || [];
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchProduto();
-    console.log(produtosIDCarrinho);
 })
 
 async function fetchProduto() {
+    
     try {
-        const response = await fetch('http://' + API + ':8080/produto/listagemAtivos', {
+        const response = await fetch(`http://${API}:8080/produto/listagemAtivos`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

@@ -12,25 +12,42 @@ body>header {
     height: 100px;
 }
 
-.logout-menu {
+.header-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Adiciona o contexto de posicionamento para o dropdown */
+}
+
+.dropdown-content {
     display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 10px;
+    top: 100%; /* Agora o dropdown aparece abaixo do ícone */
+    left: 50%; /* Alinha o dropdown no centro horizontal */
+    transform: translateX(-50%); /* Centraliza horizontalmente o dropdown */
 }
 
-.logout-menu button {
-    background-color: #33333344;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.logout-menu button:hover {
-    background-color: #8d8d8d;
-}
-
-.header-user:hover .logout-menu {
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
     display: block;
+    border-radius: 10px;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.header-user:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
 }
 
 .lado-a {
@@ -95,13 +112,6 @@ header .lado-b img {
 
 .user-carrinho img {
     display: inline-block;
-}
-
-.header-user {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .header-carrinho {

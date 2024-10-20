@@ -78,24 +78,20 @@ input {
 
 
 /* Estilo Modal confirmação */
-#modal-confirm {
+.modal-confirm {
     width: 280px;
     height: fit-content;
     background-color: #ffffff;
     border-radius: 10px;
     border: 1px solid rgb(206, 206, 206);
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 20px;
     gap: 15px;
-    position: fixed; /* Alterado para fixed */
-    top: 50%; /* Alinha verticalmente ao centro */
-    left: 50%; /* Alinha horizontalmente ao centro */
-    transform: translate(-50%, -50%); /* Centraliza o modal com base no próprio tamanho */
+    position: relative;
     font-family: Arial, Helvetica, sans-serif;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.066);
-    z-index: 1000; /* Garante que o modal esteja acima de outros elementos */
 }
 
 .modal-heading {
@@ -133,4 +129,5 @@ input {
 .accept:hover {
     background-color: rgb(0, 0, 0);
 }
+
 /*Fim estilo modal confirmação  */

@@ -8,11 +8,15 @@
 body {
     background: #f6f6f6;
     font-family: 'Lato', sans-serif;
+    height: 100vh;
+    width: 100vw;
 }
 
 body>main {
     background: #fff;
-    padding: 25px 25px 25px;
+    padding: 45px 0;
+    height: 80%;
+    width: 100%;
 }
 
 body>main .page-title {
@@ -34,18 +38,26 @@ body>main .content section {
 }
 
 body>main .content aside {
-    min-width: 250px;
+    min-width: 320px;
 }
 
 .content {
     display: flex;
-    width: 100%; /* Faz com que a .content acompanhe a largura da .box */
-    max-width: 1300px; /* Ajuste conforme necessário */
-    margin: 0 auto; /* Centraliza a .content horizontalmente */
-    padding: 20px; /* Espaçamento interno */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
-    border-radius: 8px; /* Bordas arredondadas */
-    background-color: #f8f9fa; /* Cor de fundo */
+    width: 100%;
+    /* Faz com que a .content acompanhe a largura da .box */
+    max-width: 1400px;
+    /* Ajuste conforme necessário */
+    margin: 0 auto;
+    /* Centraliza a .content horizontalmente */
+    padding: 20px;
+    /* Espaçamento interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra para dar profundidade */
+    border-radius: 8px;
+    /* Bordas arredondadas */
+    background-color: #f8f9fa;
+    /* Cor de fundo */
+    height: 100%;
 }
 
 .produtosCarrinho {
@@ -54,8 +66,10 @@ body>main .content aside {
 }
 
 .produtosCarrinho {
-    max-height: 620px; /* Ajuste a altura máxima conforme necessário */
-    overflow-y: auto; /* Adiciona a barra de rolagem vertical */
+    max-height: 620px;
+    /* Ajuste a altura máxima conforme necessário */
+    overflow-y: auto;
+    /* Adiciona a barra de rolagem vertical */
 }
 
 button {
@@ -73,7 +87,8 @@ table thead tr {
 }
 
 table thead tr th {
-    text-align: center; /* Centraliza o cabeçalho */
+    text-align: center;
+    /* Centraliza o cabeçalho */
     padding: 10px;
     text-transform: uppercase;
     color: #666;
@@ -83,17 +98,21 @@ table thead tr th {
 }
 
 table tbody tr {
-    border-bottom: 1px solid #222; /* Borda inferior leve entre os produtos */
+    border-bottom: 1px solid #222;
+    /* Borda inferior leve entre os produtos */
 }
 
 table tbody tr:last-child {
-    border-bottom: 0; /* Remove a borda inferior do último item */
+    border-bottom: 0;
+    /* Remove a borda inferior do último item */
 }
 
 table tbody tr td {
     padding: 10px;
-    vertical-align: middle; /* Alinha verticalmente os itens */
-    text-align: center; /* Centraliza o conteúdo da tabela */
+    vertical-align: middle;
+    /* Alinha verticalmente os itens */
+    text-align: center;
+    /* Centraliza o conteúdo da tabela */
 }
 
 .product {
@@ -106,7 +125,8 @@ tbody img {
     width: auto;
     height: 60px;
     display: block;
-    margin: 0 auto; /* Centraliza a imagem na célula */
+    margin: 0 auto;
+    /* Centraliza a imagem na célula */
 }
 
 .product .info {
@@ -177,7 +197,8 @@ tbody img {
     -ms-flex-pack: center;
     justify-content: center;
     font-size: 20px;
-    margin: 0 auto; /* Centraliza o botão de remoção */
+    margin: 0 auto;
+    /* Centraliza o botão de remoção */
 }
 
 .remove:hover {
@@ -203,7 +224,7 @@ aside .box header {
     align-items: center;
 }
 
-aside .box header img{
+aside .box header img {
     width: 25px;
     height: 25px;
     margin-right: 3%;
@@ -269,7 +290,8 @@ aside .box footer {
 }
 
 .btn-finalizar {
-    background: #28a745;
+    /* background: #28a745; */
+    background-color: #0f52b6;
 }
 
 .btn-continuar {
@@ -277,13 +299,17 @@ aside .box footer {
 }
 
 .btn-finalizar:hover {
-    background: #218838; /* Cor de fundo ao passar o mouse */
-    color: #fff; /* Cor do texto ao passar o mouse */
+    background: #0b3a80;
+    /* Cor de fundo ao passar o mouse */
+    color: #fff;
+    /* Cor do texto ao passar o mouse */
 }
 
 .btn-continuar:hover {
-    background: #555; /* Cor de fundo ao passar o mouse */
-    color: #fff; /* Cor do texto ao passar o mouse */
+    background: #555;
+    /* Cor de fundo ao passar o mouse */
+    color: #fff;
+    /* Cor do texto ao passar o mouse */
 }
 
 .invalid-feedback {
@@ -292,31 +318,42 @@ aside .box footer {
 
 /* CSS/Carrinho/styles.css */
 .box-cep {
-    background-color: #f8f9fa; /* Cor de fundo clara */
-    padding: 20px; /* Espaçamento interno */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
+    background-color: #f8f9fa;
+    /* Cor de fundo clara */
+    padding: 20px;
+    /* Espaçamento interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra para dar profundidade */
     display: flex;
     align-items: center;
-    gap: 10px; /* Espaçamento entre os elementos */
+    gap: 10px;
+    /* Espaçamento entre os elementos */
 }
 
 .info-cep {
-    background-color: #f8f9fa; /* Cor de fundo clara */
-    padding: 10px; /* Espaçamento interno */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
+    background-color: #f8f9fa;
+    /* Cor de fundo clara */
+    padding: 10px;
+    /* Espaçamento interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra para dar profundidade */
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 450px;
-    gap: 10px; /* Espaçamento entre os elementos */
+    gap: 10px;
+    /* Espaçamento entre os elementos */
 }
 
 /* CSS/Carrinho/styles.css */
 .frete-options {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Três colunas de largura igual */
-    gap: 20px; /* Espaçamento entre os itens */
-    margin-bottom: 20px; /* Espaçamento inferior */
+    grid-template-columns: repeat(3, 1fr);
+    /* Três colunas de largura igual */
+    gap: 20px;
+    /* Espaçamento entre os itens */
+    margin-bottom: 20px;
+    /* Espaçamento inferior */
 }
 
 .fretes {
@@ -324,17 +361,22 @@ aside .box footer {
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    border: 1px solid #ced4da; /* Borda */
-    border-radius: 4px; /* Bordas arredondadas */
-    background-color: #f8f9fa; /* Cor de fundo */
+    border: 1px solid #ced4da;
+    /* Borda */
+    border-radius: 4px;
+    /* Bordas arredondadas */
+    background-color: #f8f9fa;
+    /* Cor de fundo */
 }
 
 .fretes input[type="radio"] {
-    margin-bottom: 10px; /* Espaçamento inferior */
+    margin-bottom: 10px;
+    /* Espaçamento inferior */
 }
 
 .fretes p {
-    margin: 5px 0; /* Espaçamento superior e inferior */
+    margin: 5px 0;
+    /* Espaçamento superior e inferior */
 }
 
 .fretes label {
@@ -342,33 +384,51 @@ aside .box footer {
 }
 
 .box-cep input[type="text"] {
-    width: 80%; /* Largura total */
-    padding: 10px; /* Espaçamento interno */
-    border: 1px solid #ced4da; /* Borda */
-    border-radius: 4px; /* Bordas arredondadas */
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); /* Sombra interna */
-    font-size: 16px; /* Tamanho da fonte */
+    width: 80%;
+    /* Largura total */
+    padding: 10px;
+    /* Espaçamento interno */
+    border: 1px solid #ced4da;
+    /* Borda */
+    border-radius: 4px;
+    /* Bordas arredondadas */
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    /* Sombra interna */
+    font-size: 16px;
+    /* Tamanho da fonte */
 }
 
 .box-cep .btn-cep {
-    background-color: #555; /* Cor de fundo do botão */
-    color: white; /* Cor do texto */
-    padding: 10px 20px; /* Espaçamento interno */
-    border: none; /* Sem borda */
-    border-radius: 4px; /* Bordas arredondadas */
-    cursor: pointer; /* Cursor de ponteiro */
-    font-size: 14px; /* Tamanho da fonte */
-    transition: background-color 0.3s ease; /* Transição suave */
+    background-color: #555;
+    /* Cor de fundo do botão */
+    color: white;
+    /* Cor do texto */
+    padding: 10px 20px;
+    /* Espaçamento interno */
+    border: none;
+    /* Sem borda */
+    border-radius: 4px;
+    /* Bordas arredondadas */
+    cursor: pointer;
+    /* Cursor de ponteiro */
+    font-size: 14px;
+    /* Tamanho da fonte */
+    transition: background-color 0.3s ease;
+    /* Transição suave */
 }
 
 .box-cep .btn-cep:hover {
-    background-color: #218838; /* Cor de fundo ao passar o mouse */
+    background-color: #0f52b6;
+    /* Cor de fundo ao passar o mouse */
 }
 
 .box-cep .invalid-feedback {
-    color: red; /* Cor do texto */
-    font-size: 12px; /* Tamanho da fonte */
-    margin-top: 5px; /* Espaçamento superior */
+    color: red;
+    /* Cor do texto */
+    font-size: 12px;
+    /* Tamanho da fonte */
+    margin-top: 5px;
+    /* Espaçamento superior */
 }
 
 .input-cep {
@@ -377,3 +437,360 @@ aside .box footer {
 }
 
 /*# sourceMappingURL=styles.css.map */
+
+/* checkbox endereço entrega */
+.checkbox-wrapper-4 * {
+    box-sizing: border-box;
+    color: #3b3b3b;
+}
+
+.checkbox-wrapper-4 .cbx {
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    padding: 10px 10px;
+    margin: 10px 10px;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.checkbox-wrapper-4 .cbx:not(:last-child) {
+    margin-right: 6px;
+}
+
+.checkbox-wrapper-4 .cbx:hover {
+    background: rgba(0, 119, 255, 0.06);
+}
+
+.checkbox-wrapper-4 .cbx span {
+    float: left;
+    vertical-align: middle;
+    transform: translate3d(0, 0, 0);
+}
+
+.checkbox-wrapper-4 .cbx span:first-child {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    transform: scale(1);
+    border: 2px solid #686868;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 1px rgba(0, 16, 75, 0.05);
+}
+
+.checkbox-wrapper-4 .cbx span:first-child svg {
+    position: absolute;
+    top: 3px;
+    left: 2px;
+    fill: none;
+    stroke: #111111;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 16px;
+    stroke-dashoffset: 16px;
+    transition: all 0.3s ease;
+    transition-delay: 0.1s;
+    transform: translate3d(0, 0, 0);
+}
+
+.checkbox-wrapper-4 .cbx span:last-child {
+    padding-left: 8px;
+    line-height: 18px;
+}
+
+.checkbox-wrapper-4 .cbx:hover span:first-child {
+    border-color: #07f;
+}
+
+.checkbox-wrapper-4 .inp-cbx {
+    position: absolute;
+    visibility: hidden;
+}
+
+.checkbox-wrapper-4 .inp-cbx:checked+.cbx span:first-child {
+    background: #07f;
+    border-color: #07f;
+    animation: wave-4 0.4s ease;
+}
+
+.checkbox-wrapper-4 .inp-cbx:checked+.cbx span:first-child svg {
+    stroke-dashoffset: 0;
+}
+
+.checkbox-wrapper-4 .inline-svg {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+@media screen and (max-width: 640px) {
+    .checkbox-wrapper-4 .cbx {
+        width: 100%;
+        display: inline-block;
+    }
+}
+
+@-moz-keyframes wave-4 {
+    50% {
+        transform: scale(0.9);
+    }
+}
+
+@-webkit-keyframes wave-4 {
+    50% {
+        transform: scale(0.9);
+    }
+}
+
+@-o-keyframes wave-4 {
+    50% {
+        transform: scale(0.9);
+    }
+}
+
+@keyframes wave-4 {
+    50% {
+        transform: scale(0.9);
+    }
+}
+
+/* botão cadastrar novos endereços */
+
+/* From Uiverse.io by andrew-demchenk0 */
+.btn-add-endereco {
+    position: relative;
+    width: 239px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #0b3a80;
+    background-color: #0f52b6;
+    margin: 0 auto 20px auto;
+}
+
+.btn-add-endereco,
+.button__icon,
+.button__text {
+    transition: all 0.3s;
+}
+
+.btn-add-endereco .button__text {
+    transform: translateX(30px);
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.btn-add-endereco .button__icon {
+    position: absolute;
+    transform: translateX(200px);
+    height: 100%;
+    width: 39px;
+    background-color: #0b3a80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-add-endereco .svg {
+    width: 30px;
+    stroke: #fff;
+}
+
+.btn-add-endereco:hover {
+    background: #0f52b6;
+}
+
+.btn-add-endereco:hover .button__text {
+    color: transparent;
+}
+
+.btn-add-endereco:hover .button__icon {
+    width: 239px;
+    transform: translateX(0);
+}
+
+.btn-add-endereco:active .button__icon {
+    background-color: #0f52b6;
+}
+
+.btn-add-endereco:active {
+    border: 1px solid #0f52b6;
+}
+
+
+/* modal para cadastro de novos endereços */
+.card-endereco {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    /* Centraliza verticalmente */
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    background-color: rgba(0, 0, 0, 0.76);
+    /* Fundo escuro para sobreposição */
+}
+
+.modal-endereco {
+    width: 60%;
+    height: 75%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid rgb(206, 206, 206);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 20px;
+    gap: 15px;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.066);
+}
+
+.modal-heading {
+    display: flex;
+    height: 10%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-preview {
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+}
+
+/* INFORMAÇÕES CADASTRO ENDEREÇO */
+
+.modal-info {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 25px 25px;
+}
+
+.dados-endereco {
+    background-color: #ffffff;
+    padding: 18px;
+    border: 1px solid #888;
+    width: 42%;
+    height: 85%;
+    position: relative;
+    overflow-y: auto;
+}
+
+.input-dados {
+    padding: 4px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.labels {
+    font-size: 20px;
+    font-family: "Poppins", sans-serif;
+}
+
+.btn-salvar {
+    background: #000;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+    border: none;
+}
+
+.btn-cadastrar {
+    background: #FFFFFF;
+    color: #000;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+}
+
+
+/* botão fechar modal */
+.card-endereco .btn-fechar {
+    position: absolute;
+    width: 3em;
+    height: 3em;
+    border: none;
+    background: rgb(0, 0, 0);
+    border-radius: 5px;
+    transition: background 0.5s;
+    right: 4%;
+}
+
+.card-endereco .X {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2em;
+    height: 1.5px;
+    background-color: rgb(255, 255, 255);
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.card-endereco .Y {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2em;
+    height: 1.5px;
+    background-color: #fff;
+    transform: translateX(-50%) rotate(-45deg);
+}
+
+.card-endereco .close {
+    position: absolute;
+    display: flex;
+    padding: 0.8rem 1.5rem;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-50%);
+    top: -70%;
+    left: 50%;
+    width: 2em;
+    height: 1em;
+    font-size: 12px;
+    background-color: rgb(19, 22, 24);
+    color: rgb(187, 229, 236);
+    border: none;
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.card-endereco .btn-fechar:hover {
+    background-color: rgb(211, 21, 21);
+}
+
+.card-endereco .btn-fechar:active {
+    background-color: rgb(130, 0, 0);
+}
+
+.card-endereco .btn-fechar:hover>.close {
+    animation: close 0.2s forwards 0.25s;
+}
+
+@keyframes close {
+    100% {
+        opacity: 1;
+    }
+}
+
+/* fim btn fechar modal */
+
