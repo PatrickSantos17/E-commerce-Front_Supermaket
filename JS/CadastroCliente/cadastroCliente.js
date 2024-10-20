@@ -97,14 +97,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="numero">Número</label>
-                    <input type="text" class="form-control" required>
+                    <input type="text" class="form-control numero" required>
                     <div class="invalid-feedback">
                         Informe o n°.
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="complemento">Complemento</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control complemento">
                 </div>
                 <div class="col-md-8 mb-3">
                     <label for="cidade">Cidade</label>
@@ -173,48 +173,57 @@ function gerarJSON() {
     const senha = document.getElementById('senha').value;
     const genero = document.getElementById('sexo').value;
     const cpf = document.getElementById('cpf').value;
-    const dtNascimento = document.getElementById('dtNascimento').value;
+    const dtNascimento = new Date(document.getElementById('dtNascimento').value).toISOString();
 
 
     const enderecos = [];
     document.querySelectorAll('.endereco').forEach(endereco => {
-        const cepField = endereco.querySelector('#cep');
-        const logradouroField = endereco.querySelector('#logradouro');
-        const complementoField = endereco.querySelector('#complemento');
-        const bairroField = endereco.querySelector('#bairro');
-        const numeroField = endereco.querySelector('#numero');
-        const cidadeField = endereco.querySelector('#cidade');
-        const ufField = endereco.querySelector('#uf');
         
-        // Verificando se os campos existem antes de acessar seus valores
-        const cep = cepField ? cepField.value : null;
-        const logradouro = logradouroField ? logradouroField.value : null;
-        const complemento = complementoField ? complementoField.value : null;
-        const bairro = bairroField ? bairroField.value : null;
-        const numero = numeroField ? numeroField.value : null;
-        const cidade = cidadeField ? cidadeField.value : null;
-        const uf = ufField ? ufField.value : null;
-        // const entrega = endereco.querySelector('.mesmoEndereco').checked; // Checkbox de entrega
-        // const cobranca = endereco.querySelector('.enderecopadrao').checked; // Checkbox de cobrança
 
-        enderecos.push({
-            cep,
-            logradouro,
-            complemento,
-            bairro,
-            numero,
-            cidade,
-            uf
-            // entrega,
-            // cobranca
-        });
+        const cepField = endereco.querySelector('.cep');
+        const logradouroField = endereco.querySelector('.logradouro');
+        const complementoField = endereco.querySelector('.complemento');
+        const bairroField = endereco.querySelector('.bairro');
+        const numeroField = endereco.querySelector('.numero');
+        const cidadeField = endereco.querySelector('.cidade');
+        const ufField = endereco.querySelector('.uf');
+
+        const entregaCheckbox = endereco.querySelector('.enderecopadrao'); // Checkbox de entrega
+        const cobrancaCheckbox = endereco.querySelector('.enderecopadrao'); // Checkbox de cobrança
+    
+        if (cep) { // Somente adiciona se o CEP estiver preenchido
+            const cep = cepField ? cepField.value : null;
+            const logradouro = logradouroField ? logradouroField.value : null;
+            const complemento = complementoField ? complementoField.value : null;
+            const bairro = bairroField ? bairroField.value : null;
+            const numero = numeroField ? numeroField.value : null;
+            const cidade = cidadeField ? cidadeField.value : null;
+            const uf = ufField ? ufField.value : null;
+            const entrega = entregaCheckbox ? entregaCheckbox.checked : false;
+            const cobranca = cobrancaCheckbox ? cobrancaCheckbox.checked : false;
+            
+            if(cep || logradouro || bairro || numero || cidade || uf) {
+            enderecos.push({
+                cep,
+                logradouro,
+                complemento,
+                bairro,
+                numero,
+                cidade,
+                uf,
+                entrega,
+                cobranca
+
+            });
+        }}
     });
-
     // Verifica se há endereços
     if (enderecos.length === 0) {
         console.error('Nenhum endereço foi adicionado.');
         // Adicione um endereço padrão ou trate conforme necessário
     }
+    
+    
 
     const usuario = {
         nome,
@@ -230,7 +239,7 @@ function gerarJSON() {
     return usuario;
 }
 function validarAno() {
-    const dtNascimento = document.getElementById('dtNascimento').value;
+    const dtNascimento = new Date(document.getElementById('dtNascimento').value).toISOString();
     const anoNascimento = new Date(dtNascimento).getFullYear();
     const anoAtual = new Date().getFullYear();
     
@@ -244,6 +253,8 @@ function validarAno() {
 // Função para enviar dados ao servidor
 async function enviarDados(usuario) {
     try {
+        console.log('Enviando dados:', JSON.stringify(usuario, null, 2)); // Log do JSON enviado
+
         const response = await fetch('http://localhost:8080/cliente/cadastro', {
             method: 'POST',
             headers: {
@@ -253,11 +264,30 @@ async function enviarDados(usuario) {
         });
 
         if (!response.ok) {
-            throw new Error('Erro ao enviar dados: ' + response.statusText);
+            const errorText = await response.text(); // Obter a mensagem de erro detalhada do servidor
+            console.error('Resposta do servidor:', errorText); // Log da resposta do servidor
+            throw new Error('Erro ao enviar dados: ' + errorText);
         }
 
         const result = await response.json();
         console.log('Dados enviados com sucesso:', result);
+        const modal = document.getElementById('modal-confirm');
+        modal.style.display = 'block';
+
+        // Fechar o modal quando o usuário clicar no botão de fechar
+        const closeModal = modal.querySelector('.accept-cookie-button');
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Fechar o modal quando o usuário clicar fora do modal
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+
     } catch (error) {
         console.error('Erro ao enviar dados:', error);
     }
