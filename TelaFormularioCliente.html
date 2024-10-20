@@ -30,9 +30,10 @@
                             <div class="col-md-6 mb-3">
                                 <label for="nomeCompleto">Nome completo</label>
                                 <input type="text" class="form-control" id="nomeCompleto"
-                                    placeholder="Digite seu nome..." required>
+                                    placeholder="Digite seu nome..." required
+                                    pattern="^[A-Za-z]{3,}\s[A-Za-z]{3,}(?:\s[A-Za-z]{3,})*$" >
                                 <div class="invalid-feedback">
-                                    Digite o seu nome completo.
+                                    Digite o seu nome completo com pelo menos duas palavras, cada uma contendo no mínimo 3 letras.
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -119,8 +120,11 @@
 
                         </div>
                         <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="mesmoEndereco" checked>
-                            <label class="form-check-label" for="mesmoEndereco">Usar endereço de faturamento como endereço de entrega</label>
+                            <input type="checkbox" class="form-check-input enderecopadrao" id="enderecopadraoFaturamento" name="enderecopadraoFaturamento" checked>
+                            <label class="form-check-label">Usar endereço de faturamento como endereço de entrega</label>
+                            <div class="invalid-feedback">
+                                Informe um enderço para entrega.
+                            </div>
                         </div>
                         <div id="novosEnderecos"></div>
                         <div class="row">
@@ -182,6 +186,13 @@
             <div class="button-wrapper">
                 <button class="accept-cookie-button">OK</button>
             </div>
+        </div>
+    </div>
+    <div id="modal-error" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Erro: CPF já existe no sistema.</p>
+            <button class="accept-cookie-button">OK</button>
         </div>
     </div>
 
