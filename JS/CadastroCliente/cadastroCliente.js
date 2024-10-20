@@ -1,3 +1,20 @@
+(() => {
+    'use strict'
+
+    const forms = document.querySelectorAll('.form')
+
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('invalid-feedback')
+        }, false)
+    })
+})()
+
 // Função para aplicar a máscara de CEP (12345-678)
 function aplicarMascaraCEP(event) {
     let cep = event.target.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
@@ -49,26 +66,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const novosEnderecosContainer = document.getElementById('novosEnderecos');
     const mesmoEnderecoCheckbox = document.getElementById('mesmoEndereco');
 
-    confirmarCadastroBtn.addEventListener('click', function() {
-        const usuario = gerarJSON();
-        console.log('JSON gerado:', JSON.stringify(usuario, null, 2)); // Adiciona log para depuração
-        // enviarDados(usuario);
-    });
-
-    // Função para mostrar/ocultar campos de novo endereço
-    function toggleNovoEndereco() {
-        if (!mesmoEnderecoCheckbox.checked) {
-            novosEnderecosContainer.style.display = 'block';
+    confirmarCadastroBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // Impede o envio do formulário
+        const form = document.querySelector('.form');
+        if (form.checkValidity()) {
+            const usuario = gerarJSON();
+            console.log('JSON gerado:', JSON.stringify(usuario, null, 2)); // Adiciona log para depuração
+            enviarDados(usuario);
         } else {
-            novosEnderecosContainer.style.display = 'block';
-            // Limpar os endereços adicionados
-            novosEnderecosContainer.innerHTML = '';
+            form.classList.add('was-validated');
         }
-    }
-
-    // Evento de mudança do checkbox
-    mesmoEnderecoCheckbox.addEventListener('change', toggleNovoEndereco);
-
+    });
     // Adicionar novo endereço
     adicionarEnderecoBtn.addEventListener('click', function () {
         novosEnderecosContainer.style.display = 'block';
@@ -127,36 +135,50 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         `;
         novosEnderecosContainer.insertAdjacentHTML('beforeend', novoEnderecoHTML);
+        
+        novosEnderecosContainer.addEventListener('input', function (event) {
+    // Verifica se o alvo do input é um input de CEP
+    if (event.target.classList.contains('cep')) {
+        aplicarMascaraCEP(event); // Chama a função de máscara
+    }
+});
 
-        const novoCepInput = novosEnderecosContainer.querySelector('.cep:last-of-type');
-        const inputs = {
-            bairro: novosEnderecosContainer.querySelector('.endereco:last-of-type .bairro'),
-            logradouro: novosEnderecosContainer.querySelector('.endereco:last-of-type .logradouro'),
-            cidade: novosEnderecosContainer.querySelector('.endereco:last-of-type .cidade'),
-            uf: novosEnderecosContainer.querySelector('.endereco:last-of-type .uf')
-        };
 
-        novoCepInput.addEventListener('input', aplicarMascaraCEP);
-        novoCepInput.addEventListener('blur', function () {
-            const cep = this.value.replace(/\D/g, '');
-            if (cep.length === 8) {
-                buscarEnderecoViaCEP(cep, inputs);
+        novosEnderecosContainer.addEventListener('blur', function (event) {
+            // Verifica se o alvo do blur é um input de CEP
+            if (event.target.classList.contains('cep')) {
+                const cep = event.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+                if (cep.length === 8) { // Se o CEP tem 8 dígitos
+                    const inputs = {
+                        bairro: event.target.closest('.endereco').querySelector('.bairro'),
+                        logradouro: event.target.closest('.endereco').querySelector('.logradouro'),
+                        cidade: event.target.closest('.endereco').querySelector('.cidade'),
+                        uf: event.target.closest('.endereco').querySelector('.uf')
+                    };
+                    buscarEnderecoViaCEP(cep, inputs);
+                } else {
+                    console.warn('CEP inválido:', cep); // Log de CEP inválido para depuração
+                }
             }
-        });
+        }, true);
 
-        // Adicionar lógica para permitir apenas um checkbox marcado
         const novoCheckbox = novosEnderecosContainer.querySelector('.enderecopadrao:last-of-type');
+
         novoCheckbox.addEventListener('click', function () {
+            // Desmarcar outros checkboxes de endereço padrão
             document.querySelectorAll('.enderecopadrao').forEach(checkbox => {
                 if (checkbox !== this) {
-                    checkbox.checked = false;
+                    checkbox.checked = false; // Desmarcar outros
                 }
             });
+            // Desmarcar o checkbox de cobrança se um endereço padrão for selecionado
+            if (this.checked) {
+                mesmoEnderecoCheckbox.checked = false;
+            }
         });
     });
 
     // Inicializar a exibição dos novos endereços com base no estado do checkbox
-    toggleNovoEndereco();
 
     // Evento para confirmar o cadastro
     confirmarCadastroBtn.addEventListener('click', function() {
@@ -177,32 +199,38 @@ function gerarJSON() {
 
 
     const enderecos = [];
-    document.querySelectorAll('.endereco').forEach(endereco => {
-        
+let cobrancaDefinida = false; // Variável para controlar se o endereço de cobrança já foi definido
 
-        const cepField = endereco.querySelector('.cep');
-        const logradouroField = endereco.querySelector('.logradouro');
-        const complementoField = endereco.querySelector('.complemento');
-        const bairroField = endereco.querySelector('.bairro');
-        const numeroField = endereco.querySelector('.numero');
-        const cidadeField = endereco.querySelector('.cidade');
-        const ufField = endereco.querySelector('.uf');
+document.querySelectorAll('.endereco').forEach(endereco => {
+    const cepField = endereco.querySelector('.cep');
+    const logradouroField = endereco.querySelector('.logradouro');
+    const complementoField = endereco.querySelector('.complemento');
+    const bairroField = endereco.querySelector('.bairro');
+    const numeroField = endereco.querySelector('.numero');
+    const cidadeField = endereco.querySelector('.cidade');
+    const ufField = endereco.querySelector('.uf');
 
-        const entregaCheckbox = endereco.querySelector('.enderecopadrao'); // Checkbox de entrega
-        const cobrancaCheckbox = endereco.querySelector('.enderecopadrao'); // Checkbox de cobrança
-    
-        if (cep) { // Somente adiciona se o CEP estiver preenchido
-            const cep = cepField ? cepField.value : null;
-            const logradouro = logradouroField ? logradouroField.value : null;
-            const complemento = complementoField ? complementoField.value : null;
-            const bairro = bairroField ? bairroField.value : null;
-            const numero = numeroField ? numeroField.value : null;
-            const cidade = cidadeField ? cidadeField.value : null;
-            const uf = ufField ? ufField.value : null;
-            const entrega = entregaCheckbox ? entregaCheckbox.checked : false;
-            const cobranca = cobrancaCheckbox ? cobrancaCheckbox.checked : false;
-            
-            if(cep || logradouro || bairro || numero || cidade || uf) {
+    const entregaCheckbox = endereco.querySelector('.enderecopadrao'); // Checkbox de entrega
+
+    // Verifica se o campo de CEP está preenchido
+    if (cepField) {
+        const cep = cepField.value || null;
+        const logradouro = logradouroField ? logradouroField.value : null;
+        const complemento = complementoField ? complementoField.value : null;
+        const bairro = bairroField ? bairroField.value : null;
+        const numero = numeroField ? numeroField.value : null;
+        const cidade = cidadeField ? cidadeField.value : null;
+        const uf = ufField ? ufField.value : null;
+        const entrega = entregaCheckbox ? entregaCheckbox.checked : false;
+
+        // Se o endereço está completo, adicione ao array
+        if (cep || logradouro || bairro || numero || cidade || uf) {
+            // Define cobranca como true apenas para o primeiro endereço marcado como entrega
+            const cobranca = !cobrancaDefinida && entrega ? true : false;
+            if (cobranca) {
+                cobrancaDefinida = true; // Define que o endereço de cobrança já foi definido
+            }
+
             enderecos.push({
                 cep,
                 logradouro,
@@ -213,30 +241,29 @@ function gerarJSON() {
                 uf,
                 entrega,
                 cobranca
-
             });
-        }}
-    });
-    // Verifica se há endereços
-    if (enderecos.length === 0) {
-        console.error('Nenhum endereço foi adicionado.');
-        // Adicione um endereço padrão ou trate conforme necessário
+        }
     }
-    
-    
+});
 
-    const usuario = {
-        nome,
-        email,
-        senha,
-        genero,
-        cpf,
-        dtNascimento,
-        enderecos
-    };
+// Verifica se há endereços
+if (enderecos.length === 0) {
+    console.error('Nenhum endereço foi adicionado.');
+    // Adicione um endereço padrão ou trate conforme necessário
+}
 
-    console.log(JSON.stringify(usuario, null, 2));
-    return usuario;
+const usuario = {
+    nome,
+    email,
+    senha,
+    genero,
+    cpf,
+    dtNascimento,
+    enderecos
+};
+
+console.log(JSON.stringify(usuario, null, 2));
+return usuario;
 }
 function validarAno() {
     const dtNascimento = new Date(document.getElementById('dtNascimento').value).toISOString();
