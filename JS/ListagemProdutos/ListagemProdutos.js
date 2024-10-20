@@ -312,3 +312,4 @@ function fecharModalConfirmacao() {
     document.getElementById("overlay").style.display = "none";
     document.getElementById("main-content").classList.remove("blur");
 }
+
