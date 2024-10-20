@@ -17,9 +17,10 @@
 
 // Função para aplicar a máscara de CEP (12345-678)
 function aplicarMascaraCEP(event) {
-    let cep = event.target.value.replace(/\D/g, ''); 
+    let cep = event.target.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
     if (cep.length > 5) {
-        cep = cep.replace(/(\d{5})(\d)/, '$1-$2'); 
+        cep = cep.replace(/(\d{5})(\d)/, '$1-$2'); // Aplica a máscara 12345-678
+    }
     event.target.value = cep; // 
 }
 
@@ -133,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
                 <div class="form-check mb-3">
                     <input type="checkbox" class="form-check-input enderecopadrao" name="enderecopadrao">
-                    <label class="form-check-label">Endereço padrão</label>
+                    <label class="form-check-label">Endereço padrão para entrega</label>
                 </div>
             </div>
         `;
