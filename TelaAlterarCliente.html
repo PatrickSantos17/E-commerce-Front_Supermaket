@@ -64,14 +64,15 @@
                         </div>
                         <h3>Endereço de faturamento:</h3>
                         <div class="row linha-faturamento">
-                            
+
                         </div>
-                        <h3>Escolha um endereço padrão de entrega:</h3>
+                        <h3 class="padrao-entrega"></h3>
                         <div class="enderecos">
                         </div>
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <button type="button" class="btn btn-primary" id="adicionarEndereco">Novo Endereço</button>
+                                <button type="button" class="btn btn-primary" id="adicionarEndereco">Novo
+                                    Endereço</button>
                             </div>
                         </div>
 
@@ -116,6 +117,74 @@
             <circle r="20" cy="50" cx="50"></circle>
         </svg>
     </div>
+    <div id="cartao-endereco" class="cartao">
+        <div class="modal-dados-endereco">
+            <div class="fechar-x">
+                <span class="close">&times;</span>
+            </div>
+            <form class="modal-completo-ende">
+                <h2>NOVO ENDEREÇO</h2>
+                <div class="col-md-8 order-md-1">
+                    <form class="form" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3 cepInput">
+                                <label for="cep">CEP</label>
+                                <input type="text" class="form-control cep" id="cep" inputmode="numeric" required>
+                                <div class="invalid-feedback">
+                                    Digite um CEP válido.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="bairro">Bairro</label>
+                                <input type="text" class="form-control bairro" id="bairro" disabled>
+                                <div class="invalid-feedback">
+                                    Informe o bairro.
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="logradouro">Logradouro</label>
+                                <input type="text" class="form-control logradouro" id="logradouro" disabled>
+                                <div class="invalid-feedback">
+                                    Informe um endereço válido.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="numero">Número</label>
+                                <input type="text" class="form-control numero" id="numero" required>
+                                <div class="invalid-feedback">
+                                    Informe o n°.
+                                </div>
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <label for="complemento">Complemento</label>
+                                <input type="text" class="form-control complemento" id="complemento">
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" class="form-control cidade" id="cidade" disabled>
+                                <div class="invalid-feedback">
+                                    Informe a cidade.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="uf">UF</label>
+                                <input type="text" class="form-control uf" id="uf" disabled>
+                                <div class="invalid-feedback">
+                                    Informe a UF.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="button-wrapper">
+                                <button class="cancelar">CANCELAR</button>
+                                <button id="salvar-endereco" class="salvar">ADICIONAR</button>
+                            </div>
+                        </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
     <div class="card" id="modal-confirm">
         <div class="modal-confirm">
             <p class="modal-heading">Cliente Alterado!</p>
@@ -134,10 +203,11 @@
     </footer>
     <!-- Footer -->
     </div>
+    <script src="JS/Geral/Geral.js" defer></script>
+    <script src="JS/AlterarCliente/acoesModal.js" defer></script>
     <script src="JS/AlterarCliente/AlterarCliente.js" defer></script>
     <script src="JS/AlterarCliente/utils.js" defer></script>
     <script src="JS/AlterarCliente/validacaoFormulario.js" defer></script>
-    <script src="JS/Geral/Geral.js" defer></script>
 </body>
 
 </html>
