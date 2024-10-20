@@ -1,3 +1,10 @@
+var API; 
+if (window.location.hostname == '127.0.0.1') {
+    API = "localhost";
+} else {
+    API = "4.228.231.177";
+}
+
 (() => {
     'use strict'
 
@@ -282,7 +289,7 @@ async function enviarDados(usuario) {
     try {
         console.log('Enviando dados:', JSON.stringify(usuario, null, 2)); // Log do JSON enviado
 
-        const response = await fetch('http://localhost:8080/cliente/cadastro', {
+        const response = await fetch(`http://${API}:8080/cliente/cadastro`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

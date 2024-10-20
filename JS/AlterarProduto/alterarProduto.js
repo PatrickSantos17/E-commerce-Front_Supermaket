@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function acessarProduto(produtoId) {
-    fetch('http://' + API + ':8080/produto/buscaID?id=' + produtoId)
+    fetch(`http://${API}:8080/produto/buscaID?id=${produtoId}`)
         .then(response => response.json())
         .then(produto => {
             document.getElementById('nomeProduto').value = produto.nomeProduto;
