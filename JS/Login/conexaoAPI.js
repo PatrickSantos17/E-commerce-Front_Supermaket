@@ -1,5 +1,9 @@
-var API = "4.228.231.177"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
-// var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+var API; 
+if (window.location.hostname == '127.0.0.1') {
+    API = "localhost";
+} else {
+    API = "4.228.231.177";
+}
 
 const formulario = document.querySelector("form")
 const email = document.querySelector(".email")
