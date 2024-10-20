@@ -39,12 +39,22 @@ function validarSenha() {
     var senha = document.getElementById("senha").value;
     var confirmSenha = document.getElementById("confirmSenha").value;
 
-    if (senha.length >= 5) {
-        document.getElementById("senha").classList.remove("is-invalid");
-        document.getElementById("senha").classList.remove(".invalid-feedback");
-        document.querySelector("#senha + .invalid-feedback").textContent = "";
+    // Permite senha vazia
+    if (senha === "" && confirmSenha === "") {
+        return true;
     }
 
+    // Verifica o comprimento mínimo da senha
+    if (senha.length >= 5) {
+        document.getElementById("senha").classList.remove("is-invalid");
+        document.querySelector("#senha + .invalid-feedback").textContent = "";
+    } else {
+        document.getElementById("senha").classList.add("is-invalid");
+        document.querySelector("#senha + .invalid-feedback").textContent = "A senha deve ter pelo menos 5 caracteres.";
+        return false;
+    }
+
+    // Verifica se as senhas coincidem
     if (senha.length >= 5 && senha === confirmSenha) {
         document.getElementById("confirmSenha").classList.remove("is-invalid");
         document.querySelector("#confirmSenha + .invalid-feedback").textContent = "";

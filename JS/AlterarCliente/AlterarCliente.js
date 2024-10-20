@@ -96,7 +96,6 @@ function renderizarEnderecos() {
         let cep = document.getElementById('cep').value;
         try {
             const endereco = await buscarEnderecoViaCEP(cep);
-            console.log(endereco.erro);
             if (endereco.erro) {
                 mostrarMensagemErro('CEP não encontrado.');
             } else {
@@ -117,6 +116,7 @@ document.querySelector('#salvar-endereco').addEventListener('click', async funct
     const form = document.querySelector(".modal-completo-ende");
     if (form.checkValidity()) {
         const endereco = {
+            id: `novo-${Date.now()}`,
             cep: document.getElementById('cep').value,
             logradouro: document.getElementById('logradouro').value,
             numero: document.getElementById('numero').value,
@@ -127,7 +127,6 @@ document.querySelector('#salvar-endereco').addEventListener('click', async funct
             cobranca: false,
             entrega: false
         };
-        console.log(endereco);
         novosEnderecos.push(endereco);
         closeModalEndereco(event);
         renderizarEnderecos();
@@ -135,6 +134,67 @@ document.querySelector('#salvar-endereco').addEventListener('click', async funct
         form.classList.add('was-validated');
     }
 });
+
+document.querySelector('#confirmarAlteracao').addEventListener('click', async function (event) {
+    event.preventDefault();
+    let idEnderecoPadrao = document.querySelector('input[name="enderecoPrincipal"]:checked').value;
+    let senhaAlterada = document.getElementById('senha').value;
+    let enderecosAlterados;
+
+    if (!senhaAlterada) {
+        senhaAlterada = null;
+    }
+    if (novosEnderecos.length === 0) {
+        enderecosAlterados = null;
+    } else {
+        novosEnderecos.forEach(endereco => {
+            if ((endereco.id == idEnderecoPadrao)) {
+                console.log(endereco.id);
+                endereco.entrega = true;
+                idEnderecoPadrao = null;
+            }
+            delete endereco.id;
+        });
+        enderecosAlterados = novosEnderecos;
+    }
+    clienteAlterado = {
+        idCliente: userId,
+        idEnderecoPadrao: idEnderecoPadrao,
+        nome: document.getElementById('nomeCompleto').value,
+        cpf: document.getElementById('cpf').value.replace(/\D/g, ''),
+        genero: document.getElementById('sexo').value,
+        email: document.getElementById('email').value,
+        senha: senhaAlterada,
+        dtNascimento: document.getElementById('dtNascimento').value,
+        enderecos: enderecosAlterados
+    }
+    const form = document.querySelector(".formulario-alterar-cliente");
+    if ((form.checkValidity() && validarSenha())) {
+        console.log(clienteAlterado);
+        alterarCliente(clienteAlterado);
+    }
+});
+
+function alterarCliente(clienteAlterado) {
+    fetch(`http://${API}:8080/cliente/alterar`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(clienteAlterado)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao alterar cliente: ' + response.statusText);
+            }
+            alert('Cliente alterado com sucesso!');
+            window.location.href = 'TelaProduto.html';
+        })
+        .catch(error => {
+            console.error('Erro ao alterar cliente:', error);
+            alert('Erro ao alterar cliente. Por favor, tente novamente.');
+        });
+}
 
 function closeModalEndereco(event) {
     event.preventDefault();
