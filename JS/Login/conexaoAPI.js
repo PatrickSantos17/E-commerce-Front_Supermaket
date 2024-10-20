@@ -1,10 +1,3 @@
-var API; 
-if (window.location.hostname == '127.0.0.1') {
-    API = "localhost";
-} else {
-    API = "4.228.231.177";
-}
-
 const formulario = document.querySelector("form")
 const email = document.querySelector(".email")
 const senha = document.querySelector(".senha")
