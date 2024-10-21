@@ -1,4 +1,5 @@
 let nome = localStorage.getItem("nome");
+let autenticado = localStorage.getItem("autenticado");
 
 let iconUsuario = document.getElementById('iconUsuario');
 let nomeUsuario = document.querySelector('.nome-usuario');
@@ -36,6 +37,18 @@ document.querySelector('.dados').addEventListener('click', function (event) {
         window.location.href = 'TelaAlterarCliente.html?userId=' + localStorage.getItem("id");
     }
 });
+
+if (autenticado === "true") {
+    document.querySelector('.info-usuario').innerHTML = `
+                <a href="TelaAlterarCliente.html?userId=${localStorage.getItem("id")}" class="dados">Meus dados</a>
+    `;
+} else {
+    document.querySelector('.info-usuario').innerHTML = `
+                <a href="#">Entre</a>
+                <p>ou</p>
+                <a href="TelaFormularioCliente.html">Cadastre-se</a>
+    `;
+}
 
 function abrirModalConfirmacao() {
     document.querySelector('.card-confirmar').innerHTML = `
