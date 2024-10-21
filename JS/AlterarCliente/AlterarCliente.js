@@ -259,3 +259,7 @@ function validarAno() {
         document.getElementById('dtNascimento').value = ''; // Limpa o campo se a data for inválida
     }
 }
+
+function directToTelaProduto() {
+    window.location.href = "TelaProduto.html";
+}
