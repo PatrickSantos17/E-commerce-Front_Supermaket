@@ -1,5 +1,5 @@
 // var userId = params.get('userId');
-var userId = 14;
+var userId = 2;
 
 let enderecosCadastrados = [];
 let novosEnderecos = [];
@@ -51,7 +51,7 @@ function renderizarEnderecos() {
                     `
         }
 
-        if (enderecosCadastrados.length > 1) {
+        if (todosEnderecos.length > 1) {
             padraoEntrega.textContent = "Escolha um endereço padrão de entrega:";
             if (endereco.entrega) {
                 enderecoCliente.innerHTML = `
