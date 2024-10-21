@@ -30,8 +30,10 @@
                 <div class="header-user">
                     <img id="iconUsuario" src="src/img/icon-cliente.png" alt="user-icon">
                     <p class="nome-usuario"></p>
-                    <div id="logout-menu" class="logout-menu hidden">
-                        <button id="logout">Sair</button>
+                    <div class="dropdown-content" id="dropdown-content">
+                        <a class="dados" href="TelaAlterarCliente.html">Perfil</a>
+                        <!-- <a class="Pedidos" href="TelaPedidos.html">Meus pedidos</a> -->
+                        <a class="logout" onclick="abrirModalConfirmacao()" href="">Sair</a>
                     </div>
                 </div>
 
@@ -44,7 +46,7 @@
                 </div>
             </div>
             <div class="info-usuario entre-cadastre">
-                <a href="TelaLogin.html">Entre</a>
+                <a href="#">Entre</a>
                 <p>ou</p>
                 <a href="TelaFormularioCliente.html">Cadastre-se</a>
             </div>
@@ -85,6 +87,8 @@
             </div>
         </div>
     </main>
+    <div id="overlay" class="overlay"></div>
+    <div class="card-confirmar"></div>
 
     <script src="JS/HeaderCliente/HeaderCliente.js" defer></script>
     <script src="JS/Geral/Geral.js" defer></script>
