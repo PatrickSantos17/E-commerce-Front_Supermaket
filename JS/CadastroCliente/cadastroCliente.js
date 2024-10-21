@@ -327,3 +327,7 @@ async function enviarDados(usuario) {
 function directToTelaLoginCliente() {
     window.location.href = "TelaLoginCliente.html";
 }
+
+function directToTelaProduto() {
+    window.location.href = "TelaProduto.html";
+}
