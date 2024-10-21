@@ -44,7 +44,7 @@ if (autenticado === "true") {
     `;
 } else {
     document.querySelector('.info-usuario').innerHTML = `
-                <a href="#">Entre</a>
+                <a href="TelaLoginCliente.html">Entre</a>
                 <p>ou</p>
                 <a href="TelaFormularioCliente.html">Cadastre-se</a>
     `;

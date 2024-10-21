@@ -323,3 +323,7 @@ async function enviarDados(usuario) {
         console.error('Erro ao enviar dados:', error);
     }
 }
+
+function directToTelaLoginCliente() {
+    window.location.href = "TelaLoginCliente.html";
+}
