@@ -34,9 +34,9 @@ function validarLogin() {
 
             console.log("Cliente autenticado: " + data.autenticado)
             // Armazena os dados do usuário no localStorage
-            localStorage.setItem("autenticado", data.autenticado);
-            localStorage.setItem("id", data.id);
-            localStorage.setItem("nome", data.nome);
+            localStorage.setItem("autenticadoCliente", data.autenticado);
+            localStorage.setItem("clienteId", data.id);
+            localStorage.setItem("nomeCliente", data.nome);
 
             loginSucedido();
         })

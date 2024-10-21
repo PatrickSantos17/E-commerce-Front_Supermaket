@@ -1,5 +1,5 @@
-let nome = localStorage.getItem("nome");
-let autenticado = localStorage.getItem("autenticado");
+let nome = localStorage.getItem("nomeCliente");
+let autenticado = localStorage.getItem("autenticadoCliente");
 
 let iconUsuario = document.getElementById('iconUsuario');
 let nomeUsuario = document.querySelector('.nome-usuario');
@@ -31,16 +31,16 @@ logoutButton.addEventListener('click', function (event) {
 
 document.querySelector('.dados').addEventListener('click', function (event) {
     event.preventDefault();
-    let autenticado = localStorage.getItem("autenticado");
+    let autenticado = localStorage.getItem("autenticadoCliente");
     const isAutenticado = (autenticado.toLowerCase() === "true")
     if (isAutenticado === true) {
-        window.location.href = 'TelaAlterarCliente.html?userId=' + localStorage.getItem("id");
+        window.location.href = 'TelaAlterarCliente.html?userId=' + localStorage.getItem("clienteId");
     }
 });
 
 if (autenticado === "true") {
     document.querySelector('.info-usuario').innerHTML = `
-                <a href="TelaAlterarCliente.html?userId=${localStorage.getItem("id")}" class="dados">Meus dados</a>
+                <a href="TelaAlterarCliente.html?userId=${localStorage.getItem("clienteId")}" class="dados">Meus dados</a>
     `;
 } else {
     document.querySelector('.info-usuario').innerHTML = `
@@ -79,11 +79,9 @@ function abrirModalConfirmacao() {
     const btnConfirmar = modal.querySelector('.card-button.primary');
 
     document.querySelector('.confirmar-saida').addEventListener('click', function (event) {
-        localStorage.removeItem("autenticado");
-        localStorage.removeItem("id");
-        localStorage.removeItem("nome");
-        localStorage.removeItem("grupo");
-        localStorage.removeItem("ativo");
+        localStorage.removeItem("autenticadoCliente");
+        localStorage.removeItem("clienteId");
+        localStorage.removeItem("nomeCliente");
         window.location.href = 'TelaProduto.html';
     });
     btnConfirmar.onclick = () => {
