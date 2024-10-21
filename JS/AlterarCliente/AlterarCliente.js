@@ -136,7 +136,11 @@ document.querySelector('#salvar-endereco').addEventListener('click', async funct
 
 document.querySelector('#confirmarAlteracao').addEventListener('click', async function (event) {
     event.preventDefault();
-    let idEnderecoPadrao = document.querySelector('input[name="enderecoPrincipal"]:checked').value;
+    let todosEnderecos = [...enderecosCadastrados, ...novosEnderecos];
+    let idEnderecoPadrao = null
+    if(!(todosEnderecos.length <= 1)) {
+        idEnderecoPadrao = document.querySelector('input[name="enderecoPrincipal"]:checked').value;
+    }
     let senhaAlterada = document.getElementById('senha').value;
     let enderecosAlterados;
 
