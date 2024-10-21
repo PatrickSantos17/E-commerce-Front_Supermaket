@@ -1,5 +1,4 @@
-// var userId = params.get('userId');
-var userId = 2;
+var userId = localStorage.getItem("clienteId");
 
 let enderecosCadastrados = [];
 let novosEnderecos = [];
