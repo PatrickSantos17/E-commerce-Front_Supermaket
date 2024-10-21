@@ -14,7 +14,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
     await carregaCarrinho(listaIdProdutos);
     totalFrete = totalProdutos += parseFloat(frete);
     const conteudo = document.querySelector(".content");
-    let usuarioAutenticado = localStorage.getItem("autenticado");
+    let usuarioAutenticado = localStorage.getItem("autenticadoCliente");
     if (usuarioAutenticado) {
         conteudo.innerHTML += `<aside>
                 <div class="box">
