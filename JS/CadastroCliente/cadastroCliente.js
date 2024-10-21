@@ -1,10 +1,27 @@
+(() => {
+    'use strict'
+
+    const forms = document.querySelectorAll('.form')
+
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('invalid-feedback')
+        }, false)
+    })
+})()
+
 // Função para aplicar a máscara de CEP (12345-678)
 function aplicarMascaraCEP(event) {
     let cep = event.target.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
     if (cep.length > 5) {
         cep = cep.replace(/(\d{5})(\d)/, '$1-$2'); // Aplica a máscara 12345-678
     }
-    event.target.value = cep; // Atualiza o campo com a máscara
+    event.target.value = cep; // 
 }
 
 // Função para buscar o endereço usando a API ViaCEP
@@ -15,7 +32,8 @@ async function buscarEnderecoViaCEP(cep, inputs) {
 
         // Verifica se o CEP é inválido
         if (data.erro) {
-            console.error('CEP inválido.');
+            alert('CEP inválido. Por favor, digite um CEP válido.');
+            document.getElementById('cep').value = '';
             return; // Sai da função se o CEP for inválido
         }
 
@@ -25,7 +43,9 @@ async function buscarEnderecoViaCEP(cep, inputs) {
         inputs.cidade.value = data.localidade || ''; // "localidade" no ViaCEP
         inputs.uf.value = data.uf || '';
     } catch (error) {
-        console.error('Erro ao consultar o CEP:', error);
+        alert('CEP inválido. Por favor, digite um CEP válido.');
+        document.getElementById('cep').value = '';
+        console.error('Erro ao buscar CEP:', error);
     }
 }
 
@@ -47,32 +67,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const adicionarEnderecoBtn = document.getElementById('adicionarEndereco');
     const confirmarCadastroBtn = document.getElementById('confirmarCadastro');
     const novosEnderecosContainer = document.getElementById('novosEnderecos');
-    const mesmoEnderecoCheckbox = document.getElementById('mesmoEndereco');
+    const mesmoEnderecoCheckbox = document.getElementById('enderecopadrao');
 
-    confirmarCadastroBtn.addEventListener('click', function() {
-        const usuario = gerarJSON();
-        console.log('JSON gerado:', JSON.stringify(usuario, null, 2)); // Adiciona log para depuração
-        // enviarDados(usuario);
-    });
-
-    // Função para mostrar/ocultar campos de novo endereço
-    function toggleNovoEndereco() {
-        if (!mesmoEnderecoCheckbox.checked) {
-            novosEnderecosContainer.style.display = 'block';
+    confirmarCadastroBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // Impede o envio do formulário
+        const form = document.querySelector('.form');
+        if (form.checkValidity()) {
+            const usuario = gerarJSON();
+            console.log('JSON gerado:', JSON.stringify(usuario, null, 2)); // Adiciona log para depuração
+            enviarDados(usuario);
         } else {
-            novosEnderecosContainer.style.display = 'block';
-            // Limpar os endereços adicionados
-            novosEnderecosContainer.innerHTML = '';
+            form.classList.add('was-validated');
         }
-    }
-
-    // Evento de mudança do checkbox
-    mesmoEnderecoCheckbox.addEventListener('change', toggleNovoEndereco);
-
+    });
     // Adicionar novo endereço
     adicionarEnderecoBtn.addEventListener('click', function () {
         novosEnderecosContainer.style.display = 'block';
         const novoEnderecoHTML = `
+        
             <div class="row endereco">
                 <div class="col-md-6 mb-3">
                     <label for="cep">CEP</label>
@@ -121,49 +133,58 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 </div>
                 <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input enderecopadrao" id="enderecopadrao">
-                    <label class="form-check-label" for="enderecopadrao">Endereço padrão</label>
+                    <input type="checkbox" class="form-check-input enderecopadrao" name="enderecopadrao">
+                    <label class="form-check-label">Endereço padrão para entrega</label>
                 </div>
             </div>
         `;
         novosEnderecosContainer.insertAdjacentHTML('beforeend', novoEnderecoHTML);
-
-        const novoCepInput = novosEnderecosContainer.querySelector('.cep:last-of-type');
-        const inputs = {
-            bairro: novosEnderecosContainer.querySelector('.endereco:last-of-type .bairro'),
-            logradouro: novosEnderecosContainer.querySelector('.endereco:last-of-type .logradouro'),
-            cidade: novosEnderecosContainer.querySelector('.endereco:last-of-type .cidade'),
-            uf: novosEnderecosContainer.querySelector('.endereco:last-of-type .uf')
-        };
-
-        novoCepInput.addEventListener('input', aplicarMascaraCEP);
-        novoCepInput.addEventListener('blur', function () {
-            const cep = this.value.replace(/\D/g, '');
-            if (cep.length === 8) {
-                buscarEnderecoViaCEP(cep, inputs);
+        
+        novosEnderecosContainer.addEventListener('input', function (event) {
+   
+    if (event.target.classList.contains('cep')) {
+        aplicarMascaraCEP(event); 
+    }
+});
+        novosEnderecosContainer.addEventListener('blur', function (event) {
+            
+            
+            if (event.target.classList.contains('cep')) {
+                const cep = event.target.value.replace(/\D/g, '');
+                if (cep.length === 8) { 
+                    const inputs = {
+                        bairro: event.target.closest('.endereco').querySelector('.bairro'),
+                        logradouro: event.target.closest('.endereco').querySelector('.logradouro'),
+                        cidade: event.target.closest('.endereco').querySelector('.cidade'),
+                        uf: event.target.closest('.endereco').querySelector('.uf')
+                    };
+                    buscarEnderecoViaCEP(cep, inputs);
+                } else {
+                    alert('CEP inválido. Por favor, digite um CEP válido.');
+                    document.getElementById('cep').value = '';
+                    console.warn('CEP inválido:', cep); // Log de CEP inválido para depuração
+                }
+            }
+        }, true);
+        novosEnderecosContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('enderecopadrao')) {
+                // Desmarcar todos os checkboxes de endereço padrão
+                document.querySelectorAll('.enderecopadrao').forEach(checkbox => {
+                    // Desmarcar todos, exceto o que foi clicado
+                    if (checkbox !== event.target) {
+                        checkbox.checked = false;
+                    }
+                });
             }
         });
-
-        // Adicionar lógica para permitir apenas um checkbox marcado
-        const novoCheckbox = novosEnderecosContainer.querySelector('.enderecopadrao:last-of-type');
-        novoCheckbox.addEventListener('click', function () {
+        document.getElementById('enderecopadraoFaturamento').addEventListener('click', function(event) {
             document.querySelectorAll('.enderecopadrao').forEach(checkbox => {
-                if (checkbox !== this) {
+                if (checkbox !== event.target) {
                     checkbox.checked = false;
                 }
             });
         });
-    });
-
-    // Inicializar a exibição dos novos endereços com base no estado do checkbox
-    toggleNovoEndereco();
-
-    // Evento para confirmar o cadastro
-    confirmarCadastroBtn.addEventListener('click', function() {
-        const usuario = gerarJSON();
-        console.log(usuario);
-        console.log('JSON gerado:', JSON.stringify(usuario, null, 2)); // Adiciona log para depuração
-        // enviarDados(usuario);
+        
     });
 });
 
@@ -175,34 +196,45 @@ function gerarJSON() {
     const cpf = document.getElementById('cpf').value;
     const dtNascimento = new Date(document.getElementById('dtNascimento').value).toISOString();
 
-
+    
     const enderecos = [];
+    let cobrancaDefinida = false; 
+    let primeiroEndereco = true; 
+    
     document.querySelectorAll('.endereco').forEach(endereco => {
         
+        
+    const cepField = endereco.querySelector('.cep');
+    const logradouroField = endereco.querySelector('.logradouro');
+    const complementoField = endereco.querySelector('.complemento');
+    const bairroField = endereco.querySelector('.bairro');
+    const numeroField = endereco.querySelector('.numero');
+    const cidadeField = endereco.querySelector('.cidade');
+    const ufField = endereco.querySelector('.uf');
 
-        const cepField = endereco.querySelector('.cep');
-        const logradouroField = endereco.querySelector('.logradouro');
-        const complementoField = endereco.querySelector('.complemento');
-        const bairroField = endereco.querySelector('.bairro');
-        const numeroField = endereco.querySelector('.numero');
-        const cidadeField = endereco.querySelector('.cidade');
-        const ufField = endereco.querySelector('.uf');
+    const entregaCheckbox = endereco.querySelector('.enderecopadrao'); // Checkbox de entrega
+    const faturamentoCheckbox = document.getElementById('enderecopadraoFaturamento');
+    // Verifica se o campo de CEP está preenchido
+    if (cepField) {
+        const cep = cepField.value || null;
+        const logradouro = logradouroField ? logradouroField.value : null;
+        const complemento = complementoField ? complementoField.value : null;
+        const bairro = bairroField ? bairroField.value : null;
+        const numero = numeroField ? numeroField.value : null;
+        const cidade = cidadeField ? cidadeField.value : null;
+        const uf = ufField ? ufField.value : null;
+        let entrega = entregaCheckbox ? entregaCheckbox.checked : false;
+        const faturamentoEntrega = faturamentoCheckbox.checked;
 
-        const entregaCheckbox = endereco.querySelector('.enderecopadrao'); // Checkbox de entrega
-        const cobrancaCheckbox = endereco.querySelector('.enderecopadrao'); // Checkbox de cobrança
-    
-        if (cep) { // Somente adiciona se o CEP estiver preenchido
-            const cep = cepField ? cepField.value : null;
-            const logradouro = logradouroField ? logradouroField.value : null;
-            const complemento = complementoField ? complementoField.value : null;
-            const bairro = bairroField ? bairroField.value : null;
-            const numero = numeroField ? numeroField.value : null;
-            const cidade = cidadeField ? cidadeField.value : null;
-            const uf = ufField ? ufField.value : null;
-            const entrega = entregaCheckbox ? entregaCheckbox.checked : false;
-            const cobranca = cobrancaCheckbox ? cobrancaCheckbox.checked : false;
-            
-            if(cep || logradouro || bairro || numero || cidade || uf) {
+        if(faturamentoEntrega && primeiroEndereco){
+            entrega = true;
+        }
+        
+        if (cep || logradouro || bairro || numero || cidade || uf) {
+            // O primeiro endereço deve ser sempre de cobrança
+            const cobranca = primeiroEndereco ? true : false;
+            primeiroEndereco = false; 
+
             enderecos.push({
                 cep,
                 logradouro,
@@ -211,32 +243,31 @@ function gerarJSON() {
                 numero,
                 cidade,
                 uf,
-                entrega,
+                entrega, 
                 cobranca
-
             });
-        }}
-    });
-    // Verifica se há endereços
-    if (enderecos.length === 0) {
-        console.error('Nenhum endereço foi adicionado.');
-        // Adicione um endereço padrão ou trate conforme necessário
+        }
     }
-    
-    
+});
 
-    const usuario = {
-        nome,
-        email,
-        senha,
-        genero,
-        cpf,
-        dtNascimento,
-        enderecos
-    };
+// Verifica se há endereços
+if (enderecos.length === 0) {
+    console.error('Nenhum endereço foi adicionado.');
+    // Adicione um endereço padrão ou trate conforme necessário
+}
 
-    console.log(JSON.stringify(usuario, null, 2));
-    return usuario;
+const usuario = {
+    nome,
+    email,
+    senha,
+    genero,
+    cpf,
+    dtNascimento,
+    enderecos
+};
+
+console.log(JSON.stringify(usuario, null, 2));
+return usuario;
 }
 function validarAno() {
     const dtNascimento = new Date(document.getElementById('dtNascimento').value).toISOString();
@@ -255,7 +286,7 @@ async function enviarDados(usuario) {
     try {
         console.log('Enviando dados:', JSON.stringify(usuario, null, 2)); // Log do JSON enviado
 
-        const response = await fetch('http://localhost:8080/cliente/cadastro', {
+        const response = await fetch(`http://${API}:8080/cliente/cadastro`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -264,8 +295,9 @@ async function enviarDados(usuario) {
         });
 
         if (!response.ok) {
-            const errorText = await response.text(); // Obter a mensagem de erro detalhada do servidor
-            console.error('Resposta do servidor:', errorText); // Log da resposta do servidor
+            const errorText = await response.text(); 
+            alert('Erro ao enviar dados, certifique-se de não ter cadastro no sistema com CPF ou e-mail.'); 
+            console.error('Resposta do servidor:', errorText); 
             throw new Error('Erro ao enviar dados: ' + errorText);
         }
 
@@ -274,13 +306,12 @@ async function enviarDados(usuario) {
         const modal = document.getElementById('modal-confirm');
         modal.style.display = 'block';
 
-        // Fechar o modal quando o usuário clicar no botão de fechar
+        
         const closeModal = modal.querySelector('.accept-cookie-button');
         closeModal.addEventListener('click', function() {
             modal.style.display = 'none';
         });
 
-        // Fechar o modal quando o usuário clicar fora do modal
         window.addEventListener('click', function(event) {
             if (event.target === modal) {
                 modal.style.display = 'none';
@@ -291,4 +322,12 @@ async function enviarDados(usuario) {
     } catch (error) {
         console.error('Erro ao enviar dados:', error);
     }
+}
+
+function directToTelaLoginCliente() {
+    window.location.href = "TelaLoginCliente.html";
+}
+
+function directToTelaProduto() {
+    window.location.href = "TelaProduto.html";
 }

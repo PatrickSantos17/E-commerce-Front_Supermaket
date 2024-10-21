@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="CSS/BootStrap/bootstrap.css">
     <link rel="stylesheet" href="CSS/BootStrap/open-iconic-bootstrap.css">
     <link rel="stylesheet" href="Css/FormularioCliente/formulario.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
 
     <title>Cadastre-se</title>
 </head>
@@ -17,11 +19,13 @@
     <div class="main">
         <div class="container">
             <div class="py-5 text-center">
-                <a href="TelaProduto.html"><img class="d-block mx-auto mb-4" src="src/img/logo-removebg-preview.png" alt="logo" width="90" height="90"></a>
+                <a href="TelaProduto.html"><img class="d-block mx-auto mb-4" src="src/img/logo-removebg-preview.png"
+                        alt="logo" width="90" height="90"></a>
                 <h2>CRIE A SUA CONTA</h2>
                 <p class="lead">Cadastre-se em nosso site para realizar compras e ficar por dentro de todas as novidades
                     e produtos!
                 </p>
+                <p>Adicione os dados do endereço de faturamento</p>
             </div>
             <div class="d-flex justify-content-center">
                 <div class="col-md-8 order-md-1">
@@ -30,9 +34,11 @@
                             <div class="col-md-6 mb-3">
                                 <label for="nomeCompleto">Nome completo</label>
                                 <input type="text" class="form-control" id="nomeCompleto"
-                                    placeholder="Digite seu nome..." required>
+                                    placeholder="Digite seu nome..." required
+                                    pattern="^[A-Za-z]{3,}\s[A-Za-z]{3,}(?:\s[A-Za-z]{3,})*$">
                                 <div class="invalid-feedback">
-                                    Digite o seu nome completo.
+                                    Digite o seu nome completo com pelo menos duas palavras, cada uma contendo no mínimo
+                                    3 letras.
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -62,77 +68,84 @@
                             </div>
                         </div>
                         <div class="endereco">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="cep">CEP</label>
-                                <input type="text" class="form-control cep" id="cep" inputmode="numeric" required>
-                                <div class="invalid-feedback">
-                                    Digite um CEP válido.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="bairro">Bairro</label>
-                                <input type="text" class="form-control bairro" id="bairro" disabled>
-                                <div class="invalid-feedback">
-                                    Informe o bairro.
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="logradouro">Logradouro</label>
-                                <input type="text" class="form-control logradouro" id="logradouro" disabled>
-                                <div class="invalid-feedback">
-                                    Informe um endereço válido.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="numero">Número</label>
-                                <input type="text" class="form-control numero" id="numero" required>
-                                <div class="invalid-feedback">
-                                    Informe o n°.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="complemento">Complemento</label>
-                                <input type="text" class="form-control complemento" id="complemento">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8 mb-3">
-                                <label for="cidade">Cidade</label>
-                                <input type="text" class="form-control cidade" id="cidade" disabled>
-                                <div class="invalid-feedback">
-                                    Informe a cidade.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="col-md-8 mb-3">
-                                    <label for="uf">UF</label>
-                                    <input type="text" class="form-control uf" id="uf" disabled style="width: 175%;">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="cep">CEP</label>
+                                    <input type="text" class="form-control cep" id="cep" inputmode="numeric" required>
                                     <div class="invalid-feedback">
-                                        Informe a UF.
+                                        Digite um CEP válido.
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="bairro">Bairro</label>
+                                    <input type="text" class="form-control bairro" id="bairro" disabled>
+                                    <div class="invalid-feedback">
+                                        Informe o bairro.
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="logradouro">Logradouro</label>
+                                    <input type="text" class="form-control logradouro" id="logradouro" disabled>
+                                    <div class="invalid-feedback">
+                                        Informe um endereço válido.
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="numero">Número</label>
+                                    <input type="text" class="form-control numero" id="numero" required>
+                                    <div class="invalid-feedback">
+                                        Informe o n°.
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="complemento">Complemento</label>
+                                    <input type="text" class="form-control complemento" id="complemento">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 mb-3">
+                                    <label for="cidade">Cidade</label>
+                                    <input type="text" class="form-control cidade" id="cidade" disabled>
+                                    <div class="invalid-feedback">
+                                        Informe a cidade.
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="col-md-8 mb-3">
+                                        <label for="uf">UF</label>
+                                        <input type="text" class="form-control uf" id="uf" disabled
+                                            style="width: 175%;">
+                                        <div class="invalid-feedback">
+                                            Informe a UF.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                            
+
 
 
                         </div>
                         <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="mesmoEndereco" checked>
-                            <label class="form-check-label" for="mesmoEndereco">Usar endereço de faturamento como endereço de entrega</label>
+                            <input type="checkbox" class="form-check-input enderecopadrao"
+                                id="enderecopadraoFaturamento" name="enderecopadraoFaturamento" checked>
+                            <label class="form-check-label">Usar endereço de faturamento como endereço de
+                                entrega</label>
+                            <div class="invalid-feedback">
+                                Informe um enderço para entrega.
+                            </div>
                         </div>
                         <div id="novosEnderecos"></div>
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <button type="button" class="btn btn-primary" id="adicionarEndereco">Adicionar Endereço</button>
+                                <button type="button" class="btn btn-primary" id="adicionarEndereco">Adicionar
+                                    Endereço</button>
                             </div>
                         </div>
-                        
+
                         <!-- Contêiner para novos endereços -->
                         <div class="endereco" id="novosEnderecos"></div>
 
-                        
+
                         <hr class="mb-4">
                         <div class="mb-3">
                             <label for="email">Email</label>
@@ -159,9 +172,11 @@
                             </div>
                         </div>
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" id="confirmarCadastro" type="button">Confirmar Cadastro</button>
-                        <button class="btn btn-secondary btn-lg btn-block">
-                            <a href="TelaLogin.html" style="color: inherit; text-decoration: none;">Cancelar</a>
+                        <button class="btn btn-primary btn-lg btn-block" id="confirmarCadastro" type="button">Confirmar
+                            Cadastro</button>
+                        <button onclick="directToTelaProduto()" class="btn btn-secondary btn-lg btn-block">
+                            Cancelar
+                            <!-- <a href="TelaProduto.html" style="color: inherit; text-decoration: none;">Cancelar</a> -->
                         </button>
                     </form>
                 </div>
@@ -180,18 +195,26 @@
                 Seu cadastro foi realizado com sucesso!!
             </p>
             <div class="button-wrapper">
-                <button class="accept-cookie-button">OK</button>
+                <button onclick="directToTelaLoginCliente()" class="accept-cookie-button">OK</button>
             </div>
+        </div>
+    </div>
+    <div id="modal-error" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Erro: CPF já existe no sistema.</p>
+            <button class="accept-cookie-button">OK</button>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-       
+
     </footer>
     <!-- Footer -->
     </div>
     <script src="JS/CadastroCliente/cadastroCliente.js" defer></script>
+    <script src="JS/Geral/Geral.js" defer></script>
 </body>
 
 </html>

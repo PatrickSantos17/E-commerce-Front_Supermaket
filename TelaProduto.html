@@ -30,7 +30,7 @@
                     <div class="dropdown-content" id="dropdown-content">
                         <a class="dados" href="TelaAlterarCliente.html">Perfil</a>
                         <!-- <a class="Pedidos" href="TelaPedidos.html">Meus pedidos</a> -->
-                        <a class="logout" href="">Sair</a>
+                        <a class="logout" onclick="abrirModalConfirmacao()" href="">Sair</a>
                     </div>
                 </div>
 
@@ -42,21 +42,23 @@
                     <p class="qtd-carrinho"></p>
                 </div>
             </div>
-            <div class="info-usuario entre-cadastre">
-                <a href="#">Entre</a>
-                <p>ou</p>
-                <a href="TelaFormularioCliente.html">Cadastre-se</a>
+            <div class="info-usuario entre-cadastre">            
             </div>
         </div>
     </header>
-    <div class="imagem-mercado">
-        <img class="imagem-merc" src="src/img/SM_Principal.jpg" alt="">
-    </div>
-    <div class="container my-5 custom-container">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4" id="product-list"></div>
-    </div>
+    <main>
+        <div class="imagem-mercado">
+            <img class="imagem-merc" src="src/img/SM_Principal.jpg" alt="">
+        </div>
+        <div class="container my-5 custom-container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4" id="product-list"></div>
+        </div>
 
-
+    </main>
+    <div id="overlay" class="overlay"></div>
+    <div class="card-confirmar"></div>
+    <!-- Scripts -->
+    <script src="JS/Geral/Geral.js" defer></script>
     <script src="JS/Produto/Produto.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="JS/HeaderCliente/HeaderCliente.js"></script>

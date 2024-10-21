@@ -1,264 +1,265 @@
-// Função para aplicar a máscara de CEP (12345-678)
-function aplicarMascaraCEP(event) {
-    let cep = event.target.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
-    if (cep.length > 5) {
-        cep = cep.replace(/(\d{5})(\d)/, '$1-$2'); // Aplica a máscara 12345-678
-    }
-    event.target.value = cep; // Atualiza o campo com a máscara
-}
+var userId = localStorage.getItem("clienteId");
 
-// Função para buscar o endereço usando a API ViaCEP
-async function buscarEnderecoViaCEP(cep, inputs) {
-    try {
-        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-        const data = await response.json();
+let enderecosCadastrados = [];
+let novosEnderecos = [];
 
-        // Verifica se o CEP é inválido
-        if (data.erro) {
-            console.error('CEP inválido.');
-            return; // Sai da função se o CEP for inválido
-        }
-
-        // Preencher os campos com os dados da resposta da API
-        inputs.bairro.value = data.bairro || '';
-        inputs.logradouro.value = data.logradouro || '';
-        inputs.cidade.value = data.localidade || ''; // "localidade" no ViaCEP
-        inputs.uf.value = data.uf || '';
-    } catch (error) {
-        console.error('Erro ao consultar o CEP:', error);
-    }
-}
-
-// Evento para o campo de CEP no formulário principal
-document.getElementById('cep').addEventListener('input', aplicarMascaraCEP);
-document.getElementById('cep').addEventListener('blur', function () {
-    const cep = this.value.replace(/\D/g, '');
-    if (cep.length === 8) {
-        buscarEnderecoViaCEP(cep, {
-            bairro: document.getElementById('bairro'),
-            logradouro: document.getElementById('logradouro'),
-            cidade: document.getElementById('cidade'),
-            uf: document.getElementById('uf')
-        });
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    buscarCliente(userId);
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const adicionarEnderecoBtn = document.getElementById('adicionarEndereco');
-    const confirmarCadastroBtn = document.getElementById('confirmarCadastro');
-    const novosEnderecosContainer = document.getElementById('novosEnderecos');
-    const mesmoEnderecoCheckbox = document.getElementById('mesmoEndereco');
+function buscarCliente(userId) {
+    fetch(`http://${API}:8080/cliente/consultar/${userId}`)
+        .then(response => response.json())
+        .then(cliente => {
+            document.getElementById('nomeCompleto').value = cliente.nome;
+            document.getElementById('cpf').value = formatarCPF(cliente.cpf);
+            document.getElementById('sexo').value = cliente.genero;
+            document.getElementById('email').value = cliente.email;
+            document.getElementById('dtNascimento').value = converterParaFormatoDate(cliente.dtNascimento);
+            enderecosCadastrados = cliente.enderecos;
+            renderizarEnderecos();
+        })
+        .catch(error => {
+            console.error('Erro ao buscar informações do cliente:', error);
+            alert("Erro ao buscar informações do cliente. Por favor, tente novamente.");
+        });
+}
 
-    confirmarCadastroBtn.addEventListener('click', function() {
-        const usuario = gerarJSON();
-        console.log('JSON gerado:', JSON.stringify(usuario, null, 2)); // Adiciona log para depuração
-        // enviarDados(usuario);
-    });
+function renderizarEnderecos() {
+    const enderecoFaturamento = document.querySelector('.linha-faturamento');
+    const enderecos = document.querySelector(".enderecos");
+    const padraoEntrega = document.querySelector('.padrao-entrega');
+    enderecos.innerHTML = '';
 
-    // Função para mostrar/ocultar campos de novo endereço
-    function toggleNovoEndereco() {
-        if (!mesmoEnderecoCheckbox.checked) {
-            novosEnderecosContainer.style.display = 'block';
-        } else {
-            novosEnderecosContainer.style.display = 'block';
-            // Limpar os endereços adicionados
-            novosEnderecosContainer.innerHTML = '';
+    const todosEnderecos = [...enderecosCadastrados, ...novosEnderecos];
+
+    todosEnderecos.forEach((endereco) => {
+        const enderecoCliente = document.createElement('div');
+        enderecoCliente.classList.add('endereco');
+
+        if (endereco.cobranca) {
+            enderecoFaturamento.innerHTML = `
+                        <div class="col-md-6 mb-3">
+                            <div class="endereco-faturamento">
+                                <h5>${endereco.cep}</h5>
+                                <p>${endereco.logradouro}, ${endereco.numero}</p>
+                                <p>${endereco.bairro}</p>
+                                <p>${endereco.cidade} - ${endereco.uf}</p>
+                            </div>
+                        </div>
+                    `
         }
-    }
 
-    // Evento de mudança do checkbox
-    mesmoEnderecoCheckbox.addEventListener('change', toggleNovoEndereco);
-
-    // Adicionar novo endereço
-    adicionarEnderecoBtn.addEventListener('click', function () {
-        novosEnderecosContainer.style.display = 'block';
-        const novoEnderecoHTML = `
-            <div class="row endereco">
-                <div class="col-md-6 mb-3">
-                    <label for="cep">CEP</label>
-                    <input type="text" class="form-control cep" inputmode="numeric" required>
-                    <div class="invalid-feedback">
-                        Digite um CEP válido.
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="bairro">Bairro</label>
-                    <input type="text" class="form-control bairro" disabled>
-                    <div class="invalid-feedback">
-                        Informe o bairro.
-                    </div>
-                </div>
-                <div class="col-md-12 mb-3">
-                    <label for="logradouro">Logradouro</label>
-                    <input type="text" class="form-control logradouro" disabled>
-                    <div class="invalid-feedback">
-                        Informe um endereço válido.
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="numero">Número</label>
-                    <input type="text" class="form-control" required>
-                    <div class="invalid-feedback">
-                        Informe o n°.
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="complemento">Complemento</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="col-md-8 mb-3">
-                    <label for="cidade">Cidade</label>
-                    <input type="text" class="form-control cidade" disabled>
-                    <div class="invalid-feedback">
-                        Informe a cidade.
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="uf">UF</label>
-                    <input type="text" class="form-control uf" disabled style="width: 100%;">
-                    <div class="invalid-feedback">
-                        Informe a UF.
-                    </div>
-                </div>
-                <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input enderecopadrao" id="enderecopadrao">
-                    <label class="form-check-label" for="enderecopadrao">Endereço padrão</label>
-                </div>
-            </div>
-        `;
-        novosEnderecosContainer.insertAdjacentHTML('beforeend', novoEnderecoHTML);
-
-        const novoCepInput = novosEnderecosContainer.querySelector('.cep:last-of-type');
-        const inputs = {
-            bairro: novosEnderecosContainer.querySelector('.endereco:last-of-type .bairro'),
-            logradouro: novosEnderecosContainer.querySelector('.endereco:last-of-type .logradouro'),
-            cidade: novosEnderecosContainer.querySelector('.endereco:last-of-type .cidade'),
-            uf: novosEnderecosContainer.querySelector('.endereco:last-of-type .uf')
-        };
-
-        novoCepInput.addEventListener('input', aplicarMascaraCEP);
-        novoCepInput.addEventListener('blur', function () {
-            const cep = this.value.replace(/\D/g, '');
-            if (cep.length === 8) {
-                buscarEnderecoViaCEP(cep, inputs);
+        if (todosEnderecos.length > 1) {
+            padraoEntrega.textContent = "Escolha um endereço padrão de entrega:";
+            if (endereco.entrega) {
+                enderecoCliente.innerHTML = `
+                                    <input type="radio" id="${endereco.id}" name="enderecoPrincipal" value="${endereco.id}" checked>
+                                    <label for="${endereco.id}">
+                                        <h5>${endereco.cep}</h5>
+                                        <p>${endereco.logradouro}, ${endereco.numero}</p>
+                                        <p>${endereco.bairro}</p>
+                                        <p>${endereco.cidade} - ${endereco.uf}</p>
+                                    </label>
+                    `
+            } else {
+                enderecoCliente.innerHTML = `
+                                    <input type="radio" id="${endereco.id}" name="enderecoPrincipal" value="${endereco.id}">
+                                    <label for="${endereco.id}">
+                                        <h5>${endereco.cep}</h5>
+                                        <p>${endereco.logradouro}, ${endereco.numero}</p>
+                                        <p>${endereco.bairro}</p>
+                                        <p>${endereco.cidade} - ${endereco.uf}</p>
+                                    </label>
+                    `
             }
-        });
+        } else {
+            padraoEntrega.textContent = "Endereço padrão de entrega:";
+            enderecoCliente.innerHTML = `
+                                    <label for="${endereco.id}">
+                                        <h5>${endereco.cep}</h5>
+                                        <p>${endereco.logradouro}, ${endereco.numero}</p>
+                                        <p>${endereco.bairro}</p>
+                                        <p>${endereco.cidade} - ${endereco.uf}</p>
+                                    </label>
+                                    `
+        }
 
-        // Adicionar lógica para permitir apenas um checkbox marcado
-        const novoCheckbox = novosEnderecosContainer.querySelector('.enderecopadrao:last-of-type');
-        novoCheckbox.addEventListener('click', function () {
-            document.querySelectorAll('.enderecopadrao').forEach(checkbox => {
-                if (checkbox !== this) {
-                    checkbox.checked = false;
-                }
-            });
-        });
+        enderecos.appendChild(enderecoCliente);
     });
 
-    // Inicializar a exibição dos novos endereços com base no estado do checkbox
-    toggleNovoEndereco();
+    const cepInput = document.querySelector('#cep');
+    cepInput.addEventListener('input', aplicarMascaraCEP);
 
-    // Evento para confirmar o cadastro
-    confirmarCadastroBtn.addEventListener('click', function() {
-        const usuario = gerarJSON();
-        console.log(usuario);
-        console.log('JSON gerado:', JSON.stringify(usuario, null, 2)); // Adiciona log para depuração
-        // enviarDados(usuario);
+    document.getElementById('cep').addEventListener('blur', async function () {
+        let cep = document.getElementById('cep').value;
+        try {
+            const endereco = await buscarEnderecoViaCEP(cep);
+            if (endereco.erro) {
+                mostrarMensagemErro('CEP não encontrado.');
+            } else {
+                console.log('Endereço encontrado:', endereco);
+                mostrarEndereco(endereco);
+            }
+        } catch (error) {
+            mostrarMensagemErro('Erro ao buscar o CEP.');
+            console.log(error);
+            console.error('Erro:', error);
+        }
     });
+}
+
+document.querySelector('#salvar-endereco').addEventListener('click', async function (event) {
+    event.preventDefault();
+
+    const form = document.querySelector(".modal-completo-ende");
+    if (form.checkValidity()) {
+        const endereco = {
+            id: `novo-${Date.now()}`,
+            cep: document.getElementById('cep').value,
+            logradouro: document.getElementById('logradouro').value,
+            numero: document.getElementById('numero').value,
+            bairro: document.getElementById('bairro').value,
+            cidade: document.getElementById('cidade').value,
+            uf: document.getElementById('uf').value,
+            complemento: document.getElementById('complemento').value,
+            cobranca: false,
+            entrega: false
+        };
+        novosEnderecos.push(endereco);
+        closeModalEndereco(event);
+        renderizarEnderecos();
+    } else {
+        form.classList.add('was-validated');
+    }
 });
 
-function gerarJSON() {
-    const nome = document.getElementById('nomeCompleto').value;
-    const email = document.getElementById('email').value;
-    const senha = document.getElementById('senha').value;
-    const genero = document.getElementById('sexo').value;
-    const cpf = document.getElementById('cpf').value;
-    const dtNascimento = document.getElementById('dtNascimento').value;
-
-
-    const enderecos = [];
-    document.querySelectorAll('.endereco').forEach(endereco => {
-        const cepField = endereco.querySelector('#cep');
-        const logradouroField = endereco.querySelector('#logradouro');
-        const complementoField = endereco.querySelector('#complemento');
-        const bairroField = endereco.querySelector('#bairro');
-        const numeroField = endereco.querySelector('#numero');
-        const cidadeField = endereco.querySelector('#cidade');
-        const ufField = endereco.querySelector('#uf');
-        
-        // Verificando se os campos existem antes de acessar seus valores
-        const cep = cepField ? cepField.value : null;
-        const logradouro = logradouroField ? logradouroField.value : null;
-        const complemento = complementoField ? complementoField.value : null;
-        const bairro = bairroField ? bairroField.value : null;
-        const numero = numeroField ? numeroField.value : null;
-        const cidade = cidadeField ? cidadeField.value : null;
-        const uf = ufField ? ufField.value : null;
-        // const entrega = endereco.querySelector('.mesmoEndereco').checked; // Checkbox de entrega
-        // const cobranca = endereco.querySelector('.enderecopadrao').checked; // Checkbox de cobrança
-
-        enderecos.push({
-            cep,
-            logradouro,
-            complemento,
-            bairro,
-            numero,
-            cidade,
-            uf
-            // entrega,
-            // cobranca
-        });
-    });
-
-    // Verifica se há endereços
-    if (enderecos.length === 0) {
-        console.error('Nenhum endereço foi adicionado.');
-        // Adicione um endereço padrão ou trate conforme necessário
+document.querySelector('#confirmarAlteracao').addEventListener('click', async function (event) {
+    event.preventDefault();
+    let todosEnderecos = [...enderecosCadastrados, ...novosEnderecos];
+    let idEnderecoPadrao = null
+    if(!(todosEnderecos.length <= 1)) {
+        idEnderecoPadrao = document.querySelector('input[name="enderecoPrincipal"]:checked').value;
     }
+    let senhaAlterada = document.getElementById('senha').value;
+    let enderecosAlterados;
 
-    const usuario = {
-        nome,
-        email,
-        senha,
-        genero,
-        cpf,
-        dtNascimento,
-        enderecos
-    };
+    if (!senhaAlterada) {
+        senhaAlterada = null;
+    }
+    if (novosEnderecos.length === 0) {
+        enderecosAlterados = null;
+    } else {
+        novosEnderecos.forEach(endereco => {
+            if ((endereco.id == idEnderecoPadrao)) {
+                console.log(endereco.id);
+                endereco.entrega = true;
+                idEnderecoPadrao = null;
+            }
+            delete endereco.id;
+        });
+        enderecosAlterados = novosEnderecos;
+    }
+    clienteAlterado = {
+        idCliente: userId,
+        idEnderecoPadrao: idEnderecoPadrao,
+        nome: document.getElementById('nomeCompleto').value,
+        cpf: document.getElementById('cpf').value.replace(/\D/g, ''),
+        genero: document.getElementById('sexo').value,
+        email: document.getElementById('email').value,
+        senha: senhaAlterada,
+        dtNascimento: document.getElementById('dtNascimento').value,
+        enderecos: enderecosAlterados
+    }
+    const form = document.querySelector(".formulario-alterar-cliente");
+    if ((form.checkValidity() && validarSenha())) {
+        console.log(clienteAlterado);
+        alterarCliente(clienteAlterado);
+    }
+});
 
-    console.log(JSON.stringify(usuario, null, 2));
-    return usuario;
+function alterarCliente(clienteAlterado) {
+    fetch(`http://${API}:8080/cliente/alterar`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(clienteAlterado)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao alterar cliente: ' + response.statusText);
+            }
+            alert('Cliente alterado com sucesso!');
+            window.location.href = 'TelaProduto.html';
+        })
+        .catch(error => {
+            console.error('Erro ao alterar cliente:', error);
+            alert('Erro ao alterar cliente. Por favor, tente novamente.');
+        });
 }
+
+function closeModalEndereco(event) {
+    event.preventDefault();
+    const modalEndereco = document.querySelector('#cartao-endereco');
+    modalEndereco.style.display = 'none';
+    limparCamposModal();
+};
+
+function limparCamposModal() {
+    const inputs = document.querySelectorAll('#cartao-endereco input'); // Seleciona todos os inputs dentro do modal
+    inputs.forEach(input => {
+        input.value = ""; // Limpa o valor de cada input
+    });
+}
+
+function aplicarMascaraCEP(event) {
+    let cep = event.target.value.replace(/\D/g, '');
+    if (cep.length > 5) {
+        cep = cep.replace(/(\d{5})(\d)/, '$1-$2');
+    }
+    event.target.value = cep;
+}
+
+async function buscarEnderecoViaCEP(cep) {
+    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+    return response.json();
+}
+
+function mostrarMensagemErro(mensagem) {
+    const feedback = document.querySelector('.cepInput .invalid-feedback');
+    feedback.textContent = mensagem;
+    feedback.style.display = 'block';
+}
+
+function mostrarEndereco(endereco) {
+    const feedback = document.querySelector('.cepInput .invalid-feedback');
+    feedback.style.display = 'none';
+    document.getElementById('bairro').value = endereco.bairro;
+    document.getElementById('cidade').value = endereco.localidade;
+    document.getElementById('uf').value = endereco.uf;
+    document.getElementById('logradouro').value = endereco.logradouro;
+}
+
+function converterParaFormatoDate(inputString) {
+    return inputString.slice(0, 10);
+}
+
+function formatarCPF(cpf) {
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+}
+
 function validarAno() {
-    const dtNascimento = document.getElementById('dtNascimento').value;
+    const dtNascimento = new Date(document.getElementById('dtNascimento').value).toISOString();
     const anoNascimento = new Date(dtNascimento).getFullYear();
     const anoAtual = new Date().getFullYear();
-    
+
     if (anoNascimento > anoAtual) {
         alert('A data de nascimento não pode ser no futuro!');
         document.getElementById('dtNascimento').value = ''; // Limpa o campo se a data for inválida
     }
 }
 
-
-// Função para enviar dados ao servidor
-async function enviarDados(usuario) {
-    try {
-        const response = await fetch('http://localhost:8080/cliente/cadastro', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(usuario)
-        });
-
-        if (!response.ok) {
-            throw new Error('Erro ao enviar dados: ' + response.statusText);
-        }
-
-        const result = await response.json();
-        console.log('Dados enviados com sucesso:', result);
-    } catch (error) {
-        console.error('Erro ao enviar dados:', error);
-    }
+function directToTelaProduto() {
+    window.location.href = "TelaProduto.html";
 }

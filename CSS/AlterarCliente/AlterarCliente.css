@@ -1,4 +1,4 @@
-input {
+input, select {
     border-radius: 8px;
     border: 1px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.300);
@@ -130,4 +130,192 @@ input {
     background-color: rgb(0, 0, 0);
 }
 
-/*Fim estilo modal confirmação  */
+.enderecos {
+    display: flex;
+    justify-content: baseline;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.endereco {
+    flex: 1 1 calc(33.333% - 20px);
+    max-width: 220px;
+    min-width: 150px;
+    border: 2px solid rgb(206, 206, 206);
+    border-radius: 5%;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.endereco-faturamento {
+    border: 2px solid rgb(206, 206, 206);
+    padding: 10px;
+    text-align: center;
+    border-radius: 5%;
+    margin-bottom: 20px;
+}
+
+input[type="radio"] {
+    appearance: none;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 2px solid rgb(206, 206, 206);
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transform: scale(1.2);
+}
+
+input[type="radio"]:checked {
+    background-color: black;
+    border: 5px solid rgb(129, 129, 129); /* Círculo preenchido ao ser selecionado */
+}
+
+/* Modal de confirmação estilizado */
+.modal-confirm {
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px;
+    gap: 15px;
+    position: relative;
+    font-family: 'Poppins', Arial, sans-serif;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.modal-heading {
+    color: rgb(34, 34, 34);
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.modal-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: rgb(90, 90, 90);
+    text-align: center;
+    line-height: 1.4;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.accept-cookie-button {
+    width: 50%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.accept-cookie-button:hover {
+    background-color: #0056b3;
+}
+
+.close {
+    color: #aaa;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+}
+
+.cancelar, .salvar {
+    background: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 10px 0;
+    width: 50%;
+    border: 1px solid #ced4da;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancelar:hover,
+.salvar:hover {
+    background-color: #e2e6ea;
+}
+
+.cartao {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+.modal-completo-ende{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+}
+
+.modal-dados-endereco {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: none;
+    padding: 15px;
+    gap: 15px;
+    position: relative;
+    font-family: 'Poppins', Arial, sans-serif;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Adicionando uma animação de suavidade ao abrir o modal */
+@keyframes modal-appear {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-confirm {
+    animation: modal-appear 0.5s ease;
+}
+
+
+#btn-cancelar {
+    margin: 15px 0 60px 0;
+}

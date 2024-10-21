@@ -11,7 +11,7 @@ function validarLogin() {
         "senha": senha.value
     };
 
-    fetch('http://' + API + ':8080/login/entrar', {
+    fetch('http://' + API + ':8080/loginCliente/entrarCliente', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -32,26 +32,13 @@ function validarLogin() {
         })
         .then(data => {
 
-            if (data.ativo) {
-                if (data.grupo != "cliente") {
+            console.log("Cliente autenticado: " + data.autenticado)
+            // Armazena os dados do usuário no localStorage
+            localStorage.setItem("autenticadoCliente", data.autenticado);
+            localStorage.setItem("clienteId", data.id);
+            localStorage.setItem("nomeCliente", data.nome);
 
-                    console.log("Usuario autenticado: " + data.autenticado)
-
-                    // Armazena os dados do usuário no localStorage
-                    localStorage.setItem("autenticado", data.autenticado);
-                    localStorage.setItem("id", data.id);
-                    localStorage.setItem("nome", data.nome);
-                    localStorage.setItem("grupo", data.grupo);
-                    localStorage.setItem("ativo", data.ativo);
-
-                    loginSucedido();
-                } else {
-                    alert('Usuário sem permissão para acessar o Backoffice!')
-                }
-            } else {
-                // Usuário não está ativo
-                alert('Usuário inativo. Por favor, entre em contato com o administrador.');
-            }
+            loginSucedido();
         })
         .catch(error => {
             // Exibe mensagem de erro em caso de falha na requisição
@@ -97,7 +84,7 @@ function loginSucedido() {
     // Direciona para a tela inicial
     btnTelaInicial.addEventListener('click', function (event) {
         event.preventDefault(); // Evita o comportamento padrão do formulário
-        window.location.href = "TelaInicial.html";
+        window.location.href = "TelaProduto.html";
     });
 }
 
