@@ -23,8 +23,8 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                         <p>Resumo da compra</p>
                     </header>
                     <div class="info">
-                        <div><span>Produtos:</span><span>R$ ${totalProdutos.toFixed(2)}</span></div>
-                        <div><span>Frete</span><span>R$ 0.00</span></div>
+                        <div><span>Produtos:</span><span class="subtotal-produtos">R$ ${totalProdutos.toFixed(2)}</span></div>
+                        <div><span>Frete</span><span class="frete-carrinho">R$ 0.00</span></div>
                     </div>
                     <footer>
                         <span>Total</span>
@@ -70,8 +70,8 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                         <p>Resumo da compra</p>
                     </header>
                     <div class="info">
-                        <div><span>Produtos:</span><span>R$ ${totalProdutos.toFixed(2)}</span></div>
-                        <div><span>Frete</span><span>R$ 0.00</span></div>
+                        <div><span>Produtos:</span><span class="subtotal-produtos">R$ ${totalProdutos.toFixed(2)}</span></div>
+                        <div><span>Frete</span><span class="frete-carrinho">R$ 0.00</span></div>
                     </div>
                     <footer>
                         <span>Total</span>
@@ -102,6 +102,16 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                 </div>
             </aside>`;
     }
+
+    document.querySelector('.btn-finalizar').addEventListener('click', () => {
+        const pagamento = {
+            subtotal: document.querySelector('.subtotal-produtos').textContent,
+            frete: document.querySelector('.frete-carrinho').textContent,
+            total: document.querySelector('footer span:last-child').textContent
+        }
+        localStorage.setItem("resumoPedido", JSON.stringify(pagamento));
+        window.location.href = "TelaPagamento.html";
+    });
 
     // Agora que o botão foi adicionado ao DOM, podemos adicionar o event listener e a máscara
     const cepInput = document.querySelector('#cep');

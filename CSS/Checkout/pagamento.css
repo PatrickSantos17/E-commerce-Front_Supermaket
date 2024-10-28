@@ -1,0 +1,933 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #FFFFFF;
+}
+
+/* estilização barra de rolagem */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #5F9EA0 transparent;
+}
+
+/* Works on Chrome, Edge, Opera and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #070d12;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  border: 3px solid #070d12;
+}
+
+.main {
+  margin-bottom: 100px;
+}
+
+/* Checkpoints */
+.checkpoints {
+  width: 750px;
+  margin: 50px auto 20px auto;
+}
+
+.checkpoints h1 {
+  display: flex;
+  flex-direction: row;
+}
+
+.checkpoints p {
+  color: #5F9EA0;
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.checkpoints span {
+  color: #828282;
+}
+
+.checkpoints hr {
+  width: 25.316px;
+  height: 1px;
+  background-color: #5F9EA0;
+}
+
+/* Posicionamento do conteudo principal */
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container-info {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.container-pagamento {
+  width: 40%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 3px solid #5F9EA0;
+  border-radius: 30px;
+}
+
+/* Tabela de resumo */
+table {
+  width: 400px;
+  height: 220px;
+  border-collapse: separate;
+  border-radius: 15px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  overflow: hidden;
+}
+
+table thead {
+  background-color: #5F9EA0;
+  border: 3px solid #5F9EA0;
+}
+
+table thead th {
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.3px;
+  padding: 4px 0;
+}
+
+table tbody {
+  border: 3px solid #5F9EA0;
+  font-size: 15px;
+  color: #5F9EA0;
+}
+
+table tbody td {
+  padding: 8px 18px;
+}
+
+table tbody span {
+  color: #000000;
+}
+
+table tbody .linha {
+  padding: 0;
+  margin: 0;
+}
+
+table tbody .linha hr {
+  width: 360px;
+  height: 1px;
+  background-color: #5F9EA0;
+}
+
+table tbody .total {
+  font-weight: bold;
+}
+
+.td-left {
+  text-align: left;
+  font-weight: bold;
+}
+
+.td-right {
+  text-align: right;
+}
+
+/* Opções de pagamento */
+.forma-pagamento h2 {
+  color: #000000;
+  font-family: Poppins;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 20px 0 31px 0;
+}
+
+.forma-pagamento ul {
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.forma-pagamento ul li {
+  margin: 15px 0;
+}
+
+/* Estilizando o input de radio */
+.opcao-pagamento input[type="radio"] {
+  display: none;
+}
+
+/* Estilizando o indicador do input de radio */
+.opcao-pagamento input[type="radio"]+label::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #5F9EA0;
+  border-radius: 50%;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+/* Estilizando o texto da label */
+.opcao-pagamento label {
+  color: #5F9EA0;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+/* Quando o input de radio é marcado, muda a cor do indicador e do texto */
+.opcao-pagamento input[type="radio"]:checked+label::before {
+  background-color: #000000;
+  border-color: #5F9EA0;
+}
+
+.opcao-pagamento input[type="radio"]:checked+label {
+  color: #000000;
+}
+
+/* estilização do card debito e credito */
+body .card {
+  border: none;
+  margin-bottom: 30px;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 240px;
+  height: 154px;
+  perspective: 1000px;
+  color: white;
+}
+
+.heading_8264 {
+  position: absolute;
+  letter-spacing: .2em;
+  font-size: 0.5em;
+  top: 2em;
+  left: 18.6em;
+}
+
+.logo {
+  position: absolute;
+  top: 6.8em;
+  left: 11.7em;
+}
+
+.chip {
+  position: absolute;
+  top: 2.3em;
+  left: 1.5em;
+}
+
+.contactless {
+  position: absolute;
+  top: 3.5em;
+  left: 12.4em;
+}
+
+.number {
+  position: absolute;
+  font-weight: bold;
+  font-size: .8em;
+  top: 6.3em;
+  left: 1.6em;
+}
+
+.valid_thru {
+  position: absolute;
+  font-weight: bold;
+  top: 635.8em;
+  font-size: .01em;
+  left: 140.3em;
+}
+
+.date_8264 {
+  position: absolute;
+  font-weight: bold;
+  font-size: 0.6em;
+  top: 10.9em;
+  left: 3.2em;
+}
+
+.name {
+  position: absolute;
+  font-weight: bold;
+  font-size: 0.8em;
+  letter-spacing: 1.3px;
+  top: 9.5em;
+  left: 1.7em;
+}
+
+.strip {
+  position: absolute;
+  background-color: black;
+  width: 15em;
+  height: 1.5em;
+  top: 2.4em;
+  background: repeating-linear-gradient(45deg,
+      #303030,
+      #303030 10px,
+      #202020 10px,
+      #202020 20px);
+}
+
+.mstrip {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  width: 8em;
+  height: 0.8em;
+  top: 5em;
+  left: .8em;
+  border-radius: 2.5px;
+}
+
+.sstrip {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  width: 4.1em;
+  height: 0.8em;
+  top: 5em;
+  left: 10em;
+  border-radius: 2.5px;
+}
+
+.code {
+  font-weight: bold;
+  text-align: center;
+  line-height: 1em;
+  color: black;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* gira o cartão */
+.virar .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  margin-top: 10px;
+}
+
+.flip-card-front {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
+  background-color: #171717;
+}
+
+.flip-card-back {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
+  background-color: #171717;
+  transform: rotateY(180deg);
+}
+
+/* Dados do cartão */
+.container-dados {
+  background-color: rgba(216, 216, 216, 0.315);
+  width: 454px;
+  height: 265px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container-dados .dados-card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.container-dados .dados-card .dados {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.container-dados .dados-card .dados div {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 15px;
+}
+
+.container-dados .dados-card .dados #num-cartao {
+  width: 200px;
+}
+
+.container-dados .dados-card .dados #validade {
+  width: 80px;
+}
+
+.container-dados .dados-card .dados #nome {
+  width: 200px;
+}
+
+.container-dados .dados-card .dados #cvv {
+  width: 80px;
+}
+
+.dados-card label {
+  color: #000;
+  font-family: Poppins;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+
+.dados-card input {
+  border: none;
+  border-radius: 15px;
+  background-color: #FFFFFF;
+  color: #000000;
+  font-family: Poppins;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.2px;
+  text-align: center;
+}
+
+.dados-card input:hover {
+  background-color: #0000001c;
+}
+
+.container-dados .formulario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Botão finalizar compra */
+.botao-finalizar {
+  width: 230px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(15, 15, 15);
+  border: none;
+  color: white;
+  font-weight: 600;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+}
+
+.svgIcon {
+  width: 16px;
+}
+
+.svgIcon path {
+  fill: white;
+}
+
+.botao-finalizar::before {
+  width: 230px;
+  height: 130px;
+  position: absolute;
+  content: "";
+  background-color: rgb(224, 224, 224);
+  border-radius: 50%;
+  left: -100%;
+  top: 0;
+  transition-duration: .3s;
+  mix-blend-mode: difference;
+}
+
+.botao-finalizar:hover::before {
+  transition-duration: .3s;
+  transform: translate(100%, -50%);
+  border-radius: 0;
+}
+
+.botao-finalizar:active {
+  transform: translate(5px, 5px);
+  transition-duration: .3s;
+}
+
+/* Botão voltar */
+.animated-button {
+  position: relative;
+  display: inline-block;
+  padding: 5px 20px;
+  border: none;
+  font-size: 16px;
+  background-color: inherit;
+  border-radius: 40px;
+  font-weight: 600;
+  color: #6e6e6e;
+  box-shadow: 0 0 0 2px #6e6e6e;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.animated-button span:last-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: #161616;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.animated-button span:first-child {
+  position: relative;
+  z-index: 1;
+}
+
+.animated-button:hover {
+  box-shadow: 0 0 0 5px #8f8f8f60;
+  color: #ffffff;
+}
+
+.animated-button:active {
+  scale: 0.95;
+}
+
+.animated-button:hover span:last-child {
+  width: 150px;
+  height: 150px;
+  opacity: 1;
+}
+
+
+/* aplicando blur na tela toda */
+.blur {
+  filter: blur(5px);
+  /* Adicione o efeito de desfoque */
+  pointer-events: none;
+  /* Impede que elementos da tela recebam eventos do mouse */
+  z-index: -1;
+}
+
+/* modal de pagamento */
+.container-modal {
+  background-color: #ffffff;
+  display: none;
+  /* ira mudar para "flex" ao clicar em finalizar compra */
+  width: 460px;
+  height: 120px;
+  position: fixed;
+  /* "relative" */
+  border-radius: 6px;
+  transition: 0.3s ease-in-out;
+  /* centralizando o elemento na div main */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+/* animation */
+.animate-modal {
+  transform: scale(1.03);
+  width: 220px;
+}
+
+/* animation */
+.animate-modal .left-side {
+  width: 100%;
+}
+
+.left-side {
+  background-color: #5de2a3;
+  width: 130px;
+  height: 120px;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.right-side {
+  width: calc(100% - 130px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  justify-content: space-between;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+/* animation */
+.animate-modal .right-side {
+  background-color: #f9f7f9;
+}
+
+.arrow {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+}
+
+.new {
+  font-size: 23px;
+  font-weight: 600;
+  font-family: "Lexend Deca", sans-serif;
+  margin-left: 20px;
+}
+
+/* efeito de piscar o pontilhado, efeito de loaging */
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.new .piscar {
+  padding: 3px;
+  letter-spacing: 0.2em;
+  animation: blink 1s infinite;
+}
+
+.container-modal .card {
+  width: 70px;
+  height: 46px;
+  background-color: #c7ffbc;
+  border-radius: 6px;
+  position: absolute;
+  display: flex;
+  z-index: 10;
+  flex-direction: column;
+  align-items: center;
+  -webkit-box-shadow: 9px 9px 9px -2px rgba(77, 200, 143, 0.72);
+  -moz-box-shadow: 9px 9px 9px -2px rgba(77, 200, 143, 0.72);
+  -webkit-box-shadow: 9px 9px 9px -2px rgba(77, 200, 143, 0.72);
+}
+
+.card-line {
+  width: 65px;
+  height: 13px;
+  background-color: #80ea69;
+  border-radius: 2px;
+  margin-top: 7px;
+}
+
+@media only screen and (max-width: 480px) {
+  .container-modal {
+    transform: scale(0.7);
+  }
+
+  /* animation */
+  .animate-modal {
+    transform: scale(0.74);
+  }
+
+  .new {
+    font-size: 18px;
+  }
+}
+
+.buttons {
+  width: 8px;
+  height: 8px;
+  background-color: #379e1f;
+  box-shadow: 0 -10px 0 0 #26850e, 0 10px 0 0 #56be3e;
+  border-radius: 50%;
+  margin-top: 5px;
+  transform: rotate(90deg);
+  margin: 10px 0 0 -30px;
+}
+
+/* animation */
+.animate-modal .card {
+  animation: slide-top 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) both;
+}
+
+/* animation */
+.animate-modal .post {
+  animation: slide-post 1s cubic-bezier(0.165, 0.84, 0.44, 1) both;
+}
+
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  50% {
+    -webkit-transform: translateY(-70px) rotate(90deg);
+    transform: translateY(-70px) rotate(90deg);
+  }
+
+  60% {
+    -webkit-transform: translateY(-70px) rotate(90deg);
+    transform: translateY(-70px) rotate(90deg);
+  }
+
+  100% {
+    -webkit-transform: translateY(-8px) rotate(90deg);
+    transform: translateY(-8px) rotate(90deg);
+  }
+}
+
+.post {
+  width: 63px;
+  height: 75px;
+  background-color: #dddde0;
+  position: absolute;
+  z-index: 11;
+  bottom: 10px;
+  top: 120px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.post-line {
+  width: 47px;
+  height: 9px;
+  background-color: #545354;
+  position: absolute;
+  border-radius: 0px 0px 3px 3px;
+  right: 8px;
+  top: 8px;
+}
+
+.post-line:before {
+  content: "";
+  position: absolute;
+  width: 47px;
+  height: 9px;
+  background-color: #757375;
+  top: -8px;
+}
+
+.screen {
+  width: 47px;
+  height: 23px;
+  background-color: #ffffff;
+  position: absolute;
+  top: 22px;
+  right: 8px;
+  border-radius: 3px;
+}
+
+.numbers {
+  width: 12px;
+  height: 12px;
+  background-color: #838183;
+  box-shadow: 0 -18px 0 0 #838183, 0 18px 0 0 #838183;
+  border-radius: 2px;
+  position: absolute;
+  transform: rotate(90deg);
+  left: 25px;
+  top: 52px;
+}
+
+.numbers-line2 {
+  width: 12px;
+  height: 12px;
+  background-color: #aaa9ab;
+  box-shadow: 0 -18px 0 0 #aaa9ab, 0 18px 0 0 #aaa9ab;
+  border-radius: 2px;
+  position: absolute;
+  transform: rotate(90deg);
+  left: 25px;
+  top: 68px;
+}
+
+@keyframes slide-post {
+  50% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    -webkit-transform: translateY(-70px);
+    transform: translateY(-70px);
+  }
+}
+
+.dollar {
+  position: absolute;
+  font-size: 16px;
+  font-family: "Lexend Deca", sans-serif;
+  width: 100%;
+  left: 0;
+  top: 0;
+  color: #4b953b;
+  text-align: center;
+}
+
+/* animation */
+.animate-modal .dollar {
+  animation: fade-in-fwd 0.3s 1s backwards;
+}
+
+@keyframes fade-in-fwd {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* fim da estilização do modal de pagamento */
+
+
+/* modal validação forma de pagamento */
+.card-validacao {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  /* Centraliza verticalmente */
+  justify-content: center;
+  /* Centraliza horizontalmente */
+  background-color: rgba(0, 0, 0, 0.1);
+  /* Fundo escuro para sobreposição */
+}
+
+.modal-validacao {
+  width: 350px;
+  height: fit-content;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgb(206, 206, 206);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 20px;
+  gap: 15px;
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.066);
+}
+
+.modal-heading {
+  color: rgb(34, 34, 34);
+  font-weight: 800;
+  text-align: center;
+}
+
+.modal-validacao img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.button-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.accept-cookie-button {
+  width: 50%;
+  padding: 8px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgb(34, 34, 34);
+  color: white;
+  transition-duration: .3s;
+}
+
+.accept-cookie-button:hover {
+  background-color: #000000;
+}
+
+/*Fim estilo modal validação forma de pagamento  */
+
+
+/* validação campos dos cartão */
+.dados-card .input-invalido {
+  border: 2px solid red;
+}
+
+.dados-card .input-valido {
+  border: 2px solid #5F9EA0;
+}
+
+.descricao-input {
+  display: none;
+  color: red;
+  font-size: 10px;
+  width: 100px;
+  margin: 0;
+}
+
+.checkout-pagamento {
+  text-decoration: underline;
+}
