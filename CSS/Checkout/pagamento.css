@@ -85,6 +85,14 @@ body {
   border-radius: 30px;
 }
 
+.container-pix {
+  width: 40%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 /* Tabela de resumo */
 table {
   width: 400px;
