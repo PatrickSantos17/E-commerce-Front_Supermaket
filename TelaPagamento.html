@@ -62,7 +62,9 @@
         <div class="add-blur">
             <div class="checkpoints">
                 <h1>
-                    <a href="TelaCarrinho.html"><p>Carrinho</p></a>
+                    <a href="TelaCarrinho.html">
+                        <p>Carrinho</p>
+                    </a>
                     <hr>
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
                         <g clip-path="url(#clip0_1_310)">
@@ -105,8 +107,8 @@
                             <li><input type="radio" id="cartao_credito" name="forma_pagamento" value="CARTAO_CREDITO">
                                 <label for="cartao_credito">Cartão de Crédito</label>
                             </li>
-                            <li><input type="radio" id="pix" name="forma_pagamento" value="PIX">
-                                <label for="pix">Pix</label>
+                            <li><input type="radio" id="radio-pix" name="forma_pagamento" value="PIX">
+                                <label for="radio-pix">Pix</label>
                             </li>
                         </ul>
                     </section>
@@ -248,7 +250,7 @@
                                 </div>
                                 <div class="dados">
                                     <div>
-                                        <label for="nome">Nome no Cartão</label> 
+                                        <label for="nome">Nome no Cartão</label>
                                         <input type="text" id="nome" disabled required
                                             oninput="formatarNomeCartao(this.value)"
                                             onkeypress="permitirSomenteLetras(event)">
@@ -279,6 +281,9 @@
                             <span></span>
                         </button>
                     </a>
+                </div>
+                <div class="container-pix">
+                    <img src="src/img/placa_pix_10x15cm_5_prancheta_1.jpg" alt="imagem ilustrativa pagamento com pix">
                 </div>
             </div>
         </div>
@@ -326,7 +331,7 @@
 
     <script src="JS/HeaderCliente/HeaderCliente.js" defer></script>
     <script src="JS/Geral/Geral.js" defer></script>
-    <script src="JS/checkout/ConexaoAPI.js"></script>
+    <script src="JS/checkout/Pagamento.js"></script>
     <script src="JS/checkout/InteracaoPagamento.js" defer></script>
 </body>
 

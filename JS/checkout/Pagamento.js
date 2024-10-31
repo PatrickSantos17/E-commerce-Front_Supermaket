@@ -4,19 +4,28 @@ const resumoPedido = JSON.parse(localStorage.getItem("resumoPedido"));
 document.addEventListener('DOMContentLoaded', function () {
     if (isAutenticado === "true") {
         let cartaoCreditoRadio = document.getElementById("cartao_credito");
-        let pixRadio = document.getElementById("pix");
+        let pixRadio = document.getElementById("radio-pix");
 
         cartaoCreditoRadio.addEventListener('change', () => {
             if (cartaoCreditoRadio.checked) {
-                const div = document.querySelector('.container-pagamento');
-                div.style.display = 'flex';
-                div.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else if (pixRadio.checked) {
-                const div = document.querySelector('.container-pagamento');
-                div.style.display = 'flex';
-                div.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const divCartao = document.querySelector('.container-pagamento');
+                const divPix = document.querySelector('.container-pix');
+                divPix.style.display = 'none';
+                divCartao.style.display = 'flex';
+                divCartao.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
+
+        pixRadio.addEventListener('change', () => {
+            if (pixRadio.checked) {
+                console.log(pixRadio)
+                const divCartao = document.querySelector('.container-pagamento');
+                const divPix = document.querySelector('.container-pix');
+                divCartao.style.display = 'none';
+                divPix.style.display = 'flex';
+                divPix.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        })
 
         const inputsCartao = document.querySelectorAll(".formulario input");
         const descricaoInputInvalido = document.querySelectorAll(".formulario span");
