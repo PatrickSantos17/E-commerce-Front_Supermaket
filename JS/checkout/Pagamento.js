@@ -1,5 +1,6 @@
 let isAutenticado = localStorage.getItem("autenticadoCliente");
 const resumoPedido = JSON.parse(localStorage.getItem("resumoPedido"));
+var formaPagamento = "";
 
 document.addEventListener('DOMContentLoaded', function () {
     if (isAutenticado === "true") {
@@ -8,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         cartaoCreditoRadio.addEventListener('change', () => {
             if (cartaoCreditoRadio.checked) {
+                formaPagamento = "Cartão de Crédito";
                 const divCartao = document.querySelector('.container-pagamento');
                 const divPix = document.querySelector('.container-pix');
                 divPix.style.display = 'none';
@@ -18,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         pixRadio.addEventListener('change', () => {
             if (pixRadio.checked) {
-                console.log(pixRadio)
+                formaPagamento = "PIX";
                 const divCartao = document.querySelector('.container-pagamento');
                 const divPix = document.querySelector('.container-pix');
                 divCartao.style.display = 'none';
@@ -64,57 +66,9 @@ function acessarCarrinhoProduto() {
 }
 
 
-function gravarPedido() {
-    mostrarProcessamentoPagamento()
-    const idUser = localStorage.getItem('IdUsuario');
-
-    const dataAtual = new Date();
-
-    const enderecoParaEnvio = enderecoConvertido.logradouro + ", " + enderecoConvertido.numero + " - " + enderecoConvertido.bairro + ", " + enderecoConvertido.cidade + ", " + enderecoConvertido.uf;
-
-    let cartaoCreditoRadio = document.getElementById("cartao_credito");
-    let pixRadio = document.getElementById("pix");
-
-    // Verifica qual input radio do cartão está selecionado
-    let escolhaPagamento;
-    if (cartaoCreditoRadio.checked) {
-        escolhaPagamento = "Cartão de Crédito";
-    } else if (pixRadio.checked) {
-        escolhaPagamento = "Cartão de Débito";
-    }
-
-    const novoPedido = {
-        idUsuario: idUser,
-        dataPedido: dataAtual,
-        tipoEnvio: "Sedex",
-        enderecoEnvio: enderecoParaEnvio,
-        formaPagamento: escolhaPagamento,
-        totalPedido: valorTotalCarrinho
-    };
-
-    fetch(`http://localhost:8080/api/pedido/gravar`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(novoPedido)
-    })
-        .then(response => {
-            if (!response.ok) {
-                esconderLoading();
-                throw new Error("Erro ao acessar a API: " + response.statusText);
-            } else {
-                // redireciona para a pag. confirmação pedido
-                setTimeout(function () {
-                    redirecionarParaPagina("TelaConfirmacaoPedido.html");
-                }, 4000);
-            }
-
-            return response.json();
-        })
-        .catch(error => {
-            console.log("Erro: " + error);
-        })
+function directResumoPedido() {
+    localStorage.setItem("formaPagamento", formaPagamento);
+    window.location.href = 'TelaResumoPedido.html';
 }
 
 // Aplicar blur e mostrar modal de pagamento-------------------------------------
@@ -160,7 +114,7 @@ function validarCampos(event) {
         const cartaoValidado = isCartaoValidado(inputsCartao, descricaoInputInvalido, event);
         console.log("cartao validado: " + cartaoValidado);
         if (cartaoValidado) { //grava o pedido após validação do cartão
-            gravarPedido();
+            directResumoPedido();
         }
     }
 }
