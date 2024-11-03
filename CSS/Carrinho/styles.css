@@ -289,6 +289,23 @@ aside .box footer {
     margin-top: 5px;
 }
 
+.header-box {
+    display: flex;
+    align-items: center; /* Alinha o conteúdo ao centro */
+}
+
+.header-box img {
+    width: 24px; /* Ajuste o tamanho conforme necessário */
+    height: 24px; /* Ajuste o tamanho conforme necessário */
+    margin-right: 8px; /* Espaçamento entre imagem e texto */
+    vertical-align: middle;
+}
+
+.header-box p {
+    font-size: 16px; /* Ajuste conforme necessário */
+    margin: 0; /* Remove margens extras do parágrafo */
+}
+
 .btn-finalizar {
     /* background: #28a745; */
     background-color: #0f52b6;

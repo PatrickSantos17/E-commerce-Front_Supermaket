@@ -93,6 +93,11 @@ body {
   flex-direction: column;
 }
 
+.container-pix img {
+  width: 400px;
+  height: auto;
+}
+
 /* Tabela de resumo */
 table {
   width: 400px;

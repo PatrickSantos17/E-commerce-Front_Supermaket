@@ -40,7 +40,7 @@
                     <p class="nome-usuario"></p>
                     <div class="dropdown-content" id="dropdown-content">
                         <a class="dados" href="TelaAlterarCliente.html">Perfil</a>
-                        <!-- <a class="Pedidos" href="TelaPedidos.html">Meus pedidos</a> -->
+                        <a class="Pedidos" href="TelaPedidos.html">Meus pedidos</a>
                         <a class="logout" onclick="abrirModalConfirmacao()" href="">Sair</a>
                     </div>
                 </div>
@@ -120,10 +120,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="td-left">Endereço de entrega:</td>
-                                    <td class="td-right"><span id="endereco-entrega"></span></td>
-                                </tr>
                                 <tr>
                                     <td class="td-left">Subtotal produtos:</td>
                                     <td class="td-right"><span id="subtotal-produtos"></span></td>
@@ -275,22 +271,22 @@
                             </button>
                         </form>
                     </div>
-                    <a href="TelaCheckout.html">
-                        <button class="animated-button">
-                            <span>VOLTAR</span>
-                            <span></span>
-                        </button>
-                    </a>
                 </div>
                 <div class="container-pix">
                     <img src="src/img/placa_pix_10x15cm_5_prancheta_1.jpg" alt="imagem ilustrativa pagamento com pix">
                     <button class="botao-finalizar" id="finalizar-compra" onclick="directResumoPedido()">
                         Avançar
-                        <svg class="svgIcon" viewBox="0 0 576 512">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 50 50">
                             <path
-                                d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z">
-                            </path>
-                        </svg>
+                                d="M 25 0.0390625 C 22.84 0.0390625 20.799531 0.88015625 19.269531 2.4101562 L 9.6796875 12 L 12.929688 12 C 14.529687 12 16.039922 12.619766 17.169922 13.759766 L 23.939453 20.529297 C 24.519453 21.109297 25.480547 21.109531 26.060547 20.519531 L 32.830078 13.759766 C 33.960078 12.619766 35.470312 12 37.070312 12 L 40.320312 12 L 30.730469 2.4101562 C 29.200469 0.88015625 27.16 0.0390625 25 0.0390625 z"
+                                fill="#FFFFFF"/>
+                            <path
+                                d="M 7.6796875 14 L 2.4101562 19.269531 C -0.74984375 22.429531 -0.74984375 27.570469 2.4101562 30.730469 L 7.6796875 36 L 12.929688 36 C 13.999687 36 14.999766 35.580078 15.759766 34.830078 L 22.529297 28.060547 C 23.889297 26.700547 26.110703 26.700547 27.470703 28.060547 L 34.240234 34.830078 C 35.000234 35.580078 36.000312 36 37.070312 36 L 42.320312 36 L 47.589844 30.730469 C 50.749844 27.570469 50.749844 22.429531 47.589844 19.269531 L 42.320312 14 L 37.070312 14 C 36.000313 14 35.000234 14.419922 34.240234 15.169922 L 27.470703 21.939453 C 26.790703 22.619453 25.9 22.960938 25 22.960938 C 24.1 22.960937 23.209297 22.619453 22.529297 21.939453 L 15.759766 15.169922 C 14.999766 14.419922 13.999688 14 12.929688 14 L 7.6796875 14 z"
+                                fill="#FFFFFF"/>
+                            <path
+                                d="M 25 29.037109 C 24.615 29.038359 24.229453 29.185469 23.939453 29.480469 L 17.169922 36.240234 C 16.039922 37.380234 14.529687 38 12.929688 38 L 9.6796875 38 L 19.269531 47.589844 C 20.799531 49.119844 22.84 49.960938 25 49.960938 C 27.16 49.960938 29.200469 49.119844 30.730469 47.589844 L 40.320312 38 L 37.070312 38 C 35.470313 38 33.960078 37.380234 32.830078 36.240234 L 26.060547 29.470703 C 25.770547 29.180703 25.385 29.035859 25 29.037109 z"
+                                fill="#FFFFFF"/>
+                        </svg>                        
                     </button>
                 </div>
             </div>
