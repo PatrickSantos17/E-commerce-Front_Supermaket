@@ -44,13 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
         pixRadio.addEventListener('change', verificarPagamentoSelecionado);
 
         isCartaoValidado(inputsCartao, descricaoInputInvalido, null);
-        //buscar o endereço selecionado para entrega do pedido
-        // let endereco = document.getElementById("endereco-entrega");
-
-        // const enderecoEntrega = localStorage.getItem('endereco-entrega-pedido');
-        // const enderecoConvertido = JSON.parse(enderecoEntrega);
-
-        // endereco.innerHTML = ` <p>${enderecoConvertido.logradouro + ', ' + enderecoConvertido.numero}</p> `
         acessarCarrinhoProduto();
     } else {
         alert("Você precisa estar logado para acessar esta página!");
@@ -59,12 +52,10 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function acessarCarrinhoProduto() {
-    console.log(resumoPedido)
     document.getElementById("subtotal-produtos").textContent = resumoPedido.subtotal;
     document.getElementById("frete-pedido").textContent = resumoPedido.frete;
     document.getElementById("total-carrinho").textContent = resumoPedido.total;
 }
-
 
 function directResumoPedido() {
     localStorage.setItem("formaPagamento", formaPagamento);

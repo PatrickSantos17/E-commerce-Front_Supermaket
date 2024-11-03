@@ -18,7 +18,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
     if (usuarioAutenticado) {
         conteudo.innerHTML += `<aside>
                 <div class="box">
-                    <header>
+                    <header class="header-box">
                         <img src="src/img/carrinho-de-compras.png" alt="imagem carrinho"/>
                         <p>Resumo da compra</p>
                     </header>
@@ -33,7 +33,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                 </div>
                 
                 <div class="box entrega">
-                    <header>
+                    <header class="header-box">
                         <img src="src/img/entrega-rapida.png" alt="imagem carrinho"/>
                         <p>Entrega</p>
                     </header>
@@ -65,7 +65,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
     } else {
         conteudo.innerHTML += `<aside>
                 <div class="box">
-                    <header>
+                    <header class="header-box">
                         <img src="src/img/carrinho-de-compras.png" alt="imagem carrinho"/>
                         <p>Resumo da compra</p>
                     </header>
@@ -79,7 +79,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                     </footer>
                 </div>
                 <div class="box entrega">
-                    <header>
+                    <header class="header-box">
                         <img src="src/img/entrega-rapida.png" alt="imagem carrinho"/>
                         <p>Entrega</p>
                     </header>
