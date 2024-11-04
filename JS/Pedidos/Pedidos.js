@@ -39,23 +39,43 @@ function mostrarDetalhes(pedidoId) {
     const pedido = pedidos.find(p => p.id === pedidoId);
     if (!pedido) return;
 
-    const modal = document.getElementById('detalhesModal');
-    const modalContent = document.getElementById('modalContent');
-    modalContent.innerHTML = `
-        <h2>Detalhes do Pedido #${pedido.id}</h2>
-        <p><strong>Data:</strong> ${pedido.dataPedido.split('T')[0]}</p>
-        <p><strong>Status:</strong> ${pedido.status}</p>
-        <p><strong>Total:</strong> R$ ${(pedido.valorTotal).toFixed(2)}</p>
-        <h3>Itens:</h3>
-        <ul>
-            ${pedido.itemPedidoModel.map(item => `
-                <li>${item.id.produtoId.nomeProduto} - Quantidade: ${item.quantidade} - Preço Unitário: R$ ${item.valorUnitario}</li>
-            `).join('')}
-        </ul>
-        <button onclick="fecharModal()">Fechar</button>
-    `;
+    // Endpoint para obter detalhes do pedido, incluindo o endereço
+    const endpoint = `http://localhost:8080/pedido/${pedidoId}/itens`;
 
-    modal.style.display = 'block';
+    // Realiza a requisição ao endpoint para obter o endereço de entrega
+    fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+            // Exibe os dados do pedido e do endereço no modal
+            const modal = document.getElementById('detalhesModal');
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <h2>Detalhes do Pedido #${pedido.id}</h2>
+                <p><strong>Data:</strong> ${pedido.dataPedido.split('T')[0]}</p>
+                <p><strong>Status:</strong> ${pedido.status}</p>
+                <p><strong>Forma de pagamento:</strong> ${pedido.formaPagamento}</p>
+                <p><strong>Total:</strong> R$ ${(pedido.valorTotal).toFixed(2)}</p>
+                <h3>Endereço de entrega:</h3>
+                <p><strong>CEP:</strong> ${data.endereco.cep}</p>
+                <p><strong>Logradouro:</strong> ${data.endereco.logradouro}</p>
+                <p><strong>Número:</strong> ${data.endereco.numero}</p>
+                <p><strong>Bairro:</strong> ${data.endereco.bairro}</p>
+                <p><strong>Cidade:</strong> ${data.endereco.cidade} - ${data.endereco.uf}</p>
+                <h3>Itens:</h3>
+                <ul>
+                    ${pedido.itemPedidoModel.map(item => `
+                        <li>${item.id.produtoId.nomeProduto} - Quantidade: ${item.quantidade} - Preço Unitário: R$ ${item.valorUnitario.toFixed(2)}</li>
+                    `).join('')}
+                </ul>
+                <button onclick="fecharModal()">Fechar</button>
+            `;
+
+            modal.style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Erro ao buscar detalhes do pedido:', error);
+            alert('Não foi possível carregar os detalhes do pedido.');
+        });
 }
 
 function fecharModal() {
