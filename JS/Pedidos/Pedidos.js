@@ -69,7 +69,6 @@ function mostrarDetalhes(pedidoId) {
                 </ul>
                 <button onclick="fecharModal()">Fechar</button>
             `;
-
             modal.style.display = 'block';
         })
         .catch(error => {
