@@ -1,6 +1,9 @@
 const resumoPedido = JSON.parse(localStorage.getItem("resumoPedido"));
 const formaPagamento = localStorage.getItem("formaPagamento");
 let listaSalva = JSON.parse(localStorage.getItem("produtos"));
+var clienteId = localStorage.getItem("clienteId");
+let produtoQtd = [];
+
 document.addEventListener('DOMContentLoaded', () => {
     const carrinhoBuscarNLRequestDTO = {
         "listaIds": listaSalva
@@ -9,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function buscarCarrinhoNL(listaIdProdutos) {
-    await carregaCarrinho(listaIdProdutos);    
+    await carregaCarrinho(listaIdProdutos);
     const conteudo = document.querySelector(".content");
     let usuarioAutenticado = localStorage.getItem("autenticadoCliente");
     if (usuarioAutenticado) {
@@ -46,13 +49,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
     }
 
     document.querySelector('.btn-finalizar').addEventListener('click', () => {
-        const pagamento = {
-            subtotal: document.querySelector('.subtotal-produtos').textContent,
-            frete: document.querySelector('.frete-carrinho').textContent,
-            total: document.querySelector('footer span:last-child').textContent
-        }
-        localStorage.setItem("resumoPedido", JSON.stringify(pagamento));
-        window.location.href = "TelaPagamento.html";
+        gravarPedido();
     });
 }
 
@@ -83,6 +80,12 @@ async function carregaCarrinho(listaIdProdutos) {
                         </tr>
                     </thead>`;
     result.produtos.forEach(produtoCarrinho => {
+        var produto = {
+            idProduto: produtoCarrinho.produto.id,
+            quantidade: produtoCarrinho.quantidade,
+            valorUnitario: produtoCarrinho.produto.preco
+        }
+        produtoQtd.push(produto);
         const row = document.createElement('tbody');
         row.innerHTML = `
                         <tr>
@@ -109,6 +112,39 @@ async function carregaCarrinho(listaIdProdutos) {
         totalProdutos += produtoCarrinho.produto.preco * produtoCarrinho.quantidade;
         prodCarrinho.appendChild(row);
     });
+}
+
+function gravarPedido() {
+    let pagamento;
+    if (formaPagamento === 'Cartão de Crédito') {
+        pagamento = 'CARTAO_CREDITO';
+    }
+    const pedido = {
+        produtoQtd: produtoQtd,
+        formaPagamento: (formaPagamento === 'PIX') ? 'PIX' : pagamento,
+        frete: parseFloat((resumoPedido.frete).replace("R$", "").trim()),
+        clienteId: clienteId,
+        enderecoId: 19
+    }
+
+    fetch(`http://${API}:8080/pedido/cadastrar`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(pedido)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao concluir pedido: ' + response.statusText);
+            }
+            alert('Pedido concluído com sucesso!');
+            window.location.href = 'TelaProduto.html';
+        })
+        .catch(error => {
+            console.error('Erro ao concluir pedido:', error);
+            alert('Erro ao concluir pedido. Por favor, tente novamente.');
+        });
 }
 function directToTelaPagamento() {
     window.location.href = "TelaPagamento.html";
