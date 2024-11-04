@@ -62,29 +62,6 @@ function directResumoPedido() {
     window.location.href = 'TelaResumoPedido.html';
 }
 
-// Aplicar blur e mostrar modal de pagamento-------------------------------------
-function mostrarProcessamentoPagamento() {
-    document.querySelector(".add-blur").classList.add('blur');
-    // Exibe o modal de pagamento
-    let processingModal = document.getElementById("container-modal");
-    processingModal.style.display = "flex";
-    // aplicando animação do modal
-    setTimeout(function () {
-        processingModal.classList.add("animate-modal");
-        // atraso de 2 segundos, após animação do modal redireciona para a pagina
-    }, 2000); // Atraso de 3 segundos (2000 milissegundos) para mostrar o modal em sua forma original
-}
-
-function esconderLoading() {
-    document.querySelector(".add-blur").classList.remove('blur');
-    processingModal.style.display = "none";
-}
-
-function fecharModal() {
-    document.querySelector(".add-blur").classList.remove('blur');
-    document.querySelector(".card-validacao").style.display = "none";
-}
-
 // validar os campos antes de gravar o pedido------------------------------------
 function validarCampos(event) {
     event.preventDefault();
