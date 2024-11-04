@@ -35,6 +35,7 @@ async function carregarPedidos() {
 }
 
 async function mostrarDetalhes(pedidoId) {
+    
     const pedido = pedidos.find(p => p.id === pedidoId);
     if (!pedido) return;
 
