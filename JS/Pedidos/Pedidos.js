@@ -5,7 +5,7 @@ var clienteId = localStorage.getItem("clienteId");
 async function carregarPedidos() {
     console.log('Carregando pedidos...');
     try {
-        const response = await fetch('http://localhost:8080/pedido/'+clienteId);
+        const response = await fetch('http://'+ API + ':8080/pedido/'+clienteId);
         pedidos = await response.json(); // Armazena os pedidos na variável global
         console.log('Dados recebidos:', pedidos);
 
@@ -23,8 +23,8 @@ async function carregarPedidos() {
                 <td>${pedido.id}</td>
                 <td>${dataPedidoFormatada}</td>
                 <td>${pedido.status || "Status não disponível"}</td>
-                <td>R$ ${(pedido.valorTotal).toFixed(2) || "Valor não disponível"}</td>
-                <td><button onclick="mostrarDetalhes(${pedido.id})">Detalhes</button></td>
+                <td>R$ ${(pedido.total).toFixed(2) || "Valor não disponível"}</td>
+                <td class="text-center"><button onclick="mostrarDetalhes(${pedido.id})">Detalhes</button></td>
             `;
             tbody.appendChild(row);
         });
@@ -34,27 +34,23 @@ async function carregarPedidos() {
     }
 }
 
-function mostrarDetalhes(pedidoId) {
-    // Encontra o pedido selecionado na lista global de pedidos
+async function mostrarDetalhes(pedidoId) {
     const pedido = pedidos.find(p => p.id === pedidoId);
     if (!pedido) return;
 
-    // Endpoint para obter detalhes do pedido, incluindo o endereço
-    const endpoint = `http://localhost:8080/pedido/${pedidoId}/itens`;
-
-    // Realiza a requisição ao endpoint para obter o endereço de entrega
+    const endpoint = 'http://'+API+':8080/pedido/detalhe/'+pedidoId;
     fetch(endpoint)
         .then(response => response.json())
         .then(data => {
-            // Exibe os dados do pedido e do endereço no modal
             const modal = document.getElementById('detalhesModal');
             const modalContent = document.getElementById('modalContent');
             modalContent.innerHTML = `
                 <h2>Detalhes do Pedido #${pedido.id}</h2>
-                <p><strong>Data:</strong> ${pedido.dataPedido.split('T')[0]}</p>
-                <p><strong>Status:</strong> ${pedido.status}</p>
-                <p><strong>Forma de pagamento:</strong> ${pedido.formaPagamento}</p>
-                <p><strong>Total:</strong> R$ ${(pedido.valorTotal).toFixed(2)}</p>
+                <p><strong>Data:</strong> ${data.dataPedido.split('T')[0]}</p>
+                <p><strong>Status:</strong> ${data.status}</p>
+                <p><strong>Forma de pagamento:</strong> ${data.formaPagamento}</p>
+                <p><strong>Frete:</strong> R$ ${data.frete.toFixed(2)}</p>
+                <p><strong>Total:</strong> R$ ${data.valorTotal.toFixed(2)}</p>
                 <h3>Endereço de entrega:</h3>
                 <p><strong>CEP:</strong> ${data.endereco.cep}</p>
                 <p><strong>Logradouro:</strong> ${data.endereco.logradouro}</p>
@@ -63,11 +59,11 @@ function mostrarDetalhes(pedidoId) {
                 <p><strong>Cidade:</strong> ${data.endereco.cidade} - ${data.endereco.uf}</p>
                 <h3>Itens:</h3>
                 <ul>
-                    ${pedido.itemPedidoModel.map(item => `
-                        <li>${item.id.produtoId.nomeProduto} - Quantidade: ${item.quantidade} - Preço Unitário: R$ ${item.valorUnitario.toFixed(2)}</li>
+                    ${data.produtoQtd.map(item => `
+                        <li>${item.nome} - Quantidade: ${item.quantidade} - Preço Unitário: R$ ${item.valorUnitario.toFixed(2)}</li>
                     `).join('')}
                 </ul>
-                <button onclick="fecharModal()">Fechar</button>
+                <button class="btn-fechar" onclick="fecharModal()">Fechar</button>
             `;
             modal.style.display = 'block';
         })
@@ -76,6 +72,7 @@ function mostrarDetalhes(pedidoId) {
             alert('Não foi possível carregar os detalhes do pedido.');
         });
 }
+
 
 function fecharModal() {
     document.getElementById('detalhesModal').style.display = 'none';
