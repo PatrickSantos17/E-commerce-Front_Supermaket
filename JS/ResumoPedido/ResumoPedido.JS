@@ -115,6 +115,7 @@ async function carregaCarrinho(listaIdProdutos) {
 }
 
 function gravarPedido() {
+    mostrarProcessamentoPagamento()
     let pagamento;
     if (formaPagamento === 'Cartão de Crédito') {
         pagamento = 'CARTAO_CREDITO';
@@ -125,7 +126,7 @@ function gravarPedido() {
         frete: parseFloat((resumoPedido.frete).replace("R$", "").trim()),
         clienteId: clienteId,
         enderecoId: 19
-    }
+    };
 
     fetch(`http://${API}:8080/pedido/cadastrar`, {
         method: 'POST',
@@ -136,16 +137,31 @@ function gravarPedido() {
     })
         .then(response => {
             if (!response.ok) {
+                document.querySelector("main").classList.remove('blur');
+                esconderLoading();
                 throw new Error('Erro ao concluir pedido: ' + response.statusText);
             }
-            alert('Pedido concluído com sucesso!');
-            window.location.href = 'TelaProduto.html';
+            return response.json();
+        })
+        .then(pedido => {
+            setTimeout(function () {
+                esconderLoading();
+                document.querySelector(".card-concluido").style.display = "flex";
+                document.querySelector(".modal-confirm").innerHTML = `
+                    <p class="modal-heading">Pedido realizado com sucesso!</p>
+                    <p class="modal-info">Número do pedido: ${pedido.id}</p>
+                    <p class="modal-info">Valor total do pedido: ${pedido.valorTotal}</p>
+                    <div class="button-wrapper">
+                        <button class="accept-cookie-button">OK</button>
+                    </div>`;
+                localStorage.setItem("produtos", JSON.stringify([]));
+                document.querySelector(".accept-cookie-button").addEventListener("click", redirecionarParaTelaProduto);
+            }, 3600);
         })
         .catch(error => {
+            esconderLoading();
+            document.querySelector("main").classList.remove('blur');
             console.error('Erro ao concluir pedido:', error);
             alert('Erro ao concluir pedido. Por favor, tente novamente.');
         });
-}
-function directToTelaPagamento() {
-    window.location.href = "TelaPagamento.html";
 }
