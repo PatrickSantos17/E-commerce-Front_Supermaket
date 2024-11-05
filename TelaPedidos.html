@@ -41,7 +41,20 @@
         </div>
     </header>
     <main>    
-        <div class="conteudo">
+      <div class="sem-pedidos" id="empty-order">
+        <h2>VOCÊ NÃO TEM PEDIDOS</h2>
+        <img src="src/img/image.png" alt="Icone sem pedidos">
+  
+        <div id="btn-voltar-inicio">
+          <a href="TelaProduto.html">
+            <button class="animated-button">
+              <span>Voltar para o inicio</span>
+              <span></span>
+            </button>
+          </a>
+        </div>
+      </div>
+        <div id="conteudo-pedidos" class="conteudo-pedidos">
           <h1 class="Titulo">Meus pedidos</h1>
           <div class="table-responsive">
     
@@ -79,6 +92,6 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
       <script src="JS/Pedidos/Pedidos.js"></script>
         <script src="JS/Geral/Geral.js" defer></script>
-      <script src="JS/HeaderCliente/HeaderCliente.js" defer></script>
+      <script src="JS/HeaderCliente/HeaderCliente.js" ></script>
     </body>
 </html>

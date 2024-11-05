@@ -1,47 +1,74 @@
-
 let pedidos = []; // Declara a variável pedidos como global
 var clienteId = localStorage.getItem("clienteId");
 
 async function carregarPedidos() {
     console.log('Carregando pedidos...');
+
+    if (!clienteId) {
+        // Exibe a mensagem de "Sem pedidos" e oculta a tabela se não houver clienteId
+        document.getElementById("empty-order").style.display = "block";
+        document.getElementById("conteudo-pedidos").style.display = "none";
+        console.error('ID do cliente não encontrado.');
+        return; // Interrompe a execução se não houver clienteId
+    }
+
     try {
-        const response = await fetch('http://'+ API + ':8080/pedido/'+clienteId);
+        const response = await fetch(`http://${API}:8080/pedido/${clienteId}`);
+        
+        // Verifica se a resposta foi bem-sucedida
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.statusText}`);
+        }
+
         pedidos = await response.json(); // Armazena os pedidos na variável global
         console.log('Dados recebidos:', pedidos);
 
         const tbody = document.getElementById('table-group-divider');
         tbody.innerHTML = ""; // Limpa o conteúdo anterior do tbody
 
-        pedidos.forEach(pedido => {
-            const row = document.createElement('tr');
+        // Verifica se há pedidos e exibe a tabela ou a mensagem de "Sem pedidos"
+        if (pedidos.length > 0) {
+            pedidos.forEach(pedido => {
+                const row = document.createElement('tr');
+                const dataPedidoFormatada = pedido.dataPedido
+                    ? pedido.dataPedido.split('T')[0]
+                    : "Data não disponível";
 
-            const dataPedidoFormatada = pedido.dataPedido
-                ? pedido.dataPedido.split('T')[0]
-                : "Data não disponível";
-
-            row.innerHTML = `
-                <td>${pedido.id}</td>
-                <td>${dataPedidoFormatada}</td>
-                <td>${pedido.status || "Status não disponível"}</td>
-                <td>R$ ${(pedido.total).toFixed(2) || "Valor não disponível"}</td>
-                <td class="text-center"><button onclick="mostrarDetalhes(${pedido.id})">Detalhes</button></td>
-            `;
-            tbody.appendChild(row);
-        });
+                row.innerHTML = `
+                    <td>${pedido.id}</td>
+                    <td>${dataPedidoFormatada}</td>
+                    <td>${pedido.status || "Status não disponível"}</td>
+                    <td>R$ ${(pedido.total).toFixed(2) || "Valor não disponível"}</td>
+                    <td class="text-center"><button onclick="mostrarDetalhes(${pedido.id})">Detalhes</button></td>
+                `;
+                tbody.appendChild(row);
+            });
+            document.getElementById("empty-order").style.display = "none"; // Oculta a mensagem de "Sem pedidos"
+            document.getElementById("conteudo-pedidos").style.display = "block"; // Exibe a tabela
+        } else {
+            document.getElementById("empty-order").style.display = "block"; // Exibe a mensagem de "Sem pedidos"
+            document.getElementById("conteudo-pedidos").style.display = "none"; // Oculta a tabela
+        }
 
     } catch (error) {
         console.error('Erro ao carregar pedidos:', error);
+        document.getElementById("empty-order").style.display = "block"; // Exibe a mensagem de "Sem pedidos"
+        document.getElementById("conteudo-pedidos").style.display = "none"; // Oculta a tabela
     }
 }
 
 async function mostrarDetalhes(pedidoId) {
-    
     const pedido = pedidos.find(p => p.id === pedidoId);
     if (!pedido) return;
 
-    const endpoint = 'http://'+API+':8080/pedido/detalhe/'+pedidoId;
+    const endpoint = `http://${API}:8080/pedido/detalhe/${pedidoId}`;
     fetch(endpoint)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+            return response.json();
+        })
         .then(data => {
             const modal = document.getElementById('detalhesModal');
             const modalContent = document.getElementById('modalContent');
@@ -64,7 +91,7 @@ async function mostrarDetalhes(pedidoId) {
                         <li>${item.nome} - Quantidade: ${item.quantidade} - Preço Unitário: R$ ${item.valorUnitario.toFixed(2)}</li>
                     `).join('')}
                 </ul>
-                <button class="btn-fechar" onclick="fecharModal()">Fechar</button>
+                <button class="btn-fechar" onclick="fecharModal()">X</button>
             `;
             modal.style.display = 'block';
         })
@@ -74,9 +101,9 @@ async function mostrarDetalhes(pedidoId) {
         });
 }
 
-
 function fecharModal() {
     document.getElementById('detalhesModal').style.display = 'none';
 }
 
+// Executa a função ao carregar a página
 document.addEventListener('DOMContentLoaded', carregarPedidos);
