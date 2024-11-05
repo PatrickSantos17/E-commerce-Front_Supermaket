@@ -39,8 +39,8 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                     </header>
                     
                     <div class="checkbox-wrapper-4">
-                        <input class="inp-cbx" id="morning" type="checkbox">
-                        <label class="cbx" for="morning"><span>
+                        <input class="inp-cbx" id="checkEndereco" type="checkbox">
+                        <label class="cbx" for="checkEndereco"><span>
                         <svg width="12px" height="10px">
                             
                         </svg></span><span>Entrega padrão</span></label>
@@ -49,6 +49,9 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                                 <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                             </symbol>
                         </svg>
+                    </div>
+
+                    <div class="entrega-selecionada">
                     </div>
 
                     <button onclick="directToTelaAlterarCliente()" type="button" class="btn-add-endereco">
