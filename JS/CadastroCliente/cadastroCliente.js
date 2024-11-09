@@ -324,8 +324,8 @@ async function enviarDados(usuario) {
     }
 }
 
-function directToTelaLoginCliente() {
-    window.location.href = "TelaLoginCliente.html";
+function directToTelaCarrinho() {
+    window.location.href = "TelaCarrinho.html";
 }
 
 function directToTelaProduto() {

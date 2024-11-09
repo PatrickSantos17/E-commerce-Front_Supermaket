@@ -61,7 +61,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                 </div>
 
                 <div class="btn-finali-conti">
-                    <button class="btn-finalizar">AVANÇAR</button>
+                    <button class="btn-finalizar">FINALIZAR PEDIDO</button>
                     <button class="btn-continuar" onclick="directToTelaProdutos()">CONTINUAR COMPRANDO</button>
                 </div>
             </aside>`;
@@ -100,7 +100,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                     </div>
                 </div>
                 <div class="btn-finali-conti">
-                    <button class="btn-finalizar">AVANÇAR</button>
+                    <button class="btn-finalizar">FINALIZAR PEDIDO</button>
                     <button class="btn-continuar" onclick="directToTelaProdutos()">CONTINUAR COMPRANDO</button>
                 </div>
             </aside>`;
