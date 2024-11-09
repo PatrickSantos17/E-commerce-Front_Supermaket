@@ -11,11 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function fetchUsuarios() {
     try {
-        // Substitua o URL abaixo pela URL da sua API
         const response = await fetch("http://" + API + ":8080/usuario");
         const usuarios = await response.json();
 
-        // Chama a função que preenche a tabela
         preencherTabela(usuarios);
     } catch (error) {
         console.error("Erro ao buscar usuários:", error);
@@ -24,13 +22,12 @@ async function fetchUsuarios() {
 
 function preencherTabela(usuarios) {
     const tbody = document.querySelector("tbody");
-    tbody.innerHTML = ""; // Limpa o conteúdo da tabela antes de adicionar novos dados
+    tbody.innerHTML = "";
 
     usuarios.forEach(usuario => {
         const tr = document.createElement("tr");
 
         const ativo = usuario.ativo ? "Ativo" : "Inativo";
-        // Preenche as células com os dados do usuário
         tr.innerHTML = `
             <td>${usuario.nome}</td>
             <td>${usuario.credencialId.email}</td>
@@ -49,7 +46,6 @@ function preencherTabela(usuarios) {
 }
 
 function alterarUsuario(id) {
-    // Função para redirecionar para a página de alteração do usuário
     window.location.href = `TelaAlterarUsuario.html?id=${id}`;
 }
 
