@@ -38,20 +38,20 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                         <p>Entrega</p>
                     </header>
                     
-                    <div class="checkbox-wrapper-4">
-                        <input class="inp-cbx" id="checkEndereco" type="checkbox">
-                        <label class="cbx" for="checkEndereco"><span>
-                        <svg width="12px" height="10px">
-                            
-                        </svg></span><span>Entrega padrão</span></label>
-                        <svg class="inline-svg">
-                            <symbol id="check-4" viewBox="0 0 12 10">
-                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </symbol>
-                        </svg>
+                    <div class="checkbox-endereco-padrao">
+                        <input type="checkbox" id="checkEndereco">
+                        <label for="checkEndereco">Entrega Padrão</label>
+
+                        <div class="entrega-padrao-selecionada">
+                        </div>
                     </div>
 
-                    <div class="entrega-selecionada">
+                    <div class="outros-enderecos">
+                        <p class="titulo-outros">Selecionar outro endereço</p>
+
+                        <div class="radio-input">
+                            
+                        </div>
                     </div>
 
                     <button onclick="directToTelaAlterarCliente()" type="button" class="btn-add-endereco">
@@ -61,7 +61,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                 </div>
 
                 <div class="btn-finali-conti">
-                    <button class="btn-finalizar">FINALIZAR PEDIDO</button>
+                    <button class="btn-finalizar">AVANÇAR</button>
                     <button class="btn-continuar" onclick="directToTelaProdutos()">CONTINUAR COMPRANDO</button>
                 </div>
             </aside>`;
@@ -100,7 +100,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                     </div>
                 </div>
                 <div class="btn-finali-conti">
-                    <button class="btn-finalizar">FINALIZAR PEDIDO</button>
+                    <button class="btn-finalizar">AVANÇAR</button>
                     <button class="btn-continuar" onclick="directToTelaProdutos()">CONTINUAR COMPRANDO</button>
                 </div>
             </aside>`;
