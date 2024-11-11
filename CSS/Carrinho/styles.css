@@ -38,7 +38,7 @@ body>main .content section {
 }
 
 body>main .content aside {
-    min-width: 320px;
+    min-width: 400px;
 }
 
 .content {
@@ -291,19 +291,25 @@ aside .box footer {
 
 .header-box {
     display: flex;
-    align-items: center; /* Alinha o conteúdo ao centro */
+    align-items: center;
+    /* Alinha o conteúdo ao centro */
 }
 
 .header-box img {
-    width: 24px; /* Ajuste o tamanho conforme necessário */
-    height: 24px; /* Ajuste o tamanho conforme necessário */
-    margin-right: 8px; /* Espaçamento entre imagem e texto */
+    width: 24px;
+    /* Ajuste o tamanho conforme necessário */
+    height: 24px;
+    /* Ajuste o tamanho conforme necessário */
+    margin-right: 8px;
+    /* Espaçamento entre imagem e texto */
     vertical-align: middle;
 }
 
 .header-box p {
-    font-size: 16px; /* Ajuste conforme necessário */
-    margin: 0; /* Remove margens extras do parágrafo */
+    font-size: 16px;
+    /* Ajuste conforme necessário */
+    margin: 0;
+    /* Remove margens extras do parágrafo */
 }
 
 .btn-finalizar {
@@ -453,10 +459,8 @@ aside .box footer {
     flex-direction: column;
 }
 
-/*# sourceMappingURL=styles.css.map */
-
 /* checkbox endereço entrega */
-.checkbox-wrapper-4 * {
+/* .checkbox-wrapper-4 * {
     box-sizing: border-box;
     color: #3b3b3b;
 }
@@ -575,11 +579,11 @@ aside .box footer {
     50% {
         transform: scale(0.9);
     }
-}
+} */
 
 /* botão cadastrar novos endereços */
 
-/* From Uiverse.io by andrew-demchenk0 */
+
 .btn-add-endereco {
     position: relative;
     width: 239px;
@@ -589,7 +593,7 @@ aside .box footer {
     align-items: center;
     border: 1px solid #0b3a80;
     background-color: #0f52b6;
-    margin: 0 auto 20px auto;
+    margin: 25px auto 20px auto;
 }
 
 .btn-add-endereco,
@@ -754,7 +758,8 @@ input {
     }
 }
 
-.btn-cancelar, .btn-salvar {
+.btn-cancelar,
+.btn-salvar {
     background: #0f52b6;
     color: #ffffff;
     font-weight: bold;
@@ -771,12 +776,12 @@ input {
     background-color: #0b3a80;
 }
 
-.modal-completo-ende{
+.modal-completo-ende {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 .button-wrapper {
@@ -863,3 +868,117 @@ input {
 
 /* fim btn fechar modal */
 
+.checkbox-endereco-padrao {
+    padding-left: 20px;
+    padding-top: 25px;
+}
+
+.checkbox-endereco-padrao label {
+    color: #0f52b6;
+    font-weight: 900;
+}
+
+.outros-enderecos .titulo-outros {
+    color: #0f52b6;
+    font-weight: 900;
+    padding-left: 20px;
+}
+
+/* input selecionar outro endereco */
+.radio-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.radio-input * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    
+}
+
+.radio-input label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0px 20px;
+    width: 380px;
+    cursor: pointer;
+    height: 50px;
+    position: relative;
+}
+
+.radio-input label::before {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: 45px;
+    z-index: -1;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border-radius: 10px;
+    border: 2px solid transparent;
+}
+
+.radio-input label:hover::before {
+    transition: all 0.2s ease;
+    background-color: #2a2e3c;
+}
+
+.radio-input .label:has(input:checked)::before {
+    background-color: #2d3750;
+    border-color: #0f52b6;
+    height: 50px;
+}
+
+.radio-input .label .text {
+    color: #000000;
+}
+
+.radio-input .label input[type="radio"] {
+    background-color: #202030;
+    appearance: none;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.radio-input .label input[type="radio"]:checked {
+    background-color: #0f52b6;
+    -webkit-animation: puls 0.7s forwards;
+    animation: pulse 0.7s forwards;
+}
+
+.radio-input .label input[type="radio"]:before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    background-color: #fff;
+    transform: scale(0);
+}
+
+.radio-input .label input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
