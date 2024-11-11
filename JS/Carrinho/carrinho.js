@@ -72,6 +72,9 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                 if (this.checked) {
                     document.querySelector(".outros-enderecos").innerHTML = '';
                     idEnderecoPadrao = this.value;
+
+                    let enderecoSelecionado = this.closest("div").querySelector(".entrega-padrao").textContent;
+                    localStorage.setItem('enderecoEscrito', enderecoSelecionado);
                     gerarFretes();
                 } else {
                     idEnderecoPadrao = 0;
@@ -153,6 +156,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
         let enderecoSelecionado;
         if (idEnderecoPadrao === 0) {
             enderecoSelecionado = pegarEscolhausuario();
+            
         } else {
             enderecoSelecionado = idEnderecoPadrao;
         }

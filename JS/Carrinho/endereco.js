@@ -1,8 +1,12 @@
 let userId = localStorage.getItem("clienteId");
+let usuarioAutenticado = localStorage.getItem("autenticadoCliente");
 
 window.addEventListener('DOMContentLoaded', function () {
-    buscarEnderecoPadrao(userId);
-    buscarEnderecosCliente(userId);
+
+    if (usuarioAutenticado) {
+        buscarEnderecoPadrao(userId);
+        buscarEnderecosCliente(userId);
+    }
     // const checkbox = document.getElementById('checkEndereco');
     // const entregaPadrao = document.querySelector(".entrega-selecionada");
 
@@ -34,7 +38,7 @@ function buscarEnderecoPadrao(userId) {
 
             const checkbox = document.getElementById('checkEndereco');
             if (checkbox) {
-                checkbox.value = endereco.id; // Supondo que `endereco.id` é o valor que deseja atribuir
+                checkbox.value = endereco.id;
             }
             // Atualiza o conteúdo da entrega-selecionada
             const entregaPadrao = document.querySelector(".entrega-padrao-selecionada");
@@ -68,13 +72,20 @@ function buscarEnderecosCliente(userId) {
                             name="value-radio"
                             value="value-${endereco.id}"
                             />
-                            <p class="text">${enderecoAbreviado}</p>
+                            <p class="text enderecoEscrito">${enderecoAbreviado}</p>
                         </label>
                     `;
 
+                    // Adiciona o evento `change` em todos os radio buttons após carregá-los no DOM
                     document.querySelectorAll('input[name="value-radio"]').forEach(radio => {
                         radio.addEventListener('change', function () {
                             gerarFretes();
+
+                            // Pega o endereço relacionado ao radio selecionado
+                            let enderecoSelecionado = this.closest("label").querySelector(".enderecoEscrito").textContent;
+
+                            // Armazena o endereço selecionado no localStorage
+                            localStorage.setItem('enderecoEscrito', enderecoSelecionado);
                         });
                     });
 

@@ -38,7 +38,7 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                         <img src="src/img/entrega-rapida.png" alt="imagem carrinho"/>
                         <p>Entrega</p>
                     </header>
-                     <p>Entrega prevista em 5 dias úteis</p>
+                     <p>${localStorage.getItem('enderecoEscrito')}</p>
                 </div>
 
                 <div class="btn-finali-conti">
