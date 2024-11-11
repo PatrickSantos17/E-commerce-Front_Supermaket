@@ -2,6 +2,7 @@ var totalProdutos;
 var totalFrete;
 let listaSalva = JSON.parse(localStorage.getItem("produtos"));
 var frete = 0.00;
+var idEnderecoPadrao = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
     const carrinhoBuscarNLRequestDTO = {
@@ -65,6 +66,18 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                     <button class="btn-continuar" onclick="directToTelaProdutos()">CONTINUAR COMPRANDO</button>
                 </div>
             </aside>`;
+
+            document.getElementById('checkEndereco').addEventListener('change', function () {
+                console.log('Checkbox foi clicado! Novo estado:', this.checked);
+                if (this.checked) {
+                    document.querySelector(".outros-enderecos").innerHTML = '';
+                    idEnderecoPadrao = this.value;
+                    gerarFretes();
+                } else {
+                    idEnderecoPadrao = 0;
+                    location.reload();
+                }
+            });
     } else {
         conteudo.innerHTML += `<aside>
                 <div class="box">
@@ -104,46 +117,58 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                     <button class="btn-continuar" onclick="directToTelaProdutos()">CONTINUAR COMPRANDO</button>
                 </div>
             </aside>`;
+
+        // Agora que o botão foi adicionado ao DOM, podemos adicionar o event listener e a máscara
+        const cepInput = document.querySelector('#cep');
+        cepInput.addEventListener('input', aplicarMascaraCEP);
+
+        document.querySelector('.btn-cep').addEventListener('click', async function (event) {
+            event.preventDefault();
+            const cep = cepInput.value.trim();
+
+            // Expressão regular para validar o formato do CEP
+            const cepRegex = /^\d{5}-\d{3}$/;
+
+            if (!cepRegex.test(cep)) {
+                mostrarMensagemErro('Digite um CEP válido.');
+                return;
+            }
+
+            try {
+                const endereco = await buscarEnderecoViaCEP(cep);
+                if (endereco.erro) {
+                    mostrarMensagemErro('CEP não encontrado.');
+                } else {
+                    console.log('Endereço encontrado:', endereco);
+                    mostrarEndereco(endereco);
+                }
+            } catch (error) {
+                mostrarMensagemErro('Erro ao buscar o CEP.');
+                console.error('Erro:', error);
+            }
+        });
     }
 
     document.querySelector('.btn-finalizar').addEventListener('click', () => {
+        let enderecoSelecionado;
+        if (idEnderecoPadrao === 0) {
+            enderecoSelecionado = pegarEscolhausuario();
+        } else {
+            enderecoSelecionado = idEnderecoPadrao;
+        }
+
+        if (!enderecoSelecionado) {
+            alert("Por favor, selecione um endereço de entrega.");
+            return;
+        }
         const pagamento = {
             subtotal: document.querySelector('.subtotal-produtos').textContent,
             frete: document.querySelector('.frete-carrinho').textContent,
-            total: document.querySelector('footer span:last-child').textContent
+            total: document.querySelector('footer span:last-child').textContent,
+            enderecoId: enderecoSelecionado
         }
         localStorage.setItem("resumoPedido", JSON.stringify(pagamento));
         window.location.href = "TelaPagamento.html";
-    });
-
-    // Agora que o botão foi adicionado ao DOM, podemos adicionar o event listener e a máscara
-    const cepInput = document.querySelector('#cep');
-    cepInput.addEventListener('input', aplicarMascaraCEP);
-
-    document.querySelector('.btn-cep').addEventListener('click', async function (event) {
-        event.preventDefault();
-        const cep = cepInput.value.trim();
-
-        // Expressão regular para validar o formato do CEP
-        const cepRegex = /^\d{5}-\d{3}$/;
-
-        if (!cepRegex.test(cep)) {
-            mostrarMensagemErro('Digite um CEP válido.');
-            return;
-        }
-
-        try {
-            const endereco = await buscarEnderecoViaCEP(cep);
-            if (endereco.erro) {
-                mostrarMensagemErro('CEP não encontrado.');
-            } else {
-                console.log('Endereço encontrado:', endereco);
-                mostrarEndereco(endereco);
-            }
-        } catch (error) {
-            mostrarMensagemErro('Erro ao buscar o CEP.');
-            console.error('Erro:', error);
-        }
     });
 }
 
@@ -252,6 +277,48 @@ function mostrarEndereco(endereco) {
     // Cria o conteúdo com os valores de frete
     infoCepDiv.innerHTML = `
         <p><strong>Entregar em:</strong> ${endereco.logradouro}, ${endereco.bairro}, ${endereco.localidade} - ${endereco.uf}</p>
+        <p><strong>Escolha o valor do frete:</strong></p>
+        <div class="frete-options">
+            <div class="fretes">
+                <input type="radio" id="frete1" name="frete" value="${frete1}">
+                <p>Entrega Econômica</p>
+                <label for="frete1">R$ ${frete1}</label><br>
+            </div>
+            <div class="fretes">
+                <input type="radio" id="frete2" name="frete" value="${frete2}">
+                <p>Entrega Rápida</p>
+                <label for="frete2">R$ ${frete2}</label><br>
+            </div>
+            <div class="fretes">
+                <input type="radio" id="frete3" name="frete" value="${frete3}">
+                <p>Entrega Expressa</p>
+                <label for="frete3">R$ ${frete3}</label>
+            </div>
+        </div>
+    `;
+
+    // Adiciona o event listener para atualizar o frete no total quando o usuário selecionar uma opção
+    document.querySelectorAll('input[name="frete"]').forEach(radio => {
+        radio.addEventListener('change', atualizarFrete);
+    });
+}
+
+function gerarFretes() {
+
+    let infoCepDiv = document.querySelector('.info-cep');
+    if (!infoCepDiv) {
+        const caixaEntrega = document.querySelector('.entrega');
+        infoCepDiv = document.createElement('div');
+        infoCepDiv.classList.add('info-cep');
+        caixaEntrega.appendChild(infoCepDiv);
+    }
+
+    // Gera três valores de frete aleatórios entre 10 e 100 reais, com diferenças pequenas entre eles
+    const frete1 = (Math.random() * (90) + 10).toFixed(2);
+    const frete2 = (parseFloat(frete1) + (Math.random() * 10)).toFixed(2);
+    const frete3 = (parseFloat(frete2) + (Math.random() * 10)).toFixed(2);
+
+    infoCepDiv.innerHTML = `
         <p><strong>Escolha o valor do frete:</strong></p>
         <div class="frete-options">
             <div class="fretes">

@@ -125,7 +125,7 @@ function gravarPedido() {
         formaPagamento: (formaPagamento === 'PIX') ? 'PIX' : pagamento,
         frete: parseFloat((resumoPedido.frete).replace("R$", "").trim()),
         clienteId: clienteId,
-        enderecoId: 19
+        enderecoId: resumoPedido.enderecoId
     };
 
     fetch(`http://${API}:8080/pedido/cadastrar`, {

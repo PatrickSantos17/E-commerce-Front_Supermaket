@@ -32,6 +32,10 @@ function buscarEnderecoPadrao(userId) {
         .then(endereco => {
             let enderecoAbreviado = `${endereco.logradouro}, ${endereco.numero} - CEP: ${endereco.cep}`;
 
+            const checkbox = document.getElementById('checkEndereco');
+            if (checkbox) {
+                checkbox.value = endereco.id; // Supondo que `endereco.id` é o valor que deseja atribuir
+            }
             // Atualiza o conteúdo da entrega-selecionada
             const entregaPadrao = document.querySelector(".entrega-padrao-selecionada");
             entregaPadrao.innerHTML = `
@@ -49,30 +53,33 @@ function buscarEnderecosCliente(userId) {
         .then(response => response.json())
         .then(cliente => {
 
-            let countEndereco = 1;
             const listaOutrosEnderecos = document.querySelector(".radio-input");
             cliente.enderecos.forEach(endereco => {
 
                 if (endereco.entrega === false) {
-                    
+
                     let enderecoAbreviado = `${endereco.logradouro}, ${endereco.numero} - CEP: ${endereco.cep}`;
 
                     listaOutrosEnderecos.innerHTML += `
                         <label class="label">
                             <input
                             type="radio"
-                            id="value-${countEndereco}"
-                            checked=""
+                            id="value-${endereco.id}"
                             name="value-radio"
-                            value="value-${countEndereco}"
+                            value="value-${endereco.id}"
                             />
                             <p class="text">${enderecoAbreviado}</p>
                         </label>
                     `;
-                    countEndereco++;
-                }
 
-            })
+                    document.querySelectorAll('input[name="value-radio"]').forEach(radio => {
+                        radio.addEventListener('change', function () {
+                            gerarFretes();
+                        });
+                    });
+
+                }
+            });
 
         })
 
@@ -80,5 +87,11 @@ function buscarEnderecosCliente(userId) {
             console.error('Erro ao buscar informações do cliente:', error);
             alert("Erro ao buscar informações do cliente. Por favor, tente novamente.");
         });
+}
+
+function pegarEscolhausuario() {
+    let escolha = document.querySelector('input[name="value-radio"]:checked').value;
+    let id = escolha.split('-')[1];
+    return id;
 }
 
