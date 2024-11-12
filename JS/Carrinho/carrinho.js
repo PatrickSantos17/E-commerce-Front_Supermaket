@@ -67,20 +67,20 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                 </div>
             </aside>`;
 
-            document.getElementById('checkEndereco').addEventListener('change', function () {
-                console.log('Checkbox foi clicado! Novo estado:', this.checked);
-                if (this.checked) {
-                    document.querySelector(".outros-enderecos").innerHTML = '';
-                    idEnderecoPadrao = this.value;
+        document.getElementById('checkEndereco').addEventListener('change', function () {
+            console.log('Checkbox foi clicado! Novo estado:', this.checked);
+            if (this.checked) {
+                document.querySelector(".outros-enderecos").innerHTML = '';
+                idEnderecoPadrao = this.value;
 
-                    let enderecoSelecionado = this.closest("div").querySelector(".entrega-padrao").textContent;
-                    localStorage.setItem('enderecoEscrito', enderecoSelecionado);
-                    gerarFretes();
-                } else {
-                    idEnderecoPadrao = 0;
-                    location.reload();
-                }
-            });
+                let enderecoSelecionado = this.closest("div").querySelector(".entrega-padrao").textContent;
+                localStorage.setItem('enderecoEscrito', enderecoSelecionado);
+                gerarFretes();
+            } else {
+                idEnderecoPadrao = 0;
+                location.reload();
+            }
+        });
     } else {
         conteudo.innerHTML += `<aside>
                 <div class="box">
@@ -153,26 +153,32 @@ async function buscarCarrinhoNL(listaIdProdutos) {
     }
 
     document.querySelector('.btn-finalizar').addEventListener('click', () => {
-        let enderecoSelecionado;
-        if (idEnderecoPadrao === 0) {
-            enderecoSelecionado = pegarEscolhausuario();
-            
-        } else {
-            enderecoSelecionado = idEnderecoPadrao;
-        }
+        let usuarioAutenticado = localStorage.getItem("autenticadoCliente");
+        if (usuarioAutenticado) {
+            let enderecoSelecionado;
+            if (idEnderecoPadrao === 0) {
+                enderecoSelecionado = pegarEscolhausuario();
 
-        if (!enderecoSelecionado) {
-            alert("Por favor, selecione um endereço de entrega.");
-            return;
+            } else {
+                enderecoSelecionado = idEnderecoPadrao;
+            }
+
+            if (!enderecoSelecionado) {
+                alert("Por favor, selecione um endereço de entrega.");
+                return;
+            }
+            const pagamento = {
+                subtotal: document.querySelector('.subtotal-produtos').textContent,
+                frete: document.querySelector('.frete-carrinho').textContent,
+                total: document.querySelector('footer span:last-child').textContent,
+                enderecoId: enderecoSelecionado
+            }
+            localStorage.setItem("resumoPedido", JSON.stringify(pagamento));
+            window.location.href = "TelaPagamento.html";
+        } else {
+            alert("Você precisa estar logado para avançar com o pedido!");
+            window.location.href = "TelaLoginCliente.html";
         }
-        const pagamento = {
-            subtotal: document.querySelector('.subtotal-produtos').textContent,
-            frete: document.querySelector('.frete-carrinho').textContent,
-            total: document.querySelector('footer span:last-child').textContent,
-            enderecoId: enderecoSelecionado
-        }
-        localStorage.setItem("resumoPedido", JSON.stringify(pagamento));
-        window.location.href = "TelaPagamento.html";
     });
 }
 
