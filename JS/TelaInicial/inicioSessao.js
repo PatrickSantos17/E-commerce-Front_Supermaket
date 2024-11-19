@@ -9,11 +9,13 @@ let iconUsuario = document.getElementById('iconUsuario');
 let nomeUsuario = document.querySelector('.nome-usuario');
 let grupoUsuario = document.querySelector('.grupo-usuario');
 let listagemUsuarios = document.getElementById('listagemUsuarios');
+let listagemPedidos = document.getElementById('listagemPedidos');
 
 if (grupo === "Admin") {
     iconUsuario.src = "src/img/profile-user-admin.png"
     listagemUsuarios.style.display = "flex";
 } else {
+    listagemPedidos.style.display = "flex";
     iconUsuario.src = "src/img/profile-user.png"
 }
 

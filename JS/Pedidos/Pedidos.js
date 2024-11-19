@@ -21,6 +21,7 @@ async function carregarPedidos() {
         }
 
         pedidos = await response.json(); // Armazena os pedidos na variável global
+        pedidos.sort((a, b) => new Date(b.dataPedido) - new Date(a.dataPedido));
         console.log('Dados recebidos:', pedidos);
 
         const tbody = document.getElementById('table-group-divider');
