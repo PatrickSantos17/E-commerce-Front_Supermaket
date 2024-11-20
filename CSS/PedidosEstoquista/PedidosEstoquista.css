@@ -42,20 +42,6 @@ button:disabled {
     cursor: not-allowed;
 }
 
-#new {
-    padding: 12px 25px;
-    font-size: 18px;
-    background-color: #28a745;
-}
-
-#new:hover {
-    background-color: black;
-}
-
-#new:active {
-    background-color: #1e7e34;
-}
-
 td button {
     border: none;
     outline: none;
@@ -130,28 +116,6 @@ td button i:first-child {
     font-size: 20px;
 }
 
-#new {
-    padding: 12px 25px;
-    font-size: 18px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#new:hover {
-    background-color: black;
-    transform: translateY(-2px);
-}
-
-#new:active {
-    background-color: #1e7e34;
-    transform: translateY(0);
-}
-
 .container-filtro {
     width: 100%;
     margin: 10px 0;
@@ -181,6 +145,13 @@ table {
 
 thead {
     background-color: whitesmoke;
+}
+
+thead th {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px;
 }
 
 th, td {
