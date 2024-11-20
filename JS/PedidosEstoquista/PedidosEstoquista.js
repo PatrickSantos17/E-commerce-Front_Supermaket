@@ -7,43 +7,51 @@ async function carregarPedidos() {
     console.log('Carregando pedidos...');
 
     try {
-        const response = await fetch(`http://${API}:8080/pedido/`+grupoEstoquista);
-        
-        // Verifica se a resposta foi bem-sucedida
-        if (!response.ok) {
-            throw new Error(`Erro na requisição: ${response.statusText}`);
-        }
+        if (grupoEstoquista === "Estoquista") {
+            const response = await fetch(`http://${API}:8080/pedido/` + grupoEstoquista);
 
-        pedidos = await response.json(); // Armazena os pedidos na variável global
+            // Verifica se a resposta foi bem-sucedida
+            if (!response.ok) {
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
 
-        console.log('Dados recebidos:', pedidos);
+            pedidos = await response.json(); // Armazena os pedidos na variável global
 
-        const tbody = document.getElementById('table-group-divider');
-        tbody.innerHTML = ""; // Limpa o conteúdo anterior do tbody
+            console.log('Dados recebidos:', pedidos);
 
-        // Itera pelos pedidos e os adiciona à tabela
-        pedidos.forEach(pedido => {
-            const row = document.createElement('tr');
-            const dataPedidoFormatada = pedido.dataPedido
-                ? pedido.dataPedido.split('T')[0]
-                : "Data não disponível";
+            const tbody = document.querySelector('tbody');
+            tbody.innerHTML = ""; // Limpa o conteúdo anterior do tbody
 
-            row.innerHTML = `
+            // Itera pelos pedidos e os adiciona à tabela
+            pedidos.forEach(pedido => {
+                const row = document.createElement('tr');
+                const dataPedidoFormatada = pedido.dataPedido
+                    ? pedido.dataPedido.split('T')[0]
+                    : "Data não disponível";
+
+                row.innerHTML = `
                 <td>${pedido.id}</td>
                 <td>${dataPedidoFormatada}</td>
                 <td>${pedido.status || "Status não disponível"}</td>
                 <td>R$ ${(pedido.total).toFixed(2) || "Valor não disponível"}</td>
-                <td class="text-center"><button onclick="mostrarDetalhes(${pedido.id})">Editar Status</button></td>
+                <td class="text-center"><button onclick="alterarStatusPedido(${pedido.id})">Editar pedido</button></td>
             `;
-            tbody.appendChild(row);
-        });
+                tbody.appendChild(row);
+            });
+        } else {
+            alert("Apenas estoquistas têm permissão para acessar essa página.");
+            window.location.href = "TelaLogin.html";
+        }
+
     } catch (error) {
         console.error('Erro ao carregar pedidos:', error);
         alert('Erro ao carregar os pedidos. Tente novamente mais tarde.');
     }
 }
 
+function alterarStatusPedido(pedidoId) {
 
+}
 
 function fecharModal() {
     document.getElementById('detalhesModal').style.display = 'none';
