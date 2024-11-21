@@ -50,43 +50,52 @@
     </div>
   </div>
   <div id="cartao-alterarStatus" class="cartao">
-    <div class="modal-dados-endereco">
+    <div class="modal-dados-statusPedido">
       <div class="fechar-x">
         <span class="close">&times;</span>
       </div>
       <form class="modal-completo-alterarStatus">
         <h2>NOVO STATUS</h2>
-        <div class="col-md-8 order-md-1">
-          <form class="form" novalidate>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="nPedido">N° pedido</label>
-                <input type="text" class="form-control cep" id="nPedido" inputmode="numeric" disabled>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="status">Status</label>
-                <select name="status_options" class="form-control" id="status">
-                  <option value="Aguardando pagamento" selected>Aguardando pagamento</option>
-                  <option value="Pagamento rejeitado">Pagamento rejeitado</option>
-                  <option value="Pagamento com sucesso">Pagamento com sucesso</option>
-                  <option value="Aguardando retirada">Aguardando retirada</option>
-                  <option value="Em transito">Em transito</option>
-                  <option value="Entregue">Entregue</option>
-                </select>
-              </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="nPedido">N° pedido</label>
+              <input type="text" class="form-control nPedido" id="nPedido" inputmode="numeric" disabled>
             </div>
-            <div class="row">
-              <div class="button-wrapper">
-                <button class="cancelar">CANCELAR</button>
-                <button id="alterar-status" class="alterar">ALTERAR STATUS</button>
-              </div>
+            <div class="col-md-6 mb-3">
+              <label for="valor">Valor</label>
+              <input type="text" class="form-control valor" id="valor" inputmode="date" disabled>
             </div>
+          </div>
+          <div class="col-md-12 mb-6">
+            <label for="status">Status</label>
+            <select name="status_options" class="form-control" id="status">
+              <option value="Aguardando pagamento">Aguardando pagamento</option>
+              <option value="Pagamento rejeitado">Pagamento rejeitado</option>
+              <option value="Pagamento com sucesso">Pagamento com sucesso</option>
+              <option value="Aguardando retirada">Aguardando retirada</option>
+              <option value="Em transito">Em transito</option>
+              <option value="Entregue">Entregue</option>
+            </select>
+          </div>
+        </div>
+        <div class="botoes">
+          <button class="cancelar">CANCELAR</button>
+          <button id="alterar-status" class="alterar">ALTERAR STATUS</button>
         </div>
       </form>
     </div>
   </div>
-  <div id="overlay" class="overlay"></div>
-  <div class="card-confirmar"></div>
+
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-confirm">
+      <p class="modal-heading">Pedido Alterado!</p>
+      <p class="modal-info">O status do pedido foi alterado com sucesso!</p>
+      <div class="button-wrapper">
+        <button class="accept-cookie-button">OK</button>
+      </div>
+    </div>
+  </div>  
   <script src="JS/PedidosEstoquista/PedidosEstoquista.js"></script>
   <script src="JS/HeaderFuncionario/HeaderFuncionario.js" defer></script>
   <script src="JS/Geral/Geral.js" defer></script>

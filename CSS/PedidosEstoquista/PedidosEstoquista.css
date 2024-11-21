@@ -4,7 +4,7 @@ body {
     font-family: "Poppins", sans-serif;
     background: radial-gradient(circle, #130ff3, #000770, #000000);
     width: 100vw;
-    height: 100vh;
+    height: 130vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -169,6 +169,221 @@ tbody tr:hover {
 
 tbody tr:nth-child(even) {
     background-color: #f9f9f9;
+}
+
+/* Estilo para o fundo com blur */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo semitransparente */
+    backdrop-filter: blur(5px); /* Efeito de desfoque no fundo */
+    display: none; /* Esconde por padrão */
+    align-items: center; /* Alinha o modal verticalmente */
+    justify-content: center; /* Alinha o modal horizontalmente */
+    z-index: 1000; /* Garante que o modal esteja no topo */
+}
+
+/* Estilo do modal */
+.modal-confirm {
+    width: 280px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid rgb(206, 206, 206);
+    display: flex; /* Para garantir flexibilidade interna */
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+    animation: modal-appear 0.3s ease; /* Suavidade na entrada */
+}
+
+/* Animação para o modal */
+@keyframes modal-appear {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Heading do modal */
+.modal-heading {
+    color: rgb(34, 34, 34);
+    font-weight: 800;
+    text-align: center;
+}
+
+/* Informações do modal */
+.modal-info {
+    font-size: 11px;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+    text-align: center;
+}
+
+/* Botões no modal */
+.button-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.accept-cookie-button {
+    width: 50%;
+    padding: 8px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(34, 34, 34);
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.accept-cookie-button:hover {
+    background-color: rgb(0, 0, 0);
+}
+
+/* Modal alterar status*/
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.accept-cookie-button {
+    width: 50%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.accept-cookie-button:hover {
+    background-color: #0056b3;
+}
+
+.close {
+    color: #aaa;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+}
+
+.fechar-x {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.botoes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.botoes button {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.cancelar, .alterar {
+    background: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 10px 0;
+    width: 50%;
+    border: 1px solid #ced4da;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancelar:hover,
+.alterar:hover {
+    background-color: #e2e6ea;
+}
+
+.cartao {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+.modal-completo-alterarStatus{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+}
+
+.modal-dados-statusPedido {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: none;
+    padding: 15px;
+    gap: 15px;
+    position: relative;
+    font-family: 'Poppins', Arial, sans-serif;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Adicionando uma animação de suavidade ao abrir o modal */
+@keyframes modal-appear {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-confirm {
+    animation: modal-appear 0.5s ease;
+}
+
+
+#btn-cancelar {
+    margin: 15px 0 60px 0;
 }
 
 @media (max-width: 768px) {
