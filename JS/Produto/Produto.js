@@ -100,6 +100,7 @@ function montarLayoutExibicao(produtos) {
                                 <h5 class="card-title">${produto.nomeProduto}</h5>
                                 <hr>
                             </div>
+                            <p class="card-text"><strong>${produto.categoria}</strong></p>
                             <p class="card-text"><strong>R$ ${formatarCasasDecimais(produto.preco)}</strong></p>
 
                             <p>Avaliação: ${estrelasHTML}</p> <!-- Aqui estão as estrelas -->
@@ -126,6 +127,26 @@ function montarLayoutExibicao(produtos) {
 
     listaProdutos.innerHTML = produtosHTML;
 }
+
+function filtrarProdutos() {
+    const filtroNome = document.getElementById("filtro-nome-produto").value.toLowerCase();
+    const categoriaSelecionada = document.getElementById("filtro-categoria").value;
+
+    const produtosFiltrados = data.filter(produto => {
+        const nomeCorresponde = produto.nomeProduto.toLowerCase().includes(filtroNome);
+        const categoriaCorresponde = categoriaSelecionada
+            ? produto.categoria === categoriaSelecionada
+            : true; // Se nenhuma categoria for selecionada, ignora este critério
+
+        return nomeCorresponde && categoriaCorresponde;
+    });
+
+    montarLayoutExibicao(produtosFiltrados);
+}
+
+// Substituir os eventos dos filtros para chamar essa função combinada:
+document.getElementById("filtro-nome-produto").oninput = filtrarProdutos;
+document.getElementById("filtro-categoria").onchange = filtrarProdutos;
 
 function formatarCasasDecimais(numero) {
     return Number(numero).toFixed(2);

@@ -1,16 +1,13 @@
 body {
     background: #FFFFFF;
-    /* Cor de fundo da página */
-    /* margin: 0;
-    padding: 0; */
     font-family: Arial, sans-serif;
 }
 
 .container {
-    /* background-color: #140048; Se você quiser que o container fique branco, por exemplo */
     padding: 20px;
     border-radius: 8px;
-    /* Para dar um efeito arredondado nas bordas */
+    display: flex;
+    flex-direction: column;
 }
 
 .produtos-container {
@@ -19,105 +16,76 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    /* background-color: #140048; */
 }
 
 .custom-container {
-    /* background-color: #140048; Cor de fundo branco para o container dos produtos */
-    padding: 20px;
-    border-radius: 8px;
-    /* Deixa o container com bordas arredondadas */
-    box-shadow: 0 4px 8px rgba(91, 129, 196, 0.1);
-    /* Sombra leve ao redor do container */
     display: flex;
     flex-wrap: wrap;
-    /* Para permitir que os cards se movam para a próxima linha */
-    gap: 20px;
-    /* Espaço entre os cards */
-    padding-left: 10%;
-    padding-right: 10%;
+    gap: 20px; /* Espaçamento entre os itens */
+    justify-content: center; /* Centraliza os itens no container */
+    align-items: flex-start; /* Alinha os itens ao topo */
+    padding: 10px; /* Ajuste do padding para dar mais espaço interno */
 }
-
-
-
-/* * {
-    box-sizing: border-box;
-} */
 
 .product-col {
-    margin-top: 4%;
+    flex: 1 1 300px; /* Flex-grow: 1, Flex-shrink: 1, Base-size: 300px */
+    max-width: 300px; /* Limita a largura máxima */
+    min-width: 320px; /* Define uma largura mínima maior */
+    box-sizing: border-box; /* Inclui padding e borda no cálculo de largura */
+    margin-bottom: 30px; /* Espaçamento inferior entre as linhas de cards */
 }
 
-.custom-container {
-    padding-left: 10%;
-    padding-right: 10%;
-}
-
-.card-body {
-    height: auto;
-    margin-bottom: 10px;
-
-}
-
-.card.h-100.card-sm {
+.card {
     border: 2px solid #8cb3f6;
+    height: auto; /* Ajusta automaticamente com o conteúdo */
+    padding: 16px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+    border-radius: 8px; /* Deixa os cards com cantos arredondados */
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.03); /* Leve efeito de zoom ao passar o mouse */
 }
 
 .card-title {
     font-size: 100%;
     font-weight: bold;
-}
-
-.card-img-top {
-    width: 20%;
-    /* Ajusta a largura da imagem */
-    height: 30%;
-    /* Mantém a proporção natural da imagem */
-    object-fit: contain;
-    /* Faz a imagem se ajustar ao espaço sem cortar */
-    margin: 0;
-    /* Centraliza a imagem dentro do card */
-    display: block;
-}
-
-.card:hover {
-    transform: scale(1.05);
-    transition: transform 0.2s;
-}
-
-.card-title,
-.card-text {
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-
-.produtos-nome {
-    /* font-size: 1.5rem; */
-    font-weight: bold;
-    margin-bottom: 0;
-    height: 10px;
-    width: 150px;
-}
-
-.produtos-nome h5 {
-    margin-bottom: 0;
-}
-
-.produtos-nome hr {
-    margin: 0 0;
+    margin-top: auto;
+    margin-bottom: 5px;
 }
 
 .card-body {
     max-width: 100%;
     padding: 10px;
     width: 100%;
-    height: 10%;
     display: flex;
     flex-direction: column;
     gap: 5%;
     margin-top: 20px;
     margin-bottom: 0;
-    object-fit: 50px;
+}
+
+.card-body hr {
+    margin: 5px 0; /* Reduz o espaçamento do <hr> (linha) */
+}
+
+.card-text {
+    margin-bottom: 0;
+}
+
+.card-body p {
+    margin-bottom: 5px; /* Reduz o espaço entre os parágrafos */
+}
+
+.card-img-top {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain; /* Mostra toda a imagem sem cortes */
+    aspect-ratio: 16 / 9; /* Proporção fixa */
+    border-radius: 8px;
+    background-color: #ffffff; /* Fundo branco para áreas vazias */
 }
 
 .img-sm {
@@ -125,128 +93,9 @@ body {
     align-items: center;
     align-content: center;
     max-height: 240px;
-
-    /* Garante que a imagem seja ajustada corretamente */
 }
 
-
-#subtitulo {
-    color: white;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-    font-size: 80px;
-}
-
-#texto {
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
-}
-
-.product-col {
-    margin-top: 4%;
-    /* Mantém o espaço acima */
-    margin-bottom: 25px;
-    /* Aumenta o espaço abaixo do card */
-}
-
-.conteudo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: 20px;
-}
-
-.card {
-    margin-bottom: 0px;
-}
-
-.card-title {
-    margin-top: auto;
-    margin-bottom: 5px;
-    /* Reduz o espaço abaixo do título */
-    font-size: 100%;
-    /* Se quiser diminuir o tamanho do título */
-}
-
-.card-body hr {
-    margin: 5px 0;
-    /* Reduz o espaçamento do <hr> (linha) */
-}
-
-.card-text {
-
-    margin-bottom: 50px;
-    /* Reduz o espaço abaixo do preço */
-    margin-bottom: 0;
-}
-
-.card-body p {
-    margin-bottom: 5px;
-    /* Reduz o espaço entre os parágrafos */
-}
-
-.btn-primary {
-    margin-top: 5px;
-    /* Reduz o espaço acima do botão */
-    padding: 20px 12px;
-    /* Reduz o tamanho do botão */
-    font-size: 14px;
-    /* Ajusta o tamanho da fonte do botão */
-    margin-bottom: 5px;
-}
-
-.card-body .btn {
-    margin-top: 5px;
-    /* Reduz o espaço acima do botão */
-    padding: 6px 12px;
-    /* Reduz o tamanho do botão */
-    font-size: 14px;
-    /* Ajusta o tamanho da fonte do botão */
-    margin-bottom: 0;
-    border: none;
-}
-
-/* avaliação produto */
-
-/* Estilos comuns para todas as estrelas */
-.star {
-    width: 24px;
-    height: 24px;
-    fill: #666;
-    /* Cor para estrelas vazias */
-}
-
-.star.filled {
-    fill: #ffeb49;
-    /* Cor para estrelas preenchidas */
-}
-
-/* Estrela meia preenchida */
-.star.half {
-    fill: url(#half-fill);
-    /* Aplica o gradiente da metade amarela e metade preta */
-}
-
-.star.empty {
-    fill: #666;
-    /* Cor para estrelas vazias */
-}
-
-
-.imagem-mercado {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.imagem-mercado img {
-    width: 100%;
-    height: 500px;
-}
-
-/* botão comprar */
+/* Botão de compra */
 .btn-comprar {
     display: flex;
     justify-content: center;
@@ -260,7 +109,7 @@ body {
     border: none;
     cursor: pointer;
     transition: 400ms;
-    width: 100%;
+    width: auto; /* Permite que o botão se ajuste ao conteúdo */
     margin-top: 15px;
 }
 
@@ -268,10 +117,6 @@ body {
     color: white;
     font-weight: 700;
     font-size: 1em;
-    transition: 400ms;
-}
-
-.btn-comprar svg path {
     transition: 400ms;
 }
 
@@ -285,4 +130,56 @@ body {
 
 .btn-comprar:hover svg path {
     fill: #0f52b6;
+}
+
+/* Estilo de estrelas (avaliação) */
+.star {
+    width: 24px;
+    height: 24px;
+    fill: #666;
+}
+
+.star.filled {
+    fill: #ffeb49;
+}
+
+.star.half {
+    fill: url(#half-fill);
+}
+
+.star.empty {
+    fill: #666;
+}
+
+.imagem-merc {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.filters select {
+    margin-left: 10px;
+}
+
+.filters .form-select {
+    max-width: 300px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .product-col {
+        flex: 1 1 100%; /* Em telas menores, cada item ocupa 100% da largura */
+        max-width: 100%;
+    }
+
+    .card-img-top {
+        height: 120px; /* Reduz a altura da imagem em telas menores */
+    }
 }
