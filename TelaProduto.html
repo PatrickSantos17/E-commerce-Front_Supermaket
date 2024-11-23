@@ -42,7 +42,7 @@
                     <p class="qtd-carrinho"></p>
                 </div>
             </div>
-            <div class="info-usuario entre-cadastre">            
+            <div class="info-usuario entre-cadastre">
             </div>
         </div>
     </header>
@@ -51,6 +51,23 @@
             <img class="imagem-merc" src="src/img/SM_Principal.jpg" alt="">
         </div>
         <div class="container my-5 custom-container">
+            <div class="filters">
+                <input type="text" id="filtro-nome-produto" class="form-control mb-4"
+                    placeholder="Filtrar por nome do produto..." oninput="filtrarProdutosPorNome()" />
+                <select id="filtro-categoria" class="form-select mb-4" onchange="filtrarProdutosPorCategoria()">
+                    <option value="">Todas as Categorias</option>
+                    <option value="Açougue">Açougue</option>
+                    <option value="Frios e laticínios">Frios e laticínios</option>
+                    <option value="Adega e bebidas">Adega e bebidas</option>
+                    <option value="Higiene e limpeza">Higiene e limpeza</option>
+                    <option value="Hortifruti e mercearia">Hortifruti e mercearia</option>
+                    <option value="Padaria">Padaria</option>
+                    <option value="Enlatados">Enlatados</option>
+                    <option value="Cereais">Cereais</option>
+                    <option value="Achocolatados">Achocolatados</option>
+                    <!-- Adicione suas categorias fixas aqui -->
+                </select>
+            </div>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4" id="product-list"></div>
         </div>
 
