@@ -153,8 +153,7 @@ body {
 
 .imagem-merc {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 600px;
 }
 
 .filters {
