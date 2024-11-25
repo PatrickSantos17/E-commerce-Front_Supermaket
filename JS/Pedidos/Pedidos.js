@@ -94,7 +94,7 @@ async function mostrarDetalhes(pedidoId) {
                 </ul>
                 <button class="btn-fechar" onclick="fecharModal()">X</button>
             `;
-            modal.style.display = 'block';
+            modal.style.display = 'flex';
         })
         .catch(error => {
             console.error('Erro ao buscar detalhes do pedido:', error);
