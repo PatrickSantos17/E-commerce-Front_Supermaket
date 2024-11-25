@@ -16,16 +16,19 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
 }
 
 #modalContent {
-    position: relative; 
+    position: relative;
     background-color: white;
-    margin: 10% auto;
     padding: 20px;
     width: 50%;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-height: 90%; /* Evita que o modal ultrapasse a altura da tela */
+    overflow-y: auto; /* Adiciona scroll caso o conteúdo seja muito grande */
 }
 
 .btn-fechar {
