@@ -3,6 +3,8 @@ var totalFrete;
 let listaSalva = JSON.parse(localStorage.getItem("produtos"));
 var frete = 0.00;
 var idEnderecoPadrao = 0;
+let userId = localStorage.getItem("clienteId");
+let usuarioAutenticado = localStorage.getItem("autenticadoCliente");
 
 document.addEventListener('DOMContentLoaded', () => {
     const carrinhoBuscarNLRequestDTO = {
@@ -67,6 +69,8 @@ async function buscarCarrinhoNL(listaIdProdutos) {
                 </div>
             </aside>`;
 
+        buscarEnderecoPadrao(userId);
+        buscarEnderecosCliente(userId);
         document.getElementById('checkEndereco').addEventListener('change', function () {
             console.log('Checkbox foi clicado! Novo estado:', this.checked);
             if (this.checked) {
@@ -224,7 +228,7 @@ async function carregaCarrinho(listaIdProdutos) {
                                     </div>
                                 </div>
                             </td>
-                            <td>R$ ${produtoCarrinho.produto.preco}</td>
+                            <td>R$ ${produtoCarrinho.produto.preco.toFixed(2)}</td>
                             <td>
                                 <div class="qty">
                                     <button class="btn-diminuir" onclick="diminuirQtd(${produtoCarrinho.produto.id})"><i class="bx bx-minus"></i></button>

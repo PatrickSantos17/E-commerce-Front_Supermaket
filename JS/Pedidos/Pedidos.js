@@ -78,6 +78,7 @@ async function mostrarDetalhes(pedidoId) {
                 <p><strong>Data:</strong> ${data.dataPedido.split('T')[0]}</p>
                 <p><strong>Status:</strong> ${data.status}</p>
                 <p><strong>Forma de pagamento:</strong> ${data.formaPagamento}</p>
+                <p><strong>Subtotal:</strong> ${data.subtotal.toFixed(2)}</p>
                 <p><strong>Frete:</strong> R$ ${data.frete.toFixed(2)}</p>
                 <p><strong>Total:</strong> R$ ${data.valorTotal.toFixed(2)}</p>
                 <h3>Endereço de entrega:</h3>
@@ -89,7 +90,7 @@ async function mostrarDetalhes(pedidoId) {
                 <h3>Itens:</h3>
                 <ul>
                     ${data.produtoQtd.map(item => `
-                        <li>${item.nome} - Quantidade: ${item.quantidade} - Preço Unitário: R$ ${item.valorUnitario.toFixed(2)}</li>
+                        <li>${item.nome} - Quantidade: ${item.quantidade} - Preço Unitário: R$ ${item.valorUnitario.toFixed(2)} - Total: R$ ${(item.quantidade * item.valorUnitario).toFixed(2)} </li>
                     `).join('')}
                 </ul>
                 <button class="btn-fechar" onclick="fecharModal()">X</button>
