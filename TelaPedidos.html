@@ -16,28 +16,33 @@
 <body>
   <header>
     <div class="lado-a">
-      <a href="/TelaProduto.html"><img src="src/img/logo-removebg-preview.png" alt="logo-img"></a>
-      <input type="search" id="buscar" placeholder="Buscar">
+        <a href="/TelaProduto.html"><img src="src/img/logo-removebg-preview.png" alt="logo-img"></a>
+        <input type="search" id="buscar" placeholder="Buscar">
     </div>
     <div class="lado-b">
-      <div class="user-carrinho">
-        <div class="header-user">
-          <img id="iconUsuario" src="src/img/icon-cliente.png" alt="user-icon">
-          <p class="nome-usuario"></p>
-          <div class="dropdown-content" id="dropdown-content">
-            <a class="dados" href="TelaAlterarCliente.html">Perfil</a>
-            <a class="Pedidos" href="TelaPedidos.html">Meus pedidos</a>
-            <a class="logout" onclick="abrirModalConfirmacao()" href="">Sair</a>
-          </div>
-        </div>
+        <div class="user-carrinho">
+            <div class="header-user">
+                <img id="iconUsuario" src="src/img/icon-cliente.png" alt="user-icon">
+                <p class="nome-usuario"></p>
+                <div class="dropdown-content" id="dropdown-content">
+                    <a class="dados" href="TelaAlterarCliente.html">Perfil</a>
+                    <a class="Pedidos" href="TelaPedidos.html">Meus pedidos</a>
+                    <a class="logout" onclick="abrirModalConfirmacao()" href="">Sair</a>
+                </div>
+            </div>
 
-        <div class="header-carrinho">
-          <a href="TelaCarrinho.html">
-            <img id="iconCarrinho" src="src/img/vista-lateral-vazia-do-carrinho-de-compras.png" alt="user-icon">
-          </a>
-          <p class="qtd-carrinho"></p>
+            <div class="header-carrinho">
+                <a href="TelaCarrinho.html">
+                    <img id="iconCarrinho" src="src/img/vista-lateral-vazia-do-carrinho-de-compras.png"
+                        alt="user-icon">
+                </a>
+                <p class="qtd-carrinho"></p>
+            </div>
         </div>
-  </header>
+        <div class="info-usuario entre-cadastre">
+        </div>
+    </div>
+</header>
   <main>
     <div class="sem-pedidos" id="empty-order">
       <h2>VOCÊ NÃO TEM PEDIDOS</h2>

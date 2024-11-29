@@ -1,35 +1,3 @@
-let userId = localStorage.getItem("clienteId");
-let usuarioAutenticado = localStorage.getItem("autenticadoCliente");
-
-window.addEventListener('DOMContentLoaded', function () {
-
-    if (usuarioAutenticado) {
-        buscarEnderecoPadrao(userId);
-        buscarEnderecosCliente(userId);
-    }
-    // const checkbox = document.getElementById('checkEndereco');
-    // const entregaPadrao = document.querySelector(".entrega-selecionada");
-
-    // if (checkbox) {
-    //     checkbox.addEventListener('change', function () {
-    //         console.log('Checkbox foi clicado! Novo estado:', this.checked);
-    //         if (this.checked) {
-    //             // Se o checkbox foi marcado, busca o endereço padrão
-    //             if (userId) {
-    //                 buscarEnderecoPadrao(userId);
-    //             } else {
-    //                 console.error("ID do cliente não encontrado no localStorage.");
-    //             }
-    //         } else {
-    //             // Caso o checkbox seja desmarcado, limpa a área de entrega padrão
-    //             entregaPadrao.innerHTML = '';
-    //         }
-    //     });
-    // } else {
-    //     console.error('Checkbox não encontrado no DOM!');
-    // }
-});
-
 function buscarEnderecoPadrao(userId) {
     fetch(`http://${API}:8080/cliente/enderecoEntrega/${userId}`)
         .then(response => response.json())

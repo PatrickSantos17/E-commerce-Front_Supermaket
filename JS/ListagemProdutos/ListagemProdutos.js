@@ -54,7 +54,7 @@ function displayTableData() {
             <td>${item.id}</td>
             <td>${item.nomeProduto}</td>
             <td>${item.quantidade}</td>
-            <td>R$${item.preco}</td>
+            <td>R$${item.preco.toFixed(2)}</td>
             <td>${item.ativo ? 'Ativo' : 'Inativo'}</td>
             <td class="acao"><button onclick="alterarProduto(${item.id})">Alterar</button></td>
             <td class="acao">
@@ -93,7 +93,7 @@ function displayTableData() {
             <td>${item.id}</td>
             <td>${item.nomeProduto}</td>
             <td>${item.quantidade}</td>
-            <td>${item.preco}</td>
+            <td>${item.preco.toFixed(2)}</td>
             <td>${item.ativo ? 'Ativo' : 'Inativo'}</td>
             <td class="acao"><button onclick="alterarProduto(${item.id})">Alterar</button></td>
         `;
@@ -227,7 +227,7 @@ function visualizarProduto(produtoId) {
             }
 
             nomeProd.innerText = produto.nomeProduto;
-            valorProd.innerText = "R$ " + produto.preco;
+            valorProd.innerText = "R$ " + produto.preco.toFixed(2);
             avaliacaoProd.innerText = "Avaliação: " + produto.avaliacao;
             descricaoProd.innerText = produto.descricao;
 
