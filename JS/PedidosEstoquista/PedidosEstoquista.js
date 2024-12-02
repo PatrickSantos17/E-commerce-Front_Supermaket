@@ -10,19 +10,17 @@ async function carregarPedidos() {
         if (grupoEstoquista === "Estoquista") {
             const response = await fetch(`http://${API}:8080/pedido/` + grupoEstoquista);
 
-            // Verifica se a resposta foi bem-sucedida
             if (!response.ok) {
                 throw new Error(`Erro na requisição: ${response.statusText}`);
             }
 
-            pedidos = await response.json(); // Armazena os pedidos na variável global
+            pedidos = await response.json();
 
             console.log('Dados recebidos:', pedidos);
 
             const tbody = document.querySelector('tbody');
-            tbody.innerHTML = ""; // Limpa o conteúdo anterior do tbody
+            tbody.innerHTML = ""; 
 
-            // Itera pelos pedidos e os adiciona à tabela
             pedidos.forEach(pedido => {
                 const row = document.createElement('tr');
                 const dataPedidoFormatada = pedido.dataPedido
@@ -101,5 +99,4 @@ document.querySelector('.accept-cookie-button').addEventListener('click', functi
     location.reload();
 });
 
-// Executa a função ao carregar a página
 document.addEventListener('DOMContentLoaded', carregarPedidos);
