@@ -21,7 +21,6 @@ function validarLogin() {
         .then(response => {
             if (response.status === 200) {
 
-                // Login está ok,  converte a resposta em JSON
                 return response.json();
             } else if (response.status === 403) {
 
@@ -33,7 +32,6 @@ function validarLogin() {
         .then(data => {
 
             console.log("Cliente autenticado: " + data.autenticado)
-            // Armazena os dados do usuário no localStorage
             localStorage.setItem("autenticadoCliente", data.autenticado);
             localStorage.setItem("clienteId", data.id);
             localStorage.setItem("nomeCliente", data.nome);
@@ -41,9 +39,7 @@ function validarLogin() {
             loginSucedido();
         })
         .catch(error => {
-            // Exibe mensagem de erro em caso de falha na requisição
             console.log('Erro ao acessar usuário:', error);
-            // alert("Erro ao acessar usuário. Por favor, tente novamente.");
         });
 }
 
@@ -52,14 +48,12 @@ function validarCampos() {
     const emailValue = email.value;
     const senhaValue = senha.value;
 
-    // Verifica se o campo de e-mail está vazio
     if (emailValue.trim() === '') {
         alert("Por favor, preencha o campo de e-mail.");
         email.focus();
         camposValidados = false;
     }
 
-    // Verifica se o campo de senha está vazio
     if (senhaValue.trim() === '') {
         alert("Por favor, preencha o campo de senha.");
         senha.focus();
@@ -73,17 +67,10 @@ function loginSucedido() {
     const modal = document.querySelector('.cartao');
     const btnTelaInicial = document.querySelector('.inicial');
 
-    // Função para abrir o modal
-    const openModal = () => {
-        modal.style.display = 'flex';
-    };
+    modal.style.display = 'flex';
 
-    // abre o modal após o login bem sucedido
-    openModal()
-
-    // Direciona para a tela inicial
     btnTelaInicial.addEventListener('click', function (event) {
-        event.preventDefault(); // Evita o comportamento padrão do formulário
+        event.preventDefault();
         window.location.href = "TelaProduto.html";
     });
 }
@@ -92,30 +79,24 @@ function loginInvalido() {
     const modal = document.querySelector('#not-valid');
     const btnOk = document.querySelector('#clicked');
 
-    // Função para abrir o modal
     const openModal = () => {
         modal.style.display = 'flex';
     };
 
-    // Função para fechar o modal
     const closeModal = () => {
         modal.style.display = 'none';
     };
 
-    // Abre o modal
     openModal();
 
-    // Adiciona o evento de clique ao botão 'btnOk'
     if (btnOk) {
         btnOk.addEventListener('click', (event) => {
-            console.log("Botão OK clicado");
             closeModal();
         });
     } else {
-        console.error("Elemento '.inicial' não encontrado.");
+        console.error("Elemento '#not-valid' não encontrado.");
     }
 
-    // Adiciona evento para fechar o modal ao clicar fora dele
     window.addEventListener('click', (event) => {
         if (event.target == modal) {
             closeModal();
